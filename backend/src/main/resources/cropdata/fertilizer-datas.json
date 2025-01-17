@@ -1,0 +1,16 @@
+{
+  "fertilizers": [
+    {
+      "name": "Compound C",
+      "alias": "C",
+      "composition": "5:15:12",
+      "remarks": "Basal"
+    },
+    {
+      "name": "Ammonium Nitrate",
+      "alias": "AN",
+      "composition": "34.5%N",
+      "remarks": "top dressing"
+    }
+  ]
+}

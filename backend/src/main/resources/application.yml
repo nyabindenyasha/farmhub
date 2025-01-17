@@ -1,0 +1,22 @@
+spring:
+  application:
+   name: crop-management-app
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    password: TR@N$p0r+3r123!@#
+    url: jdbc:postgresql://10.250.13.59:8433/city_of_gweru
+    username: admin
+  jpa:
+    database: POSTGRESQL
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+cbs:
+  funds-transfer: http://192.168.119.114:8096/olive/publisher/fundtransfer
+  cbd: 06-07-2024
+  delivery-channel: CBX
+  usd-credit-account: 00000260284711
+  zig-credit-account: 00000260275259
