@@ -1,0 +1,188 @@
+{
+  "pesticides": [
+    {
+      "name": "Lambda",
+      "alias": "Lambda",
+      "activeIngredients": [
+        "Lambda"
+      ],
+      "applicationRate": "16ml",
+      "safetyInterval": 7,
+      "pesticideType": "PESTICIDE",
+      "modeOfAction": "PREVENTATIVE",
+      "targetPests": [
+        "General pests"
+      ],
+      "targetDiseases": []
+    },
+    {
+      "name": "Dichlorvos",
+      "alias": "Dichlorvos",
+      "activeIngredients": [
+        "Dichlorvos"
+      ],
+      "applicationRate": "16ml",
+      "safetyInterval": 7,
+      "pesticideType": "PESTICIDE",
+      "modeOfAction": "PREVENTATIVE",
+      "targetPests": [
+        "General pests"
+      ],
+      "targetDiseases": []
+    },
+    {
+      "name": "Muroti",
+      "alias": "Muroti",
+      "activeIngredients": [
+        "Muroti"
+      ],
+      "applicationRate": "16ml",
+      "safetyInterval": 7,
+      "pesticideType": "PESTICIDE",
+      "modeOfAction": "PREVENTATIVE",
+      "targetPests": [
+        "General pests"
+      ],
+      "targetDiseases": []
+    },
+    {
+      "name": "Belt",
+      "alias": "Belt",
+      "activeIngredients": [
+        "Belt"
+      ],
+      "applicationRate": "4ml",
+      "safetyInterval": 7,
+      "pesticideType": "PESTICIDE",
+      "modeOfAction": "PREVENTATIVE",
+      "targetPests": [
+        "General pests"
+      ],
+      "targetDiseases": []
+    },
+    {
+      "name": "Carbaryl",
+      "alias": "Carbaryl",
+      "activeIngredients": [
+        "Carbaryl"
+      ],
+      "applicationRate": "50g",
+      "safetyInterval": 7,
+      "pesticideType": "PESTICIDE",
+      "modeOfAction": "PREVENTATIVE",
+      "targetPests": [
+        "General pests"
+      ],
+      "targetDiseases": []
+    }
+  ],
+  "fungicides": [
+    {
+      "name": "Chlorothalonil",
+      "alias": "Chlorothalonil",
+      "activeIngredients": [
+        "Chlorothalonil"
+      ],
+      "applicationRate": "32ml",
+      "safetyInterval": 14,
+      "pesticideType": "FUNGICIDE",
+      "modeOfAction": "PREVENTATIVE",
+      "targetPests": [],
+      "targetDiseases": [
+        "Fungal infections"
+      ]
+    },
+    {
+      "name": "Antracol",
+      "alias": "Antracol",
+      "activeIngredients": [
+        "Antracol"
+      ],
+      "applicationRate": "32g",
+      "safetyInterval": 14,
+      "pesticideType": "FUNGICIDE",
+      "modeOfAction": "PREVENTATIVE",
+      "targetPests": [],
+      "targetDiseases": [
+        "Fungal infections"
+      ]
+    },
+    {
+      "name": "Acomil",
+      "alias": "Acomil",
+      "activeIngredients": [
+        "Acomil"
+      ],
+      "applicationRate": "50g",
+      "safetyInterval": 14,
+      "pesticideType": "FUNGICIDE",
+      "modeOfAction": "PREVENTATIVE",
+      "targetPests": [],
+      "targetDiseases": [
+        "Fungal infections"
+      ]
+    },
+    {
+      "name": "Tebuconazole",
+      "alias": "Tebuconazole",
+      "activeIngredients": [
+        "Tebuconazole"
+      ],
+      "applicationRate": "16ml",
+      "safetyInterval": 14,
+      "pesticideType": "FUNGICIDE",
+      "modeOfAction": "PREVENTATIVE",
+      "targetPests": [],
+      "targetDiseases": [
+        "Fungal infections"
+      ]
+    },
+    {
+      "name": "Chlorothalonil",
+      "alias": "Chlorothalonil",
+      "activeIngredients": [
+        "Chlorothalonil"
+      ],
+      "applicationRate": "32ml",
+      "safetyInterval": 14,
+      "pesticideType": "FUNGICIDE",
+      "modeOfAction": "PREVENTATIVE",
+      "targetPests": [],
+      "targetDiseases": [
+        "Fungal infections"
+      ]
+    }
+  ],
+  "herbicides": [
+    {
+      "name": "Metolachlor",
+      "alias": "Metolachlor",
+      "activeIngredients": [
+        "Metolachlor"
+      ],
+      "applicationRate": "120ml",
+      "safetyInterval": 7,
+      "pesticideType": "HERBICIDE",
+      "modeOfAction": "PREVENTATIVE",
+      "targetPests": [
+        "Weeds"
+      ],
+      "targetDiseases": []
+    },
+    {
+      "name": "Fluazifop",
+      "alias": "Fluazifop",
+      "activeIngredients": [
+        "Fluazifop"
+      ],
+      "applicationRate": "80ml",
+      "safetyInterval": 7,
+      "pesticideType": "HERBICIDE",
+      "modeOfAction": "PREVENTATIVE",
+      "targetPests": [
+        "Grassy weeds"
+      ],
+      "targetDiseases": []
+    }
+  ]
+}

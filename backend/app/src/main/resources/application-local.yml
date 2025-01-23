@@ -1,0 +1,36 @@
+spring:
+  application:
+    name: crop-management-app
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    password: postgres
+    url: jdbc:postgresql://localhost:5432/crop_management8
+    username: postgres
+  jpa:
+    database: POSTGRESQL
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+  main:
+    allow-bean-definition-overriding: true
+  mail:
+    host: smtp.gmail.com
+    password: egeozlkhwdkdtzzf
+    properties:
+      mail:
+        smtp:
+          auth: true
+          socketFactory:
+            class: javax.net.ssl.SSLSocketFactory
+            fallback: false
+            port: 465
+    username: noreplysmartproc@gmail.com
+system:
+  baseURL: https://procurement-system-backend.herokuapp.com
+  name: FarmHub
+  redirectURL: "http://localhost:8080/v1/verify-user"
+logging:
+  file:
+    name: harm-hub.log

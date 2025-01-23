@@ -31,3 +31,19 @@ build/
 
 ### VS Code ###
 .vscode/
+/user-service/.mvn/wrapper/maven-wrapper.jar
+/event-service/.mvn/wrapper/maven-wrapper.properties
+/file-storage/.mvn/wrapper/maven-wrapper.properties
+/notification-service/.mvn/wrapper/maven-wrapper.properties
+/user-service/.mvn/wrapper/maven-wrapper.properties
+/event-service/mvnw
+/file-storage/mvnw
+/notification-service/mvnw
+/event-service/mvnw.cmd
+/file-storage/mvnw.cmd
+/notification-service/mvnw.cmd
+/notification-service/.mvn/wrapper/maven-wrapper.jar
+/notification-service/.mvn/wrapper/maven-wrapper.jar
+/events_system.log
+/app/src/main/resources/Certificate.jks
+/upload-dir/
