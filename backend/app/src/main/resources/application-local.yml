@@ -4,7 +4,7 @@ spring:
   datasource:
     driver-class-name: org.postgresql.Driver
     password: postgres
-    url: jdbc:postgresql://localhost:5432/crop_management8
+    url: jdbc:postgresql://localhost:5432/crop_management9
     username: postgres
   jpa:
     database: POSTGRESQL
@@ -33,4 +33,4 @@ system:
   redirectURL: "http://localhost:8080/v1/verify-user"
 logging:
   file:
-    name: harm-hub.log
+    name: farm-hub.log
