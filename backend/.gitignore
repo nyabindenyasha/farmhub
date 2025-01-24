@@ -47,3 +47,6 @@ build/
 /events_system.log
 /app/src/main/resources/Certificate.jks
 /upload-dir/
+/test-dir/
+
+farm-hub.log*
