@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, ReactNode } from "react";
+import React, {createContext, useContext, useState, ReactNode} from "react";
 import apiClient from "../utils/apiClient";
 import {User} from "@/lib/types";
 import id from "@/pages/dashboard/patient/[id]";
@@ -9,7 +9,7 @@ interface UserContextType {
     setUser: (user: User | null) => void;
     logout: () => void;
     getAllUsers: () => Promise<User[]>;
-    getUserById:(id:number) => Promise<User|null>;
+    getUserById: (id: number) => Promise<User | null>;
 }
 
 // Create the context with a default value
@@ -20,7 +20,7 @@ interface UserProviderProps {
     children: ReactNode;
 }
 
-export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
+export const UserProvider: React.FC<UserProviderProps> = ({children}) => {
     const [user, setUser] = useState<User | null>(null);
 
     const logout = () => {
@@ -38,9 +38,9 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
         }
     };
 
-    const getUserById = async (id:number): Promise<User|null> => {
+    const getUserById = async (id: number): Promise<User | null> => {
         try {
-            const response = await apiClient.get<User>("/v1/api/policy-member/"+id);
+            const response = await apiClient.get<User>("/v1/api/policy-member/" + id);
             return response.data;
         } catch (error) {
             console.error("Error fetching users:", error);
@@ -49,7 +49,7 @@ export const UserProvider: React.FC<UserProviderProps> = ({ children }) => {
     };
 
     return (
-        <UserContext.Provider value={{ user, setUser, logout, getAllUsers, getUserById }}>
+        <UserContext.Provider value={{user, setUser, logout, getAllUsers, getUserById}}>
             {children}
         </UserContext.Provider>
     );

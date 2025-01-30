@@ -18,10 +18,11 @@ export const nav_items = [
 export const dashboard_nav_items ={
     sideBar: [
         {name:'Dashboard',location:'/dashboard',id:'1',Icon: HomeIcon,active: true},
-        {name:'Appointment',location:'/dashboard/appointment',id:'2',Icon: CalendarDateRangeIcon},
-        {name:'Patient',location:'/dashboard/patient',id:'3',Icon: ClipboardDocumentListIcon},
-        {name:'Doctor Schedule',location:'/dashboard/doctor_schedule',id:'4',Icon: TimerIcon},
-        {name:'Reports',location:'/dashboard/report',id:'5',Icon: ChartBarIcon},
+        {name:'Crops',location:'/dashboard/crop',id:'2',Icon: ClipboardDocumentListIcon},
+        {name:'Appointment',location:'/dashboard/appointment',id:'3',Icon: CalendarDateRangeIcon},
+        {name:'Patient',location:'/dashboard/patient',id:'4',Icon: ClipboardDocumentListIcon},
+        {name:'Doctor Schedule',location:'/dashboard/doctor_schedule',id:'5',Icon: TimerIcon},
+        {name:'Reports',location:'/dashboard/report',id:'6',Icon: ChartBarIcon},
         // {name:'PatientDashboard',location:'/dashboard/patientDashboard',id:'3',Icon: ClipboardDocumentListIcon},
 
 

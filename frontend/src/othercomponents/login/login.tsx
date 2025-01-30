@@ -6,8 +6,9 @@ import { Button } from "@/components/ui/button"
 import { Label } from "@/components/ui/label"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import type { LoginFormData, AuthState } from "@/types/auth"
+import type { LoginFormData, AuthState } from "@/lib/types/auth"
 import {Icons} from "@/components/icons/icons";
+import axios from "axios";
 
 export function LoginForm() {
     const router = useRouter()
@@ -24,12 +25,17 @@ export function LoginForm() {
         const data: LoginFormData = {
             username: formData.get("username") as string,
             password: formData.get("password") as string,
-            rememberMe: formData.get("remember") === "on",
         }
 
         try {
             // Add your authentication logic here
             await new Promise((resolve) => setTimeout(resolve, 2000))
+
+            const response = await axios.post('http://localhost:8080/api/v1/auth/token/signin', data);
+            // Handle successful login (e.g., store token in local storage)
+            console.log(response);
+            console.log(response.data);
+
             router.push("/dashboard")
         } catch (error) {
             setState({
@@ -38,6 +44,7 @@ export function LoginForm() {
             })
         }
     }
+
 
     return (
         <div className="space-y-6">
