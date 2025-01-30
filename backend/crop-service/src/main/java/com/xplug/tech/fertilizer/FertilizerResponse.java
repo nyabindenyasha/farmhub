@@ -2,11 +2,13 @@ package com.xplug.tech.fertilizer;
 
 import com.xplug.tech.crop.Fertilizer;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
 import java.util.Objects;
 
+@Getter
 @Setter
 @ToString
 @Builder

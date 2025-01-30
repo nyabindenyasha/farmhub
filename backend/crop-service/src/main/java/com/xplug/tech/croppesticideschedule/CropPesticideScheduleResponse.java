@@ -6,11 +6,13 @@ import com.xplug.tech.enums.PesticideApplicationMethod;
 import com.xplug.tech.period.PeriodResponse;
 import com.xplug.tech.pesticide.PesticideResponse;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
 import java.util.Objects;
 
+@Getter
 @Setter
 @ToString
 @Builder
@@ -18,7 +20,7 @@ public class CropPesticideScheduleResponse {
 
     private Long id;
 
-    private CropScheduleResponse cropScheduleResponse;
+//    private CropScheduleResponse cropScheduleResponse;
 
     private PesticideResponse pesticide;
 
@@ -34,7 +36,7 @@ public class CropPesticideScheduleResponse {
         Objects.requireNonNull(cropPesticideSchedule, "Crop cannot be null!");
         return CropPesticideScheduleResponse.builder()
                 .id(cropPesticideSchedule.getId())
-                .cropScheduleResponse(CropScheduleResponse.of(cropPesticideSchedule.getCropSchedule()))
+//                .cropScheduleResponse(CropScheduleResponse.of(cropPesticideSchedule.getCropSchedule()))
                 .pesticide(PesticideResponse.of(cropPesticideSchedule.getPesticide()))
                 .stageOfGrowth(PeriodResponse.of(cropPesticideSchedule.getStageOfGrowth()))
                 .applicationInterval(PeriodResponse.of(cropPesticideSchedule.getApplicationInterval()))

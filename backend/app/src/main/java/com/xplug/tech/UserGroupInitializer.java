@@ -7,12 +7,18 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.DependsOn;
+import org.springframework.core.annotation.Order;
 
+import javax.annotation.Priority;
 import java.util.stream.Stream;
 
 
 @Slf4j
 @Configuration
+@Order(2)
+@Priority(2)
+@DependsOn("permissionsInitializer")
 @AllArgsConstructor
 public class UserGroupInitializer implements InitializingBean {
 

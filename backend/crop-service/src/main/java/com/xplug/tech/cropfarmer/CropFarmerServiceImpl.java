@@ -2,8 +2,14 @@ package com.xplug.tech.cropfarmer;
 
 import com.xplug.tech.crop.CropFarmer;
 import com.xplug.tech.crop.CropFarmerDao;
+import com.xplug.tech.event.CropFarmerCreatedEvent;
+import com.xplug.tech.exception.InvalidRequestException;
 import com.xplug.tech.exception.ItemAlreadyExistsException;
+import com.xplug.tech.usermanager.UserAccount;
+import com.xplug.tech.usermanager.UserGroupEnum;
+import com.xplug.tech.usermanager.user.UserAccountService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,9 +22,15 @@ public non-sealed class CropFarmerServiceImpl implements CropFarmerService {
 
     private final CropFarmerMapper cropFarmerMapper;
 
-    public CropFarmerServiceImpl(CropFarmerDao cropFarmerRepository, CropFarmerMapper cropFarmerMapper) {
+    private final UserAccountService userAccountService;
+
+    private final ApplicationEventPublisher applicationEventPublisher;
+
+    public CropFarmerServiceImpl(CropFarmerDao cropFarmerRepository, CropFarmerMapper cropFarmerMapper, UserAccountService userAccountService, ApplicationEventPublisher applicationEventPublisher) {
         this.cropFarmerRepository = cropFarmerRepository;
         this.cropFarmerMapper = cropFarmerMapper;
+        this.userAccountService = userAccountService;
+        this.applicationEventPublisher = applicationEventPublisher;
     }
 
 
@@ -32,13 +44,17 @@ public non-sealed class CropFarmerServiceImpl implements CropFarmerService {
     }
 
     public CropFarmer create(CropFarmerRequest cropFarmerRequest) {
-        var optionalCrop = cropFarmerRepository
+        //can also validate by cropProgramId i.e. cropSchedule
+        var optionalCropFarmer = cropFarmerRepository
                 .findByCropIdAndUserAccountIdAndAndDateOfTransplant(cropFarmerRequest.getCropId(), cropFarmerRequest.getFarmerId(), cropFarmerRequest.getDateOfTransplant());
-        if (optionalCrop.isPresent()) {
+        if (optionalCropFarmer.isPresent()) {
             throw new ItemAlreadyExistsException("CropFarmer with same farmer and crop already exists");
         }
+        validateFarmer(cropFarmerRequest.getFarmerId());
         var cropFarmer = cropFarmerMapper.cropFarmerFromCropFarmerRequest(cropFarmerRequest);
-        return cropFarmerRepository.save(cropFarmer);
+        var savedCropFarmer = cropFarmerRepository.save(cropFarmer);
+        applicationEventPublisher.publishEvent(new CropFarmerCreatedEvent(this, savedCropFarmer, cropFarmerRequest.getCropProgramId()));
+        return savedCropFarmer;
     }
 
     public CropFarmer update(CropFarmerUpdateRequest cropFarmerUpdateRequest) {
@@ -50,6 +66,13 @@ public non-sealed class CropFarmerServiceImpl implements CropFarmerService {
     public void delete(Long id) {
         CropFarmer crop = getById(id);
         cropFarmerRepository.delete(crop);
+    }
+
+    private void validateFarmer(Long userAccountId) {
+        UserAccount userAccount = userAccountService.findById(userAccountId);
+        if (!userAccount.getGroup().getName().equals(UserGroupEnum.FARMER.name())) {
+            throw new InvalidRequestException("User Account must have role: FARMER");
+        }
     }
 
 }

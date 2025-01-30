@@ -63,11 +63,11 @@ public class SmtpMailSender {
             addSubject(mimeMessageHelper, sendEmailRequest);
             addFrom(mimeMessageHelper, sendEmailRequest.getFrom(), emailFrom);
             mimeMessageHelper.setSentDate(new Date());
-//            mimeMessageHelper.setTo(sendEmailRequest.getRecipients());
-            mimeMessageHelper.setTo("nyabindenyasha@gmail.com");
+            mimeMessageHelper.setTo(sendEmailRequest.getRecipients());
+//            mimeMessageHelper.setTo("nyabindenyasha@gmail.com");
             val htmlText = emailHtmlRepresentationBuilder.buildHtmlRepresentation(sendEmailRequest.getBody(), systemName);
             mimeMessageHelper.setText(htmlText, true);
-            mimeMessageHelper.addAttachment("test-name.pdf", sendEmailRequest.getAttachment().getFile());
+//            mimeMessageHelper.addAttachment("test-name.pdf", sendEmailRequest.getAttachment().getFile());
             javaMailSender.send(mimeMessage);
         } else {
             sendEmailRequest.getEmailRecipients().forEach(recipient -> {

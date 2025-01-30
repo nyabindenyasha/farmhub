@@ -2,6 +2,7 @@ package com.xplug.tech.cropschedule;
 
 import com.xplug.tech.crop.CropSchedule;
 import com.xplug.tech.crop.CropScheduleDao;
+import com.xplug.tech.cropprograms.CropProgramService;
 import com.xplug.tech.enums.CropScheduleType;
 import com.xplug.tech.exception.ItemAlreadyExistsException;
 import lombok.extern.slf4j.Slf4j;
@@ -17,9 +18,12 @@ public non-sealed class CropScheduleServiceImpl implements CropScheduleService {
 
     private final CropScheduleMapper cropScheduleMapper;
 
-    public CropScheduleServiceImpl(CropScheduleDao cropScheduleRepository, CropScheduleMapper cropScheduleMapper) {
+    private final CropProgramService cropProgramService;
+
+    public CropScheduleServiceImpl(CropScheduleDao cropScheduleRepository, CropScheduleMapper cropScheduleMapper, CropProgramService cropProgramService) {
         this.cropScheduleRepository = cropScheduleRepository;
         this.cropScheduleMapper = cropScheduleMapper;
+        this.cropProgramService = cropProgramService;
     }
 
 
@@ -46,7 +50,9 @@ public non-sealed class CropScheduleServiceImpl implements CropScheduleService {
         }
         var cropSchedule = cropScheduleMapper
                 .cropScheduleFromCropScheduleRequest(cropScheduleRequest);
-        return cropScheduleRepository.save(cropSchedule);
+        var savedCropSchedule = cropScheduleRepository.save(cropSchedule);
+        cropProgramService.create(savedCropSchedule);
+        return savedCropSchedule;
     }
 
     @Override

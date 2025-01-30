@@ -4,12 +4,14 @@ import com.xplug.tech.crop.Pesticide;
 import com.xplug.tech.enums.PesticideModeOfAction;
 import com.xplug.tech.enums.PesticideType;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
 import java.util.List;
 import java.util.Objects;
 
+@Getter
 @Setter
 @ToString
 @Builder

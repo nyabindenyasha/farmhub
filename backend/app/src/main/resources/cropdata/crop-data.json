@@ -418,6 +418,424 @@
   },
 
 
+  {
+    "crop": {
+      "name": "Cebbege_test",
+      "family": "Cruciferacease",
+      "genus": "Brassica",
+      "species": "Oleracea",
+      "subSpecies": "Capitate"
+    },
+    "fertilizerSchedule": [
+      {
+        "cropName": "Cebbege_test",
+        "fertilizerName": "Compound C",
+        "stageOfGrowth": {
+          "periodUnit": "MINUTES",
+          "periodValue": 1
+        },
+        "applicationInterval": {
+          "periodUnit": "HOURS",
+          "periodValue": 0
+        },
+        "applicationMethod": "SPOT_PLACEMENT",
+        "rate": 30,
+        "remarks": "Basal"
+      },
+      {
+        "cropName": "Cebbege_test",
+        "fertilizerName": "AN",
+        "stageOfGrowth": {
+          "periodUnit": "HOURS",
+          "periodValue": 2
+        },
+        "applicationInterval": {
+          "periodUnit": "HOURS",
+          "periodValue": 0
+        },
+        "applicationMethod": "SPOT_PLACEMENT",
+        "rate": 5,
+        "remarks": "Top dressing"
+      },
+      {
+        "cropName": "Cebbege_test",
+        "fertilizerName": "AN",
+        "stageOfGrowth": {
+          "periodUnit": "HOURS",
+          "periodValue": 3
+        },
+        "applicationInterval": {
+          "periodUnit": "HOURS",
+          "periodValue": 0
+        },
+        "applicationMethod": "SPOT_PLACEMENT",
+        "rate": 5,
+        "remarks": "Top dressing"
+      },
+      {
+        "cropName": "Cebbege_test",
+        "fertilizerName": "AN",
+        "stageOfGrowth": {
+          "periodUnit": "HOURS",
+          "periodValue": 5
+        },
+        "applicationInterval": {
+          "periodUnit": "HOURS",
+          "periodValue": 0
+        },
+        "applicationMethod": "SPOT_PLACEMENT",
+        "rate": 5,
+        "remarks": "Top dressing"
+      }
+    ],
+    "pesticideSchedule": [
+      {
+        "cropName": "Cebbege_test",
+        "pesticideName": "Lambda",
+        "stageOfGrowth": {
+          "periodUnit": "MINUTES",
+          "periodValue": 1
+        },
+        "applicationInterval": {
+          "periodUnit": "HOURS",
+          "periodValue": 0
+        },
+        "applicationMethod": "SPRAYING",
+        "remarks": "string"
+      },
+      {
+        "cropName": "Cebbege_test",
+        "pesticideName": "Metolachlor",
+        "stageOfGrowth": {
+          "periodUnit": "MINUTES",
+          "periodValue": 1
+        },
+        "applicationInterval": {
+          "periodUnit": "HOURS",
+          "periodValue": 0
+        },
+        "applicationMethod": "SPRAYING",
+        "remarks": "string"
+      },
+      {
+        "cropName": "Cebbege_test",
+        "pesticideName": "Dichlorvos",
+        "stageOfGrowth": {
+          "periodUnit": "HOURS",
+          "periodValue": 1
+        },
+        "applicationInterval": {
+          "periodUnit": "HOURS",
+          "periodValue": 0
+        },
+        "applicationMethod": "SPRAYING",
+        "remarks": "string"
+      },
+      {
+        "cropName": "Cebbege_test",
+        "pesticideName": "Muroti",
+        "stageOfGrowth": {
+          "periodUnit": "HOURS",
+          "periodValue": 2
+        },
+        "applicationInterval": {
+          "periodUnit": "HOURS",
+          "periodValue": 0
+        },
+        "applicationMethod": "SPRAYING",
+        "remarks": "string"
+      },
+      {
+        "cropName": "Cebbege_test",
+        "pesticideName": "Chlorothalonil",
+        "stageOfGrowth": {
+          "periodUnit": "HOURS",
+          "periodValue": 2
+        },
+        "applicationInterval": {
+          "periodUnit": "HOURS",
+          "periodValue": 0
+        },
+        "applicationMethod": "SPRAYING",
+        "remarks": "string"
+      },
+      {
+        "cropName": "Cebbege_test",
+        "pesticideName": "Belt",
+        "stageOfGrowth": {
+          "periodUnit": "HOURS",
+          "periodValue": 3
+        },
+        "applicationInterval": {
+          "periodUnit": "HOURS",
+          "periodValue": 0
+        },
+        "applicationMethod": "SPRAYING",
+        "remarks": "string"
+      },
+      {
+        "cropName": "Cebbege_test",
+        "pesticideName": "Antracol",
+        "stageOfGrowth": {
+          "periodUnit": "HOURS",
+          "periodValue": 3
+        },
+        "applicationInterval": {
+          "periodUnit": "HOURS",
+          "periodValue": 0
+        },
+        "applicationMethod": "SPRAYING",
+        "remarks": "string"
+      },
+      {
+        "cropName": "Cebbege_test",
+        "pesticideName": "Carbaryl",
+        "stageOfGrowth": {
+          "periodUnit": "HOURS",
+          "periodValue": 4
+        },
+        "applicationInterval": {
+          "periodUnit": "HOURS",
+          "periodValue": 0
+        },
+        "applicationMethod": "SPRAYING",
+        "remarks": "string"
+      },
+      {
+        "cropName": "Cebbege_test",
+        "pesticideName": "Acomil",
+        "stageOfGrowth": {
+          "periodUnit": "HOURS",
+          "periodValue": 4
+        },
+        "applicationInterval": {
+          "periodUnit": "HOURS",
+          "periodValue": 0
+        },
+        "applicationMethod": "SPRAYING",
+        "remarks": "string"
+      },
+      {
+        "cropName": "Cebbege_test",
+        "pesticideName": "Fluazifop",
+        "stageOfGrowth": {
+          "periodUnit": "HOURS",
+          "periodValue": 4
+        },
+        "applicationInterval": {
+          "periodUnit": "HOURS",
+          "periodValue": 0
+        },
+        "applicationMethod": "SPRAYING",
+        "remarks": "string"
+      },
+      {
+        "cropName": "Cebbege_test",
+        "pesticideName": "Dichlorvos",
+        "stageOfGrowth": {
+          "periodUnit": "HOURS",
+          "periodValue": 5
+        },
+        "applicationInterval": {
+          "periodUnit": "HOURS",
+          "periodValue": 0
+        },
+        "applicationMethod": "SPRAYING",
+        "remarks": "string"
+      },
+      {
+        "cropName": "Cebbege_test",
+        "pesticideName": "Tebuconazole",
+        "stageOfGrowth": {
+          "periodUnit": "HOURS",
+          "periodValue": 5
+        },
+        "applicationInterval": {
+          "periodUnit": "HOURS",
+          "periodValue": 0
+        },
+        "applicationMethod": "SPRAYING",
+        "remarks": "string"
+      },
+      {
+        "cropName": "Cebbege_test",
+        "pesticideName": "Muroti",
+        "stageOfGrowth": {
+          "periodUnit": "HOURS",
+          "periodValue": 6
+        },
+        "applicationInterval": {
+          "periodUnit": "HOURS",
+          "periodValue": 0
+        },
+        "applicationMethod": "SPRAYING",
+        "remarks": "string"
+      },
+      {
+        "cropName": "Cebbege_test",
+        "pesticideName": "Belt",
+        "stageOfGrowth": {
+          "periodUnit": "HOURS",
+          "periodValue": 7
+        },
+        "applicationInterval": {
+          "periodUnit": "HOURS",
+          "periodValue": 0
+        },
+        "applicationMethod": "SPRAYING",
+        "remarks": "string"
+      },
+      {
+        "cropName": "Cebbege_test",
+        "pesticideName": "Chlorothalonil",
+        "stageOfGrowth": {
+          "periodUnit": "HOURS",
+          "periodValue": 7
+        },
+        "applicationInterval": {
+          "periodUnit": "HOURS",
+          "periodValue": 0
+        },
+        "applicationMethod": "SPRAYING",
+        "remarks": "string"
+      },
+      {
+        "cropName": "Cebbege_test",
+        "pesticideName": "Carbaryl",
+        "stageOfGrowth": {
+          "periodUnit": "HOURS",
+          "periodValue": 8
+        },
+        "applicationInterval": {
+          "periodUnit": "HOURS",
+          "periodValue": 0
+        },
+        "applicationMethod": "SPRAYING",
+        "remarks": "string"
+      },
+      {
+        "cropName": "Cebbege_test",
+        "pesticideName": "Dichlorvos",
+        "stageOfGrowth": {
+          "periodUnit": "HOURS",
+          "periodValue": 9
+        },
+        "applicationInterval": {
+          "periodUnit": "HOURS",
+          "periodValue": 0
+        },
+        "applicationMethod": "SPRAYING",
+        "remarks": "string"
+      },
+      {
+        "cropName": "Cebbege_test",
+        "pesticideName": "Antracol",
+        "stageOfGrowth": {
+          "periodUnit": "HOURS",
+          "periodValue": 9
+        },
+        "applicationInterval": {
+          "periodUnit": "HOURS",
+          "periodValue": 0
+        },
+        "applicationMethod": "SPRAYING",
+        "remarks": "string"
+      },
+      {
+        "cropName": "Cebbege_test",
+        "pesticideName": "Muroti",
+        "stageOfGrowth": {
+          "periodUnit": "HOURS",
+          "periodValue": 10
+        },
+        "applicationInterval": {
+          "periodUnit": "HOURS",
+          "periodValue": 0
+        },
+        "applicationMethod": "SPRAYING",
+        "remarks": "string"
+      },
+      {
+        "cropName": "Cebbege_test",
+        "pesticideName": "Belt",
+        "stageOfGrowth": {
+          "periodUnit": "HOURS",
+          "periodValue": 11
+        },
+        "applicationInterval": {
+          "periodUnit": "HOURS",
+          "periodValue": 0
+        },
+        "applicationMethod": "SPRAYING",
+        "remarks": "string"
+      },
+      {
+        "cropName": "Cebbege_test",
+        "pesticideName": "Carbaryl",
+        "stageOfGrowth": {
+          "periodUnit": "HOURS",
+          "periodValue": 12
+        },
+        "applicationInterval": {
+          "periodUnit": "HOURS",
+          "periodValue": 0
+        },
+        "applicationMethod": "SPRAYING",
+        "remarks": "string"
+      }
+    ],
+    "stagesOfGrowth": [
+      {
+        "cropName": "Cebbege_test",
+        "stageStartDate": {
+          "periodUnit": "MINUTES",
+          "periodValue": 1
+        },
+        "stageEndDate": {
+          "periodUnit": "MINUTES",
+          "periodValue": 1
+        },
+        "stageOfGrowth": "TRANSPLANTING"
+      },
+      {
+        "cropName": "Cebbege_test",
+        "stageStartDate": {
+          "periodUnit": "HOURS",
+          "periodValue": 1
+        },
+        "stageEndDate": {
+          "periodUnit": "HOURS",
+          "periodValue": 5
+        },
+        "stageOfGrowth": "VEGETATIVE_GROWTH"
+      },
+      {
+        "cropName": "Cebbege_test",
+        "stageStartDate": {
+          "periodUnit": "HOURS",
+          "periodValue": 6
+        },
+        "stageEndDate": {
+          "periodUnit": "HOURS",
+          "periodValue": 11
+        },
+        "stageOfGrowth": "HEAD_FORMATION"
+      },
+      {
+        "cropName": "Cebbege_test",
+        "stageStartDate": {
+          "periodUnit": "HOURS",
+          "periodValue": 12
+        },
+        "stageEndDate": {
+          "periodUnit": "HOURS",
+          "periodValue": 12
+        },
+        "stageOfGrowth": "MATURITY"
+      }
+    ]
+  },
+
 
   {
     "crop": {
@@ -928,4 +1346,6 @@
       }
     ]
   }
+
+
 ]

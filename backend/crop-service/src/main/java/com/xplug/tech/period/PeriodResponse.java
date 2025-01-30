@@ -3,11 +3,13 @@ package com.xplug.tech.period;
 import com.xplug.tech.crop.Period;
 import com.xplug.tech.enums.PeriodUnit;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
 import java.util.Objects;
 
+@Getter
 @Setter
 @ToString
 @Builder

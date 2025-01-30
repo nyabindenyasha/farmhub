@@ -2,6 +2,7 @@ package com.xplug.tech.cropfarmer;
 
 import com.xplug.tech.crop.CropFarmer;
 import com.xplug.tech.crop.CropService;
+import com.xplug.tech.cropprograms.CropProgramService;
 import com.xplug.tech.usermanager.user.UserAccountService;
 import org.springframework.stereotype.Component;
 
@@ -14,9 +15,12 @@ public non-sealed class CropFarmerMapperImpl implements CropFarmerMapper {
 
     private final UserAccountService userAccountService;
 
-    public CropFarmerMapperImpl(CropService cropService, UserAccountService userAccountService) {
+    private final CropProgramService cropProgramService;
+
+    public CropFarmerMapperImpl(CropService cropService, UserAccountService userAccountService, CropProgramService cropProgramService) {
         this.cropService = cropService;
         this.userAccountService = userAccountService;
+        this.cropProgramService = cropProgramService;
     }
 
     @Override
@@ -27,6 +31,7 @@ public non-sealed class CropFarmerMapperImpl implements CropFarmerMapper {
         return CropFarmer.builder()
                 .crop(crop)
                 .userAccount(farmer)
+                .cropProgram(cropProgramService.getById(cropFarmerRequest.getCropProgramId()))
                 .dateOfTransplant(cropFarmerRequest.getDateOfTransplant())
                 .location(cropFarmerRequest.getLocation())
                 .remarks(cropFarmerRequest.getRemarks())

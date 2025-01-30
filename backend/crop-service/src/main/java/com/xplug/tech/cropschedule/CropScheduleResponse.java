@@ -4,12 +4,14 @@ import com.xplug.tech.crop.CropResponse;
 import com.xplug.tech.crop.CropSchedule;
 import com.xplug.tech.enums.CropScheduleType;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
 import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
+@Getter
 @Setter
 @ToString
 @Builder

@@ -4,12 +4,16 @@ import com.xplug.tech.crop.CropDao;
 import com.xplug.tech.crop.CropService;
 import com.xplug.tech.cropfertilizerschedule.CropFertilizerScheduleService;
 import com.xplug.tech.croppesticideschedule.CropPesticideScheduleService;
+import com.xplug.tech.cropprograms.CropProgramService;
 import com.xplug.tech.cropschedule.CropScheduleService;
 import com.xplug.tech.cropstagesofgrowth.CropStagesOfGrowthService;
 import com.xplug.tech.enums.CropScheduleType;
+import com.xplug.tech.event.SystemConfiguredEvent;
 import com.xplug.tech.fertilizer.FertilizerService;
 import com.xplug.tech.pesticide.PesticideService;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Component;
 
 import javax.transaction.Transactional;
@@ -17,6 +21,7 @@ import java.util.List;
 
 @Slf4j
 @Component
+@RequiredArgsConstructor
 public class CropInitializerService {
 
     private final CropDao cropDao;
@@ -29,28 +34,16 @@ public class CropInitializerService {
 
     private final CropScheduleService cropScheduleService;
 
+    private final CropProgramService cropProgramService;
+
     private final CropStagesOfGrowthService cropStagesOfGrowthService;
 
     private final CropFertilizerScheduleService cropFertilizerScheduleService;
 
     private final CropPesticideScheduleService cropPesticideScheduleService;
 
-    public CropInitializerService(CropDao cropDao,
-                                  CropService cropService, FertilizerService fertilizerService,
-                                  PesticideService pesticideService,
-                                  CropScheduleService cropScheduleService,
-                                  CropStagesOfGrowthService cropStagesOfGrowthService,
-                                  CropFertilizerScheduleService cropFertilizerScheduleService,
-                                  CropPesticideScheduleService cropPesticideScheduleService) {
-        this.cropDao = cropDao;
-        this.cropService = cropService;
-        this.fertilizerService = fertilizerService;
-        this.pesticideService = pesticideService;
-        this.cropScheduleService = cropScheduleService;
-        this.cropStagesOfGrowthService = cropStagesOfGrowthService;
-        this.cropFertilizerScheduleService = cropFertilizerScheduleService;
-        this.cropPesticideScheduleService = cropPesticideScheduleService;
-    }
+    private final ApplicationEventPublisher applicationEventPublisher;
+
 
     @Transactional
     public void initializeCrops(List<CropData> cropDataList) {
@@ -59,6 +52,7 @@ public class CropInitializerService {
             var cropRequest = cropData.getCrop();
 
             var optionalCrop = cropDao.findByNameContainsIgnoreCase(cropRequest.getName());
+
             if (optionalCrop.isPresent()) {
                 return;
             }
@@ -66,6 +60,8 @@ public class CropInitializerService {
             var savedCrop = cropService.initialize(cropRequest);
 
             var cropSchedule = cropScheduleService.getByCropIdAndCropScheduleType(savedCrop.getId(), CropScheduleType.PRIMARY);
+
+            cropProgramService.create(cropSchedule);
 
             var cropDataFertilizerScheduleRequests = cropData.getFertilizerSchedule();
 
@@ -93,6 +89,8 @@ public class CropInitializerService {
             });
 
         });
+//todo load users first
+//        applicationEventPublisher.publishEvent(new SystemConfiguredEvent(this));
     }
 
 }

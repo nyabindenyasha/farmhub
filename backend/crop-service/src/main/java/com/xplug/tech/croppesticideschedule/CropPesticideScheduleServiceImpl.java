@@ -2,9 +2,10 @@ package com.xplug.tech.croppesticideschedule;
 
 import com.xplug.tech.crop.CropPesticideSchedule;
 import com.xplug.tech.crop.CropPesticideScheduleDao;
+import com.xplug.tech.cropprograms.CropProgramService;
 import com.xplug.tech.enums.CropScheduleType;
-import com.xplug.tech.period.PeriodService;
 import com.xplug.tech.exception.ItemAlreadyExistsException;
+import com.xplug.tech.period.PeriodService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -18,11 +19,14 @@ public non-sealed class CropPesticideScheduleServiceImpl implements CropPesticid
 
     private final CropPesticideScheduleMapper cropPesticideScheduleMapper;
 
+    private final CropProgramService cropProgramService;
+
     private final PeriodService periodService;
 
-    public CropPesticideScheduleServiceImpl(CropPesticideScheduleDao cropPesticideScheduleRepository, CropPesticideScheduleMapper cropPesticideScheduleMapper, PeriodService periodService) {
+    public CropPesticideScheduleServiceImpl(CropPesticideScheduleDao cropPesticideScheduleRepository, CropPesticideScheduleMapper cropPesticideScheduleMapper, CropProgramService cropProgramService, PeriodService periodService) {
         this.cropPesticideScheduleRepository = cropPesticideScheduleRepository;
         this.cropPesticideScheduleMapper = cropPesticideScheduleMapper;
+        this.cropProgramService = cropProgramService;
         this.periodService = periodService;
     }
 
@@ -57,7 +61,9 @@ public non-sealed class CropPesticideScheduleServiceImpl implements CropPesticid
         }
         var cropPesticideSchedule = cropPesticideScheduleMapper
                 .cropPesticideScheduleFromCropPesticideScheduleRequest(request);
-        return cropPesticideScheduleRepository.save(cropPesticideSchedule);
+        var savedCropPesticideSchedule = cropPesticideScheduleRepository.save(cropPesticideSchedule);
+        cropProgramService.updatePesticideSchedule(savedCropPesticideSchedule);
+        return savedCropPesticideSchedule;
     }
 
     public CropPesticideSchedule update(CropPesticideScheduleUpdateRequest cropPesticideScheduleUpdateRequest) {

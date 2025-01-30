@@ -27,6 +27,10 @@ public class CropFarmer {
     @JoinColumn(name = "User_account_id", nullable = false)
     private UserAccount userAccount; //farmer
 
+    @ManyToOne
+    @JoinColumn(name = "crop_program_id", nullable = false)
+    private CropProgram cropProgram; //crop program to be used
+
     private LocalDate dateOfTransplant; //to derive crop stages and day of maturity
 
     private String location;

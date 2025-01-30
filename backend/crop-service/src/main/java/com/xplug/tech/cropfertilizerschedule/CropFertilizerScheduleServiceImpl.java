@@ -2,6 +2,8 @@ package com.xplug.tech.cropfertilizerschedule;
 
 import com.xplug.tech.crop.CropFertilizerSchedule;
 import com.xplug.tech.crop.CropFertilizerScheduleDao;
+import com.xplug.tech.crop.CropProgramDao;
+import com.xplug.tech.cropprograms.CropProgramService;
 import com.xplug.tech.enums.CropScheduleType;
 import com.xplug.tech.period.PeriodService;
 import com.xplug.tech.exception.ItemAlreadyExistsException;
@@ -18,11 +20,14 @@ public non-sealed class CropFertilizerScheduleServiceImpl implements CropFertili
 
     private final CropFertilizerScheduleMapper cropFertilizerScheduleMapper;
 
+    private final CropProgramService cropProgramService;
+
     private final PeriodService periodService;
 
-    public CropFertilizerScheduleServiceImpl(CropFertilizerScheduleDao cropFertilizerScheduleRepository, CropFertilizerScheduleMapper cropFertilizerScheduleMapper, PeriodService periodService) {
+    public CropFertilizerScheduleServiceImpl(CropFertilizerScheduleDao cropFertilizerScheduleRepository, CropFertilizerScheduleMapper cropFertilizerScheduleMapper, CropProgramService cropProgramService, PeriodService periodService) {
         this.cropFertilizerScheduleRepository = cropFertilizerScheduleRepository;
         this.cropFertilizerScheduleMapper = cropFertilizerScheduleMapper;
+        this.cropProgramService = cropProgramService;
         this.periodService = periodService;
     }
 
@@ -57,9 +62,12 @@ public non-sealed class CropFertilizerScheduleServiceImpl implements CropFertili
         }
         var cropFertilizerSchedule = cropFertilizerScheduleMapper
                 .cropFertilizerScheduleFromCropFertilizerScheduleRequest(request);
-        return cropFertilizerScheduleRepository.save(cropFertilizerSchedule);
+        var savedCropFertilizerSchedule =  cropFertilizerScheduleRepository.save(cropFertilizerSchedule);
+        cropProgramService.updateFertilizerSchedule(savedCropFertilizerSchedule);
+        return savedCropFertilizerSchedule;
     }
 
+    //todo update crop program as well
     public CropFertilizerSchedule update(CropFertilizerScheduleUpdateRequest cropFertilizerScheduleUpdateRequest) {
         var cropFertilizerSchedule = getById(cropFertilizerScheduleUpdateRequest.getId());
         var updatedCropFertilizerSchedule = cropFertilizerScheduleMapper

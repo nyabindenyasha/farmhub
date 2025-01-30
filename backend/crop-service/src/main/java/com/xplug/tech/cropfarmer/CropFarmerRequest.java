@@ -16,6 +16,9 @@ public class CropFarmerRequest {
     @NotNull(message = "Farmer id cannot be null!")
     private Long farmerId;
 
+    @NotNull(message = "Crop Program id cannot be null!")
+    private Long cropProgramId;
+
     @NotNull(message = "Date Of Transplant cannot be null!")
     private LocalDate dateOfTransplant;
 
