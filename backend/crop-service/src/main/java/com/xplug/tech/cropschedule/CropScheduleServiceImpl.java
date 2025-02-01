@@ -1,8 +1,9 @@
 package com.xplug.tech.cropschedule;
 
+import com.xplug.tech.crop.CropFertilizerScheduleDao;
+import com.xplug.tech.crop.CropPesticideScheduleDao;
 import com.xplug.tech.crop.CropSchedule;
 import com.xplug.tech.crop.CropScheduleDao;
-import com.xplug.tech.cropprograms.CropProgramService;
 import com.xplug.tech.enums.CropScheduleType;
 import com.xplug.tech.exception.ItemAlreadyExistsException;
 import lombok.extern.slf4j.Slf4j;
@@ -18,12 +19,15 @@ public non-sealed class CropScheduleServiceImpl implements CropScheduleService {
 
     private final CropScheduleMapper cropScheduleMapper;
 
-    private final CropProgramService cropProgramService;
+    private final CropFertilizerScheduleDao cropFertilizerScheduleService;
 
-    public CropScheduleServiceImpl(CropScheduleDao cropScheduleRepository, CropScheduleMapper cropScheduleMapper, CropProgramService cropProgramService) {
+    private final CropPesticideScheduleDao cropPesticideScheduleService;
+
+    public CropScheduleServiceImpl(CropScheduleDao cropScheduleRepository, CropScheduleMapper cropScheduleMapper, CropFertilizerScheduleDao cropFertilizerScheduleService, CropPesticideScheduleDao cropPesticideScheduleService) {
         this.cropScheduleRepository = cropScheduleRepository;
         this.cropScheduleMapper = cropScheduleMapper;
-        this.cropProgramService = cropProgramService;
+        this.cropFertilizerScheduleService = cropFertilizerScheduleService;
+        this.cropPesticideScheduleService = cropPesticideScheduleService;
     }
 
 
@@ -32,8 +36,11 @@ public non-sealed class CropScheduleServiceImpl implements CropScheduleService {
     }
 
     public CropSchedule getById(Long id) {
-        return cropScheduleRepository.findById(id)
+        var cropSchedule = cropScheduleRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("CropSchedule not found with ID: " + id));
+        cropSchedule.setFertilizerScheduleList(cropFertilizerScheduleService.findByCropScheduleId(cropSchedule.getId()));
+        cropSchedule.setPesticideScheduleList(cropPesticideScheduleService.findByCropScheduleId(cropSchedule.getId()));
+        return cropSchedule;
     }
 
     @Override
@@ -51,7 +58,6 @@ public non-sealed class CropScheduleServiceImpl implements CropScheduleService {
         var cropSchedule = cropScheduleMapper
                 .cropScheduleFromCropScheduleRequest(cropScheduleRequest);
         var savedCropSchedule = cropScheduleRepository.save(cropSchedule);
-        cropProgramService.create(savedCropSchedule);
         return savedCropSchedule;
     }
 

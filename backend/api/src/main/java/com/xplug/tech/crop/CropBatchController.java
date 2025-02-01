@@ -1,12 +1,13 @@
 package com.xplug.tech.crop;
 
-import com.xplug.tech.cropbatch.CropBatchRequest;
+import com.xplug.tech.cropbatch.CropBatchResponse;
 import com.xplug.tech.cropbatch.CropBatchService;
 import com.xplug.tech.cropbatch.CropBatchUpdateRequest;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @CrossOrigin
 @RestController
@@ -21,21 +22,21 @@ public class CropBatchController {
 
     @GetMapping
     @Operation(summary = "Get All Crop Batches")
-    public List<CropBatch> getAll() {
-        return cropBatchService.getAll();
+    public List<CropBatchResponse> getAll() {
+        return cropBatchService.getAll().stream().map(CropBatchResponse::of).collect(Collectors.toList());
     }
 
     @GetMapping("/{id}")
     @Operation(summary = "Get Crop Batch Info By Id")
-    public CropBatch getById(@PathVariable Long id) {
-        return cropBatchService.getById(id);
+    public CropBatchResponse getById(@PathVariable Long id) {
+        return CropBatchResponse.of(cropBatchService.getById(id));
     }
 
-    @PostMapping
-    @Operation(summary = "Create Crop Batch")
-    public CropBatch create(@RequestBody CropBatchRequest cropBatchRequest) {
-        return cropBatchService.create(cropBatchRequest);
-    }
+//    @PostMapping
+//    @Operation(summary = "Create Crop Batch")
+//    public CropBatch create(@RequestBody CropBatchRequest cropBatchRequest) {
+//        return cropBatchService.create(cropBatchRequest);
+//    }
 
     @PutMapping("/{id}")
     @Operation(summary = "Update Crop Batch")

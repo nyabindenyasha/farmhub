@@ -4,7 +4,12 @@ import com.xplug.tech.usermanager.UserAccount;
 import lombok.*;
 
 import javax.persistence.*;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.util.Calendar;
+import java.util.TimeZone;
 
 @Entity
 @Getter
@@ -28,13 +33,23 @@ public class CropFarmer {
     private UserAccount userAccount; //farmer
 
     @ManyToOne
-    @JoinColumn(name = "crop_program_id", nullable = false)
-    private CropProgram cropProgram; //crop program to be used
+    @JoinColumn(name = "crop_schedule_id", nullable = false)
+    private CropSchedule cropSchedule; //crop program to be used
 
-    private LocalDate dateOfTransplant; //to derive crop stages and day of maturity
+    //todo for testing
+    // private LocalDate dateOfTransplant; //to derive crop stages and day of maturity
+
+    private LocalDateTime dateOfTransplant; //to derive crop stages and day of maturity
 
     private String location;
 
     private String remarks;
+
+    @PrePersist
+    @PreUpdate
+    public void adjustTimeZone() {
+        ZoneId  zoneId = ZoneId.of("Africa/Harare");
+        this.dateOfTransplant = ZonedDateTime.of(this.dateOfTransplant, zoneId).toLocalDateTime();
+    }
 
 }

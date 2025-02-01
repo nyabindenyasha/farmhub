@@ -60,7 +60,8 @@ public class SystemConfiguredEventListener implements ApplicationListener<System
         Set<String> emails = new HashSet<>();
         emails.add(admin.getEmail());
         emailRequest.setEmailRecipients(emails);
-        notificationService.create(userCreatedNotificationsContext, emailRequest);
+        //todo uncomment
+  //      notificationService.create(userCreatedNotificationsContext, emailRequest);
     }
 
 }

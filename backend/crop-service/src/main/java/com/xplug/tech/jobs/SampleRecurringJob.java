@@ -13,41 +13,45 @@ public class SampleRecurringJob {
 
     private final JobScheduler jobScheduler;
 
-    public SampleRecurringJob(JobScheduler jobScheduler) {
+    private final TaskStatusUpdateService taskStatusUpdateService;
+
+    public SampleRecurringJob(JobScheduler jobScheduler, TaskStatusUpdateService taskStatusUpdateService) {
         this.jobScheduler = jobScheduler;
+        this.taskStatusUpdateService = taskStatusUpdateService;
     }
 
     // Using @PostConstruct to schedule jobs on startup
     @PostConstruct
     public void scheduleJobs() {
-        // Example 1: Run every minute
+        // Example 1: Run every 5 minute
         jobScheduler.scheduleRecurrently(
-            "minutely-task",           // unique identifier
-            Cron.minutely(),             // cron expression for every minute
-            () -> processMinutelyTask() // the job to execute
+                "five-minutely-task",           // unique identifier
+                Cron.every5minutes(),             // cron expression for every minute
+                () -> processMinutelyTask() // the job to execute
         );
 
         // Example 2: Run every hour
         jobScheduler.scheduleRecurrently(
-            "hourly-task",
-            Cron.hourly(), // same as "0 0 * * * *"
-            () -> processHourlyTask()
+                "hourly-task",
+                Cron.hourly(), // same as "0 0 * * * *"
+                () -> processHourlyTask()
         );
 
         // Example 3: Run daily at midnight
         jobScheduler.scheduleRecurrently(
-            "daily-task",
-            Cron.daily(), // same as "0 0 0 * * *"
-            () -> processDailyTask()
+                "daily-task",
+                Cron.daily(), // same as "0 0 0 * * *"
+                () -> processDailyTask()
         );
     }
 
 
     @Job(name = "Process Minutely Task")
     public void processMinutelyTask() {
-        System.out.println("Minutely task executed at: " + LocalDateTime.now());
+        System.out.println("5 Minutely task executed at: " + LocalDateTime.now());
         // Your minutely task logic here
         // For example: Check for new messages in a queue
+        taskStatusUpdateService.updateTaskStatuses();
     }
 
     @Job(name = "Process Hourly Task")

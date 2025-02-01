@@ -4,7 +4,6 @@ import com.xplug.tech.crop.CropDao;
 import com.xplug.tech.crop.CropService;
 import com.xplug.tech.cropfertilizerschedule.CropFertilizerScheduleService;
 import com.xplug.tech.croppesticideschedule.CropPesticideScheduleService;
-import com.xplug.tech.cropprograms.CropProgramService;
 import com.xplug.tech.cropschedule.CropScheduleService;
 import com.xplug.tech.cropstagesofgrowth.CropStagesOfGrowthService;
 import com.xplug.tech.enums.CropScheduleType;
@@ -34,8 +33,6 @@ public class CropInitializerService {
 
     private final CropScheduleService cropScheduleService;
 
-    private final CropProgramService cropProgramService;
-
     private final CropStagesOfGrowthService cropStagesOfGrowthService;
 
     private final CropFertilizerScheduleService cropFertilizerScheduleService;
@@ -61,8 +58,6 @@ public class CropInitializerService {
 
             var cropSchedule = cropScheduleService.getByCropIdAndCropScheduleType(savedCrop.getId(), CropScheduleType.PRIMARY);
 
-            cropProgramService.create(cropSchedule);
-
             var cropDataFertilizerScheduleRequests = cropData.getFertilizerSchedule();
 
             var cropDataPesticideScheduleRequests = cropData.getPesticideSchedule();
@@ -71,16 +66,16 @@ public class CropInitializerService {
 
             cropDataFertilizerScheduleRequests.forEach(cropDataFertilizerScheduleRequest -> {
                 var fertilizer = fertilizerService.getByName(cropDataFertilizerScheduleRequest.getFertilizerName());
-                cropDataFertilizerScheduleRequest.setCropScheduleId(cropSchedule.getId());
-                cropDataFertilizerScheduleRequest.setFertilizerId(fertilizer.getId());
-                cropFertilizerScheduleService.create(cropDataFertilizerScheduleRequest);
+//                cropDataFertilizerScheduleRequest.setCropScheduleId(cropSchedule.getId());
+//                cropDataFertilizerScheduleRequest.setFertilizerId(fertilizer.getId());
+                cropFertilizerScheduleService.initialize(cropSchedule, fertilizer, cropDataFertilizerScheduleRequest);
             });
 
             cropDataPesticideScheduleRequests.forEach(cropDataPesticideScheduleRequest -> {
                 var pesticide = pesticideService.getByName(cropDataPesticideScheduleRequest.getPesticideName());
-                cropDataPesticideScheduleRequest.setCropScheduleId(cropSchedule.getId());
-                cropDataPesticideScheduleRequest.setPesticideId(pesticide.getId());
-                cropPesticideScheduleService.create(cropDataPesticideScheduleRequest);
+//                cropDataPesticideScheduleRequest.setCropScheduleId(cropSchedule.getId());
+//                cropDataPesticideScheduleRequest.setPesticideId(pesticide.getId());
+                cropPesticideScheduleService.initialize(cropSchedule, pesticide, cropDataPesticideScheduleRequest);
             });
 
             cropDataCropStagesOfGrowthRequests.forEach(cropDataCropStagesOfGrowthRequest -> {
@@ -90,7 +85,7 @@ public class CropInitializerService {
 
         });
 //todo load users first
-//        applicationEventPublisher.publishEvent(new SystemConfiguredEvent(this));
+        applicationEventPublisher.publishEvent(new SystemConfiguredEvent(this));
     }
 
 }

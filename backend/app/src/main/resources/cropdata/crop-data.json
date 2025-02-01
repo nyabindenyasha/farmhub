@@ -432,7 +432,7 @@
         "fertilizerName": "Compound C",
         "stageOfGrowth": {
           "periodUnit": "MINUTES",
-          "periodValue": 1
+          "periodValue": 10
         },
         "applicationInterval": {
           "periodUnit": "HOURS",
@@ -494,7 +494,7 @@
         "pesticideName": "Lambda",
         "stageOfGrowth": {
           "periodUnit": "MINUTES",
-          "periodValue": 1
+          "periodValue": 10
         },
         "applicationInterval": {
           "periodUnit": "HOURS",
@@ -508,7 +508,7 @@
         "pesticideName": "Metolachlor",
         "stageOfGrowth": {
           "periodUnit": "MINUTES",
-          "periodValue": 1
+          "periodValue": 10
         },
         "applicationInterval": {
           "periodUnit": "HOURS",
@@ -789,11 +789,11 @@
         "cropName": "Cebbege_test",
         "stageStartDate": {
           "periodUnit": "MINUTES",
-          "periodValue": 1
+          "periodValue": 10
         },
         "stageEndDate": {
           "periodUnit": "MINUTES",
-          "periodValue": 1
+          "periodValue": 10
         },
         "stageOfGrowth": "TRANSPLANTING"
       },

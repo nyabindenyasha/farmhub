@@ -50,7 +50,6 @@ public non-sealed class UserAccountMapperImpl implements UserAccountMapper {
                 .lastName(userAccount.getLastName())
                 .email(userAccount.getEmail())
                 .username(userAccount.getUsername())
-                .password(userAccount.getPassword())
                 //todo
                 .group(userAccount.getGroup())
                 .phoneNumber(userAccount.getPhoneNumber())

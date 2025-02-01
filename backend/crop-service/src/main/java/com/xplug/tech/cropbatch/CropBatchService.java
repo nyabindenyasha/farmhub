@@ -1,9 +1,7 @@
 package com.xplug.tech.cropbatch;
 
-import com.xplug.tech.crop.Crop;
 import com.xplug.tech.crop.CropBatch;
-import com.xplug.tech.crop.CropRequest;
-import com.xplug.tech.crop.CropUpdateRequest;
+import com.xplug.tech.crop.CropFarmer;
 
 import java.util.List;
 
@@ -13,7 +11,7 @@ public sealed interface CropBatchService permits CropBatchServiceImpl {
 
     CropBatch getById(Long id);
 
-    CropBatch create(CropBatchRequest cropBatchRequest);
+    CropBatch create(CropFarmer cropFarmer);
 
     CropBatch update(CropBatchUpdateRequest cropBatchUpdateRequest);
 

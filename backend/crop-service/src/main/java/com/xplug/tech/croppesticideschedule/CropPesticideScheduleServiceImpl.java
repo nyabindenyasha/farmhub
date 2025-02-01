@@ -1,8 +1,7 @@
 package com.xplug.tech.croppesticideschedule;
 
-import com.xplug.tech.crop.CropPesticideSchedule;
-import com.xplug.tech.crop.CropPesticideScheduleDao;
-import com.xplug.tech.cropprograms.CropProgramService;
+import com.xplug.tech.crop.*;
+import com.xplug.tech.cropfertilizerschedule.CropFertilizerScheduleRequest;
 import com.xplug.tech.enums.CropScheduleType;
 import com.xplug.tech.exception.ItemAlreadyExistsException;
 import com.xplug.tech.period.PeriodService;
@@ -10,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 
 @Slf4j
 @Service
@@ -19,14 +19,11 @@ public non-sealed class CropPesticideScheduleServiceImpl implements CropPesticid
 
     private final CropPesticideScheduleMapper cropPesticideScheduleMapper;
 
-    private final CropProgramService cropProgramService;
-
     private final PeriodService periodService;
 
-    public CropPesticideScheduleServiceImpl(CropPesticideScheduleDao cropPesticideScheduleRepository, CropPesticideScheduleMapper cropPesticideScheduleMapper, CropProgramService cropProgramService, PeriodService periodService) {
+    public CropPesticideScheduleServiceImpl(CropPesticideScheduleDao cropPesticideScheduleRepository, CropPesticideScheduleMapper cropPesticideScheduleMapper, PeriodService periodService) {
         this.cropPesticideScheduleRepository = cropPesticideScheduleRepository;
         this.cropPesticideScheduleMapper = cropPesticideScheduleMapper;
-        this.cropProgramService = cropProgramService;
         this.periodService = periodService;
     }
 
@@ -41,6 +38,11 @@ public non-sealed class CropPesticideScheduleServiceImpl implements CropPesticid
     }
 
     @Override
+    public Set<CropPesticideSchedule> getByCropScheduleId(Long cropScheduleId) {
+        return cropPesticideScheduleRepository.findByCropScheduleId(cropScheduleId);
+    }
+
+    @Override
     public List<CropPesticideSchedule> getByCropAndScheduleType(Long cropId, CropScheduleType cropScheduleType) {
         return cropPesticideScheduleRepository.findByCropScheduleCropIdAndCropScheduleCropScheduleType(cropId, cropScheduleType);
     }
@@ -50,6 +52,19 @@ public non-sealed class CropPesticideScheduleServiceImpl implements CropPesticid
         return cropPesticideScheduleRepository
                 .findByCropScheduleCropIdAndCropScheduleCropScheduleTypeAndStageOfGrowthId(cropId, cropScheduleType, stageOfGrowthId)
                 .orElseThrow(() -> new RuntimeException("CropPesticideSchedule not found"));
+    }
+
+    @Override
+    public CropPesticideSchedule initialize(CropSchedule cropSchedule, Pesticide pesticide, CropPesticideScheduleRequest cropPesticideScheduleRequest) {
+        var cropPesticideSchedule = CropPesticideSchedule.builder()
+                .cropSchedule(cropSchedule)
+                .pesticide(pesticide)
+                .stageOfGrowth(periodService.findOrCreatePeriod(cropPesticideScheduleRequest.getStageOfGrowth()))
+                .applicationInterval(periodService.findOrCreatePeriod(cropPesticideScheduleRequest.getApplicationInterval()))
+                .applicationMethod(cropPesticideScheduleRequest.getApplicationMethod())
+                .remarks(cropPesticideScheduleRequest.getRemarks())
+                .build();
+        return cropPesticideScheduleRepository.save(cropPesticideSchedule);
     }
 
     public CropPesticideSchedule create(CropPesticideScheduleRequest request) {
@@ -62,7 +77,6 @@ public non-sealed class CropPesticideScheduleServiceImpl implements CropPesticid
         var cropPesticideSchedule = cropPesticideScheduleMapper
                 .cropPesticideScheduleFromCropPesticideScheduleRequest(request);
         var savedCropPesticideSchedule = cropPesticideScheduleRepository.save(cropPesticideSchedule);
-        cropProgramService.updatePesticideSchedule(savedCropPesticideSchedule);
         return savedCropPesticideSchedule;
     }
 

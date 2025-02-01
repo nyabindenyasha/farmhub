@@ -1,22 +1,28 @@
 package com.xplug.tech.crop;
 
-import com.xplug.tech.enums.FertilizerApplicationMethod;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.xplug.tech.enums.TaskStatus;
+import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.persistence.JoinColumn;
-import java.time.LocalDate;
+import javax.persistence.*;
+import java.time.*;
 
 @Entity
 @Getter
 @Setter
-@ToString
+@Builder
+@ToString(exclude = {"cropBatch"})
 @NoArgsConstructor
-public class CropFertilizerScheduleTask extends CropFertilizerSchedule {
+@AllArgsConstructor
+public class CropFertilizerScheduleTask {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @ManyToOne
+    @JoinColumn(name = "crop_fertilizer_schedule_id", nullable = false)
+    private CropFertilizerSchedule cropFertilizerSchedule;
 
     private Boolean isCompleted;
 
@@ -24,94 +30,25 @@ public class CropFertilizerScheduleTask extends CropFertilizerSchedule {
 
     private String taskRemarks;
 
+    @Enumerated(EnumType.STRING)
+    private TaskStatus taskStatus;
+
+    private LocalDateTime taskDate;
+
+    @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "crop_batch_id")
+    @JoinColumn(name = "crop_batch_id", nullable = false)
     private CropBatch cropBatch;
 
-    public static CropFertilizerScheduleTaskBuilder builder() {
-        return new CropFertilizerScheduleTaskBuilder();
+    public String getTaskName() {
+        return cropBatch.getCropFarmer().getCrop().getName() + " " + cropFertilizerSchedule.getFertilizer().getName() + " " + cropFertilizerSchedule.getRate();
     }
 
-    public static class CropFertilizerScheduleTaskBuilder extends CropFertilizerScheduleBuilder {
-        private CropFertilizerScheduleTask taskInstance;
-
-        protected CropFertilizerScheduleTaskBuilder() {
-            super();
-            taskInstance = new CropFertilizerScheduleTask();
-            instance = taskInstance;
-        }
-
-        public CropFertilizerScheduleTaskBuilder isCompleted(Boolean isCompleted) {
-            taskInstance.setIsCompleted(isCompleted);
-            return this;
-        }
-
-        public CropFertilizerScheduleTaskBuilder completionDate(LocalDate completionDate) {
-            taskInstance.setCompletionDate(completionDate);
-            return this;
-        }
-
-        public CropFertilizerScheduleTaskBuilder taskRemarks(String taskRemarks) {
-            taskInstance.setTaskRemarks(taskRemarks);
-            return this;
-        }
-
-        public CropFertilizerScheduleTaskBuilder cropBatch(CropBatch cropBatch) {
-            taskInstance.setCropBatch(cropBatch);
-            return this;
-        }
-
-        @Override
-        public CropFertilizerScheduleTaskBuilder id(Long id) {
-            super.id(id);
-            return this;
-        }
-
-        @Override
-        public CropFertilizerScheduleTaskBuilder cropSchedule(CropSchedule cropSchedule) {
-            super.cropSchedule(cropSchedule);
-            return this;
-        }
-
-        @Override
-        public CropFertilizerScheduleTaskBuilder fertilizer(Fertilizer fertilizer) {
-            super.fertilizer(fertilizer);
-            return this;
-        }
-
-        @Override
-        public CropFertilizerScheduleTaskBuilder stageOfGrowth(Period stageOfGrowth) {
-            super.stageOfGrowth(stageOfGrowth);
-            return this;
-        }
-
-        @Override
-        public CropFertilizerScheduleTaskBuilder applicationInterval(Period applicationInterval) {
-            super.applicationInterval(applicationInterval);
-            return this;
-        }
-
-        @Override
-        public CropFertilizerScheduleTaskBuilder rate(Integer rate) {
-            super.rate(rate);
-            return this;
-        }
-
-        @Override
-        public CropFertilizerScheduleTaskBuilder applicationMethod(FertilizerApplicationMethod applicationMethod) {
-            super.applicationMethod(applicationMethod);
-            return this;
-        }
-
-        @Override
-        public CropFertilizerScheduleTaskBuilder remarks(String remarks) {
-            super.remarks(remarks);
-            return this;
-        }
-
-        @Override
-        public CropFertilizerScheduleTask build() {
-            return taskInstance;
-        }
+    @PrePersist
+    @PreUpdate
+    public void adjustTimeZone() {
+        ZoneId zoneId = ZoneId.of("Africa/Harare");
+        this.taskDate = ZonedDateTime.of(this.taskDate, zoneId).toLocalDateTime();
     }
+
 }

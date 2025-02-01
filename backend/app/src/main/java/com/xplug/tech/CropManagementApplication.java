@@ -1,11 +1,10 @@
 package com.xplug.tech;
 
 
-import com.lowagie.text.Font;
-import com.lowagie.text.*;
+import com.lowagie.text.Phrase;
 import com.lowagie.text.pdf.PdfPCell;
 import com.lowagie.text.pdf.PdfPTable;
-import com.lowagie.text.pdf.PdfWriter;
+import com.xplug.tech.utils.date.DateUtils;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -13,18 +12,20 @@ import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 import java.awt.*;
-import java.io.FileOutputStream;
+import java.time.LocalDateTime;
 
-@SpringBootApplication
-@EnableConfigurationProperties
-@EnableCaching
 @EnableJpaAuditing
+@SpringBootApplication
 public class CropManagementApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(CropManagementApplication.class, args);
 
         String outputPath = "test-dir/Cabbage_Production_Guide.pdf";
+
+        System.out.println("LocalDateTime.now(): " + LocalDateTime.now());
+
+        System.out.println("DateUtils.getCurrentTime(): " + DateUtils.getCurrentTime());
 
 //        try {
 //            // Step 1: Create a Document instance

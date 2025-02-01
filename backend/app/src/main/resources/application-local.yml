@@ -1,10 +1,12 @@
 spring:
+  jackson:
+    time-zone: Africa/Harare
   application:
     name: crop-management-app
   datasource:
     driver-class-name: org.postgresql.Driver
     password: postgres
-    url: jdbc:postgresql://localhost:5432/crop_management10
+    url: jdbc:postgresql://localhost:5432/crop_management11
     username: postgres
   jpa:
     database: POSTGRESQL
@@ -13,6 +15,8 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
+        jdbc:
+          time_zone: Africa/Harare
   main:
     allow-bean-definition-overriding: true
   mail:

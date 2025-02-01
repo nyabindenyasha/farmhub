@@ -9,12 +9,9 @@ public class CropFarmerCreatedEvent extends ApplicationEvent {
 
     private final CropFarmer cropFarmer;
 
-    private final Long cropProgramId;
-
-    public CropFarmerCreatedEvent(Object source, CropFarmer cropFarmer, Long cropProgramId) {
+    public CropFarmerCreatedEvent(Object source, CropFarmer cropFarmer) {
         super(source);
         this.cropFarmer = cropFarmer;
-        this.cropProgramId = cropProgramId;
     }
 
 }

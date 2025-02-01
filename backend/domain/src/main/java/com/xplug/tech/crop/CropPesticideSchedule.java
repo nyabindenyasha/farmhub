@@ -1,26 +1,22 @@
 package com.xplug.tech.crop;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.xplug.tech.enums.PesticideApplicationMethod;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
 @Getter
 @Setter
-@ToString
+@ToString(exclude = {"cropSchedule"})
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class CropPesticideSchedule {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "pesticide_schedule_seq")
-    @SequenceGenerator(name = "pesticide_schedule_seq", sequenceName = "pesticide_schedule_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
@@ -45,54 +41,4 @@ public class CropPesticideSchedule {
     @Column(length = 500)
     private String remarks;
 
-    public static CropPesticideScheduleBuilder builder() {
-        return new CropPesticideScheduleBuilder();
-    }
-
-    public static class CropPesticideScheduleBuilder {
-        protected CropPesticideSchedule instance;
-
-        protected CropPesticideScheduleBuilder() {
-            instance = new CropPesticideSchedule();
-        }
-
-        public CropPesticideScheduleBuilder id(Long id) {
-            instance.setId(id);
-            return this;
-        }
-
-        public CropPesticideScheduleBuilder cropSchedule(CropSchedule cropSchedule) {
-            instance.setCropSchedule(cropSchedule);
-            return this;
-        }
-
-        public CropPesticideScheduleBuilder pesticide(Pesticide pesticide) {
-            instance.setPesticide(pesticide);
-            return this;
-        }
-
-        public CropPesticideScheduleBuilder stageOfGrowth(Period stageOfGrowth) {
-            instance.setStageOfGrowth(stageOfGrowth);
-            return this;
-        }
-
-        public CropPesticideScheduleBuilder applicationInterval(Period applicationInterval) {
-            instance.setApplicationInterval(applicationInterval);
-            return this;
-        }
-
-        public CropPesticideScheduleBuilder applicationMethod(PesticideApplicationMethod applicationMethod) {
-            instance.setApplicationMethod(applicationMethod);
-            return this;
-        }
-
-        public CropPesticideScheduleBuilder remarks(String remarks) {
-            instance.setRemarks(remarks);
-            return this;
-        }
-
-        public CropPesticideSchedule build() {
-            return instance;
-        }
-    }
 }

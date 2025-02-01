@@ -12,6 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Slf4j
@@ -29,7 +30,7 @@ public non-sealed class CropFarmerServiceImpl implements CropFarmerService {
     public CropFarmerServiceImpl(CropFarmerDao cropFarmerRepository, CropFarmerMapper cropFarmerMapper, UserAccountService userAccountService, ApplicationEventPublisher applicationEventPublisher) {
         this.cropFarmerRepository = cropFarmerRepository;
         this.cropFarmerMapper = cropFarmerMapper;
-        this.userAccountService = userAccountService;
+        this.userAccountService = userAccountService;;
         this.applicationEventPublisher = applicationEventPublisher;
     }
 
@@ -53,7 +54,7 @@ public non-sealed class CropFarmerServiceImpl implements CropFarmerService {
         validateFarmer(cropFarmerRequest.getFarmerId());
         var cropFarmer = cropFarmerMapper.cropFarmerFromCropFarmerRequest(cropFarmerRequest);
         var savedCropFarmer = cropFarmerRepository.save(cropFarmer);
-        applicationEventPublisher.publishEvent(new CropFarmerCreatedEvent(this, savedCropFarmer, cropFarmerRequest.getCropProgramId()));
+        applicationEventPublisher.publishEvent(new CropFarmerCreatedEvent(this, savedCropFarmer));
         return savedCropFarmer;
     }
 

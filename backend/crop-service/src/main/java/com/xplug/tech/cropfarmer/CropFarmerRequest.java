@@ -1,10 +1,12 @@
 package com.xplug.tech.cropfarmer;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.ToString;
 
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Getter
 @ToString
@@ -20,7 +22,8 @@ public class CropFarmerRequest {
     private Long cropProgramId;
 
     @NotNull(message = "Date Of Transplant cannot be null!")
-    private LocalDate dateOfTransplant;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime dateOfTransplant;
 
     @NotNull(message = "Location cannot be null!")
     private String location;

@@ -25,28 +25,43 @@ public class CropBatch {
     @JoinColumn(name = "crop_farmer_id", nullable = false)
     private CropFarmer cropFarmer;
 
-//    @OneToOne
-//    @JoinColumn(name = "crop_program_id", nullable = false)
-//    private CropProgram cropProgram;
+//  todo breaking the bidirectional mapping
 
-    @OneToMany(mappedBy = "cropBatch", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<CropPesticideScheduleTask> pesticideScheduleTasks;
+//    @OneToMany(mappedBy = "cropBatch", cascade = CascadeType.ALL, orphanRemoval = true)
+//    private Set<CropPesticideScheduleTask> pesticideScheduleTasks = new HashSet<>();
+//
+//    @OneToMany(mappedBy = "cropBatch", cascade = CascadeType.ALL, orphanRemoval = true)
+//    private Set<CropFertilizerScheduleTask> fertilizerScheduleTasks = new HashSet<>();
+//
+//    public void addPesticideScheduleTask(CropPesticideScheduleTask task) {
+//        task.setCropBatch(this);
+//        this.pesticideScheduleTasks.add(task);
+//    }
+//
+//    public void addFertilizerScheduleTask(CropFertilizerScheduleTask task) {
+//        task.setCropBatch(this);
+//        this.fertilizerScheduleTasks.add(task);
+//    }
+//
+//    public Set<CropPesticideScheduleTask> getPesticideScheduleTasks() {
+//        if (isNull(pesticideScheduleTasks)) {
+//            pesticideScheduleTasks = new HashSet<>();
+//        }
+//        return pesticideScheduleTasks;
+//    }
+//
+//    public Set<CropFertilizerScheduleTask> getFertilizerScheduleTasks() {
+//        if (isNull(fertilizerScheduleTasks)) {
+//            fertilizerScheduleTasks = new HashSet<>();
+//        }
+//        return fertilizerScheduleTasks;
+//    }
 
-    @OneToMany(mappedBy = "cropBatch", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<CropFertilizerScheduleTask> fertilizerScheduleTasks;
+    @Transient
+    private Set<CropFertilizerScheduleTask> fertilizerScheduleTasks = new HashSet<>();
 
-    public Set<CropPesticideScheduleTask> getPesticideScheduleTasks() {
-        if (isNull(pesticideScheduleTasks)) {
-            pesticideScheduleTasks = new HashSet<>();
-        }
-        return pesticideScheduleTasks;
-    }
 
-    public Set<CropFertilizerScheduleTask> getFertilizerScheduleTasks() {
-        if (isNull(fertilizerScheduleTasks)) {
-            fertilizerScheduleTasks = new HashSet<>();
-        }
-        return fertilizerScheduleTasks;
-    }
+    @Transient
+    private Set<CropPesticideScheduleTask> pesticideScheduleTasks = new HashSet<>();
 
 }

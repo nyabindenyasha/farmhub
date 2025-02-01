@@ -20,8 +20,6 @@ public class UserAccountResponse {
 
     private String email;
 
-    private String password;
-
     private String firstName;
 
     private String lastName;
@@ -37,8 +35,10 @@ public class UserAccountResponse {
         return UserAccountResponse.builder()
                 .id(userAccount.getId())
                 .username(userAccount.getUsername())
+                .email(userAccount.getEmail())
                 .firstName(userAccount.getFirstName())
                 .lastName(userAccount.getLastName())
+                .group(userAccount.getGroup())
                 .phoneNumber(userAccount.getPhoneNumber())
                 .build();
     }

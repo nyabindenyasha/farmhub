@@ -2,9 +2,13 @@ package com.xplug.tech.utils;
 
 import com.xplug.tech.crop.Period;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static com.xplug.tech.crop.Period.toDays;
 
 public class PeriodUtils {
 
@@ -100,4 +104,28 @@ public class PeriodUtils {
     public static boolean isEqual(Period period1, Period period2) {
         return PERIOD_COMPARATOR.compare(period1, period2) == 0;
     }
+
+    public static LocalDateTime addPeriod(LocalDateTime dateTime, Period period) {
+        if (dateTime == null || period == null) {
+            throw new IllegalArgumentException("DateTime and period cannot be null");
+        }
+
+        switch (period.getPeriodUnit()) {
+            case MINUTES:
+                return dateTime.plusMinutes(period.getPeriodValue());
+            case HOURS:
+                return dateTime.plusHours(period.getPeriodValue());
+            case DAYS:
+                return dateTime.plusDays(period.getPeriodValue());
+            case WEEKS:
+                return dateTime.plusWeeks(period.getPeriodValue());
+            case MONTHS:
+                return dateTime.plusMonths(period.getPeriodValue());
+            case YEARS:
+                return dateTime.plusYears(period.getPeriodValue());
+            default:
+                throw new IllegalArgumentException("Unknown period unit: " + period.getPeriodUnit());
+        }
+    }
+
 }

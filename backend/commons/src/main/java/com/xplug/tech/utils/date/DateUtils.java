@@ -1,9 +1,6 @@
 package com.xplug.tech.utils.date;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.ZoneId;
+import java.time.*;
 import java.util.Date;
 
 public class DateUtils {
@@ -28,4 +25,9 @@ public class DateUtils {
     public static LocalTime convertToLocalTime(Date date) {
         return date.toInstant().atZone(ZoneId.systemDefault()).toLocalTime();
     }
+
+    public static LocalDateTime getCurrentTime() {
+        return ZonedDateTime.now(ZoneId.of("Africa/Harare")).toLocalDateTime();
+    }
+
 }
