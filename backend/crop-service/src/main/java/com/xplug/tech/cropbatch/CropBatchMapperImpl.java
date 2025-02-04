@@ -2,8 +2,6 @@ package com.xplug.tech.cropbatch;
 
 import com.xplug.tech.crop.CropBatch;
 import com.xplug.tech.crop.CropBatchDao;
-import com.xplug.tech.crop.CropFertilizerScheduleTaskDao;
-import com.xplug.tech.crop.CropPesticideScheduleTaskDao;
 import com.xplug.tech.cropfarmer.CropFarmerService;
 import org.springframework.stereotype.Component;
 
@@ -16,15 +14,9 @@ public non-sealed class CropBatchMapperImpl implements CropBatchMapper {
 
     private final CropBatchDao cropBatchRepository;
 
-    private final CropFertilizerScheduleTaskDao cropFertilizerScheduleTaskRepository;
-
-    private final CropPesticideScheduleTaskDao cropPesticideScheduleTaskRepository;
-
-    public CropBatchMapperImpl(CropFarmerService cropFarmerService, CropBatchDao cropBatchRepository, CropFertilizerScheduleTaskDao cropFertilizerScheduleTaskRepository, CropPesticideScheduleTaskDao cropPesticideScheduleTaskRepository) {
+    public CropBatchMapperImpl(CropFarmerService cropFarmerService, CropBatchDao cropBatchRepository) {
         this.cropFarmerService = cropFarmerService;
         this.cropBatchRepository = cropBatchRepository;
-        this.cropFertilizerScheduleTaskRepository = cropFertilizerScheduleTaskRepository;
-        this.cropPesticideScheduleTaskRepository = cropPesticideScheduleTaskRepository;
     }
 
     @Override

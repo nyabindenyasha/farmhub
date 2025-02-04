@@ -19,9 +19,11 @@ export const dashboard_nav_items ={
     sideBar: [
         {name:'Dashboard',location:'/dashboard',id:'1',Icon: HomeIcon,active: true},
         {name:'Crops',location:'/dashboard/crop',id:'2',Icon: ClipboardDocumentListIcon},
-        {name:'Appointment',location:'/dashboard/appointment',id:'3',Icon: CalendarDateRangeIcon},
-        {name:'Patient',location:'/dashboard/patient',id:'4',Icon: ClipboardDocumentListIcon},
-        {name:'Doctor Schedule',location:'/dashboard/doctor_schedule',id:'5',Icon: TimerIcon},
+        {name:'Fertilizer',location:'/dashboard/fertilizer',id:'3',Icon: CalendarDateRangeIcon},
+        {name:'Pesticides',location:'/dashboard/pesticide',id:'4',Icon: ClipboardDocumentListIcon},
+        {name:'Crop Program',location:'/dashboard/cropprogram',id:'5',Icon: TimerIcon},
+        {name:'Crop Stages',location:'/dashboard/cropstages',id:'6',Icon: TimerIcon},
+        {name:'Crop Variety',location:'/dashboard/cropvariety',id:'7',Icon: TimerIcon},
         {name:'Reports',location:'/dashboard/report',id:'6',Icon: ChartBarIcon},
         // {name:'PatientDashboard',location:'/dashboard/patientDashboard',id:'3',Icon: ClipboardDocumentListIcon},
 

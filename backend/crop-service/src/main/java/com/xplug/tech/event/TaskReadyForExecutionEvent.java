@@ -1,7 +1,6 @@
 package com.xplug.tech.event;
 
-import com.xplug.tech.crop.CropFertilizerScheduleTask;
-import com.xplug.tech.crop.CropPesticideScheduleTask;
+import com.xplug.tech.crop.CropScheduleTask;
 import lombok.Getter;
 import org.springframework.context.ApplicationEvent;
 
@@ -10,14 +9,11 @@ public class TaskReadyForExecutionEvent extends ApplicationEvent {
 
     //todo use inheritance
 
-    private final CropFertilizerScheduleTask cropFertilizerScheduleTask;
+    private final CropScheduleTask cropScheduleTask;
 
-    private final CropPesticideScheduleTask cropPesticideScheduleTask;
-
-    public TaskReadyForExecutionEvent(Object source, CropFertilizerScheduleTask cropFertilizerScheduleTask, CropPesticideScheduleTask cropPesticideScheduleTask) {
+    public TaskReadyForExecutionEvent(Object source, CropScheduleTask cropScheduleTask) {
         super(source);
-        this.cropFertilizerScheduleTask = cropFertilizerScheduleTask;
-        this.cropPesticideScheduleTask = cropPesticideScheduleTask;
+        this.cropScheduleTask = cropScheduleTask;
     }
 
 }

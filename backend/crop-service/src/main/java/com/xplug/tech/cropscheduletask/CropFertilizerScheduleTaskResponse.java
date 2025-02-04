@@ -1,6 +1,5 @@
-package com.xplug.tech.cropfertilizerscheduletask;
+package com.xplug.tech.cropscheduletask;
 
-import com.xplug.tech.crop.CropFertilizerSchedule;
 import com.xplug.tech.crop.CropFertilizerScheduleTask;
 import com.xplug.tech.enums.FertilizerApplicationMethod;
 import com.xplug.tech.enums.TaskStatus;

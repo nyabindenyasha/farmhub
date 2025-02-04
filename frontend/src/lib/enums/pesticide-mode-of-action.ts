@@ -1,4 +1,4 @@
 export enum PesticideModeOfAction {
-    PREVENTATIVE,
-    CURATIVE
+    PREVENTATIVE = "PREVENTATIVE",
+    CURATIVE = "CURATIVE"
 }

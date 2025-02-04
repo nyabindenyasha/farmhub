@@ -115,10 +115,10 @@ export default function PesticideComponent() {
                                     />
                                 </TableHead>
                                 <TableHead>Name</TableHead>
-                                <TableHead>Family</TableHead>
-                                <TableHead>Genus</TableHead>
-                                <TableHead>Species</TableHead>
-                                <TableHead>Sub Species</TableHead>
+                                {/*<TableHead>Alias</TableHead>*/}
+                                <TableHead>Active Ingredients</TableHead>
+                                <TableHead>Application Rate</TableHead>
+                                <TableHead>Withdrawal Period</TableHead>
 
                             </TableRow>
                         </TableHeader>
@@ -132,10 +132,11 @@ export default function PesticideComponent() {
                                         />
                                     </TableCell>
                                     <TableCell>{pesticide.name}</TableCell>
-                                    <TableCell>{pesticide.family}</TableCell>
-                                    <TableCell>{pesticide.genus}</TableCell>
-                                    <TableCell>{pesticide.species}</TableCell>
-                                    <TableCell>{pesticide.subSpecies}</TableCell>
+                                    {/*<TableCell>{pesticide.alias}</TableCell>*/}
+                                    <TableCell>{pesticide.activeIngredients.join(", ")}</TableCell>
+                                    <TableCell>{pesticide.applicationRate}</TableCell>
+                                    <TableCell>{pesticide.safetyInterval} Days</TableCell>
+
                                     <TableCell>
                                         <DropdownMenu>
                                             <DropdownMenuTrigger asChild>
@@ -146,10 +147,10 @@ export default function PesticideComponent() {
                                             <DropdownMenuContent align="end">
                                                 <DropdownMenuItem>
                                                     <span
-                                                        onClick={() => router.push(`/dashboard/patient/${'adsfljkl'}`)}> View details</span>
+                                                        onClick={() => router.push(`/dashboard/patient/${'adsfljkl'}`)}> View Details</span>
                                                 </DropdownMenuItem>
-                                                <DropdownMenuItem>Edit client</DropdownMenuItem>
-                                                <DropdownMenuItem>View history</DropdownMenuItem>
+                                                <DropdownMenuItem>Edit Record</DropdownMenuItem>
+                                                <DropdownMenuItem>Download Datasheet</DropdownMenuItem>
                                             </DropdownMenuContent>
                                         </DropdownMenu>
                                     </TableCell>

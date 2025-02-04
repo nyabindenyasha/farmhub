@@ -2,7 +2,7 @@ package com.xplug.tech.cropfertilizerschedule;
 
 import com.xplug.tech.crop.CropFertilizerSchedule;
 import com.xplug.tech.crop.CropFertilizerScheduleDao;
-import com.xplug.tech.crop.CropSchedule;
+import com.xplug.tech.crop.CropProgram;
 import com.xplug.tech.crop.Fertilizer;
 import com.xplug.tech.enums.CropScheduleType;
 import com.xplug.tech.exception.ItemAlreadyExistsException;
@@ -41,25 +41,25 @@ public non-sealed class CropFertilizerScheduleServiceImpl implements CropFertili
 
     @Override
     public Set<CropFertilizerSchedule> getByCropScheduleId(Long cropScheduleId) {
-        return cropFertilizerScheduleRepository.findByCropScheduleId(cropScheduleId);
+        return cropFertilizerScheduleRepository.findByCropProgramId(cropScheduleId);
     }
 
     @Override
     public List<CropFertilizerSchedule> getByCropAndScheduleType(Long cropId, CropScheduleType cropScheduleType) {
-        return cropFertilizerScheduleRepository.findByCropScheduleCropIdAndCropScheduleCropScheduleType(cropId, cropScheduleType);
+        return cropFertilizerScheduleRepository.findByCropProgramCropIdAndCropProgramCropScheduleType(cropId, cropScheduleType);
     }
 
     @Override
     public CropFertilizerSchedule getByCropAndScheduleTypeAndStageOfGrowth(Long cropId, CropScheduleType cropScheduleType, Long stageOfGrowthId) {
         return cropFertilizerScheduleRepository
-                .findByCropScheduleCropIdAndCropScheduleCropScheduleTypeAndStageOfGrowthId(cropId, cropScheduleType, stageOfGrowthId)
+                .findByCropProgramCropIdAndCropProgramCropScheduleTypeAndStageOfGrowthId(cropId, cropScheduleType, stageOfGrowthId)
                 .orElseThrow(() -> new RuntimeException("CropFertilizerSchedule not found"));
     }
 
     public CropFertilizerSchedule create(CropFertilizerScheduleRequest request) {
         var period = periodService.findOrCreatePeriod(request.getStageOfGrowth());
         var optionalCropFertilizerSchedule = cropFertilizerScheduleRepository
-                .findByCropScheduleIdAndFertilizerIdAndStageOfGrowthId(request.getCropScheduleId(), request.getFertilizerId(), period.getId());
+                .findByCropProgramIdAndFertilizerIdAndStageOfGrowthId(request.getCropScheduleId(), request.getFertilizerId(), period.getId());
         if (optionalCropFertilizerSchedule.isPresent()) {
             throw new ItemAlreadyExistsException("CropFertilizerSchedule already exists");
         }
@@ -70,9 +70,9 @@ public non-sealed class CropFertilizerScheduleServiceImpl implements CropFertili
     }
 
     @Override
-    public CropFertilizerSchedule initialize(CropSchedule cropSchedule, Fertilizer fertilizer, CropFertilizerScheduleRequest cropFertilizerScheduleRequest) {
+    public CropFertilizerSchedule initialize(CropProgram cropProgram, Fertilizer fertilizer, CropFertilizerScheduleRequest cropFertilizerScheduleRequest) {
         var cropFertilizerSchedule = CropFertilizerSchedule.builder()
-                .cropSchedule(cropSchedule)
+                .cropProgram(cropProgram)
                 .fertilizer(fertilizer)
                 .stageOfGrowth(periodService.findOrCreatePeriod(cropFertilizerScheduleRequest.getStageOfGrowth()))
                 .applicationInterval(periodService.findOrCreatePeriod(cropFertilizerScheduleRequest.getApplicationInterval()))
@@ -94,6 +94,11 @@ public non-sealed class CropFertilizerScheduleServiceImpl implements CropFertili
     public void delete(Long id) {
         CropFertilizerSchedule cropFertilizerSchedule = getById(id);
         cropFertilizerScheduleRepository.delete(cropFertilizerSchedule);
+    }
+
+    @Override
+    public Set<CropFertilizerSchedule> findByCropProgramId(Long cropProgramId) {
+        return cropFertilizerScheduleRepository.findByCropProgramId(cropProgramId);
     }
 
 }

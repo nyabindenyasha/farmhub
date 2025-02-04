@@ -1,9 +1,12 @@
 package com.xplug.tech.event;
 
 import com.xplug.tech.crop.Crop;
+import com.xplug.tech.cropprograms.CropProgramPDFGeneratorTest;
 import com.xplug.tech.notifications.context.CreateNotificationContext;
 import com.xplug.tech.notifications.context.NotificationService;
+import com.xplug.tech.notifications.email.context.ResourceMultipartFile;
 import com.xplug.tech.notifications.email.context.SendEmailRequest;
+import com.xplug.tech.notifications.email.core.Attachment;
 import com.xplug.tech.notifications.email.core.EmailMessageFormatter;
 import com.xplug.tech.usermanager.UserAccount;
 import com.xplug.tech.usermanager.user.UserAccountService;
@@ -11,13 +14,17 @@ import lombok.extern.slf4j.Slf4j;
 import lombok.val;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationListener;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
-
-import static java.util.Objects.nonNull;
 
 @Slf4j
 @Component
@@ -27,10 +34,13 @@ public class TaskReadyForExecutionEventListener implements ApplicationListener<T
     private String systemName;
     private final UserAccountService userAccountService;
 
+    private final CropProgramPDFGeneratorTest cropProgramPDFGeneratorTest;
+
     private final NotificationService notificationService;
 
-    public TaskReadyForExecutionEventListener(UserAccountService userAccountService, NotificationService notificationService) {
+    public TaskReadyForExecutionEventListener(UserAccountService userAccountService, CropProgramPDFGeneratorTest cropProgramPDFGeneratorTest, NotificationService notificationService) {
         this.userAccountService = userAccountService;
+        this.cropProgramPDFGeneratorTest = cropProgramPDFGeneratorTest;
         this.notificationService = notificationService;
     }
 
@@ -40,24 +50,10 @@ public class TaskReadyForExecutionEventListener implements ApplicationListener<T
 
         val subject = "Task Ready For Execution";
 
-        UserAccount farmer;
-        Crop crop;
-        String taskName;
-        LocalDateTime taskDate;
-
-        if (nonNull(taskReadyForExecutionEvent.getCropPesticideScheduleTask())) {
-            log.error("CropPesticideScheduleTask not null");
-            farmer = userAccountService.findById(taskReadyForExecutionEvent.getCropPesticideScheduleTask().getCropBatch().getCropFarmer().getUserAccount().getId());
-            crop = taskReadyForExecutionEvent.getCropPesticideScheduleTask().getCropBatch().getCropFarmer().getCrop();
-            taskName = taskReadyForExecutionEvent.getCropPesticideScheduleTask().getTaskName();
-            taskDate = taskReadyForExecutionEvent.getCropPesticideScheduleTask().getTaskDate();
-        } else {
-            log.error("CropFertilizerScheduleTask is null");
-            farmer = userAccountService.findById(taskReadyForExecutionEvent.getCropFertilizerScheduleTask().getCropBatch().getCropFarmer().getUserAccount().getId());
-            crop = taskReadyForExecutionEvent.getCropFertilizerScheduleTask().getCropBatch().getCropFarmer().getCrop();
-            taskName = taskReadyForExecutionEvent.getCropFertilizerScheduleTask().getTaskName();
-            taskDate = taskReadyForExecutionEvent.getCropFertilizerScheduleTask().getTaskDate();
-        }
+        UserAccount farmer = userAccountService.findById(taskReadyForExecutionEvent.getCropScheduleTask().getCropBatch().getCropFarmer().getUserAccount().getId());
+        Crop crop = taskReadyForExecutionEvent.getCropScheduleTask().getCropBatch().getCropFarmer().getCrop();
+        String taskName = taskReadyForExecutionEvent.getCropScheduleTask().getTaskName();
+        LocalDateTime taskDate = taskReadyForExecutionEvent.getCropScheduleTask().getTaskDate();
 
         CreateNotificationContext userCreatedNotificationsContext = new CreateNotificationContext();
         userCreatedNotificationsContext.setCategory(subject);
@@ -82,7 +78,30 @@ public class TaskReadyForExecutionEventListener implements ApplicationListener<T
         Set<String> emails = new HashSet<>();
         emails.add(farmer.getEmail());
         emailRequest.setEmailRecipients(emails);
+
+        String fileName = crop.getName() + "_Program.pdf";
+        Resource resource = convertToByteArrayResource(cropProgramPDFGeneratorTest.generateCabbageProgramPdf(crop.getId()));
+        MultipartFile multipartFile = new ResourceMultipartFile(resource);
+        Attachment attachment = new Attachment();
+        attachment.setName(fileName);
+        attachment.setFile(multipartFile);
+        emailRequest.setAttachment(attachment);
+
+
         notificationService.create(userCreatedNotificationsContext, emailRequest);
+    }
+
+//    private File convert(byte[] bytes, String fileName) throws IOException {
+//        File tempFile = File.createTempFile(fileName, null); // Creates a temp file
+//        try (FileOutputStream fos = new FileOutputStream(tempFile)) {
+//            fos.write(bytes);
+//        }
+//        return tempFile;
+//    }
+
+    static Resource convertToByteArrayResource(byte[] bytes) {
+        ByteArrayResource resource = new ByteArrayResource(bytes);
+        return resource;
     }
 
 }

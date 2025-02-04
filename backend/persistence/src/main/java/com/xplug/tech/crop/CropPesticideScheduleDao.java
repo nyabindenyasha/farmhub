@@ -9,13 +9,13 @@ import java.util.Set;
 
 public interface CropPesticideScheduleDao extends JpaRepository<CropPesticideSchedule, Long> {
 
-    Set<CropPesticideSchedule> findByCropScheduleId(Long cropScheduleId);
+    Set<CropPesticideSchedule> findByCropProgramId(Long cropProgramId);
 
-    Optional<CropPesticideSchedule> findByCropScheduleIdAndPesticideIdAndStageOfGrowthId(Long cropScheduleId, Long pesticideId, Long stageOfGrowthId);
+    Optional<CropPesticideSchedule> findByCropProgramIdAndPesticideIdAndStageOfGrowthId(Long cropProgramId, Long pesticideId, Long stageOfGrowthId);
 
-    List<CropPesticideSchedule> findByCropScheduleCropIdAndCropScheduleCropScheduleType(Long cropId, CropScheduleType cropScheduleType);
+    List<CropPesticideSchedule> findByCropProgramCropIdAndCropProgramCropScheduleType(Long cropId, CropScheduleType cropScheduleType);
 
-    Optional<CropPesticideSchedule> findByCropScheduleCropIdAndCropScheduleCropScheduleTypeAndStageOfGrowthId(Long cropId, CropScheduleType cropScheduleType, Long stageOfGrowthId);
+    Optional<CropPesticideSchedule> findByCropProgramCropIdAndCropProgramCropScheduleTypeAndStageOfGrowthId(Long cropId, CropScheduleType cropScheduleType, Long stageOfGrowthId);
 
 }
 

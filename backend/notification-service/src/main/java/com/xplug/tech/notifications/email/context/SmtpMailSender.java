@@ -67,7 +67,9 @@ public class SmtpMailSender {
 //            mimeMessageHelper.setTo("nyabindenyasha@gmail.com");
             val htmlText = emailHtmlRepresentationBuilder.buildHtmlRepresentation(sendEmailRequest.getBody(), systemName);
             mimeMessageHelper.setText(htmlText, true);
-//            mimeMessageHelper.addAttachment("test-name.pdf", sendEmailRequest.getAttachment().getFile());
+            if (nonNull(sendEmailRequest.getAttachment())) {
+                mimeMessageHelper.addAttachment(sendEmailRequest.getAttachment().getName(), sendEmailRequest.getAttachment().getFile());
+            }
             javaMailSender.send(mimeMessage);
         } else {
             sendEmailRequest.getEmailRecipients().forEach(recipient -> {

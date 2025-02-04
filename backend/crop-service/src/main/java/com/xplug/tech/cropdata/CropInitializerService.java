@@ -4,7 +4,7 @@ import com.xplug.tech.crop.CropDao;
 import com.xplug.tech.crop.CropService;
 import com.xplug.tech.cropfertilizerschedule.CropFertilizerScheduleService;
 import com.xplug.tech.croppesticideschedule.CropPesticideScheduleService;
-import com.xplug.tech.cropschedule.CropScheduleService;
+import com.xplug.tech.cropprogram.CropProgramService;
 import com.xplug.tech.cropstagesofgrowth.CropStagesOfGrowthService;
 import com.xplug.tech.enums.CropScheduleType;
 import com.xplug.tech.event.SystemConfiguredEvent;
@@ -31,7 +31,7 @@ public class CropInitializerService {
 
     private final PesticideService pesticideService;
 
-    private final CropScheduleService cropScheduleService;
+    private final CropProgramService cropProgramService;
 
     private final CropStagesOfGrowthService cropStagesOfGrowthService;
 
@@ -56,7 +56,7 @@ public class CropInitializerService {
 
             var savedCrop = cropService.initialize(cropRequest);
 
-            var cropSchedule = cropScheduleService.getByCropIdAndCropScheduleType(savedCrop.getId(), CropScheduleType.PRIMARY);
+            var cropSchedule = cropProgramService.getByCropIdAndCropScheduleType(savedCrop.getId(), CropScheduleType.PRIMARY);
 
             var cropDataFertilizerScheduleRequests = cropData.getFertilizerSchedule();
 

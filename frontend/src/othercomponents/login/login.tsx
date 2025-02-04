@@ -54,10 +54,10 @@ export function LoginForm() {
             </div>
 
             <Tabs defaultValue="login" className="space-y-6">
-                <TabsList className="grid w-full grid-cols-2">
-                    <TabsTrigger value="login">Login</TabsTrigger>
-                    <TabsTrigger value="register" onClick={() => router.push("/register/page")}>Register</TabsTrigger>
-                </TabsList>
+                {/*<TabsList className="grid w-full grid-cols-2">*/}
+                {/*    <TabsTrigger value="login">Login</TabsTrigger>*/}
+                {/*    <TabsTrigger value="register" onClick={() => router.push("/register/page")}>Register</TabsTrigger>*/}
+                {/*</TabsList>*/}
 
                 <TabsContent value="login" className="space-y-6">
                     {state.error && (

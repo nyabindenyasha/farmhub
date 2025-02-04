@@ -1,46 +1,83 @@
 package com.xplug.tech.crop;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.xplug.tech.enums.FertilizerApplicationMethod;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
 
 @Entity
 @Getter
 @Setter
-@ToString(exclude = {"cropSchedule"})
-@Builder
+@ToString(exclude = {"cropProgram"})
 @NoArgsConstructor
 @AllArgsConstructor
-public class CropFertilizerSchedule {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @ManyToOne
-    @JoinColumn(name = "crop_schedule_id", nullable = false)
-    private CropSchedule cropSchedule;
+public class CropFertilizerSchedule extends CropSchedule {
 
     @ManyToOne
     @JoinColumn(name = "fertilizer_id", nullable = false)
     private Fertilizer fertilizer;
 
-    @ManyToOne
-    @JoinColumn(name = "period_id_stage_of_growth", nullable = false)
-    private Period stageOfGrowth;
-
-    @ManyToOne
-    @JoinColumn(name = "period_id_application_interval", nullable = false)
-    private Period applicationInterval;
-
+    // create emmbedded class for rate, for unit
     private Integer rate; //grams per plant
 
     @Enumerated(EnumType.STRING)
     private FertilizerApplicationMethod applicationMethod;
 
-    @Column(length = 500)
-    private String remarks;
+    public static CropFertilizerScheduleBuilder builder() {
+        return new CropFertilizerScheduleBuilder();
+    }
+
+    public static class CropFertilizerScheduleBuilder {
+        protected CropFertilizerSchedule instance;
+
+        protected CropFertilizerScheduleBuilder() {
+            instance = new CropFertilizerSchedule();
+        }
+
+        public CropFertilizerScheduleBuilder id(Long id) {
+            instance.setId(id);
+            return this;
+        }
+
+        public CropFertilizerScheduleBuilder cropProgram(CropProgram cropProgram) {
+            instance.setCropProgram(cropProgram);
+            return this;
+        }
+
+        public CropFertilizerScheduleBuilder fertilizer(Fertilizer fertilizer) {
+            instance.setFertilizer(fertilizer);
+            return this;
+        }
+
+        public CropFertilizerScheduleBuilder stageOfGrowth(Period stageOfGrowth) {
+            instance.setStageOfGrowth(stageOfGrowth);
+            return this;
+        }
+
+        public CropFertilizerScheduleBuilder applicationInterval(Period applicationInterval) {
+            instance.setApplicationInterval(applicationInterval);
+            return this;
+        }
+
+        public CropFertilizerScheduleBuilder rate(Integer rate) {
+            instance.setRate(rate);
+            return this;
+        }
+
+        public CropFertilizerScheduleBuilder applicationMethod(FertilizerApplicationMethod applicationMethod) {
+            instance.setApplicationMethod(applicationMethod);
+            return this;
+        }
+
+        public CropFertilizerScheduleBuilder remarks(String remarks) {
+            instance.setRemarks(remarks);
+            return this;
+        }
+
+        public CropFertilizerSchedule build() {
+            return instance;
+        }
+    }
 
 }

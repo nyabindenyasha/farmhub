@@ -1,7 +1,7 @@
 package com.xplug.tech.cropfertilizerschedule;
 
 import com.xplug.tech.crop.CropFertilizerSchedule;
-import com.xplug.tech.cropschedule.CropScheduleService;
+import com.xplug.tech.cropprogram.CropProgramService;
 import com.xplug.tech.fertilizer.FertilizerService;
 import com.xplug.tech.period.PeriodService;
 import org.springframework.stereotype.Component;
@@ -11,14 +11,14 @@ import java.util.Objects;
 @Component
 public non-sealed class CropFertilizerScheduleMapperImpl implements CropFertilizerScheduleMapper {
 
-    private final CropScheduleService cropScheduleService;
+    private final CropProgramService cropProgramService;
 
     private final FertilizerService fertilizerService;
 
     private final PeriodService periodService;
 
-    public CropFertilizerScheduleMapperImpl(CropScheduleService cropScheduleService, FertilizerService fertilizerService, PeriodService periodService) {
-        this.cropScheduleService = cropScheduleService;
+    public CropFertilizerScheduleMapperImpl(CropProgramService cropProgramService, FertilizerService fertilizerService, PeriodService periodService) {
+        this.cropProgramService = cropProgramService;
         this.fertilizerService = fertilizerService;
         this.periodService = periodService;
     }
@@ -26,10 +26,10 @@ public non-sealed class CropFertilizerScheduleMapperImpl implements CropFertiliz
     @Override
     public CropFertilizerSchedule cropFertilizerScheduleFromCropFertilizerScheduleRequest(CropFertilizerScheduleRequest cropFertilizerScheduleRequest) {
         Objects.requireNonNull(cropFertilizerScheduleRequest, "CropFertilizerScheduleRequest cannot be null!");
-        var cropSchedule = cropScheduleService.getById(cropFertilizerScheduleRequest.getCropScheduleId());
+        var cropProgram = cropProgramService.getById(cropFertilizerScheduleRequest.getCropScheduleId());
         var fertilizer = fertilizerService.getById(cropFertilizerScheduleRequest.getFertilizerId());
         return CropFertilizerSchedule.builder()
-                .cropSchedule(cropSchedule)
+                .cropProgram(cropProgram)
                 .fertilizer(fertilizer)
                 .stageOfGrowth(periodService.findOrCreatePeriod(cropFertilizerScheduleRequest.getStageOfGrowth()))
                 .applicationInterval(periodService.findOrCreatePeriod(cropFertilizerScheduleRequest.getApplicationInterval()))

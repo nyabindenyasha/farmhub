@@ -1,7 +1,7 @@
-package com.xplug.tech.cropschedule;
+package com.xplug.tech.cropprogram;
 
 import com.xplug.tech.crop.CropResponse;
-import com.xplug.tech.crop.CropSchedule;
+import com.xplug.tech.crop.CropProgram;
 import com.xplug.tech.crop.Period;
 import com.xplug.tech.cropfertilizerschedule.CropFertilizerScheduleResponse;
 import com.xplug.tech.croppesticideschedule.CropPesticideScheduleResponse;
@@ -22,11 +22,11 @@ import java.util.stream.Collectors;
 @Setter
 @ToString
 @Builder
-public class CropScheduleResponse {
+public class CropProgramResponse {
 
     private Long id;
 
-    private CropResponse cropResponse;
+    private CropResponse crop;
 
     @NotNull(message = "Crop Schedule name cannot be null!")
     private String name;
@@ -43,8 +43,8 @@ public class CropScheduleResponse {
 
     private List<CropFertilizerScheduleResponse> fertilizerScheduleList;
 
-    public static CropScheduleResponse of(CropSchedule cropSchedule) {
-        Objects.requireNonNull(cropSchedule, "CropSchedule cannot be null!");
+    public static CropProgramResponse of(CropProgram cropProgram) {
+        Objects.requireNonNull(cropProgram, "CropSchedule cannot be null!");
 
         // Create a comparator for CropPesticideScheduleResponse based on stageOfGrowth
         Comparator<CropPesticideScheduleResponse> pestStageOfGrowthComparator =
@@ -72,25 +72,25 @@ public class CropScheduleResponse {
                 );
 
         // Convert pesticide schedules to list and sort by stageOfGrowth
-        List<CropPesticideScheduleResponse> sortedPesticideList = cropSchedule.getPesticideScheduleList().stream()
+        List<CropPesticideScheduleResponse> sortedPesticideList = cropProgram.getPesticideScheduleList().stream()
                 .map(CropPesticideScheduleResponse::of)
                 .sorted(pestStageOfGrowthComparator)
                 .collect(Collectors.toList());
 
         // Convert fertilizer schedules to list
-        List<CropFertilizerScheduleResponse> sortedFertilizerList = cropSchedule.getFertilizerScheduleList().stream()
+        List<CropFertilizerScheduleResponse> sortedFertilizerList = cropProgram.getFertilizerScheduleList().stream()
                 .map(CropFertilizerScheduleResponse::of)
                 .sorted(fertStageOfGrowthComparator)
                 .collect(Collectors.toList());
 
-        return CropScheduleResponse.builder()
-                .id(cropSchedule.getId())
-                .cropResponse(CropResponse.of(cropSchedule.getCrop()))
-                .name(cropSchedule.getName())
-                .description(cropSchedule.getDescription())
-                .source(cropSchedule.getSource())
-                .remarks(cropSchedule.getRemarks())
-                .cropScheduleType(cropSchedule.getCropScheduleType())
+        return CropProgramResponse.builder()
+                .id(cropProgram.getId())
+                .crop(CropResponse.of(cropProgram.getCrop()))
+                .name(cropProgram.getName())
+                .description(cropProgram.getDescription())
+                .source(cropProgram.getSource())
+                .remarks(cropProgram.getRemarks())
+                .cropScheduleType(cropProgram.getCropScheduleType())
                 .pesticideScheduleList(sortedPesticideList)
                 .fertilizerScheduleList(sortedFertilizerList)
                 .build();

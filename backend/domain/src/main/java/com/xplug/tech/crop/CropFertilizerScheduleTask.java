@@ -1,11 +1,15 @@
 package com.xplug.tech.crop;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.xplug.tech.enums.FertilizerApplicationMethod;
 import com.xplug.tech.enums.TaskStatus;
+import com.xplug.tech.utils.TaskUtils;
 import lombok.*;
 
-import javax.persistence.*;
-import java.time.*;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -14,41 +18,70 @@ import java.time.*;
 @ToString(exclude = {"cropBatch"})
 @NoArgsConstructor
 @AllArgsConstructor
-public class CropFertilizerScheduleTask {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class CropFertilizerScheduleTask extends CropScheduleTask {
 
     @ManyToOne
     @JoinColumn(name = "crop_fertilizer_schedule_id", nullable = false)
     private CropFertilizerSchedule cropFertilizerSchedule;
 
-    private Boolean isCompleted;
-
-    private LocalDate completionDate;
-
-    private String taskRemarks;
-
-    @Enumerated(EnumType.STRING)
-    private TaskStatus taskStatus;
-
-    private LocalDateTime taskDate;
-
-    @JsonIgnore
-    @ManyToOne
-    @JoinColumn(name = "crop_batch_id", nullable = false)
-    private CropBatch cropBatch;
-
     public String getTaskName() {
-        return cropBatch.getCropFarmer().getCrop().getName() + " " + cropFertilizerSchedule.getFertilizer().getName() + " " + cropFertilizerSchedule.getRate();
+        return getCropBatch().getCropFarmer().getCrop().getName() + " " + cropFertilizerSchedule.getFertilizer().getName() + " " + cropFertilizerSchedule.getRate();
     }
 
-    @PrePersist
-    @PreUpdate
-    public void adjustTimeZone() {
-        ZoneId zoneId = ZoneId.of("Africa/Harare");
-        this.taskDate = ZonedDateTime.of(this.taskDate, zoneId).toLocalDateTime();
+    public static CropFertilizerScheduleTask.CropFertilizerScheduleTaskBuilder builder() {
+        return new CropFertilizerScheduleTask.CropFertilizerScheduleTaskBuilder();
+    }
+
+    public static class CropFertilizerScheduleTaskBuilder {
+        protected CropFertilizerScheduleTask instance;
+
+        protected CropFertilizerScheduleTaskBuilder() {
+            instance = new CropFertilizerScheduleTask();
+        }
+
+        public CropFertilizerScheduleTask.CropFertilizerScheduleTaskBuilder id(Long id) {
+            instance.setId(id);
+            return this;
+        }
+
+        public CropFertilizerScheduleTask.CropFertilizerScheduleTaskBuilder cropBatch(CropBatch cropBatch) {
+            instance.setCropBatch(cropBatch);
+            return this;
+        }
+
+        public CropFertilizerScheduleTask.CropFertilizerScheduleTaskBuilder cropFertilizerSchedule(CropFertilizerSchedule cropFertilizerSchedule) {
+            instance.setCropFertilizerSchedule(cropFertilizerSchedule);
+            return this;
+        }
+
+        public CropFertilizerScheduleTask.CropFertilizerScheduleTaskBuilder isCompleted(Boolean isCompleted) {
+            instance.setIsCompleted(isCompleted);
+            return this;
+        }
+
+        public CropFertilizerScheduleTask.CropFertilizerScheduleTaskBuilder completionDate(LocalDate completionDate) {
+            instance.setCompletionDate(completionDate);
+            return this;
+        }
+
+        public CropFertilizerScheduleTask.CropFertilizerScheduleTaskBuilder taskRemark(String taskRemarks) {
+            instance.setTaskRemarks(taskRemarks);
+            return this;
+        }
+
+        public CropFertilizerScheduleTask.CropFertilizerScheduleTaskBuilder taskStatus(TaskStatus taskStatus) {
+            instance.setTaskStatus(taskStatus);
+            return this;
+        }
+
+        public CropFertilizerScheduleTask.CropFertilizerScheduleTaskBuilder taskDate(LocalDateTime taskDate) {
+            instance.setTaskDate(taskDate);
+            return this;
+        }
+
+        public CropFertilizerScheduleTask build() {
+            return instance;
+        }
     }
 
 }

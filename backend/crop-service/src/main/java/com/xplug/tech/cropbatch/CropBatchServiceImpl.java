@@ -1,7 +1,6 @@
 package com.xplug.tech.cropbatch;
 
 import com.xplug.tech.crop.*;
-import com.xplug.tech.enums.TaskStatus;
 import com.xplug.tech.event.CropBatchCreatedEvent;
 import com.xplug.tech.exception.ItemNotFoundException;
 import com.xplug.tech.utils.PeriodUtils;
@@ -13,6 +12,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -20,16 +20,13 @@ public non-sealed class CropBatchServiceImpl implements CropBatchService {
 
     private final CropBatchDao cropBatchRepository;
 
-    private final CropFertilizerScheduleTaskDao cropFertilizerScheduleTaskRepository;
-
-    private final CropPesticideScheduleTaskDao cropPesticideScheduleTaskRepository;
+    private final CropScheduleTaskDao cropScheduleTaskDao;
 
     private final ApplicationEventPublisher applicationEventPublisher;
 
-    public CropBatchServiceImpl(CropBatchDao cropBatchRepository, CropFertilizerScheduleTaskDao cropFertilizerScheduleTaskRepository, CropPesticideScheduleTaskDao cropPesticideScheduleTaskRepository, ApplicationEventPublisher applicationEventPublisher) {
+    public CropBatchServiceImpl(CropBatchDao cropBatchRepository, CropScheduleTaskDao cropScheduleTaskDao, ApplicationEventPublisher applicationEventPublisher) {
         this.cropBatchRepository = cropBatchRepository;
-        this.cropFertilizerScheduleTaskRepository = cropFertilizerScheduleTaskRepository;
-        this.cropPesticideScheduleTaskRepository = cropPesticideScheduleTaskRepository;
+        this.cropScheduleTaskDao = cropScheduleTaskDao;
         this.applicationEventPublisher = applicationEventPublisher;
     }
 
@@ -41,8 +38,8 @@ public non-sealed class CropBatchServiceImpl implements CropBatchService {
     public CropBatch getById(Long id) {
         var cropBatch = cropBatchRepository.findById(id)
                 .orElseThrow(() -> new ItemNotFoundException("Crop not found with Id: " + id));
-        cropBatch.setFertilizerScheduleTasks(cropFertilizerScheduleTaskRepository.findByCropBatchId(id));
-        cropBatch.setPesticideScheduleTasks(cropPesticideScheduleTaskRepository.findByCropBatchId(id));
+        cropBatch.setFertilizerScheduleTasks(cropScheduleTaskDao.findByCropBatchId(id).stream().filter(CropFertilizerScheduleTask.class::isInstance).map(CropFertilizerScheduleTask.class::cast).collect(Collectors.toSet()));
+        cropBatch.setPesticideScheduleTasks(cropScheduleTaskDao.findByCropBatchId(id).stream().filter(CropPesticideScheduleTask.class::isInstance).map(CropPesticideScheduleTask.class::cast).collect(Collectors.toSet()));
         return cropBatch;
     }
 
@@ -57,7 +54,7 @@ public non-sealed class CropBatchServiceImpl implements CropBatchService {
         CropBatch savedCropBatch = cropBatchRepository.save(cropBatch);
 
         // Step 3: Create Tasks from CropPesticideSchedule
-        Set<CropPesticideSchedule> pesticideSchedules = cropFarmer.getCropSchedule().getPesticideScheduleList();
+        Set<CropPesticideSchedule> pesticideSchedules = cropFarmer.getCropProgram().getPesticideScheduleList();
 
         for (CropPesticideSchedule pesticideSchedule : pesticideSchedules) {
             LocalDateTime taskDate = PeriodUtils.addPeriod(savedCropBatch.getCropFarmer().getDateOfTransplant(), pesticideSchedule.getStageOfGrowth());
@@ -68,10 +65,10 @@ public non-sealed class CropBatchServiceImpl implements CropBatchService {
                     .taskStatus(TaskUtils.getTaskStatus(taskDate))
                     .taskDate(taskDate)
                     .build();
-            cropPesticideScheduleTaskRepository.save(pesticideScheduleTask);
+            cropScheduleTaskDao.save(pesticideScheduleTask);
         }
 
-        Set<CropFertilizerSchedule> fertilizerSchedules = cropFarmer.getCropSchedule().getFertilizerScheduleList();
+        Set<CropFertilizerSchedule> fertilizerSchedules = cropFarmer.getCropProgram().getFertilizerScheduleList();
 
         for (CropFertilizerSchedule fertilizerSchedule : fertilizerSchedules) {
             LocalDateTime taskDate = PeriodUtils.addPeriod(savedCropBatch.getCropFarmer().getDateOfTransplant(), fertilizerSchedule.getStageOfGrowth());
@@ -82,7 +79,7 @@ public non-sealed class CropBatchServiceImpl implements CropBatchService {
                     .taskStatus(TaskUtils.getTaskStatus(taskDate))
                     .taskDate(taskDate)
                     .build();
-            cropFertilizerScheduleTaskRepository.save(fertilizerScheduleTask);
+            cropScheduleTaskDao.save(fertilizerScheduleTask);
         }
         applicationEventPublisher.publishEvent(new CropBatchCreatedEvent(this, savedCropBatch));
         return savedCropBatch;

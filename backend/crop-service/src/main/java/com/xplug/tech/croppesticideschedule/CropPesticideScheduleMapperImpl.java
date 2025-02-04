@@ -1,7 +1,7 @@
 package com.xplug.tech.croppesticideschedule;
 
 import com.xplug.tech.crop.CropPesticideSchedule;
-import com.xplug.tech.cropschedule.CropScheduleService;
+import com.xplug.tech.cropprogram.CropProgramService;
 import com.xplug.tech.period.PeriodService;
 import com.xplug.tech.pesticide.PesticideService;
 import org.springframework.stereotype.Component;
@@ -11,14 +11,14 @@ import java.util.Objects;
 @Component
 public non-sealed class CropPesticideScheduleMapperImpl implements CropPesticideScheduleMapper {
 
-    private final CropScheduleService cropScheduleService;
+    private final CropProgramService cropProgramService;
 
     private final PesticideService pesticideService;
 
     private final PeriodService periodService;
 
-    public CropPesticideScheduleMapperImpl(CropScheduleService cropScheduleService, PesticideService pesticideService, PeriodService periodService) {
-        this.cropScheduleService = cropScheduleService;
+    public CropPesticideScheduleMapperImpl(CropProgramService cropProgramService, PesticideService pesticideService, PeriodService periodService) {
+        this.cropProgramService = cropProgramService;
         this.pesticideService = pesticideService;
         this.periodService = periodService;
     }
@@ -26,10 +26,10 @@ public non-sealed class CropPesticideScheduleMapperImpl implements CropPesticide
     @Override
     public CropPesticideSchedule cropPesticideScheduleFromCropPesticideScheduleRequest(CropPesticideScheduleRequest cropPesticideScheduleRequest) {
         Objects.requireNonNull(cropPesticideScheduleRequest, "CropPesticideScheduleRequest cannot be null!");
-        var cropSchedule = cropScheduleService.getById(cropPesticideScheduleRequest.getCropScheduleId());
+        var cropSchedule = cropProgramService.getById(cropPesticideScheduleRequest.getCropScheduleId());
         var fertilizer = pesticideService.getById(cropPesticideScheduleRequest.getPesticideId());
         return CropPesticideSchedule.builder()
-                .cropSchedule(cropSchedule)
+                .cropProgram(cropSchedule)
                 .pesticide(fertilizer)
                 .stageOfGrowth(periodService.findOrCreatePeriod(cropPesticideScheduleRequest.getStageOfGrowth()))
                 .applicationInterval(periodService.findOrCreatePeriod(cropPesticideScheduleRequest.getApplicationInterval()))

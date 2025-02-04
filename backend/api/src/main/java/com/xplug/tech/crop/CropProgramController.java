@@ -1,9 +1,8 @@
 package com.xplug.tech.crop;
 
+import com.xplug.tech.cropprogram.*;
 import com.xplug.tech.cropprograms.CropProgramPDFGenerator;
 import com.xplug.tech.cropprograms.CropProgramPDFGeneratorTest;
-import com.xplug.tech.cropschedule.CropScheduleResponse;
-import com.xplug.tech.cropschedule.CropScheduleService;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
@@ -17,28 +16,52 @@ import java.util.stream.Collectors;
 @RequestMapping("v1/api/crop-program")
 public class CropProgramController {
 
-    private final CropScheduleService cropScheduleService;
+    private final CropProgramService cropProgramService;
 
     private final CropProgramPDFGenerator cropProgramPDFGenerator;
 
     private final CropProgramPDFGeneratorTest cropProgramPDFGeneratorTest;
 
-    public CropProgramController(CropScheduleService cropScheduleService, CropProgramPDFGenerator cropProgramPDFGenerator, CropProgramPDFGeneratorTest cropProgramPDFGeneratorTest) {
-        this.cropScheduleService = cropScheduleService;
+    public CropProgramController(CropProgramService cropProgramService, CropProgramPDFGenerator cropProgramPDFGenerator, CropProgramPDFGeneratorTest cropProgramPDFGeneratorTest) {
+        this.cropProgramService = cropProgramService;
         this.cropProgramPDFGenerator = cropProgramPDFGenerator;
         this.cropProgramPDFGeneratorTest = cropProgramPDFGeneratorTest;
     }
 
     @GetMapping
     @Operation(summary = "Get All Crop Programs")
-    public List<CropScheduleResponse> getAll() {
-        return cropScheduleService.getAll().stream().map(CropScheduleResponse::of).collect(Collectors.toList());
+    public List<CropProgramResponse> getAll() {
+        return cropProgramService.getAll().stream().map(CropProgramResponse::of).collect(Collectors.toList());
     }
 
-    @GetMapping("/crop-schedule/{cropScheduleId}")
-    @Operation(summary = "Get Crop Program By Crop Schedule Id")
-    public CropScheduleResponse getByCropScheduleId(@PathVariable Long cropScheduleId) {
-        return CropScheduleResponse.of(cropScheduleService.getById(cropScheduleId));
+    @GetMapping("/{id}")
+    @Operation(summary = "Get Crop Program Info By Id")
+    public CropProgram getById(@PathVariable Long id) {
+        return cropProgramService.getById(id);
+    }
+
+    @PostMapping
+    @Operation(summary = "Create CropSchedule")
+    public CropProgram create(@RequestBody CropProgramRequest cropProgramRequest) {
+        return cropProgramService.create(cropProgramRequest);
+    }
+
+    @PostMapping("/v2")
+    @Operation(summary = "Create V2 CropSchedule")
+    public CropProgram create(@RequestBody CropProgramRequestV2 cropProgramRequest) {
+        return cropProgramService.create(cropProgramRequest);
+    }
+
+    @PutMapping("/{id}")
+    @Operation(summary = "Update CropSchedule")
+    public CropProgram update(@RequestBody CropProgramUpdateRequest cropScheduleUpdateRequest) {
+        return cropProgramService.update(cropScheduleUpdateRequest);
+    }
+
+    @DeleteMapping("/{id}")
+    @Operation(summary = "Delete CropSchedule")
+    public void delete(@PathVariable Long id) {
+        cropProgramService.delete(id);
     }
 
     @GetMapping("/pdf/{cropId}")

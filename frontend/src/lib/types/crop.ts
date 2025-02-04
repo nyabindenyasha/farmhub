@@ -1,5 +1,5 @@
 export interface Crop {
-    id: string;
+    id: number;
     name: string;
     family: string;
     genus: string;

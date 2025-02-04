@@ -35,8 +35,6 @@ public class CropProgramPDFGeneratorTest {
     private final CropPesticideScheduleService cropPesticideScheduleService;
     private final CropFertilizerScheduleService cropFertilizerScheduleService;
 
-    private List<CropFertilizerSchedule> cropFertilizerScheduleList;
-
     public CropProgramPDFGeneratorTest(CropService cropService,
                                        CropStagesOfGrowthService cropStagesOfGrowthService, CropPesticideScheduleService cropPesticideSchedule,
                                        CropFertilizerScheduleService cropFertilizerScheduleService) {

@@ -1,7 +1,7 @@
 package com.xplug.tech.cropfertilizerschedule;
 
 import com.xplug.tech.crop.CropFertilizerSchedule;
-import com.xplug.tech.crop.CropSchedule;
+import com.xplug.tech.crop.CropProgram;
 import com.xplug.tech.crop.Fertilizer;
 import com.xplug.tech.enums.CropScheduleType;
 
@@ -23,10 +23,12 @@ public sealed interface CropFertilizerScheduleService permits CropFertilizerSche
     CropFertilizerSchedule create(CropFertilizerScheduleRequest cropFertilizerScheduleRequest);
 
 
-    CropFertilizerSchedule initialize(CropSchedule cropSchedule, Fertilizer fertilizer, CropFertilizerScheduleRequest cropFertilizerScheduleRequest);
+    CropFertilizerSchedule initialize(CropProgram cropProgram, Fertilizer fertilizer, CropFertilizerScheduleRequest cropFertilizerScheduleRequest);
 
     CropFertilizerSchedule update(CropFertilizerScheduleUpdateRequest cropFertilizerScheduleUpdateRequest);
 
     void delete(Long id);
+
+    Set<CropFertilizerSchedule> findByCropProgramId(Long cropProgramId);
 
 }

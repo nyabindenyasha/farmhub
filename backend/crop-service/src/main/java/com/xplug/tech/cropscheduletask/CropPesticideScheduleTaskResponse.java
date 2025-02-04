@@ -1,4 +1,4 @@
-package com.xplug.tech.croppesticidescheduletask;
+package com.xplug.tech.cropscheduletask;
 
 import com.xplug.tech.crop.CropPesticideScheduleTask;
 import com.xplug.tech.enums.PesticideApplicationMethod;

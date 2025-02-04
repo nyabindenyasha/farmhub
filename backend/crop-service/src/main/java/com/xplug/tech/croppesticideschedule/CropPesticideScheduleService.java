@@ -1,7 +1,6 @@
 package com.xplug.tech.croppesticideschedule;
 
 import com.xplug.tech.crop.*;
-import com.xplug.tech.cropfertilizerschedule.CropFertilizerScheduleRequest;
 import com.xplug.tech.enums.CropScheduleType;
 
 import java.util.List;
@@ -19,12 +18,14 @@ public sealed interface CropPesticideScheduleService permits CropPesticideSchedu
 
     CropPesticideSchedule getByCropAndScheduleTypeAndStageOfGrowth(Long cropId, CropScheduleType cropScheduleType, Long stageOfGrowthId);
 
-    CropPesticideSchedule initialize(CropSchedule cropSchedule, Pesticide pesticide, CropPesticideScheduleRequest cropPesticideScheduleRequest);
+    CropPesticideSchedule initialize(CropProgram cropProgram, Pesticide pesticide, CropPesticideScheduleRequest cropPesticideScheduleRequest);
 
     CropPesticideSchedule create(CropPesticideScheduleRequest cropPesticideScheduleRequest);
 
     CropPesticideSchedule update(CropPesticideScheduleUpdateRequest cropPesticideScheduleUpdateRequest);
 
     void delete(Long id);
+
+    Set<CropPesticideSchedule> findByCropProgramId(Long cropProgramId);
 
 }

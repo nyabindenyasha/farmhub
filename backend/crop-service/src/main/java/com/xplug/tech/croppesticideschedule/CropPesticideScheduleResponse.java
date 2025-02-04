@@ -1,7 +1,6 @@
 package com.xplug.tech.croppesticideschedule;
 
 import com.xplug.tech.crop.CropPesticideSchedule;
-import com.xplug.tech.cropschedule.CropScheduleResponse;
 import com.xplug.tech.enums.PesticideApplicationMethod;
 import com.xplug.tech.period.PeriodResponse;
 import com.xplug.tech.pesticide.PesticideResponse;

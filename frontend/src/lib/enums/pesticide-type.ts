@@ -1,5 +1,5 @@
 export enum PesticideType {
-    PESTICIDE,
-    FUNGICIDE,
-    HERBICIDE
+    PESTICIDE = "PESTICIDE",
+    FUNGICIDE = "FUNGICIDE",
+    HERBICIDE = "HERBICIDE"
 }

@@ -5,11 +5,8 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.time.OffsetDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
-import java.util.Calendar;
-import java.util.TimeZone;
 
 @Entity
 @Getter
@@ -34,7 +31,7 @@ public class CropFarmer {
 
     @ManyToOne
     @JoinColumn(name = "crop_schedule_id", nullable = false)
-    private CropSchedule cropSchedule; //crop program to be used
+    private CropProgram cropProgram; //crop program to be used
 
     //todo for testing
     // private LocalDate dateOfTransplant; //to derive crop stages and day of maturity

@@ -6,12 +6,12 @@ spring:
   datasource:
     driver-class-name: org.postgresql.Driver
     password: postgres
-    url: jdbc:postgresql://localhost:5432/crop_management11
+    url: jdbc:postgresql://localhost:5432/crop_management12
     username: postgres
   jpa:
     database: POSTGRESQL
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect

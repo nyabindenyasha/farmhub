@@ -1,7 +1,6 @@
 package com.xplug.tech.cropfertilizerschedule;
 
 import com.xplug.tech.crop.CropFertilizerSchedule;
-import com.xplug.tech.cropschedule.CropScheduleResponse;
 import com.xplug.tech.enums.FertilizerApplicationMethod;
 import com.xplug.tech.fertilizer.FertilizerResponse;
 import com.xplug.tech.period.PeriodResponse;

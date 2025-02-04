@@ -8,16 +8,15 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-
     <artifactId>app</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>app</name>
     <description>app</description>
 
-
     <properties>
-        <java.version>11</java.version>
+        <java.version>17</java.version>
     </properties>
+
     <dependencies>
         <dependency>
             <groupId>com.xplug.tech</groupId>
@@ -33,24 +32,24 @@
             <artifactId>springdoc-openapi-webmvc-core</artifactId>
             <version>1.7.0</version>
         </dependency>
-        <!--        <dependency>-->
-        <!--            <groupId>org.springframework.boot</groupId>-->
-        <!--            <artifactId>spring-boot-starter-actuator</artifactId>-->
-        <!--        </dependency>-->
     </dependencies>
+
     <build>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <configuration>
-                    <excludes>
-                        <exclude>
-                            <groupId>org.projectlombok</groupId>
-                            <artifactId>lombok</artifactId>
-                        </exclude>
-                    </excludes>
-                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                        <configuration>
+                            <mainClass>com.xplug.tech.CropManagementApplication</mainClass>
+                            <classifier>exec</classifier>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
             <plugin>
                 <groupId>org.springdoc</groupId>
@@ -66,18 +65,17 @@
                 <configuration>
                     <apiDocsUrl>http://localhost:8083/v3/api-docs</apiDocsUrl>
                     <outputFileName>openapi.json</outputFileName>
-                    <outputDir>/Users/damba/Documents/NMB/bonvie/app/src/main/resources</outputDir>
+                    <outputDir>${project.basedir}/src/main/resources</outputDir>
                 </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
-                    <source>16</source>
-                    <target>16</target>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
                 </configuration>
             </plugin>
-
         </plugins>
         <finalName>${project.parent.artifactId}-${project.parent.version}</finalName>
     </build>

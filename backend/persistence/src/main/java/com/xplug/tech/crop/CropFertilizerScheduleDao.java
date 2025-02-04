@@ -9,12 +9,12 @@ import java.util.Set;
 
 public interface CropFertilizerScheduleDao extends JpaRepository<CropFertilizerSchedule, Long> {
 
-    Set<CropFertilizerSchedule> findByCropScheduleId(Long cropScheduleId);
+    Set<CropFertilizerSchedule> findByCropProgramId(Long cropProgramId);
 
-    Optional<CropFertilizerSchedule> findByCropScheduleIdAndFertilizerIdAndStageOfGrowthId(Long cropScheduleId, Long fertilizerId, Long stageOfGrowthId);
+    Optional<CropFertilizerSchedule> findByCropProgramIdAndFertilizerIdAndStageOfGrowthId(Long cropProgramId, Long fertilizerId, Long stageOfGrowthId);
 
-    List<CropFertilizerSchedule> findByCropScheduleCropIdAndCropScheduleCropScheduleType(Long cropId, CropScheduleType cropScheduleType);
+    List<CropFertilizerSchedule> findByCropProgramCropIdAndCropProgramCropScheduleType(Long cropId, CropScheduleType cropScheduleType);
 
-    Optional<CropFertilizerSchedule> findByCropScheduleCropIdAndCropScheduleCropScheduleTypeAndStageOfGrowthId(Long cropId, CropScheduleType cropScheduleType, Long stageOfGrowthId);
+    Optional<CropFertilizerSchedule> findByCropProgramCropIdAndCropProgramCropScheduleTypeAndStageOfGrowthId(Long cropId, CropScheduleType cropScheduleType, Long stageOfGrowthId);
 
 }

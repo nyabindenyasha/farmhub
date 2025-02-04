@@ -1,9 +1,7 @@
 package com.xplug.tech.jobs;
 
-import com.xplug.tech.crop.CropFertilizerScheduleTask;
-import com.xplug.tech.crop.CropPesticideScheduleTask;
-import com.xplug.tech.cropfertilizerscheduletask.CropFertilizerScheduleTaskService;
-import com.xplug.tech.croppesticidescheduletask.CropPesticideScheduleTaskService;
+import com.xplug.tech.crop.CropScheduleTask;
+import com.xplug.tech.cropscheduletask.CropScheduleTaskService;
 import com.xplug.tech.enums.TaskStatus;
 import com.xplug.tech.event.TaskReadyForExecutionEvent;
 import com.xplug.tech.utils.TaskUtils;
@@ -18,15 +16,12 @@ import java.util.List;
 @Service
 public class TaskStatusUpdateService {
 
-    private final CropFertilizerScheduleTaskService cropFertilizerScheduleTaskService;
-
-    private final CropPesticideScheduleTaskService cropPesticideScheduleTaskService;
+    private final CropScheduleTaskService cropScheduleTaskService;
 
     private final ApplicationEventPublisher applicationEventPublisher;
 
-    public TaskStatusUpdateService(CropFertilizerScheduleTaskService cropFertilizerScheduleTaskService, CropPesticideScheduleTaskService cropPesticideScheduleTaskService, ApplicationEventPublisher applicationEventPublisher) {
-        this.cropFertilizerScheduleTaskService = cropFertilizerScheduleTaskService;
-        this.cropPesticideScheduleTaskService = cropPesticideScheduleTaskService;
+    public TaskStatusUpdateService(CropScheduleTaskService cropScheduleTaskService, ApplicationEventPublisher applicationEventPublisher) {
+        this.cropScheduleTaskService = cropScheduleTaskService;
         this.applicationEventPublisher = applicationEventPublisher;
     }
 
@@ -35,50 +30,60 @@ public class TaskStatusUpdateService {
 
         log.info("### TaskStatusUpdateService: Updating task statuses");
 
-        List<CropFertilizerScheduleTask> fertilizerScheduleTasksPending = cropFertilizerScheduleTaskService.findByPendingTasksDueTomorrow();
+        List<CropScheduleTask> scheduleTasksPending = cropScheduleTaskService.findByPendingTasksDueTomorrow();
 
-        log.info("### Fertilizer Schedule Tasks Pending : {}", fertilizerScheduleTasksPending );
+        log.info("### Schedule Tasks Pending : {}", scheduleTasksPending );
 
-        List<CropPesticideScheduleTask> pesticideScheduleTasksPending  = cropPesticideScheduleTaskService.findByPendingTasksDueTomorrow();
+//        List<CropPesticideScheduleTask> pesticideScheduleTasksPending  = cropPesticideScheduleTaskService.findByPendingTasksDueTomorrow();
 
-        log.info("### Pesticide Schedule Tasks Pending : {}", pesticideScheduleTasksPending );
+//        log.info("### Pesticide Schedule Tasks Pending : {}", pesticideScheduleTasksPending );
 
-        for (CropFertilizerScheduleTask fertilizerScheduleTask : fertilizerScheduleTasksPending ) {
-            TaskStatus newStatus = TaskUtils.getTaskStatus(fertilizerScheduleTask.getTaskDate());
-            fertilizerScheduleTask.setTaskStatus(newStatus);
-            applicationEventPublisher.publishEvent(new TaskReadyForExecutionEvent(this,fertilizerScheduleTask, null));
+        for (CropScheduleTask cropScheduleTask : scheduleTasksPending ) {
+            TaskStatus newStatus = TaskUtils.getTaskStatus(cropScheduleTask, cropScheduleTask.getTaskDate());
+            cropScheduleTask.setTaskStatus(newStatus);
+            applicationEventPublisher.publishEvent(new TaskReadyForExecutionEvent(this, cropScheduleTask));
         }
 
-        for (CropPesticideScheduleTask pesticideScheduleTask : pesticideScheduleTasksPending ) {
-            TaskStatus newStatus = TaskUtils.getTaskStatus(pesticideScheduleTask.getTaskDate());
-            pesticideScheduleTask.setTaskStatus(newStatus);
-            applicationEventPublisher.publishEvent(new TaskReadyForExecutionEvent(this, null, pesticideScheduleTask));
+//        for (CropFertilizerScheduleTask fertilizerScheduleTask : fertilizerScheduleTasksPending ) {
+//            TaskStatus newStatus = TaskUtils.getTaskStatus(fertilizerScheduleTask.getTaskDate());
+//            fertilizerScheduleTask.setTaskStatus(newStatus);
+//            applicationEventPublisher.publishEvent(new TaskReadyForExecutionEvent(this,fertilizerScheduleTask, null));
+//        }
+//
+//        for (CropPesticideScheduleTask pesticideScheduleTask : pesticideScheduleTasksPending ) {
+//            TaskStatus newStatus = TaskUtils.getTaskStatus(pesticideScheduleTask.getTaskDate());
+//            pesticideScheduleTask.setTaskStatus(newStatus);
+//            applicationEventPublisher.publishEvent(new TaskReadyForExecutionEvent(this, null, pesticideScheduleTask));
+//        }
+
+        cropScheduleTaskService.saveAll(scheduleTasksPending);
+
+        List<CropScheduleTask> scheduleTasksInProgress = cropScheduleTaskService.findTasksInProgress();
+
+        log.info("### Schedule Tasks In Progress: {}", scheduleTasksInProgress);
+
+//        List<CropPesticideScheduleTask> pesticideScheduleTasksInProgress = cropPesticideScheduleTaskService.findByPendingTasksDueTomorrow();
+//
+//        log.info("### Pesticide Schedule Tasks In Progress: {}", pesticideScheduleTasksInProgress);
+
+        for (CropScheduleTask cropScheduleTask : scheduleTasksInProgress ) {
+            TaskStatus newStatus = TaskUtils.getTaskStatus(cropScheduleTask, cropScheduleTask.getTaskDate());
+            cropScheduleTask.setTaskStatus(newStatus);
         }
 
-        cropFertilizerScheduleTaskService.saveAll(fertilizerScheduleTasksPending);
-        cropPesticideScheduleTaskService.saveAll(pesticideScheduleTasksPending);
+//        for (CropFertilizerScheduleTask fertilizerScheduleTask : fertilizerScheduleTasksInProgress) {
+//            TaskStatus newStatus = TaskUtils.getTaskStatus(fertilizerScheduleTask.getTaskDate());
+//            fertilizerScheduleTask.setTaskStatus(newStatus);
+//        }
+//
+//        for (CropPesticideScheduleTask pesticideScheduleTask : pesticideScheduleTasksInProgress ) {
+//            TaskStatus newStatus = TaskUtils.getTaskStatus(pesticideScheduleTask.getTaskDate());
+//            pesticideScheduleTask.setTaskStatus(newStatus);
+//        }
 
-        List<CropFertilizerScheduleTask> fertilizerScheduleTasksInProgress = cropFertilizerScheduleTaskService.findTasksInProgress();
-
-        log.info("### Fertilizer Schedule Tasks In Progress: {}", fertilizerScheduleTasksInProgress);
-
-        List<CropPesticideScheduleTask> pesticideScheduleTasksInProgress = cropPesticideScheduleTaskService.findByPendingTasksDueTomorrow();
-
-        log.info("### Pesticide Schedule Tasks In Progress: {}", pesticideScheduleTasksInProgress);
-
-        for (CropFertilizerScheduleTask fertilizerScheduleTask : fertilizerScheduleTasksInProgress) {
-            TaskStatus newStatus = TaskUtils.getTaskStatus(fertilizerScheduleTask.getTaskDate());
-            fertilizerScheduleTask.setTaskStatus(newStatus);
-        }
-
-        for (CropPesticideScheduleTask pesticideScheduleTask : pesticideScheduleTasksInProgress ) {
-            TaskStatus newStatus = TaskUtils.getTaskStatus(pesticideScheduleTask.getTaskDate());
-            pesticideScheduleTask.setTaskStatus(newStatus);
-        }
-
-        cropFertilizerScheduleTaskService.saveAll(fertilizerScheduleTasksInProgress);
-        cropPesticideScheduleTaskService.saveAll(pesticideScheduleTasksInProgress);
+        cropScheduleTaskService.saveAll(scheduleTasksInProgress);
 
     }
+
 }
 

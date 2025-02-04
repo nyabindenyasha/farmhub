@@ -1,9 +1,9 @@
 package com.xplug.tech.event;
 
-import com.xplug.tech.crop.CropSchedule;
+import com.xplug.tech.crop.CropProgram;
 import com.xplug.tech.cropfertilizerschedule.CropFertilizerScheduleService;
 import com.xplug.tech.croppesticideschedule.CropPesticideScheduleService;
-import com.xplug.tech.cropschedule.CropScheduleService;
+import com.xplug.tech.cropprogram.CropProgramService;
 import com.xplug.tech.enums.CropScheduleType;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationListener;
@@ -13,13 +13,13 @@ import org.springframework.stereotype.Component;
 @Component
 public class CropCreatedEventListener implements ApplicationListener<CropCreatedEvent> {
 
-    private final CropScheduleService cropScheduleService;
+    private final CropProgramService cropProgramService;
     private final CropFertilizerScheduleService cropFertilizerScheduleService;
 
     private final CropPesticideScheduleService cropPesticideScheduleService;
 
-    public CropCreatedEventListener(CropScheduleService cropScheduleService, CropFertilizerScheduleService cropFertilizerScheduleService, CropPesticideScheduleService cropPesticideScheduleService) {
-        this.cropScheduleService = cropScheduleService;
+    public CropCreatedEventListener(CropProgramService cropProgramService, CropFertilizerScheduleService cropFertilizerScheduleService, CropPesticideScheduleService cropPesticideScheduleService) {
+        this.cropProgramService = cropProgramService;
         this.cropFertilizerScheduleService = cropFertilizerScheduleService;
         this.cropPesticideScheduleService = cropPesticideScheduleService;
     }
@@ -31,7 +31,7 @@ public class CropCreatedEventListener implements ApplicationListener<CropCreated
 
         //todo get values from a preloaded file
 
-        var cropSchedule = CropSchedule.builder()
+        var cropSchedule = CropProgram.builder()
                 .crop(cropCreatedEvent.getCrop())
                 .name(cropCreatedEvent.getCrop().getName().concat("_default"))
                 .description(cropCreatedEvent.getCrop().getName().concat("_default"))
@@ -40,7 +40,7 @@ public class CropCreatedEventListener implements ApplicationListener<CropCreated
                 .cropScheduleType(CropScheduleType.PRIMARY)
                 .build();
 
-        var savedCropSchedule = cropScheduleService.save(cropSchedule);
+        var savedCropSchedule = cropProgramService.save(cropSchedule);
 
         log.info("### Saved Crop Schedule, {}", savedCropSchedule);
 

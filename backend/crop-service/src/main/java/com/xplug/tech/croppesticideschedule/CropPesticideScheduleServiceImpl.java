@@ -1,7 +1,6 @@
 package com.xplug.tech.croppesticideschedule;
 
 import com.xplug.tech.crop.*;
-import com.xplug.tech.cropfertilizerschedule.CropFertilizerScheduleRequest;
 import com.xplug.tech.enums.CropScheduleType;
 import com.xplug.tech.exception.ItemAlreadyExistsException;
 import com.xplug.tech.period.PeriodService;
@@ -39,25 +38,25 @@ public non-sealed class CropPesticideScheduleServiceImpl implements CropPesticid
 
     @Override
     public Set<CropPesticideSchedule> getByCropScheduleId(Long cropScheduleId) {
-        return cropPesticideScheduleRepository.findByCropScheduleId(cropScheduleId);
+        return cropPesticideScheduleRepository.findByCropProgramId(cropScheduleId);
     }
 
     @Override
     public List<CropPesticideSchedule> getByCropAndScheduleType(Long cropId, CropScheduleType cropScheduleType) {
-        return cropPesticideScheduleRepository.findByCropScheduleCropIdAndCropScheduleCropScheduleType(cropId, cropScheduleType);
+        return cropPesticideScheduleRepository.findByCropProgramCropIdAndCropProgramCropScheduleType(cropId, cropScheduleType);
     }
 
     @Override
     public CropPesticideSchedule getByCropAndScheduleTypeAndStageOfGrowth(Long cropId, CropScheduleType cropScheduleType, Long stageOfGrowthId) {
         return cropPesticideScheduleRepository
-                .findByCropScheduleCropIdAndCropScheduleCropScheduleTypeAndStageOfGrowthId(cropId, cropScheduleType, stageOfGrowthId)
+                .findByCropProgramCropIdAndCropProgramCropScheduleTypeAndStageOfGrowthId(cropId, cropScheduleType, stageOfGrowthId)
                 .orElseThrow(() -> new RuntimeException("CropPesticideSchedule not found"));
     }
 
     @Override
-    public CropPesticideSchedule initialize(CropSchedule cropSchedule, Pesticide pesticide, CropPesticideScheduleRequest cropPesticideScheduleRequest) {
+    public CropPesticideSchedule initialize(CropProgram cropProgram, Pesticide pesticide, CropPesticideScheduleRequest cropPesticideScheduleRequest) {
         var cropPesticideSchedule = CropPesticideSchedule.builder()
-                .cropSchedule(cropSchedule)
+                .cropProgram(cropProgram)
                 .pesticide(pesticide)
                 .stageOfGrowth(periodService.findOrCreatePeriod(cropPesticideScheduleRequest.getStageOfGrowth()))
                 .applicationInterval(periodService.findOrCreatePeriod(cropPesticideScheduleRequest.getApplicationInterval()))
@@ -70,7 +69,7 @@ public non-sealed class CropPesticideScheduleServiceImpl implements CropPesticid
     public CropPesticideSchedule create(CropPesticideScheduleRequest request) {
         var period = periodService.findOrCreatePeriod(request.getStageOfGrowth());
         var optionalCropPesticideSchedule = cropPesticideScheduleRepository
-                .findByCropScheduleIdAndPesticideIdAndStageOfGrowthId(request.getCropScheduleId(), request.getPesticideId(), period.getId());
+                .findByCropProgramIdAndPesticideIdAndStageOfGrowthId(request.getCropScheduleId(), request.getPesticideId(), period.getId());
         if (optionalCropPesticideSchedule.isPresent()) {
             throw new ItemAlreadyExistsException("CropPesticideSchedule already exists");
         }
@@ -90,6 +89,11 @@ public non-sealed class CropPesticideScheduleServiceImpl implements CropPesticid
     public void delete(Long id) {
         CropPesticideSchedule cropPesticideSchedule = getById(id);
         cropPesticideScheduleRepository.delete(cropPesticideSchedule);
+    }
+
+    @Override
+    public Set<CropPesticideSchedule> findByCropProgramId(Long cropProgramId) {
+        return cropPesticideScheduleRepository.findByCropProgramId(cropProgramId);
     }
 
 }

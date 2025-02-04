@@ -2,8 +2,8 @@ package com.xplug.tech.cropbatch;
 
 import com.xplug.tech.crop.CropBatch;
 import com.xplug.tech.cropfarmer.CropFarmerSummaryResponse;
-import com.xplug.tech.cropfertilizerscheduletask.CropFertilizerScheduleTaskResponse;
-import com.xplug.tech.croppesticidescheduletask.CropPesticideScheduleTaskResponse;
+import com.xplug.tech.cropscheduletask.CropFertilizerScheduleTaskResponse;
+import com.xplug.tech.cropscheduletask.CropPesticideScheduleTaskResponse;
 import com.xplug.tech.utils.PeriodComparator;
 import lombok.Builder;
 import lombok.Getter;
@@ -12,7 +12,6 @@ import lombok.ToString;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 @Getter

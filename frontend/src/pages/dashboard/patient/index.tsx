@@ -175,10 +175,9 @@ function Patient() {
                                                 <DropdownMenuContent align="end">
                                                     <DropdownMenuItem>
                                                     <span
-                                                        onClick={() => router.push(`/dashboard/patient/${'adsfljkl'}`)}> View details</span>
+                                                        onClick={() => router.push(`/dashboard/patient/${'adsfljkl'}`)}> View Details</span>
                                                     </DropdownMenuItem>
-                                                    <DropdownMenuItem>Edit client</DropdownMenuItem>
-                                                    <DropdownMenuItem>View history</DropdownMenuItem>
+                                                    <DropdownMenuItem>Edit Record</DropdownMenuItem>
                                                 </DropdownMenuContent>
                                             </DropdownMenu>
                                         </TableCell>

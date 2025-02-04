@@ -1,4 +1,4 @@
-package com.xplug.tech.cropschedule;
+package com.xplug.tech.cropprogram;
 
 import com.xplug.tech.enums.CropScheduleType;
 import lombok.Getter;
@@ -8,7 +8,7 @@ import javax.validation.constraints.NotNull;
 
 @Getter
 @ToString
-public class CropScheduleRequest {
+public class CropProgramRequest {
 
     @NotNull(message = "Crop Id cannot be null!")
     private Long cropId;

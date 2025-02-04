@@ -1,6 +1,7 @@
 package com.xplug.tech.crop;
 
 import com.xplug.tech.cropfarmer.CropFarmerRequest;
+import com.xplug.tech.cropfarmer.CropFarmerResponse;
 import com.xplug.tech.cropfarmer.CropFarmerService;
 import com.xplug.tech.cropfarmer.CropFarmerUpdateRequest;
 import io.swagger.v3.oas.annotations.Operation;
@@ -33,8 +34,8 @@ public class CropFarmerController {
 
     @PostMapping
     @Operation(summary = "Create CropFarmer")
-    public CropFarmer create(@RequestBody CropFarmerRequest cropFarmerRequest) {
-        return cropFarmerService.create(cropFarmerRequest);
+    public CropFarmerResponse create(@RequestBody CropFarmerRequest cropFarmerRequest) {
+        return CropFarmerResponse.of(cropFarmerService.create(cropFarmerRequest));
     }
 
     @PutMapping("/{id}")

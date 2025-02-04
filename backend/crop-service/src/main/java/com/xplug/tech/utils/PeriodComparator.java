@@ -2,9 +2,9 @@ package com.xplug.tech.utils;
 
 import com.xplug.tech.crop.Period;
 import com.xplug.tech.cropfertilizerschedule.CropFertilizerScheduleResponse;
-import com.xplug.tech.cropfertilizerscheduletask.CropFertilizerScheduleTaskResponse;
+import com.xplug.tech.cropscheduletask.CropFertilizerScheduleTaskResponse;
 import com.xplug.tech.croppesticideschedule.CropPesticideScheduleResponse;
-import com.xplug.tech.croppesticidescheduletask.CropPesticideScheduleTaskResponse;
+import com.xplug.tech.cropscheduletask.CropPesticideScheduleTaskResponse;
 
 import java.util.Comparator;
 
