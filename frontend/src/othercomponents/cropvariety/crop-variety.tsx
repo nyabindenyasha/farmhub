@@ -3,7 +3,6 @@ import {useRouter} from "next/router";
 import {patients} from "@/lib/data";
 import DashboardLayout from "@/layouts/DashboardLayout";
 import {Button} from "@/components/ui/button";
-import PrimaryButton from "@/components/buttons/customButton";
 import {MoreHorizontal, Plus, Search} from "lucide-react";
 import {Tabs, TabsList, TabsTrigger} from "@/components/ui/tabs";
 import {Badge} from "@/components/ui/badge";

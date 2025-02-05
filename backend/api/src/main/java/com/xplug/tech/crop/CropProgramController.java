@@ -36,8 +36,8 @@ public class CropProgramController {
 
     @GetMapping("/{id}")
     @Operation(summary = "Get Crop Program Info By Id")
-    public CropProgram getById(@PathVariable Long id) {
-        return cropProgramService.getById(id);
+    public CropProgramResponse getById(@PathVariable Long id) {
+        return CropProgramResponse.of(cropProgramService.getById(id));
     }
 
     @PostMapping

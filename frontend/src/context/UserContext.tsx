@@ -1,36 +1,45 @@
-import React, {createContext, useContext, useState, ReactNode} from "react";
-import apiClient from "../utils/apiClient";
-import {User} from "@/lib/types";
-import id from "@/pages/dashboard/patient/[id]";
+import type React from "react"
+import {createContext, useContext, useState, useEffect} from "react"
+import {LoginResponse} from "@/lib/types/login-response";
+import {UserAccount} from "@/lib/types/user-account";
+import apiClient from "@/utils/apiClient";
 
-// Define the context type
 interface UserContextType {
-    user: User | null;
-    setUser: (user: User | null) => void;
-    logout: () => void;
-    getAllUsers: () => Promise<User[]>;
-    getUserById: (id: number) => Promise<User | null>;
+    user: LoginResponse | null
+    login: (loginData: LoginResponse) => void
+    logout: () => void
+    getAllUsers: () => Promise<UserAccount[]>
+    getUserById: (id: number) => Promise<UserAccount | null>
 }
 
-// Create the context with a default value
-export const UserContext = createContext<UserContextType | undefined>(undefined);
+export const UserContext = createContext<UserContextType | undefined>(undefined)
 
-// Create the provider component
-interface UserProviderProps {
-    children: ReactNode;
-}
+export const UserProvider: React.FC<{ children: React.ReactNode }> = ({children}) => {
+    const [user, setUser] = useState<LoginResponse | null>(null)
 
-export const UserProvider: React.FC<UserProviderProps> = ({children}) => {
-    const [user, setUser] = useState<User | null>(null);
+    useEffect(() => {
+        // Check if there's a stored user in localStorage
+        const storedUser = localStorage.getItem("user")
+        if (storedUser) {
+            setUser(JSON.parse(storedUser))
+        }
+    }, [])
+
+    const login = (loginData: LoginResponse) => {
+
+        setUser(loginData)
+        localStorage.setItem("user", JSON.stringify(loginData))
+    }
 
     const logout = () => {
-        setUser(null);
-        localStorage.removeItem("token");
-    };
+        setUser(null)
+        localStorage.removeItem("user")
+    }
 
-    const getAllUsers = async (): Promise<User[]> => {
+    //todo
+    const getAllUsers = async (): Promise<UserAccount[]> => {
         try {
-            const response = await apiClient.get<User[]>("/v1/api/policy-member/all");
+            const response = await apiClient.get<UserAccount[]>("/v1/users/all");
             return response.data;
         } catch (error) {
             console.error("Error fetching users:", error);
@@ -38,9 +47,9 @@ export const UserProvider: React.FC<UserProviderProps> = ({children}) => {
         }
     };
 
-    const getUserById = async (id: number): Promise<User | null> => {
+    const getUserById = async (id: number): Promise<UserAccount | null> => {
         try {
-            const response = await apiClient.get<User>("/v1/api/policy-member/" + id);
+            const response = await apiClient.get<UserAccount>("/v1/user/" + id);
             return response.data;
         } catch (error) {
             console.error("Error fetching users:", error);
@@ -48,10 +57,15 @@ export const UserProvider: React.FC<UserProviderProps> = ({children}) => {
         }
     };
 
-    return (
-        <UserContext.Provider value={{user, setUser, logout, getAllUsers, getUserById}}>
-            {children}
-        </UserContext.Provider>
-    );
-};
 
+    return <UserContext.Provider
+        value={{user, login, logout, getAllUsers, getUserById}}>{children}</UserContext.Provider>
+}
+
+// export const useUser = () => {
+//     const context = useContext(UserContext)
+//     if (context === undefined) {
+//         throw new Error("useUser must be used within a UserProvider")
+//     }
+//     return context
+// }

@@ -1,4 +1,4 @@
-import React, {createContext, useContext, useState, ReactNode} from "react";
+import React, {createContext, useContext, useState, ReactNode, useCallback} from "react";
 import apiClient from "../utils/apiClient";
 import {Crop} from "@/lib/types/crop";
 import {BASE_URL} from "@/lib/constants";
@@ -21,14 +21,16 @@ interface CropProviderProps {
 export const CropProvider: React.FC<CropProviderProps> = ({children}) => {
     const [crops, setCrops] = useState<Crop[]>([]);
 
-    const getAllCrops = async (): Promise<void> => {
+    const getAllCrops = useCallback(async (): Promise<void> => {
         try {
             const response = await apiClient.get<Crop[]>("/v1/api/crop");
             setCrops(response.data);
+
         } catch (error) {
+
             console.error("Error fetching crops:", error);
         }
-    };
+    }, []);
 
     const createCrop = async (cropData: Crop): Promise<void> => {
         try {

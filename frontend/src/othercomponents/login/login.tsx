@@ -9,8 +9,10 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import type { LoginFormData, AuthState } from "@/lib/types/auth"
 import {Icons} from "@/components/icons/icons";
 import axios from "axios";
+import {useUser} from "@/hooks/useUser";
 
 export function LoginForm() {
+    const { login } = useUser()
     const router = useRouter()
     const [state, setState] = useState<AuthState>({
         isLoading: false,
@@ -35,6 +37,8 @@ export function LoginForm() {
             // Handle successful login (e.g., store token in local storage)
             console.log(response);
             console.log(response.data);
+            // localStorage.setItem("user", response.data)
+            login(response.data);
 
             router.push("/dashboard")
         } catch (error) {

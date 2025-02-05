@@ -7,34 +7,113 @@ import {
 } from "@heroicons/react/24/outline";
 import {TimerIcon} from "@radix-ui/react-icons";
 import {Patient as PatientType} from '@/lib/types'
+import {NavItem} from "@/lib/types/nav-item";
+import {Role} from "@/lib/enums/role";
 
 export const nav_items = [
 
-    {name: 'Home',location:'/',id:'1'},
-    {name: 'About',location:'/about',id:'2'},
-    {name: 'Contact',location:'/contact',id:'3'},
+    {name: 'Home', location: '/', id: '1'},
+    {name: 'About', location: '/about', id: '2'},
+    {name: 'Contact', location: '/contact', id: '3'},
 ];
 
-export const dashboard_nav_items ={
+export const dashboard_nav_items = {
     sideBar: [
-        {name:'Dashboard',location:'/dashboard',id:'1',Icon: HomeIcon,active: true},
-        {name:'Crops',location:'/dashboard/crop',id:'2',Icon: ClipboardDocumentListIcon},
-        {name:'Fertilizer',location:'/dashboard/fertilizer',id:'3',Icon: CalendarDateRangeIcon},
-        {name:'Pesticides',location:'/dashboard/pesticide',id:'4',Icon: ClipboardDocumentListIcon},
-        {name:'Crop Program',location:'/dashboard/cropprogram',id:'5',Icon: TimerIcon},
-        {name:'Crop Stages',location:'/dashboard/cropstages',id:'6',Icon: TimerIcon},
-        {name:'Crop Variety',location:'/dashboard/cropvariety',id:'7',Icon: TimerIcon},
-        {name:'Reports',location:'/dashboard/report',id:'6',Icon: ChartBarIcon},
+        {name: 'Dashboard', location: '/dashboard', id: '1', Icon: HomeIcon, active: true},
+        {name: 'Crops', location: '/dashboard/crop', id: '2', Icon: ClipboardDocumentListIcon},
+        {name: 'Fertilizer', location: '/dashboard/fertilizer', id: '3', Icon: CalendarDateRangeIcon},
+        {name: 'Pesticides', location: '/dashboard/pesticide', id: '4', Icon: ClipboardDocumentListIcon},
+        {name: 'Crop Program', location: '/dashboard/cropprogram', id: '5', Icon: TimerIcon},
+        {name: 'Crop Stages', location: '/dashboard/cropstages', id: '6', Icon: TimerIcon},
+        {name: 'Crop Variety', location: '/dashboard/cropvariety', id: '7', Icon: TimerIcon},
+        {name: 'Reports', location: '/dashboard/report', id: '6', Icon: ChartBarIcon},
         // {name:'PatientDashboard',location:'/dashboard/patientDashboard',id:'3',Icon: ClipboardDocumentListIcon},
 
 
     ],
-    navBar:[
-        {name:'Home',location:'/dashboard',id:'1',Icon: UserGroupIcon},
-        {name:'Profile',location:'dashboard/profile',id:'2',Icon: UserGroupIcon}
+    navBar: [
+        {name: 'Home', location: '/dashboard', id: '1', Icon: UserGroupIcon},
+        {name: 'Profile', location: 'dashboard/profile', id: '2', Icon: UserGroupIcon}
     ]
 
 }
+
+export const sideBarDashboardNavItems: NavItem[] = [
+    {
+        name: "Dashboard",
+        location: "/dashboard",
+        id: "1",
+        icon: HomeIcon,
+        active: true,
+        roles: [Role.ADMIN,
+            Role.FARMER]
+    },
+    {
+        name: "Crops",
+        location: "/dashboard/crop",
+        id: "2",
+        icon: ClipboardDocumentListIcon,
+        roles: [Role.ADMIN],
+    },
+    {
+        name: "Fertilizer",
+        location: "/dashboard/fertilizer",
+        id: "3",
+        icon: CalendarDateRangeIcon,
+        roles: [Role.ADMIN]
+    },
+    {
+        name: "Pesticides",
+        location: "/dashboard/pesticide",
+        id: "4",
+        icon: ClipboardDocumentListIcon,
+        roles: [Role.ADMIN],
+    },
+    {
+        name: "Crop Program",
+        location: "/dashboard/cropprogram",
+        id: "5",
+        icon: TimerIcon,
+        roles: [Role.ADMIN]
+    },
+    {
+        name: "Crop Stages",
+        location: "/dashboard/cropstages",
+        id: "6",
+        icon: TimerIcon,
+        roles: [Role.ADMIN]
+    },
+    {
+        name: "Crop Variety",
+        location: "/dashboard/cropvariety",
+        id: "7",
+        icon: TimerIcon,
+        roles: [Role.ADMIN]
+    },
+    {
+        name: "Reports",
+        location: "/dashboard/report",
+        id: "8",
+        icon: ChartBarIcon,
+        roles: [Role.ADMIN]
+    },
+
+
+
+    {
+        name: "Crop Batches",
+        location: "/farmerdashboard/cropbatch",
+        id: "9",
+        icon: TimerIcon,
+        roles: [Role.FARMER]
+    },
+];
+
+
+export const navBarDashboardNavItems: NavItem[] = [
+    {name: "Home", location: "/dashboard", id: "1", icon: UserGroupIcon, roles: [Role.ADMIN, Role.FARMER]},
+    {name: "Profile", location: "dashboard/profile", id: "2", icon: UserGroupIcon, roles: [Role.ADMIN, Role.FARMER]},
+];
 
 
 export const patients: PatientType[] = [

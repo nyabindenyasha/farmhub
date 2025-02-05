@@ -71,7 +71,7 @@ function Dashboard() {
     const [users, setUsers] = useState<any>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
-    const {getAllUsers, logout} = useUser()
+    const {user, getAllUsers, logout} = useUser()
 
     useEffect(() => {
         const fetchUsers = async () => {
@@ -120,7 +120,7 @@ function Dashboard() {
                     </div>
                     <div className="relative flex items-center justify-between p-8">
                         <div className="space-y-4">
-                            <h2 className="text-3xl font-bold text-white">Good Morning, Kudzai Damba</h2>
+                            <h2 className="text-3xl font-bold text-white">Good Morning, {user?.userAccount.firstName + " " + user?.userAccount.lastName} </h2>
                             <p className="text-teal-50">
                                 Today is a good day. Stay optimistic!
                             </p>
