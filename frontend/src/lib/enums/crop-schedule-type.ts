@@ -1,6 +1,6 @@
 export enum CropScheduleType {
-    PRIMARY, //Default
-    SECONDARY, //e.g. winter schedule
-    TERTIARY,
-    CUSTOM //farmers custom schedule
+    PRIMARY = "PRIMARY", //Default
+    SECONDARY = "SECONDARY", //e.g. winter schedule
+    TERTIARY = "TERTIARY", //e.g. summer schedule
+    CUSTOM = "CUSTOM" //farmers custom schedule
 }

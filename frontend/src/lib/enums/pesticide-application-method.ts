@@ -1,4 +1,4 @@
 export enum PesticideApplicationMethod {
-    SPRAYING,
-    FUMIGATION
+    SPRAYING = "SPRAYING",
+    FUMIGATION = "FUMIGATION",
 }
