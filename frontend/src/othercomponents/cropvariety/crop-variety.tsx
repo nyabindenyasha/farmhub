@@ -11,18 +11,16 @@ import {Input} from "@/components/ui/input";
 import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow} from "@/components/ui/table";
 import {Checkbox} from "@/components/ui/checkbox";
 import {DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger} from "@/components/ui/dropdown-menu";
-import {useCropProgramContext} from "@/context/CropProgramContext";
-import CreateCropProgram from "@/othercomponents/cropprogram/create-crop-program";
+import {useCropVarietyContext} from "@/context/CropVarietyContext";
+import CreateCropVariety from "@/othercomponents/cropvariety/create-crop-variety";
 
-// const cropProgramData: CropProgram[] = useCropProgramContext().getAllCropPrograms();
+export default function CropVarietyComponent() {
 
-export default function CropProgramComponent() {
-
-    const {cropPrograms, getAllCropPrograms} = useCropProgramContext();
+    const {cropVarieties, getAllCropVarieties} = useCropVarietyContext();
 
     useEffect(() => {
-        getAllCropPrograms();
-    }, [getAllCropPrograms]);
+        getAllCropVarieties();
+    }, [getAllCropVarieties]);
 
     const [isPolicyFormOpen, setIsPolicyFormOpen] = useState(false)
     const openPolicyForm = () => setIsPolicyFormOpen(true)
@@ -62,12 +60,12 @@ export default function CropProgramComponent() {
         <DashboardLayout>
             <div className="flex w-screen p-5 space-y-6 min-h-screen flex-col">
                 <div className="flex items-center justify-between">
-                    <h2 className="text-3xl font-bold tracking-tight">CropPrograms</h2>
+                    <h2 className="text-3xl font-bold tracking-tight">CropVarietys</h2>
                     <div className="flex items-center space-x-2">
                         <Button variant="outline">Export</Button>
-                        {/*<PrimaryButton secondary={true} text={"Add CropProgram"} onClick={openPolicyForm}*/}
+                        {/*<PrimaryButton secondary={true} text={"Add CropVariety"} onClick={openPolicyForm}*/}
                         {/*               icon={<Plus className="h-4 w-4"/>}/>*/}
-                        <CreateCropProgram isOpen={isPolicyFormOpen} onClose={closePolicyForm}/>
+                        <CreateCropVariety isOpen={isPolicyFormOpen} onClose={closePolicyForm}/>
                     </div>
                 </div>
                 <div className="flex items-center justify-between">
@@ -115,27 +113,27 @@ export default function CropProgramComponent() {
                                     />
                                 </TableHead>
                                 <TableHead>Crop Name</TableHead>
-                                <TableHead>Program Name</TableHead>
-                                <TableHead>Description</TableHead>
-                                <TableHead>Source</TableHead>
-                                <TableHead>Schedule Type</TableHead>
+                                <TableHead>Variety </TableHead>
+                                <TableHead>Maturity</TableHead>
+                                <TableHead>Harvest Duration</TableHead>
+                                <TableHead>Comments</TableHead>
 
                             </TableRow>
                         </TableHeader>
                         <TableBody>
-                            {cropPrograms.slice(0, 10).map((cropProgram) => (
-                                <TableRow key={cropProgram.id}>
+                            {cropVarieties.slice(0, 10).map((cropVariety) => (
+                                <TableRow key={cropVariety.id}>
                                     <TableCell>
                                         <Checkbox
-                                            checked={selectedClients.includes(String(cropProgram.id))}
-                                            onCheckedChange={() => handleSelectClient(String(cropProgram.id))}
+                                            checked={selectedClients.includes(String(cropVariety.id))}
+                                            onCheckedChange={() => handleSelectClient(String(cropVariety.id))}
                                         />
                                     </TableCell>
-                                    <TableCell>{cropProgram.crop.name}</TableCell>
-                                    <TableCell>{cropProgram.name}</TableCell>
-                                    <TableCell>{cropProgram.description}</TableCell>
-                                    <TableCell>{cropProgram.source}</TableCell>
-                                    <TableCell>{cropProgram.cropScheduleType}</TableCell>
+                                    <TableCell>{cropVariety.crop.name}</TableCell>
+                                    <TableCell>{cropVariety.variety}</TableCell>
+                                    <TableCell>{cropVariety.maturityStartDay}-{cropVariety.maturityStartDay} Days</TableCell>
+                                    <TableCell>{cropVariety.harvestDuration} Days</TableCell>
+                                    <TableCell>{cropVariety.remarks}</TableCell>
                                     <TableCell>
                                         <DropdownMenu>
                                             <DropdownMenuTrigger asChild>
@@ -149,7 +147,6 @@ export default function CropProgramComponent() {
                                                         onClick={() => router.push(`/dashboard/patient/${'adsfljkl'}`)}> View Details</span>
                                                 </DropdownMenuItem>
                                                 <DropdownMenuItem>Edit Record</DropdownMenuItem>
-                                                <DropdownMenuItem>Download Pdf</DropdownMenuItem>
                                             </DropdownMenuContent>
                                         </DropdownMenu>
                                     </TableCell>

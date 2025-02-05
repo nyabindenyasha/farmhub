@@ -2,7 +2,7 @@ import React, {createContext, useContext, useState, ReactNode} from "react";
 import apiClient from "../utils/apiClient";
 import {CropVariety} from "@/lib/types/crop-variety";
 import {BASE_URL} from "@/lib/constants";
-import {CropVarietyRequest} from "@/othercomponents/crop/create-crop-variety";
+import {CropVarietyRequest} from "@/othercomponents/cropvariety/create-crop-variety";
 
 // Define the context type
 interface CropVarietyContextType {
@@ -23,7 +23,7 @@ export const CropVarietyProvider: React.FC<CropVarietyProviderProps> = ({childre
     const [cropVarieties, setCropVarieties] = useState<CropVariety[]>([]);
 
     const getAllCropVarieties = async (): Promise<void> => {
-        console.log(BASE_URL + "/v1/api/cropVariety")
+        console.log(BASE_URL + "/v1/api/crop-variety")
         try {
             const response = await apiClient.get<CropVariety[]>(BASE_URL + "/v1/api/crop-variety");
             setCropVarieties(response.data);

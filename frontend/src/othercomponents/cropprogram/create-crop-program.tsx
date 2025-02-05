@@ -15,7 +15,6 @@ import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/compo
 import {FormProps} from "@/lib/types";
 
 
-
 interface CropProgram {
     cropId: number
     name: string
@@ -45,20 +44,20 @@ export default function CreateCropProgram({isOpen, onClose}: FormProps) {
     const [isDialogOpen, setIsDialogOpen] = useState(false)
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        const { name, value } = e.target
-        setCropProgram((prev) => ({ ...prev, [name]: value }))
+        const {name, value} = e.target
+        setCropProgram((prev) => ({...prev, [name]: value}))
     }
 
     const handleSelectChange = (name: string, value: string) => {
-        setCropProgram((prev) => ({ ...prev, [name]: value }))
+        setCropProgram((prev) => ({...prev, [name]: value}))
     }
 
     const handleFertilizerScheduleChange = (schedules: FertilizerSchedule[]) => {
-        setCropProgram((prev) => ({ ...prev, fertilizerScheduleRequests: schedules }))
+        setCropProgram((prev) => ({...prev, fertilizerScheduleRequests: schedules}))
     }
 
     const handlePesticideScheduleChange = (schedules: PesticideSchedule[]) => {
-        setCropProgram((prev) => ({ ...prev, pesticideScheduleRequests: schedules }))
+        setCropProgram((prev) => ({...prev, pesticideScheduleRequests: schedules}))
     }
 
     const handleSubmit = (e: React.FormEvent) => {
@@ -87,7 +86,8 @@ export default function CreateCropProgram({isOpen, onClose}: FormProps) {
                     <div className="space-y-4">
                         <div>
                             <Label htmlFor="name">Name</Label>
-                            <Input id="name" name="name" value={cropProgram.name} onChange={handleInputChange} required />
+                            <Input id="name" name="name" value={cropProgram.name} onChange={handleInputChange}
+                                   required/>
                         </div>
                         <div>
                             <Label htmlFor="description">Description</Label>
@@ -101,11 +101,13 @@ export default function CreateCropProgram({isOpen, onClose}: FormProps) {
                         </div>
                         <div>
                             <Label htmlFor="source">Source</Label>
-                            <Input id="source" name="source" value={cropProgram.source} onChange={handleInputChange} required />
+                            <Input id="source" name="source" value={cropProgram.source} onChange={handleInputChange}
+                                   required/>
                         </div>
                         <div>
                             <Label htmlFor="remarks">Remarks</Label>
-                            <Textarea id="remarks" name="remarks" value={cropProgram.remarks} onChange={handleInputChange} />
+                            <Textarea id="remarks" name="remarks" value={cropProgram.remarks}
+                                      onChange={handleInputChange}/>
                         </div>
                         <div>
                             <Label htmlFor="cropScheduleType">Crop Schedule Type</Label>
@@ -115,12 +117,13 @@ export default function CreateCropProgram({isOpen, onClose}: FormProps) {
                                 onValueChange={(value) => handleSelectChange("cropScheduleType", value)}
                             >
                                 <SelectTrigger>
-                                    <SelectValue placeholder="Select crop schedule type" />
+                                    <SelectValue placeholder="Select crop schedule type"/>
                                 </SelectTrigger>
                                 <SelectContent>
-                                    {/*<SelectItem value="PRIMARY">Primary</SelectItem>*/}
-                                    <SelectItem value="SECONDARY">Secondary</SelectItem>
-                                    <SelectItem value="TERTIARY">Tertiary</SelectItem>
+                                    <SelectItem
+                                        value={CropScheduleType.SECONDARY.toString()}>{CropScheduleType.SECONDARY}</SelectItem>
+                                    <SelectItem
+                                        value={CropScheduleType.TERTIARY.toString()}>{CropScheduleType.TERTIARY}</SelectItem>
                                 </SelectContent>
                             </Select>
                         </div>
@@ -141,7 +144,7 @@ export default function CreateCropProgram({isOpen, onClose}: FormProps) {
                     />
                 )
             case 4:
-                return <CropProgramSummary cropProgram={cropProgram} />
+                return <CropProgramSummary cropProgram={cropProgram}/>
             default:
                 return null
         }
@@ -157,7 +160,8 @@ export default function CreateCropProgram({isOpen, onClose}: FormProps) {
                 <CardContent>
                     <div className="flex justify-between items-center">
                         <div>Step {step} of 4</div>
-                        <Button onClick={openDialog}>{step === 4 ? "Review" : step === 1 ? "Start" : "Continue"}</Button>
+                        <Button
+                            onClick={openDialog}>{step === 4 ? "Review" : step === 1 ? "Start" : "Continue"}</Button>
                     </div>
                 </CardContent>
             </Card>

@@ -22,9 +22,8 @@ export const CropProvider: React.FC<CropProviderProps> = ({children}) => {
     const [crops, setCrops] = useState<Crop[]>([]);
 
     const getAllCrops = async (): Promise<void> => {
-        console.log(BASE_URL + "/v1/api/crop")
         try {
-            const response = await apiClient.get<Crop[]>(BASE_URL + "/v1/api/crop");
+            const response = await apiClient.get<Crop[]>("/v1/api/crop");
             setCrops(response.data);
         } catch (error) {
             console.error("Error fetching crops:", error);
@@ -33,7 +32,7 @@ export const CropProvider: React.FC<CropProviderProps> = ({children}) => {
 
     const createCrop = async (cropData: Crop): Promise<void> => {
         try {
-            const response = await apiClient.post<Crop>(BASE_URL + "/v1/api/crop", cropData, {
+            const response = await apiClient.post<Crop>("/v1/api/crop", cropData, {
                 headers: {
                     'Content-Type': 'application/json',
                 },
