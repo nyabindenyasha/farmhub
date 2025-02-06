@@ -1,4 +1,4 @@
-import React, {createContext, useContext, useState, ReactNode} from "react";
+import React, {createContext, useContext, useState, ReactNode, useCallback} from "react";
 import apiClient from "../utils/apiClient";
 import {CropProgram} from "@/lib/types/crop-program";
 import {BASE_URL} from "@/lib/constants";
@@ -7,6 +7,7 @@ import {BASE_URL} from "@/lib/constants";
 interface CropProgramContextType {
     cropPrograms: CropProgram[];
     getAllCropPrograms: () => Promise<void>;
+    getCropProgramById: (id: number) => Promise<CropProgram | null>
     createCropProgram: (cropProgramData: CropProgram) => Promise<void>;
 }
 
@@ -21,16 +22,14 @@ interface CropProgramProviderProps {
 export const CropProgramProvider: React.FC<CropProgramProviderProps> = ({children}) => {
     const [cropPrograms, setCropPrograms] = useState<CropProgram[]>([]);
 
-    const getAllCropPrograms = async (): Promise<void> => {
-        console.log("### Get all CropPrograms")
-        console.log(BASE_URL + "/v1/api/crop-program")
+    const getAllCropPrograms = useCallback(async (): Promise<void> => {
         try {
             const response = await apiClient.get<CropProgram[]>(BASE_URL + "/v1/api/crop-program");
             setCropPrograms(response.data);
         } catch (error) {
             console.error("Error fetching cropPrograms:", error);
         }
-    };
+    }, [])
 
     const createCropProgram = async (cropProgramData: CropProgram): Promise<void> => {
         try {
@@ -45,8 +44,18 @@ export const CropProgramProvider: React.FC<CropProgramProviderProps> = ({childre
         }
     };
 
+    const getCropProgramById = useCallback(async (id: number): Promise<CropProgram | null> => {
+        try {
+            const response = await apiClient.get<CropProgram>("/v1/api/crop-program/" + id);
+            return response.data;
+        } catch (error) {
+            console.error("Error fetching users:", error);
+            return null;
+        }
+    }, []);
+
     return (
-        <CropProgramContext.Provider value={{cropPrograms, getAllCropPrograms, createCropProgram}}>
+        <CropProgramContext.Provider value={{cropPrograms, getAllCropPrograms, getCropProgramById, createCropProgram}}>
             {children}
         </CropProgramContext.Provider>
     );

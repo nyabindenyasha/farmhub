@@ -9,6 +9,7 @@ import {TimerIcon} from "@radix-ui/react-icons";
 import {Patient as PatientType} from '@/lib/types'
 import {NavItem} from "@/lib/types/nav-item";
 import {Role} from "@/lib/enums/role";
+import {ShieldCheck} from "lucide-react";
 
 export const nav_items = [
 
@@ -101,9 +102,16 @@ export const sideBarDashboardNavItems: NavItem[] = [
 
 
     {
+        name: "Crop Programs",
+        location: "/farmerdashboard/cropprogram",
+        id: "9",
+        icon: ShieldCheck,
+        roles: [Role.FARMER]
+    },
+    {
         name: "Crop Batches",
         location: "/farmerdashboard/cropbatch",
-        id: "9",
+        id: "10",
         icon: TimerIcon,
         roles: [Role.FARMER]
     },
