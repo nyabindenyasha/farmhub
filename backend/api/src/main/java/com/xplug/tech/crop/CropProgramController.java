@@ -34,6 +34,12 @@ public class CropProgramController {
         return cropProgramService.getAll().stream().map(CropProgramResponse::of).collect(Collectors.toList());
     }
 
+    @GetMapping("/crop/{cropId}")
+    @Operation(summary = "Get Crop Programs By CropId")
+    public List<CropProgramResponse> getByCrop(@PathVariable Long cropId) {
+        return cropProgramService.getByCrop(cropId).stream().map(CropProgramResponse::of).collect(Collectors.toList());
+    }
+
     @GetMapping("/{id}")
     @Operation(summary = "Get Crop Program Info By Id")
     public CropProgramResponse getById(@PathVariable Long id) {

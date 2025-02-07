@@ -1,8 +1,6 @@
 package com.xplug.tech.cropprogram;
 
 import com.xplug.tech.crop.*;
-import com.xplug.tech.cropfertilizerschedule.CropFertilizerScheduleService;
-import com.xplug.tech.croppesticideschedule.CropPesticideScheduleService;
 import com.xplug.tech.enums.CropScheduleType;
 import com.xplug.tech.exception.ItemAlreadyExistsException;
 import lombok.extern.slf4j.Slf4j;
@@ -34,6 +32,16 @@ public non-sealed class CropProgramServiceImpl implements CropProgramService {
 
     public List<CropProgram> getAll() {
         return cropScheduleRepository.findAll();
+    }
+
+    @Override
+    public List<CropProgram> getByCrop(Long cropId) {
+        var cropProgramList = cropScheduleRepository.findByCropId(cropId);
+        cropProgramList.forEach(cropProgram -> {
+            cropProgram.setFertilizerScheduleList(cropFertilizerScheduleService.findByCropProgramId(cropProgram.getId()));
+            cropProgram.setPesticideScheduleList(cropPesticideScheduleService.findByCropProgramId(cropProgram.getId()));
+        });
+        return cropProgramList;
     }
 
     public CropProgram getById(Long id) {

@@ -9,6 +9,8 @@ public sealed interface CropProgramService permits CropProgramServiceImpl {
 
     List<CropProgram> getAll();
 
+    List<CropProgram> getByCrop(Long cropId);
+
     CropProgram getById(Long id);
 
     CropProgram getByCropIdAndCropScheduleType(Long cropId, CropScheduleType cropScheduleType);

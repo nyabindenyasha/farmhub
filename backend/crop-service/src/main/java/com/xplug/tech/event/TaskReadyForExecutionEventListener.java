@@ -19,9 +19,6 @@ import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
@@ -50,8 +47,8 @@ public class TaskReadyForExecutionEventListener implements ApplicationListener<T
 
         val subject = "Task Ready For Execution";
 
-        UserAccount farmer = userAccountService.findById(taskReadyForExecutionEvent.getCropScheduleTask().getCropBatch().getCropFarmer().getUserAccount().getId());
-        Crop crop = taskReadyForExecutionEvent.getCropScheduleTask().getCropBatch().getCropFarmer().getCrop();
+        UserAccount farmer = userAccountService.findById(taskReadyForExecutionEvent.getCropScheduleTask().getCropBatch().getUserAccount().getId());
+        Crop crop = taskReadyForExecutionEvent.getCropScheduleTask().getCropBatch().getCropProgram().getCrop();
         String taskName = taskReadyForExecutionEvent.getCropScheduleTask().getTaskName();
         LocalDateTime taskDate = taskReadyForExecutionEvent.getCropScheduleTask().getTaskDate();
 

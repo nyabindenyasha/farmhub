@@ -1,26 +1,31 @@
 package com.xplug.tech.cropbatch;
 
-import com.xplug.tech.crop.CropFarmer;
-import com.xplug.tech.crop.CropFertilizerScheduleTask;
-import com.xplug.tech.crop.CropPesticideScheduleTask;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import javax.persistence.CascadeType;
-import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
-import java.util.Set;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
 @ToString
 public class CropBatchRequest {
 
-    @NotNull(message = "Crop Farmer Id cannot be null!")
-    private Long cropFarmerId;
+    @NotNull(message = "Farmer id cannot be null!")
+    private Long farmerId;
 
-    @NotNull(message = "Crop Farmer Id cannot be null!")
+    @NotNull(message = "Crop Program id cannot be null!")
     private Long cropProgramId;
+
+    @NotNull(message = "Date Of Transplant cannot be null!")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime dateOfTransplant;
+
+    @NotNull(message = "Location cannot be null!")
+    private String location;
+
+    private String remarks;
 
 }

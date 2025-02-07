@@ -2,7 +2,6 @@ package com.xplug.tech.cropbatch;
 
 import com.xplug.tech.crop.CropBatch;
 import com.xplug.tech.crop.CropResponse;
-import com.xplug.tech.cropfarmer.CropFarmerSummaryResponse;
 import com.xplug.tech.cropprogram.CropProgramSummaryResponse;
 import com.xplug.tech.cropscheduletask.CropFertilizerScheduleTaskResponse;
 import com.xplug.tech.cropscheduletask.CropPesticideScheduleTaskResponse;
@@ -58,12 +57,12 @@ public class CropBatchResponse {
 
         return CropBatchResponse.builder()
                 .id(cropBatch.getId())
-                .crop(CropResponse.of(cropBatch.getCropFarmer().getCrop()))
-                .farmer(UserAccountResponse.of(cropBatch.getCropFarmer().getUserAccount()))
-                .cropSchedule(CropProgramSummaryResponse.of(cropBatch.getCropFarmer().getCropProgram()))
-                .dateOfTransplant(cropBatch.getCropFarmer().getDateOfTransplant())
-                .location(cropBatch.getCropFarmer().getLocation())
-                .remarks(cropBatch.getCropFarmer().getRemarks())
+                .crop(CropResponse.of(cropBatch.getCropProgram().getCrop()))
+                .farmer(UserAccountResponse.of(cropBatch.getUserAccount()))
+                .cropSchedule(CropProgramSummaryResponse.of(cropBatch.getCropProgram()))
+                .dateOfTransplant(cropBatch.getDateOfTransplant())
+                .location(cropBatch.getLocation())
+                .remarks(cropBatch.getRemarks())
                 .pesticideScheduleTasks(sortedPesticideTaskList)
                 .fertilizerScheduleTasks(sortedFertilizerTaskList)
                 .build();

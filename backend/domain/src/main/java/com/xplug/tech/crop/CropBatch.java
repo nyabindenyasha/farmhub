@@ -1,8 +1,10 @@
 package com.xplug.tech.crop;
 
+import com.xplug.tech.usermanager.UserAccount;
 import lombok.*;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -21,9 +23,22 @@ public class CropBatch {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne
-    @JoinColumn(name = "crop_farmer_id", nullable = false)
-    private CropFarmer cropFarmer;
+    @ManyToOne
+    @JoinColumn(name = "User_account_id", nullable = false)
+    private UserAccount userAccount; //farmer
+
+    @ManyToOne
+    @JoinColumn(name = "crop_schedule_id", nullable = false)
+    private CropProgram cropProgram; //crop program to be used
+
+    //todo for testing
+    // private LocalDate dateOfTransplant; //to derive crop stages and day of maturity
+
+    private LocalDateTime dateOfTransplant; //to derive crop stages and day of maturity
+
+    private String location;
+
+    private String remarks;
 
 //  todo breaking the bidirectional mapping
 

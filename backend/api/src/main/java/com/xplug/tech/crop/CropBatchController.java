@@ -1,5 +1,6 @@
 package com.xplug.tech.crop;
 
+import com.xplug.tech.cropbatch.CropBatchRequest;
 import com.xplug.tech.cropbatch.CropBatchResponse;
 import com.xplug.tech.cropbatch.CropBatchService;
 import com.xplug.tech.cropbatch.CropBatchUpdateRequest;
@@ -32,11 +33,17 @@ public class CropBatchController {
         return CropBatchResponse.of(cropBatchService.getById(id));
     }
 
-//    @PostMapping
-//    @Operation(summary = "Create Crop Batch")
-//    public CropBatch create(@RequestBody CropBatchRequest cropBatchRequest) {
-//        return cropBatchService.create(cropBatchRequest);
-//    }
+    @GetMapping("/user/{userAccountId}")
+    @Operation(summary = "Get Crop Batch Info By Farmer Id")
+    public List<CropBatchResponse> getByFarmer(@PathVariable Long userAccountId) {
+        return cropBatchService.getByFarmer(userAccountId).stream().map(CropBatchResponse::of).collect(Collectors.toList());
+    }
+
+    @PostMapping
+    @Operation(summary = "Create Crop Batch")
+    public CropBatchResponse create(@RequestBody CropBatchRequest cropBatchRequest) {
+        return CropBatchResponse.of(cropBatchService.create(cropBatchRequest));
+    }
 
     @PutMapping("/{id}")
     @Operation(summary = "Update Crop Batch")

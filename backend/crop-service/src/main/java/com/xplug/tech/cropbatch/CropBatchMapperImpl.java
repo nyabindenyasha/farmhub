@@ -2,7 +2,6 @@ package com.xplug.tech.cropbatch;
 
 import com.xplug.tech.crop.CropBatch;
 import com.xplug.tech.crop.CropBatchDao;
-import com.xplug.tech.cropfarmer.CropFarmerService;
 import org.springframework.stereotype.Component;
 
 import java.util.Objects;
@@ -10,12 +9,9 @@ import java.util.Objects;
 @Component
 public non-sealed class CropBatchMapperImpl implements CropBatchMapper {
 
-    private final CropFarmerService cropFarmerService;
-
     private final CropBatchDao cropBatchRepository;
 
-    public CropBatchMapperImpl(CropFarmerService cropFarmerService, CropBatchDao cropBatchRepository) {
-        this.cropFarmerService = cropFarmerService;
+    public CropBatchMapperImpl(CropBatchDao cropBatchRepository) {
         this.cropBatchRepository = cropBatchRepository;
     }
 

@@ -23,7 +23,7 @@ public class CropPesticideScheduleTask extends CropScheduleTask {
     private CropPesticideSchedule cropPesticideSchedule;
 
     public String getTaskName() {
-        return getCropBatch().getCropFarmer().getCrop().getName() + " " + cropPesticideSchedule.getPesticide().getName() + " " + cropPesticideSchedule.getPesticide().getApplicationRate();
+        return getCropBatch().getCropProgram().getCrop().getName() + " " + cropPesticideSchedule.getPesticide().getName() + " " + cropPesticideSchedule.getPesticide().getApplicationRate();
     }
 
     public static CropPesticideScheduleTask.CropPesticideScheduleTaskBuilder builder() {

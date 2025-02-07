@@ -35,9 +35,9 @@ public class CropBatchCreatedEventListener implements ApplicationListener<CropBa
 
         val subject = "Crop Batch Created";
 
-        var farmer = userAccountService.findById(cropBatchCreatedEvent.getCropBatch().getCropFarmer().getId());
+        var farmer = userAccountService.findById(cropBatchCreatedEvent.getCropBatch().getUserAccount().getId());
 
-        var crop = cropBatchCreatedEvent.getCropBatch().getCropFarmer().getCrop();
+        var crop = cropBatchCreatedEvent.getCropBatch().getCropProgram().getCrop();
 
         CreateNotificationContext userCreatedNotificationsContext = new CreateNotificationContext();
         userCreatedNotificationsContext.setCategory(subject);
@@ -53,7 +53,7 @@ public class CropBatchCreatedEventListener implements ApplicationListener<CropBa
         emailMessageFormatter.addGreeting("Hie " + farmer.getUsername());
 
         emailMessageFormatter.addParagraph("You have created a new crop batch successfully.");
-        emailMessageFormatter.addParagraph("The crop " + crop.getName() + " was successfully planted on " + cropBatchCreatedEvent.getCropBatch().getCropFarmer().getDateOfTransplant());
+        emailMessageFormatter.addParagraph("The crop " + crop.getName() + " was successfully planted on " + cropBatchCreatedEvent.getCropBatch().getDateOfTransplant());
         emailMessageFormatter.addParagraph("");
 
         emailRequest.setBody(emailMessageFormatter.buildMessage());
@@ -62,7 +62,7 @@ public class CropBatchCreatedEventListener implements ApplicationListener<CropBa
         emails.add(farmer.getEmail());
         emailRequest.setEmailRecipients(emails);
         //todo
- //       notificationService.create(userCreatedNotificationsContext, emailRequest);
+        notificationService.create(userCreatedNotificationsContext, emailRequest);
     }
 
 }

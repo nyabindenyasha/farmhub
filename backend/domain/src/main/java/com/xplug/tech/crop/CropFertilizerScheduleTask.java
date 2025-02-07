@@ -1,8 +1,6 @@
 package com.xplug.tech.crop;
 
-import com.xplug.tech.enums.FertilizerApplicationMethod;
 import com.xplug.tech.enums.TaskStatus;
-import com.xplug.tech.utils.TaskUtils;
 import lombok.*;
 
 import javax.persistence.Entity;
@@ -25,7 +23,7 @@ public class CropFertilizerScheduleTask extends CropScheduleTask {
     private CropFertilizerSchedule cropFertilizerSchedule;
 
     public String getTaskName() {
-        return getCropBatch().getCropFarmer().getCrop().getName() + " " + cropFertilizerSchedule.getFertilizer().getName() + " " + cropFertilizerSchedule.getRate();
+        return getCropBatch().getCropProgram().getCrop().getName() + " " + cropFertilizerSchedule.getFertilizer().getName() + " " + cropFertilizerSchedule.getRate();
     }
 
     public static CropFertilizerScheduleTask.CropFertilizerScheduleTaskBuilder builder() {
