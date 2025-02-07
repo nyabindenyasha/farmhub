@@ -1,7 +1,7 @@
 import React, {createContext, useContext, useState, useCallback, ReactNode} from "react";
 import apiClient from "../utils/apiClient";
 import {CropBatch} from "@/lib/types/crop-batch";
-import {UserAccount} from "@/lib/types/user-account";
+import {CropBatchRequest} from "@/farmercomponents/cropbatches/create-crop-batch";
 
 
 // Define the context type
@@ -10,7 +10,7 @@ interface CropBatchContextType {
     getAllCropBatches: () => Promise<void>;
     // cropBatch: CropBatch;
     getCropBatchById: (id: number) => Promise<CropBatch | null>
-    createCropBatch: (cropBatchData: CropBatch) => Promise<void>;
+    createCropBatch: (cropBatchData: CropBatchRequest) => Promise<void>;
 }
 
 // Create the context with a default value
@@ -43,7 +43,7 @@ export const CropBatchProvider: React.FC<CropBatchProviderProps> = ({children}) 
         }
     }, []);
 
-    const createCropBatch = useCallback(async (cropBatchData: CropBatch): Promise<void> => {
+    const createCropBatch = useCallback(async (cropBatchData: CropBatchRequest): Promise<void> => {
         try {
             const response = await apiClient.post<CropBatch>("/v1/api/crop/batch", cropBatchData, {
                 headers: {

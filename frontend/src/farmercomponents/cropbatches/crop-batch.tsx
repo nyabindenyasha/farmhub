@@ -6,15 +6,14 @@ import {Button} from "@/components/ui/button"
 import CropBatchDetails from "./crop-batch-details"
 import {useCropBatchContext} from "@/context/CropBatchContext";
 import DashboardLayout from "@/layouts/DashboardLayout";
-import PrimaryButton from "@/components/buttons/customButton";
 import {MoreHorizontal, Plus, Search} from "lucide-react";
-import CreateCrop from "@/othercomponents/crop/create-crop";
 import {Tabs, TabsList, TabsTrigger} from "@/components/ui/tabs";
 import {Badge} from "@/components/ui/badge";
 import {Input} from "@/components/ui/input";
 import {Checkbox} from "@/components/ui/checkbox";
 import {DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger} from "@/components/ui/dropdown-menu";
 import {patients} from "@/lib/data";
+import CreateCropBatch from "@/farmercomponents/cropbatches/create-crop-batch";
 
 // Sample data
 
@@ -64,9 +63,9 @@ export default function CropBatchComponent() {
                     <h2 className="text-3xl font-bold tracking-tight">My Batches</h2>
                     <div className="flex items-center space-x-2">
                         <Button variant="outline">Export</Button>
-                        <PrimaryButton secondary={true} text={"Create Batch"} onClick={openPolicyForm}
-                                       icon={<Plus className="h-4 w-4"/>}/>
-                        <CreateCrop isOpen={isPolicyFormOpen} onClose={closePolicyForm}/>
+                        {/*<PrimaryButton secondary={true} text={"Create Batch"} onClick={openPolicyForm}*/}
+                        {/*               icon={<Plus className="h-4 w-4"/>}/>*/}
+                        <CreateCropBatch isOpen={isPolicyFormOpen} onClose={closePolicyForm}/>
                     </div>
                 </div>
                 <div className="flex items-center justify-between">

@@ -6,7 +6,7 @@ import {Schedule} from "@/lib/types/schedule";
 
 
 export interface CropPesticideSchedule {
-    id: 0,
+    id: number,
     cropSchedule: CropSchedule,
     pesticide: Pesticide,
     stageOfGrowth: Period,

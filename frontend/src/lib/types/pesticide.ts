@@ -2,7 +2,7 @@ import {PesticideType} from "@/lib/enums/pesticide-type";
 import {PesticideModeOfAction} from "@/lib/enums/pesticide-mode-of-action";
 
 export interface Pesticide {
-    id: string;
+    id: number;
     name: string;
     alias: string,
     activeIngredients: string[],
@@ -12,4 +12,5 @@ export interface Pesticide {
     modeOfAction: PesticideModeOfAction,
     targetPests: string[],
     targetDiseases: string[]
+    alternatives: Pesticide[]
 }

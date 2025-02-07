@@ -1,12 +1,18 @@
 import React from "react";
 import {CropBatchProvider} from "@/context/CropBatchContext";
 import CropBatchComponent from "@/farmercomponents/cropbatches/crop-batch";
+import {CropProvider} from "@/context/CropContext";
+import {CropProgramProvider} from "@/context/CropProgramContext";
 
 function CropBatch() {
     return (
-        <CropBatchProvider>
-            <CropBatchComponent />
-        </CropBatchProvider>
+        <CropProvider>
+            <CropProgramProvider>
+                <CropBatchProvider>
+                    <CropBatchComponent/>
+                </CropBatchProvider>
+            </CropProgramProvider>
+        </CropProvider>
     )
 }
 

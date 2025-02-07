@@ -6,42 +6,44 @@ import {Button} from "@/components/ui/button"
 import {Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger} from "@/components/ui/dialog"
 import {Input} from "@/components/ui/input"
 import {ScrollArea} from "@/components/ui/scroll-area"
-import {Crop} from "@/lib/types/crop";
-import {useCropContext} from "@/context/CropContext";
+import {CropProgram} from "@/lib/types/crop-program";
+import {useCropProgramContext} from "@/context/CropProgramContext";
 import {DialogProps} from "@/lib/types/dialog-props";
 
-interface CropSelectorProps {
-    onCropSelect: (crop: Crop) => void
+interface CropProgramSelectorProps {
+    // crop: Crop | null
+    crop: any
+    onCropProgramSelect: (cropProgram: CropProgram) => void
     dialogProps: DialogProps
 }
 
-export function CropSelector({onCropSelect, dialogProps}: CropSelectorProps) {
-    const {crops, getAllCrops} = useCropContext()
+export function CropProgramSelector({crop, onCropProgramSelect, dialogProps}: CropProgramSelectorProps) {
+    const {cropPrograms, getCropProgramsByCrop} = useCropProgramContext()
     const [isOpen, setIsOpen] = useState(false)
     const [searchTerm, setSearchTerm] = useState("")
-    const [selectedCrop, setSelectedCrop] = useState<Crop | null>(null)
-    const [filteredCrops, setFilteredCrops] = useState(crops)
+    const [selectedCropProgram, setSelectedCropProgram] = useState<CropProgram | null>(null)
+    const [filteredCropPrograms, setFilteredCropPrograms] = useState(cropPrograms)
 
     useEffect(() => {
-        getAllCrops()
-    }, [getAllCrops])
+        getCropProgramsByCrop(crop.id)
+    }, [getCropProgramsByCrop])
 
     useEffect(() => {
-        const filtered = crops.filter((crop) => crop.name.toLowerCase().includes(searchTerm.toLowerCase()))
-        setFilteredCrops(filtered)
+        const filtered = cropPrograms.filter((cropProgram) => cropProgram.name.toLowerCase().includes(searchTerm.toLowerCase()))
+        setFilteredCropPrograms(filtered)
     }, [searchTerm])
 
-    const handleCropSelect = (crop: Crop) => {
-        setSelectedCrop(crop)
+    const handleCropProgramSelect = (cropProgram: CropProgram) => {
+        setSelectedCropProgram(cropProgram)
         setIsOpen(false)
-        onCropSelect(crop)  // Notify the parent component
+        onCropProgramSelect(cropProgram)  // Notify the parent component
     }
 
     return (
         <Dialog open={isOpen} onOpenChange={setIsOpen}>
             <DialogTrigger asChild>
                 <Button variant="outline" className="w-full justify-between">
-                    {selectedCrop ? selectedCrop.name : "Select crop..."}
+                    {selectedCropProgram ? selectedCropProgram.name : "Select cropProgram..."}
                     <Search className="ml-2 h-4 w-4 shrink-0 opacity-50"/>
                 </Button>
             </DialogTrigger>
@@ -51,25 +53,25 @@ export function CropSelector({onCropSelect, dialogProps}: CropSelectorProps) {
                 </DialogHeader>
                 <div className="grid gap-4 py-4">
                     <Input
-                        placeholder="Search crops..."
+                        placeholder="Search cropPrograms..."
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
                         className="col-span-3"
                     />
                     <ScrollArea className="h-[200px]">
-                        {filteredCrops.length === 0 ? (
+                        {filteredCropPrograms.length === 0 ? (
                             <p className="text-sm text-muted-foreground p-2">
-                                {crops.length === 0 ? "No crops available. Please add crops first." : "No crop found. Type to search."}
+                                {cropPrograms.length === 0 ? "No cropPrograms available. Please add cropPrograms first." : "No cropProgram found. Type to search."}
                             </p>
                         ) : (
-                            filteredCrops.map((crop) => (
+                            filteredCropPrograms.map((cropProgram) => (
                                 <Button
-                                    key={crop.id}
+                                    key={cropProgram.id}
                                     variant="ghost"
                                     className="w-full justify-start font-normal"
-                                    onClick={() => handleCropSelect(crop)}
+                                    onClick={() => handleCropProgramSelect(cropProgram)}
                                 >
-                                    <span className="truncate">{crop.name}</span>
+                                    <span className="truncate">{cropProgram.name} {cropProgram.cropScheduleType} </span>
                                 </Button>
                             ))
                         )}

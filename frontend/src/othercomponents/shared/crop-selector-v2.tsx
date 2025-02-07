@@ -1,9 +1,7 @@
 "use client"
 
 import {useState, useEffect} from "react"
-import {Search} from "lucide-react"
 import {Button} from "@/components/ui/button"
-import {Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger} from "@/components/ui/dialog"
 import {Input} from "@/components/ui/input"
 import {ScrollArea} from "@/components/ui/scroll-area"
 import {Crop} from "@/lib/types/crop";
@@ -13,7 +11,7 @@ interface CropSelectorProps {
     onCropSelect: (crop: Crop) => void
 }
 
-export function CropSelector({onCropSelect}: CropSelectorProps) {
+export function CropSelectorV2({onCropSelect}: CropSelectorProps) {
     const {crops, getAllCrops} = useCropContext()
     const [isOpen, setIsOpen] = useState(false)
     const [searchTerm, setSearchTerm] = useState("")
@@ -32,6 +30,7 @@ export function CropSelector({onCropSelect}: CropSelectorProps) {
     const handleCropSelect = (crop: Crop) => {
         setSelectedCrop(crop)
         setIsOpen(false)
+        onCropSelect(crop)  // Notify the parent component
     }
 
     return (

@@ -7,6 +7,7 @@ import {BASE_URL} from "@/lib/constants";
 interface CropProgramContextType {
     cropPrograms: CropProgram[];
     getAllCropPrograms: () => Promise<void>;
+    getCropProgramsByCrop: (cropId: number) => Promise<void>
     getCropProgramById: (id: number) => Promise<CropProgram | null>
     createCropProgram: (cropProgramData: CropProgram) => Promise<void>;
 }
@@ -25,6 +26,15 @@ export const CropProgramProvider: React.FC<CropProgramProviderProps> = ({childre
     const getAllCropPrograms = useCallback(async (): Promise<void> => {
         try {
             const response = await apiClient.get<CropProgram[]>(BASE_URL + "/v1/api/crop-program");
+            setCropPrograms(response.data);
+        } catch (error) {
+            console.error("Error fetching cropPrograms:", error);
+        }
+    }, [])
+
+    const getCropProgramsByCrop = useCallback(async (cropId: number): Promise<void> => {
+        try {
+            const response = await apiClient.get<CropProgram[]>(BASE_URL + "/v1/api/crop-program/crop/" + cropId);
             setCropPrograms(response.data);
         } catch (error) {
             console.error("Error fetching cropPrograms:", error);
@@ -55,7 +65,7 @@ export const CropProgramProvider: React.FC<CropProgramProviderProps> = ({childre
     }, []);
 
     return (
-        <CropProgramContext.Provider value={{cropPrograms, getAllCropPrograms, getCropProgramById, createCropProgram}}>
+        <CropProgramContext.Provider value={{cropPrograms, getAllCropPrograms, getCropProgramsByCrop, getCropProgramById, createCropProgram}}>
             {children}
         </CropProgramContext.Provider>
     );
