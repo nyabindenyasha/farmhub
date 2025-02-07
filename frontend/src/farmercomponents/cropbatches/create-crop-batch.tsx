@@ -16,6 +16,7 @@ import {CropProgram} from "@/lib/types/crop-program";
 import {DialogProps} from "@/lib/types/dialog-props";
 import {CropProgramSelector} from "@/othercomponents/shared/crop-program-selector";
 import {useUser} from "@/hooks/useUser";
+import {CropBatchSummary} from "@/farmercomponents/cropbatches/crop-batch-summary";
 
 
 export interface CropBatchRequest {
@@ -29,6 +30,7 @@ export interface CropBatchRequest {
 export default function CreateCropBatch({isOpen, onClose}: FormProps) {
 
     const [step, setStep] = useState(1)
+
     const [cropBatch, setCropBatch] = useState<CropBatchRequest>({
         farmerId: 0,
         cropProgramId: 0,
@@ -45,6 +47,7 @@ export default function CreateCropBatch({isOpen, onClose}: FormProps) {
     const [selectedCropProgram, setSelectedCropProgram] = useState<CropProgram | null>(null)
 
     const [isLoading, setIsLoading] = useState(false)
+
     const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle")
 
     const {user} = useUser();
@@ -94,11 +97,13 @@ export default function CreateCropBatch({isOpen, onClose}: FormProps) {
             await createCropBatch(cropBatch)
             setSubmitStatus("success")
             setIsDialogOpen(false)
+            setStep(1)
         } catch (error) {
             console.error("Error creating crop variety:", error)
             setSubmitStatus("error")
         } finally {
             setIsLoading(false)
+            setStep(1)
         }
     }
 
@@ -118,6 +123,7 @@ export default function CreateCropBatch({isOpen, onClose}: FormProps) {
         if (step < 5) {
             setStep((prev) => prev + 1)
         } else {
+            setStep(1)
             setIsDialogOpen(false)
         }
     }
@@ -139,7 +145,7 @@ export default function CreateCropBatch({isOpen, onClose}: FormProps) {
                 )
             case 3:
                 return (
-                    <div className="space-y-4">
+                    <div className="space-y-2">
 
                         <DateTimePicker value={cropBatch.dateOfTransplant} onChange={handleDateTimeChange}
                                         label="Date of Transplant"/>
@@ -164,15 +170,62 @@ export default function CreateCropBatch({isOpen, onClose}: FormProps) {
 
                     </div>
                 )
-            // case 4:
-            //     return <CropBatchSummary cropBatch={cropBatch}
-            //                              cropProgram={(selectedCropProgram) ? selectedCropProgram : null}/>
+            case 4:
+                return <CropBatchSummary cropBatch={cropBatch}
+                                         cropProgram={(selectedCropProgram) ? selectedCropProgram : null}/>
             default:
                 return null
         }
     }
 
-    return (
+    return (step < 4) ? (
+            <div className="max-w-4xl mx-auto p-4">
+                <Card>
+                    <CardHeader>
+                        <CardTitle>Create Crop Batch</CardTitle>
+                        <CardDescription>Follow the steps to create your crop batch</CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                        <div className="flex justify-between items-center">
+                            <div>Step {step} of 4</div>
+                            <Button
+                                onClick={openDialog}>{step === 4 ? "Review" : step === 1 ? "Start" : "Continue"}</Button>
+                        </div>
+                    </CardContent>
+                </Card>
+
+                <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+                    {/*<DialogContent className={`sm:max-w-[${dialogProps.width}px] overflow-y-auto`}>*/}
+                    <DialogContent className="max-h-[80vh] overflow-y-auto">
+                        <DialogHeader>
+                            <DialogTitle>Create Crop Batch</DialogTitle>
+                        </DialogHeader>
+
+
+                        <form onSubmit={handleSubmit}>
+                            {getDialogContent()}
+                            <div className="flex justify-between mt-6">
+                                {step > 1 && (
+                                    <Button type="button" onClick={prevStep} variant="outline">
+                                        Previous
+                                    </Button>
+                                )}
+                                {step < 4 ? (
+                                    <Button type="button" onClick={nextStep}>
+                                        Next
+                                    </Button>
+                                ) : (
+                                    <Button type="submit">Submit</Button>
+                                )}
+                            </div>
+                        </form>
+
+
+                    </DialogContent>
+                </Dialog>
+            </div>
+        )
+        :
         <div className="max-w-4xl mx-auto p-4">
             <Card>
                 <CardHeader>
@@ -187,33 +240,21 @@ export default function CreateCropBatch({isOpen, onClose}: FormProps) {
                     </div>
                 </CardContent>
             </Card>
-
             <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-                {/*<DialogContent className={`sm:max-w-[${dialogProps.width}px] overflow-y-auto`}>*/}
-                <DialogContent style={{maxWidth: `${dialogProps.width}px`}} className="overflow-y-auto">
+                <DialogContent className="max-h-[80vh] overflow-y-auto">
                     <DialogHeader>
                         <DialogTitle>Create Crop Batch</DialogTitle>
                     </DialogHeader>
-                    <form onSubmit={handleSubmit}>
-                        {getDialogContent()}
-                        <div className="flex justify-between mt-6">
-                            {step > 1 && (
-                                <Button type="button" onClick={prevStep} variant="outline">
-                                    Previous
-                                </Button>
-                            )}
-                            {step < 5 ? (
-                                <Button type="button" onClick={nextStep}>
-                                    Next
-                                </Button>
-                            ) : (
-                                <Button type="submit">Submit</Button>
-                            )}
-                        </div>
-                    </form>
+                    <CropBatchSummary cropBatch={cropBatch}
+                                      cropProgram={(selectedCropProgram) ? selectedCropProgram : null}/>
+                    <div className="flex justify-between mt-6">
+                        <Button type="button" onClick={prevStep} variant="outline">
+                            Previous
+                        </Button>
+                        <Button type="submit" onClick={handleSubmit}>Submit</Button>
+                    </div>
                 </DialogContent>
             </Dialog>
         </div>
-    )
 }
 

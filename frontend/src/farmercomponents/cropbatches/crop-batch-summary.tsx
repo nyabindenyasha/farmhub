@@ -20,12 +20,13 @@ export function CropBatchSummary({cropBatch, cropProgram}: CropBatchSummaryProps
     })
 
     const toggleSection = (section: keyof typeof expandedSections) => {
+        console.log(section);
         setExpandedSections((prev) => ({...prev, [section]: !prev[section]}))
     }
 
     return (
-        <ScrollArea className="h-[calc(100vh-2rem)] pr-4">
-            <div className="space-y-6 pb-8">
+        <ScrollArea className="h-[calc(100vh-1rem)] pr-1">
+            <div className="space-y-2 pb-2">
                 <Card>
                     <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                         <CardTitle>Crop Batch Details</CardTitle>

@@ -1,4 +1,4 @@
-import React, {createContext, useContext, useState, ReactNode} from "react";
+import React, {createContext, useContext, useState, ReactNode, useCallback} from "react";
 import apiClient from "../utils/apiClient";
 import {CropVariety} from "@/lib/types/crop-variety";
 import {BASE_URL} from "@/lib/constants";
@@ -22,7 +22,7 @@ interface CropVarietyProviderProps {
 export const CropVarietyProvider: React.FC<CropVarietyProviderProps> = ({children}) => {
     const [cropVarieties, setCropVarieties] = useState<CropVariety[]>([]);
 
-    const getAllCropVarieties = async (): Promise<void> => {
+    const getAllCropVarieties = useCallback(async (): Promise<void> => {
         console.log(BASE_URL + "/v1/api/crop-variety")
         try {
             const response = await apiClient.get<CropVariety[]>(BASE_URL + "/v1/api/crop-variety");
@@ -30,7 +30,7 @@ export const CropVarietyProvider: React.FC<CropVarietyProviderProps> = ({childre
         } catch (error) {
             console.error("Error fetching cropVarieties:", error);
         }
-    };
+    }, []);
 
     const createCropVariety = async (cropVarietyData: CropVarietyRequest): Promise<void> => {
         try {
