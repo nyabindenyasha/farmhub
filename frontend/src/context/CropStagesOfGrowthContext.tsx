@@ -1,13 +1,13 @@
-import React, {createContext, useContext, useState, ReactNode} from "react";
+import React, {createContext, useContext, useState, ReactNode, useCallback} from "react";
 import apiClient from "../utils/apiClient";
 import {CropStagesOfGrowth} from "@/lib/types/crop-stages-of-growth";
-import {BASE_URL} from "@/lib/constants";
+import {CropStagesOfGrowthRequest} from "@/othercomponents/cropstages/create-crop-stages-of-growth";
 
 // Define the context type
 interface CropStagesOfGrowthContextType {
     cropStagesOfGrowths: CropStagesOfGrowth[];
     getAllCropStagesOfGrowths: () => Promise<void>;
-    createCropStagesOfGrowth: (cropStagesOfGrowthData: CropStagesOfGrowth) => Promise<void>;
+    createCropStagesOfGrowth: (cropStagesOfGrowthData: CropStagesOfGrowthRequest) => Promise<void>;
 }
 
 // Create the context with a default value
@@ -21,19 +21,18 @@ interface CropStagesOfGrowthProviderProps {
 export const CropStagesOfGrowthProvider: React.FC<CropStagesOfGrowthProviderProps> = ({children}) => {
     const [cropStagesOfGrowths, setCropStagesOfGrowths] = useState<CropStagesOfGrowth[]>([]);
 
-    const getAllCropStagesOfGrowths = async (): Promise<void> => {
-        console.log(BASE_URL + "/v1/api/cropStagesOfGrowth")
+    const getAllCropStagesOfGrowths = useCallback(async (): Promise<void> => {
         try {
-            const response = await apiClient.get<CropStagesOfGrowth[]>(BASE_URL + "/v1/api/cropStagesOfGrowth");
+            const response = await apiClient.get<CropStagesOfGrowth[]>("/v1/api/crop-stages-of-growth");
             setCropStagesOfGrowths(response.data);
         } catch (error) {
             console.error("Error fetching cropStagesOfGrowths:", error);
         }
-    };
+    }, []);
 
-    const createCropStagesOfGrowth = async (cropStagesOfGrowthData: CropStagesOfGrowth): Promise<void> => {
+    const createCropStagesOfGrowth = async (cropStagesOfGrowthData: CropStagesOfGrowthRequest): Promise<void> => {
         try {
-            const response = await apiClient.post<CropStagesOfGrowth>(BASE_URL + "/v1/api/cropStagesOfGrowth", cropStagesOfGrowthData, {
+            const response = await apiClient.post<CropStagesOfGrowth>("/v1/api/crop-stages-of-growth", cropStagesOfGrowthData, {
                 headers: {
                     'Content-Type': 'application/json',
                 },

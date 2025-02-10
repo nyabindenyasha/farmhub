@@ -1,11 +1,14 @@
 import React from "react";
-import { CropProvider } from "@/context/CropContext";
+import {CropProvider} from "@/context/CropContext";
 import CropStagesOfGrowthComponent from "@/othercomponents/cropstages/crop-stages-of-growth";
+import {CropStagesOfGrowthProvider} from "@/context/CropStagesOfGrowthContext";
 
 function CropStagesOfGrowth() {
     return (
         <CropProvider>
-            <CropStagesOfGrowthComponent />
+            <CropStagesOfGrowthProvider>
+                <CropStagesOfGrowthComponent/>
+            </CropStagesOfGrowthProvider>
         </CropProvider>
     )
 }

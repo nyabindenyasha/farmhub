@@ -1,9 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {useRouter} from "next/router";
-import {patients} from "@/lib/data";
 import DashboardLayout from "@/layouts/DashboardLayout";
 import {Button} from "@/components/ui/button";
-import PrimaryButton from "@/components/buttons/customButton";
 import {MoreHorizontal, Plus, Search} from "lucide-react";
 import {Tabs, TabsList, TabsTrigger} from "@/components/ui/tabs";
 import {Badge} from "@/components/ui/badge";
@@ -11,36 +9,38 @@ import {Input} from "@/components/ui/input";
 import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow} from "@/components/ui/table";
 import {Checkbox} from "@/components/ui/checkbox";
 import {DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger} from "@/components/ui/dropdown-menu";
-import {useCropContext} from "@/context/CropContext";
 import CreateCropStagesOfGrowth from "@/othercomponents/cropstages/create-crop-stages-of-growth";
+import {useCropStagesOfGrowthContext} from "@/context/CropStagesOfGrowthContext";
 
 export default function CropStagesOfGrowthComponent() {
 
-    const {crops, getAllCrops} = useCropContext();
+    const {cropStagesOfGrowths, getAllCropStagesOfGrowths} = useCropStagesOfGrowthContext();
 
-    useEffect(() => {
-        getAllCrops();
-    }, [getAllCrops]);
 
     const [isPolicyFormOpen, setIsPolicyFormOpen] = useState(false)
     const openPolicyForm = () => setIsPolicyFormOpen(true)
     const closePolicyForm = () => setIsPolicyFormOpen(false)
 
+    useEffect(() => {
+        getAllCropStagesOfGrowths();
+    }, [getAllCropStagesOfGrowths]);
+
     const [selectedClients, setSelectedClients] = useState<string[]>([])
     const [searchTerm, setSearchTerm] = useState("")
     const router = useRouter()
 
-    const filteredClients = patients.filter((patient) =>
-        patient.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        patient.caseRef.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        patient.source.toLowerCase().includes(searchTerm.toLowerCase())
+    const filteredClients = cropStagesOfGrowths.filter((cropStageOfGrowth) =>
+        cropStageOfGrowth.crop.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        cropStageOfGrowth.stageOfGrowth.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        cropStageOfGrowth.stageStartDate.periodUnit.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        cropStageOfGrowth.stageEndDate.periodUnit.toLowerCase().includes(searchTerm.toLowerCase())
     )
 
     const handleSelectAll = () => {
         if (selectedClients.length === filteredClients.length) {
             setSelectedClients([])
         } else {
-            setSelectedClients(filteredClients.map((client) => client.id))
+            setSelectedClients(filteredClients.map((client) => client.crop.name))
         }
     }
 
@@ -61,11 +61,9 @@ export default function CropStagesOfGrowthComponent() {
         <DashboardLayout>
             <div className="flex w-screen p-5 space-y-6 min-h-screen flex-col">
                 <div className="flex items-center justify-between">
-                    <h2 className="text-3xl font-bold tracking-tight">Crops</h2>
+                    <h2 className="text-3xl font-bold tracking-tight">Crops stages</h2>
                     <div className="flex items-center space-x-2">
                         <Button variant="outline">Export</Button>
-                        <PrimaryButton secondary={true} text={"Add Crop"} onClick={openPolicyForm}
-                                       icon={<Plus className="h-4 w-4"/>}/>
                         <CreateCropStagesOfGrowth isOpen={isPolicyFormOpen} onClose={closePolicyForm}/>
                     </div>
                 </div>
@@ -113,28 +111,26 @@ export default function CropStagesOfGrowthComponent() {
                                         onCheckedChange={handleSelectAll}
                                     />
                                 </TableHead>
-                                <TableHead>Name</TableHead>
-                                <TableHead>Family</TableHead>
-                                <TableHead>Genus</TableHead>
-                                <TableHead>Species</TableHead>
-                                <TableHead>Sub Species</TableHead>
-
+                                <TableHead>Crop Name</TableHead>
+                                <TableHead>Stage</TableHead>
+                                <TableHead>Stage Start Date</TableHead>
+                                <TableHead>Stage End Date</TableHead>
+                                <TableHead>Actions</TableHead>
                             </TableRow>
                         </TableHeader>
                         <TableBody>
-                            {crops.slice(0, 10).map((crop) => (
-                                <TableRow key={crop.id}>
+                            {cropStagesOfGrowths.slice(0, 10).map((cropStageOfGrowth) => (
+                                <TableRow key={cropStageOfGrowth.id}>
                                     <TableCell>
                                         <Checkbox
-                                            checked={selectedClients.includes(String(crop.id))}
-                                            onCheckedChange={() => handleSelectClient(String(crop.id))}
+                                            checked={selectedClients.includes(String(cropStageOfGrowth.id))}
+                                            onCheckedChange={() => handleSelectClient(String(cropStageOfGrowth.id))}
                                         />
                                     </TableCell>
-                                    <TableCell>{crop.name}</TableCell>
-                                    <TableCell>{crop.family}</TableCell>
-                                    <TableCell>{crop.genus}</TableCell>
-                                    <TableCell>{crop.species}</TableCell>
-                                    <TableCell>{crop.subSpecies}</TableCell>
+                                    <TableCell>{cropStageOfGrowth.crop.name}</TableCell>
+                                    <TableCell>{cropStageOfGrowth.stageOfGrowth}</TableCell>
+                                    <TableCell>{cropStageOfGrowth.stageStartDate.periodValue} {cropStageOfGrowth.stageStartDate.periodUnit}</TableCell>
+                                    <TableCell>{cropStageOfGrowth.stageEndDate.periodValue} {cropStageOfGrowth.stageEndDate.periodUnit}</TableCell>
                                     <TableCell>
                                         <DropdownMenu>
                                             <DropdownMenuTrigger asChild>
@@ -145,7 +141,8 @@ export default function CropStagesOfGrowthComponent() {
                                             <DropdownMenuContent align="end">
                                                 <DropdownMenuItem>
                                                     <span
-                                                        onClick={() => router.push(`/dashboard/patient/${'adsfljkl'}`)}> View Details</span>
+                                                        onClick={() => {
+                                                        }}> View Details</span>
                                                 </DropdownMenuItem>
                                                 <DropdownMenuItem>Edit Record</DropdownMenuItem>
                                             </DropdownMenuContent>

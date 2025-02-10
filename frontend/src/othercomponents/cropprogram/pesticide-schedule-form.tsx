@@ -7,6 +7,9 @@ import {Maximize2, Minimize2} from "lucide-react"
 import {Period} from "@/lib/types/period";
 import {PesticideApplicationMethod} from "@/lib/enums/pesticide-application-method";
 import {PeriodUnit} from "@/lib/enums/period-unit";
+import {useEffect, useState} from "react";
+import {usePesticideContext} from "@/context/PesticideContext";
+import {Pesticide} from "@/lib/types/pesticide";
 
 export interface PesticideSchedule {
     cropScheduleId: number
@@ -16,6 +19,7 @@ export interface PesticideSchedule {
     applicationMethod: PesticideApplicationMethod,
     remarks: string
     expanded: boolean
+    pesticideName: string
 }
 
 interface PesticideScheduleFormProps {
@@ -25,8 +29,16 @@ interface PesticideScheduleFormProps {
 
 export default function PesticideScheduleForm({schedules, onChange}: PesticideScheduleFormProps) {
 
+    const {pesticides, getAllPesticides} = usePesticideContext()
+    const [selectedPesticide, setSelectedPesticide] = useState<Pesticide | undefined>(undefined);
+    const [search, setSearch] = useState("");
+
     let periodUnits = Object.keys(PeriodUnit);
     let applicationMethods = Object.keys(PesticideApplicationMethod);
+
+    useEffect(() => {
+        getAllPesticides()
+    }, [getAllPesticides])
 
     const handleAddSchedule = () => {
         const newSchedule: PesticideSchedule = {
@@ -37,17 +49,22 @@ export default function PesticideScheduleForm({schedules, onChange}: PesticideSc
             applicationMethod: PesticideApplicationMethod.SPRAYING,
             remarks: "",
             expanded: true, // New schedules are expanded by default
+            pesticideName: ""
         }
         onChange([...schedules, newSchedule])
     }
 
     const handleScheduleChange = (index: number, field: keyof PesticideSchedule, value: any) => {
+        console.log("index: ", index)
+        console.log("value: ", value)
         const updatedSchedules = schedules.map((schedule, i) => {
             if (i === index) {
                 return {...schedule, [field]: value}
             }
+            console.log(schedule)
             return schedule
         })
+        console.log(updatedSchedules)
         onChange(updatedSchedules)
     }
 
@@ -60,6 +77,10 @@ export default function PesticideScheduleForm({schedules, onChange}: PesticideSc
         })
         onChange(updatedSchedules)
     }
+
+    const filteredItems = pesticides.filter(pesticide =>
+        pesticide.name.toLowerCase().includes(search.toLowerCase())
+    );
 
     return (
         <div className="space-y-4">
@@ -75,20 +96,55 @@ export default function PesticideScheduleForm({schedules, onChange}: PesticideSc
                     </div>
                     {!schedule.expanded && (
                         <div className="text-sm text-gray-500">
-                            Pesticide ID: {schedule.pesticideId}, Method: {schedule.applicationMethod}
+                            Pesticide: {schedule.pesticideName}, Method: {schedule.applicationMethod},
+                            Stage: {schedule.stageOfGrowth.periodValue} {schedule.stageOfGrowth.periodUnit}
                         </div>
                     )}
                     {schedule.expanded && (
                         <>
+                            {/*<div>*/}
+                            {/*    <Label htmlFor={`pesticideId-${index}`}>Pesticide ID</Label>*/}
+                            {/*    <Input*/}
+                            {/*        id={`pesticideId-${index}`}*/}
+                            {/*        type="number"*/}
+                            {/*        value={schedule.pesticideId}*/}
+                            {/*        onChange={(e) => handleScheduleChange(index, "pesticideId", Number.parseInt(e.target.value))}*/}
+                            {/*    />*/}
+                            {/*</div>*/}
+
                             <div>
-                                <Label htmlFor={`pesticideId-${index}`}>Pesticide ID</Label>
-                                <Input
-                                    id={`pesticideId-${index}`}
-                                    type="number"
-                                    value={schedule.pesticideId}
-                                    onChange={(e) => handleScheduleChange(index, "pesticideId", Number.parseInt(e.target.value))}
-                                />
+                                <Label htmlFor="name">Pesticide</Label>
+                                <Select onValueChange={(value) => {
+                                    let pesticide = pesticides.find(item => item.name === value)
+                                    console.log(pesticide)
+                                    setSelectedPesticide(pesticide)
+                                    handleScheduleChange(index, "pesticideId", pesticide?.id)
+                                    handleScheduleChange(index, "pesticideName", pesticide?.name)
+                                }
+                                }>
+                                    <SelectTrigger className="w-full">
+                                        <SelectValue placeholder="Select Pesticide"/>
+                                    </SelectTrigger>
+                                    <SelectContent className="max-h-40 overflow-y-auto">
+                                        <div className="p-2">
+                                            <Input
+                                                placeholder="Search..."
+                                                value={search}
+                                                onChange={(e) => setSearch(e.target.value)}
+                                                className="mb-2"
+                                            />
+                                        </div>
+                                        {filteredItems.map(item => (
+                                            <SelectItem key={item.name}
+                                                        value={item.name}>{item.name.charAt(0).toUpperCase() + item.name.slice(1)}</SelectItem>
+                                        ))}
+                                    </SelectContent>
+                                </Select>
+                                {selectedPesticide && (
+                                    <p className="mt-2 text-sm text-gray-500">Selected: {selectedPesticide.name}</p>
+                                )}
                             </div>
+
                             <div>
                                 <Label htmlFor={`stageOfGrowth-${index}`}>Stage of Growth</Label>
                                 <div className="flex space-x-2">

@@ -1,3 +1,5 @@
+import {Crop} from "@/lib/types/crop";
+
 export interface Patient {
     id: string
     name: string
@@ -23,6 +25,12 @@ export interface User {
 export interface FormProps {
     isOpen: boolean
     onClose: () => void
+}
+
+export interface CropFormProps {
+    isOpen: boolean
+    onClose: () => void
+    onCropSelect: (crop: Crop | undefined) => void
 }
 
 export interface AppointmentResponse {

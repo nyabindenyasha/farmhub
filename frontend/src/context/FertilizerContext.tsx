@@ -1,4 +1,4 @@
-import React, {createContext, useContext, useState, ReactNode} from "react";
+import React, {createContext, useContext, useState, ReactNode, useCallback} from "react";
 import apiClient from "../utils/apiClient";
 import {Fertilizer} from "@/lib/types/fertilizer";
 import {BASE_URL} from "@/lib/constants";
@@ -21,15 +21,16 @@ interface FertilizerProviderProps {
 export const FertilizerProvider: React.FC<FertilizerProviderProps> = ({children}) => {
     const [fertilizers, setFertilizers] = useState<Fertilizer[]>([]);
 
-    const getAllFertilizers = async (): Promise<void> => {
-        console.log(BASE_URL + "/v1/api/fertilizer")
-        try {
-            const response = await apiClient.get<Fertilizer[]>(BASE_URL + "/v1/api/fertilizer");
-            setFertilizers(response.data);
-        } catch (error) {
-            console.error("Error fetching fertilizers:", error);
-        }
-    };
+    const getAllFertilizers = useCallback(async (): Promise<void> => {
+            console.log(BASE_URL + "/v1/api/fertilizer")
+            try {
+                const response = await apiClient.get<Fertilizer[]>(BASE_URL + "/v1/api/fertilizer");
+                setFertilizers(response.data);
+            } catch (error) {
+                console.error("Error fetching fertilizers:", error);
+            }
+        }, []
+    );
 
     const createFertilizer = async (fertilizerData: Fertilizer): Promise<void> => {
         try {

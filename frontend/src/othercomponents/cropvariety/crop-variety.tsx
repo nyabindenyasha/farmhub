@@ -59,7 +59,7 @@ export default function CropVarietyComponent() {
         <DashboardLayout>
             <div className="flex w-screen p-5 space-y-6 min-h-screen flex-col">
                 <div className="flex items-center justify-between">
-                    <h2 className="text-3xl font-bold tracking-tight">CropVarietys</h2>
+                    <h2 className="text-3xl font-bold tracking-tight">Crop Varieties</h2>
                     <div className="flex items-center space-x-2">
                         <Button variant="outline">Export</Button>
                         {/*<PrimaryButton secondary={true} text={"Add CropVariety"} onClick={openPolicyForm}*/}

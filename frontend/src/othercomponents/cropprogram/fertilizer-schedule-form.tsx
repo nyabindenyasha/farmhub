@@ -7,6 +7,9 @@ import {Maximize2, Minimize2} from "lucide-react"
 import {PeriodUnit} from "@/lib/enums/period-unit";
 import {Period} from "@/lib/types/period";
 import {FertilizerApplicationMethod} from "@/lib/enums/fertilizer-application-method";
+import {useFertilizerContext} from "@/context/FertilizerContext";
+import {useEffect, useState} from "react";
+import {Fertilizer} from "@/lib/types/fertilizer";
 
 export interface FertilizerSchedule {
     cropScheduleId: number
@@ -17,6 +20,7 @@ export interface FertilizerSchedule {
     applicationMethod: FertilizerApplicationMethod
     remarks: string
     expanded: boolean
+    fertilizerName: string
 }
 
 interface FertilizerScheduleFormProps {
@@ -26,8 +30,17 @@ interface FertilizerScheduleFormProps {
 
 export default function FertilizerScheduleForm({schedules, onChange}: FertilizerScheduleFormProps) {
 
+    const {fertilizers, getAllFertilizers} = useFertilizerContext()
+    const [selectedFertilizer, setSelectedFertilizer] = useState<Fertilizer | undefined>(undefined);
+    const [search, setSearch] = useState("");
+
     let periodUnits = Object.keys(PeriodUnit);
+
     let applicationMethods = Object.keys(FertilizerApplicationMethod);
+
+    useEffect(() => {
+        getAllFertilizers()
+    }, [getAllFertilizers])
 
     const handleAddSchedule = () => {
         const newSchedule: FertilizerSchedule = {
@@ -39,17 +52,22 @@ export default function FertilizerScheduleForm({schedules, onChange}: Fertilizer
             applicationMethod: FertilizerApplicationMethod.SPOT_PLACEMENT,
             remarks: "",
             expanded: true, // New schedules are expanded by default
+            fertilizerName: ""
         }
         onChange([...schedules, newSchedule])
     }
 
     const handleScheduleChange = (index: number, field: keyof FertilizerSchedule, value: any) => {
+        console.log("index: ", index)
+        console.log("index: ", value)
         const updatedSchedules = schedules.map((schedule, i) => {
             if (i === index) {
                 return {...schedule, [field]: value}
             }
+            console.log(schedule)
             return schedule
         })
+        console.log(updatedSchedules)
         onChange(updatedSchedules)
     }
 
@@ -62,6 +80,10 @@ export default function FertilizerScheduleForm({schedules, onChange}: Fertilizer
         })
         onChange(updatedSchedules)
     }
+
+    const filteredItems = fertilizers.filter(fertilizer =>
+        fertilizer.name.toLowerCase().includes(search.toLowerCase())
+    );
 
     return (
         <div className="space-y-4">
@@ -77,21 +99,54 @@ export default function FertilizerScheduleForm({schedules, onChange}: Fertilizer
                     </div>
                     {!schedule.expanded && (
                         <div className="text-sm text-gray-500">
-                            Fertilizer ID: {schedule.fertilizerId}, Rate: {schedule.rate},
-                            Method: {schedule.applicationMethod}
+                            Fertilizer : {schedule.fertilizerName}, Rate: {schedule.rate}g,
+                            Method: {schedule.applicationMethod}, Stage: {schedule.stageOfGrowth.periodValue} {schedule.stageOfGrowth.periodUnit}
                         </div>
                     )}
                     {schedule.expanded && (
                         <>
+                            {/*<div className="mb-2">*/}
+                            {/*    <Label htmlFor={`fertilizerId-${index}`}>Fertilizer ID</Label>*/}
+                            {/*    <Input*/}
+                            {/*        id={`fertilizerId-${index}`}*/}
+                            {/*        type="number"*/}
+                            {/*        value={schedule.fertilizerId}*/}
+                            {/*        onChange={(e) => handleScheduleChange(index, "fertilizerId", Number.parseInt(e.target.value))}*/}
+                            {/*    />*/}
+                            {/*</div>*/}
+
                             <div>
-                                <Label htmlFor={`fertilizerId-${index}`}>Fertilizer ID</Label>
-                                <Input
-                                    id={`fertilizerId-${index}`}
-                                    type="number"
-                                    value={schedule.fertilizerId}
-                                    onChange={(e) => handleScheduleChange(index, "fertilizerId", Number.parseInt(e.target.value))}
-                                />
+                                <Label htmlFor="name">Fertilizer</Label>
+                                <Select onValueChange={(value) => {
+                                    let fertilizer = fertilizers.find(item => item.name === value)
+                                    setSelectedFertilizer(fertilizer)
+                                    handleScheduleChange(index, "fertilizerId", fertilizer?.id)
+                                    handleScheduleChange(index, "fertilizerName", fertilizer?.name)
+                                }
+                                }>
+                                    <SelectTrigger className="w-full">
+                                        <SelectValue placeholder="Select Fertilizer"/>
+                                    </SelectTrigger>
+                                    <SelectContent className="max-h-40 overflow-y-auto">
+                                        <div className="p-2">
+                                            <Input
+                                                placeholder="Search..."
+                                                value={search}
+                                                onChange={(e) => setSearch(e.target.value)}
+                                                className="mb-2"
+                                            />
+                                        </div>
+                                        {filteredItems.map(item => (
+                                            <SelectItem key={item.name}
+                                                        value={item.name}>{item.name.charAt(0).toUpperCase() + item.name.slice(1)}</SelectItem>
+                                        ))}
+                                    </SelectContent>
+                                </Select>
+                                {selectedFertilizer && (
+                                    <p className="mt-2 text-sm text-gray-500">Selected: {selectedFertilizer.name}</p>
+                                )}
                             </div>
+
                             <div>
                                 <Label htmlFor={`stageOfGrowth-${index}`}>Stage of Growth</Label>
                                 <div className="flex space-x-2">
