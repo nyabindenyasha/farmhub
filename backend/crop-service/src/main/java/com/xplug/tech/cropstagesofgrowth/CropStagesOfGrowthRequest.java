@@ -13,9 +13,6 @@ import javax.validation.constraints.NotNull;
 @ToString
 public class CropStagesOfGrowthRequest {
 
-    @NotNull(message = "Crop Id name cannot be null!")
-    private Long cropId;
-
     private PeriodRequest stageStartDate;
 
     private PeriodRequest stageEndDate;

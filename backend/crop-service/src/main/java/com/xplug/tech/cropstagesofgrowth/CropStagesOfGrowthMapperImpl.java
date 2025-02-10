@@ -20,9 +20,9 @@ public non-sealed class CropStagesOfGrowthMapperImpl implements CropStagesOfGrow
     }
 
     @Override
-    public CropStagesOfGrowth cropStagesOfGrowthFromCropStagesOfGrowthRequest(CropStagesOfGrowthRequest cropStagesOfGrowthRequest) {
+    public CropStagesOfGrowth cropStagesOfGrowthFromCropStagesOfGrowthRequest(CropStagesOfGrowthRequest cropStagesOfGrowthRequest, Long cropId) {
         Objects.requireNonNull(cropStagesOfGrowthRequest, "CropStagesOfGrowthRequest cannot be null!");
-        var crop = cropService.getById(cropStagesOfGrowthRequest.getCropId());
+        var crop = cropService.getById(cropId);
         return CropStagesOfGrowth.builder()
                 .crop(crop)
                 .stageStartDate(periodService.findOrCreatePeriod(cropStagesOfGrowthRequest.getStageStartDate()))

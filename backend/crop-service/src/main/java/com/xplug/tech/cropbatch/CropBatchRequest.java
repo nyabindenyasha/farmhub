@@ -19,6 +19,10 @@ public class CropBatchRequest {
     @NotNull(message = "Crop Program id cannot be null!")
     private Long cropProgramId;
 
+    //todo
+    //add optional cropVarietyId
+    //data collection
+
     @NotNull(message = "Date Of Transplant cannot be null!")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime dateOfTransplant;

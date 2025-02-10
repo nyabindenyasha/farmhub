@@ -5,6 +5,7 @@ import com.xplug.tech.crop.CropService;
 import com.xplug.tech.cropfertilizerschedule.CropFertilizerScheduleService;
 import com.xplug.tech.croppesticideschedule.CropPesticideScheduleService;
 import com.xplug.tech.cropprogram.CropProgramService;
+import com.xplug.tech.cropstagesofgrowth.CropStagesOfGrowthBulkRequest;
 import com.xplug.tech.cropstagesofgrowth.CropStagesOfGrowthService;
 import com.xplug.tech.enums.CropScheduleType;
 import com.xplug.tech.event.SystemConfiguredEvent;
@@ -78,10 +79,11 @@ public class CropInitializerService {
                 cropPesticideScheduleService.initialize(cropSchedule, pesticide, cropDataPesticideScheduleRequest);
             });
 
+
             cropDataCropStagesOfGrowthRequests.forEach(cropDataCropStagesOfGrowthRequest -> {
-                cropDataCropStagesOfGrowthRequest.setCropId(savedCrop.getId());
-                cropStagesOfGrowthService.initialize(cropDataCropStagesOfGrowthRequest);
+                cropStagesOfGrowthService.initialize(cropDataCropStagesOfGrowthRequest, savedCrop.getId());
             });
+
 
         });
 //todo load users first

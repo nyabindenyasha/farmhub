@@ -1,6 +1,6 @@
 package com.xplug.tech.crop;
 
-import com.xplug.tech.cropstagesofgrowth.CropStagesOfGrowthRequest;
+import com.xplug.tech.cropstagesofgrowth.CropStagesOfGrowthBulkRequest;
 import com.xplug.tech.cropstagesofgrowth.CropStagesOfGrowthService;
 import com.xplug.tech.cropstagesofgrowth.CropStagesOfGrowthUpdateRequest;
 import io.swagger.v3.oas.annotations.Operation;
@@ -39,7 +39,7 @@ public class CropStagesOfGrowthController {
 
     @PostMapping
     @Operation(summary = "Create CropStagesOfGrowth")
-    public CropStagesOfGrowth create(@RequestBody CropStagesOfGrowthRequest cropStagesOfGrowthRequest) {
+    public List<CropStagesOfGrowth> create(@RequestBody CropStagesOfGrowthBulkRequest cropStagesOfGrowthRequest) {
         return cropStagesOfGrowthService.create(cropStagesOfGrowthRequest);
     }
 

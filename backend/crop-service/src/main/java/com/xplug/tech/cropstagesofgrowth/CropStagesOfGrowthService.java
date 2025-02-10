@@ -12,9 +12,9 @@ public sealed interface CropStagesOfGrowthService permits CropStagesOfGrowthServ
 
     List<CropStagesOfGrowth> getByCropId(Long cropId);
 
-    CropStagesOfGrowth create(CropStagesOfGrowthRequest cropStagesOfGrowthRequest);
+    List<CropStagesOfGrowth> create(CropStagesOfGrowthBulkRequest cropStagesOfGrowthRequest);
 
-    void initialize(CropStagesOfGrowthRequest cropStagesOfGrowthRequest);
+    void initialize(CropStagesOfGrowthRequest cropStagesOfGrowthRequest, Long cropId);
 
     CropStagesOfGrowth update(CropStagesOfGrowthUpdateRequest cropStagesOfGrowthUpdateRequest);
 

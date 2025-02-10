@@ -2,9 +2,9 @@ package com.xplug.tech.cropstagesofgrowth;
 
 import com.xplug.tech.crop.CropStagesOfGrowth;
 import com.xplug.tech.crop.CropStagesOfGrowthDao;
+import com.xplug.tech.exception.ItemAlreadyExistsException;
 import com.xplug.tech.period.PeriodRequest;
 import com.xplug.tech.period.PeriodService;
-import com.xplug.tech.exception.ItemAlreadyExistsException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -43,20 +43,27 @@ public non-sealed class CropStagesOfGrowthServiceImpl implements CropStagesOfGro
         return cropStagesOfGrowthList;
     }
 
-    public CropStagesOfGrowth create(CropStagesOfGrowthRequest request) {
-        var stageStartDatePeriod = periodService.findOrCreatePeriod(request.getStageStartDate());
-        var stageEndDatePeriod = periodService.findOrCreatePeriod(request.getStageEndDate());
-        var optionalCropStagesOfGrowth = cropStagesOfGrowthRepository
-                .findByCropIdAndStageStartDateIdAndStageEndDateId(request.getCropId(), stageStartDatePeriod.getId(), stageEndDatePeriod.getId());
-        if (optionalCropStagesOfGrowth.isPresent()) {
-            throw new ItemAlreadyExistsException("CropStagesOfGrowth with same period already exists");
-        }
-        var cropStagesOfGrowth = cropStagesOfGrowthMapper.cropStagesOfGrowthFromCropStagesOfGrowthRequest(request);
-        return cropStagesOfGrowthRepository.save(cropStagesOfGrowth);
+    public List<CropStagesOfGrowth> create(CropStagesOfGrowthBulkRequest request) {
+
+        List<CropStagesOfGrowth> cropStagesOfGrowthList = new ArrayList<>();
+
+        request.getCropStages().forEach(cropStage -> {
+            var stageStartDatePeriod = periodService.findOrCreatePeriod(cropStage.getStageStartDate());
+            var stageEndDatePeriod = periodService.findOrCreatePeriod(cropStage.getStageEndDate());
+            var optionalCropStagesOfGrowth = cropStagesOfGrowthRepository
+                    .findByCropIdAndStageStartDateIdAndStageEndDateId(request.getCropId(), stageStartDatePeriod.getId(), stageEndDatePeriod.getId());
+            if (optionalCropStagesOfGrowth.isPresent()) {
+                throw new ItemAlreadyExistsException("CropStagesOfGrowth with same period already exists");
+            }
+            var cropStagesOfGrowth = cropStagesOfGrowthMapper.cropStagesOfGrowthFromCropStagesOfGrowthRequest(cropStage, request.getCropId());
+            cropStagesOfGrowthList.add(cropStagesOfGrowth);
+        });
+
+        return cropStagesOfGrowthRepository.saveAll(cropStagesOfGrowthList);
     }
 
     @Override
-    public void initialize(CropStagesOfGrowthRequest request) {
+    public void initialize(CropStagesOfGrowthRequest request, Long cropId) {
 
         var cropStagesOfGrowthRequests = buildRequest(request);
 
@@ -66,12 +73,12 @@ public non-sealed class CropStagesOfGrowthServiceImpl implements CropStagesOfGro
             var stageStartDatePeriod = periodService.findOrCreatePeriod(cropStagesOfGrowthRequest.getStageStartDate());
             var stageEndDatePeriod = periodService.findOrCreatePeriod(cropStagesOfGrowthRequest.getStageEndDate());
             var optionalCrop = cropStagesOfGrowthRepository
-                    .findByCropIdAndStageStartDateIdAndStageEndDateId(cropStagesOfGrowthRequest.getCropId(), stageStartDatePeriod.getId(), stageEndDatePeriod.getId());
+                    .findByCropIdAndStageStartDateIdAndStageEndDateId(cropId, stageStartDatePeriod.getId(), stageEndDatePeriod.getId());
             if (optionalCrop.isPresent()) {
                 log.info("### CropStagesOfGrowth Found {}", optionalCrop.get());
                 return;
             }
-            var cropStagesOfGrowth = cropStagesOfGrowthMapper.cropStagesOfGrowthFromCropStagesOfGrowthRequest(cropStagesOfGrowthRequest);
+            var cropStagesOfGrowth = cropStagesOfGrowthMapper.cropStagesOfGrowthFromCropStagesOfGrowthRequest(cropStagesOfGrowthRequest, cropId);
             var savedCropStagesOfGrowth = cropStagesOfGrowthRepository.save(cropStagesOfGrowth);
             log.info("Saved CropStagesOfGrowth {}", savedCropStagesOfGrowth);
         });
@@ -86,7 +93,6 @@ public non-sealed class CropStagesOfGrowthServiceImpl implements CropStagesOfGro
                 var stageStartDatePeriodRequest = new PeriodRequest(request.getStageStartDate().getPeriodUnit(), i);
 
                 CropStagesOfGrowthRequest newRequest = new CropStagesOfGrowthRequest();
-                newRequest.setCropId(request.getCropId());
                 newRequest.setStageOfGrowth(request.getStageOfGrowth());
                 newRequest.setStageStartDate(stageStartDatePeriodRequest);
                 newRequest.setStageEndDate(request.getStageEndDate());
