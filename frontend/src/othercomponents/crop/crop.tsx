@@ -13,8 +13,7 @@ import {Checkbox} from "@/components/ui/checkbox";
 import {DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger} from "@/components/ui/dropdown-menu";
 import {useCropContext} from "@/context/CropContext";
 import CreateCrop from "@/othercomponents/crop/create-crop";
-
-// const cropData: Crop[] = useCropContext().getAllCrops();
+import {Crop} from "@/lib/types/crop";
 
 export default function CropComponent() {
 
@@ -24,9 +23,11 @@ export default function CropComponent() {
         getAllCrops();
     }, [getAllCrops]);
 
-    const [isPolicyFormOpen, setIsPolicyFormOpen] = useState(false)
-    const openPolicyForm = () => setIsPolicyFormOpen(true)
-    const closePolicyForm = () => setIsPolicyFormOpen(false)
+    const [isCropFormOpen, setIsCropFormOpen] = useState(false)
+    const openPolicyForm = () => setIsCropFormOpen(true)
+    const closeCropForm = () => setIsCropFormOpen(false)
+
+    const [selectedCrop, setSelectedCrop] = useState<Crop | undefined>(undefined);
 
     const [selectedClients, setSelectedClients] = useState<string[]>([])
     const [searchTerm, setSearchTerm] = useState("")
@@ -58,6 +59,12 @@ export default function CropComponent() {
         // Handle delete logic here
         console.log(`Deleting client ${clientId}`)
     }
+
+    const handleCropSelect = (crop: Crop) => {
+        console.log("here: ", JSON.stringify(crop))
+        setSelectedCrop(crop)
+    }
+
     return (
         <DashboardLayout>
             <div className="flex w-screen p-5 space-y-6 min-h-screen flex-col">
@@ -67,7 +74,7 @@ export default function CropComponent() {
                         <Button variant="outline">Export</Button>
                         <PrimaryButton secondary={true} text={"Add Crop"} onClick={openPolicyForm}
                                        icon={<Plus className="h-4 w-4"/>}/>
-                        <CreateCrop isOpen={isPolicyFormOpen} onClose={closePolicyForm}/>
+                        <CreateCrop isOpen={isCropFormOpen} onClose={closeCropForm} onCropSelect={handleCropSelect}/>
                     </div>
                 </div>
                 <div className="flex items-center justify-between">

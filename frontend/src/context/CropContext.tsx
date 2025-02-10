@@ -1,25 +1,26 @@
 import React, {createContext, useContext, useState, ReactNode, useCallback} from "react";
 import apiClient from "../utils/apiClient";
 import {Crop} from "@/lib/types/crop";
-import {BASE_URL} from "@/lib/constants";
+import {Toast} from "primereact/toast";
+import {useRef} from "react";
 
-// Define the context type
 interface CropContextType {
     crops: Crop[];
     getAllCrops: () => Promise<void>;
-    createCrop: (cropData: Crop) => Promise<void>;
+    createCrop: (cropData: Crop) => Promise<{ success: boolean; data?: Crop; error?: string}>;
+    loading: boolean
 }
 
-// Create the context with a default value
 export const CropContext = createContext<CropContextType | undefined>(undefined);
 
-// Create the provider component
 interface CropProviderProps {
     children: ReactNode;
 }
 
 export const CropProvider: React.FC<CropProviderProps> = ({children}) => {
     const [crops, setCrops] = useState<Crop[]>([]);
+    const [loading, setLoading] = useState(false);
+    const toast = useRef<Toast | null>(null);
 
     const getAllCrops = useCallback(async (): Promise<void> => {
         try {
@@ -32,7 +33,7 @@ export const CropProvider: React.FC<CropProviderProps> = ({children}) => {
         }
     }, []);
 
-    const createCrop = async (cropData: Crop): Promise<void> => {
+    const createCrop = async (cropData: Crop): Promise<{ success: boolean; data?: Crop; error?: string }> => {
         try {
             const response = await apiClient.post<Crop>("/v1/api/crop", cropData, {
                 headers: {
@@ -40,13 +41,30 @@ export const CropProvider: React.FC<CropProviderProps> = ({children}) => {
                 },
             });
             setCrops([...crops, response.data]);
+            toast.current?.show({
+                severity: "success",
+                summary: "Success",
+                detail: "Crop created successfully",
+                life: 3000
+            });
+            return { success: true, data: response.data };
         } catch (error) {
             console.error("Error creating crop:", error);
+            toast.current?.show({
+                severity: "error",
+                summary: "Error",
+                detail: "Failed to create crop",
+                life: 3000
+            });
+            return { success: false, error: "Failed to create crop" };
+        } finally {
+            setLoading(false);
         }
     };
 
     return (
-        <CropContext.Provider value={{crops, getAllCrops, createCrop}}>
+        <CropContext.Provider value={{crops, getAllCrops, createCrop, loading}}>
+            <Toast ref={toast}/>
             {children}
         </CropContext.Provider>
     );
