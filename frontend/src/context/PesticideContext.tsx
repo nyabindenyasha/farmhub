@@ -1,25 +1,27 @@
-import React, {createContext, useContext, useState, ReactNode} from "react";
+import React, {createContext, useContext, useState, ReactNode, useRef} from "react";
 import apiClient from "../utils/apiClient";
 import {Pesticide} from "@/lib/types/pesticide";
 import {BASE_URL} from "@/lib/constants";
+import {Toast} from "primereact/toast";
+import {Crop} from "@/lib/types/crop";
 
-// Define the context type
 interface PesticideContextType {
     pesticides: Pesticide[];
     getAllPesticides: () => Promise<void>;
-    createPesticide: (pesticideData: Pesticide) => Promise<void>;
+    createPesticide: (pesticideData: Pesticide) => Promise<{ success: boolean; data?: Pesticide; error?: string}>;
+    loading: boolean;
 }
 
-// Create the context with a default value
 export const PesticideContext = createContext<PesticideContextType | undefined>(undefined);
 
-// Create the provider component
 interface PesticideProviderProps {
     children: ReactNode;
 }
 
 export const PesticideProvider: React.FC<PesticideProviderProps> = ({children}) => {
     const [pesticides, setPesticides] = useState<Pesticide[]>([]);
+    const [loading, setLoading] = useState(false);
+    const toast = useRef<Toast | null>(null);
 
     const getAllPesticides = async (): Promise<void> => {
         console.log(BASE_URL + "/v1/api/pesticide")
@@ -31,7 +33,8 @@ export const PesticideProvider: React.FC<PesticideProviderProps> = ({children}) 
         }
     };
 
-    const createPesticide = async (pesticideData: Pesticide): Promise<void> => {
+    const createPesticide = async (pesticideData: Pesticide): Promise<{ success: boolean; data?: Pesticide; error?: string}> => {
+        setLoading(true);
         try {
             const response = await apiClient.post<Pesticide>(BASE_URL + "/v1/api/pesticide", pesticideData, {
                 headers: {
@@ -39,13 +42,30 @@ export const PesticideProvider: React.FC<PesticideProviderProps> = ({children}) 
                 },
             });
             setPesticides([...pesticides, response.data]);
+            toast.current?.show({
+                severity: "success",
+                summary: "Success",
+                detail: "Pesticide created successfully",
+                life: 3000
+            });
+            return { success: true, data: response.data };
         } catch (error) {
             console.error("Error creating pesticide:", error);
+            toast.current?.show({
+                severity: "error",
+                summary: "Error",
+                detail: "Failed to create pesticide",
+                life: 3000
+            });
+            return { success: false, error: "Failed to create pesticide" };
+        } finally {
+            setLoading(false);
         }
     };
 
     return (
-        <PesticideContext.Provider value={{pesticides, getAllPesticides, createPesticide}}>
+        <PesticideContext.Provider value={{pesticides, getAllPesticides, createPesticide, loading}}>
+            <Toast ref={toast}/>
             {children}
         </PesticideContext.Provider>
     );

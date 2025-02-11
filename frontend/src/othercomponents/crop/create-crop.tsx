@@ -22,7 +22,7 @@ import {CheckCircle, XCircle} from "lucide-react";
 
 export default function CreateCrop({isOpen, onClose, onCropSelect}: CropFormProps) {
 
-    const {createCrop} = useCropContext()
+    const {createCrop, loading} = useCropContext()
 
     const [cropData, setCropData] = useState<Crop>({
         id: 0,
@@ -33,7 +33,6 @@ export default function CreateCrop({isOpen, onClose, onCropSelect}: CropFormProp
         subSpecies: "",
     })
 
-    const [isLoading, setIsLoading] = useState(false);
     const [errors, setErrors] = useState<{ [key: string]: string }>({});
     const toast = useRef<Toast | null>(null);
     const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle")
@@ -71,7 +70,6 @@ export default function CreateCrop({isOpen, onClose, onCropSelect}: CropFormProp
             });
             return;
         }
-        setIsLoading(true);
         try {
             const result = await createCrop(cropData);
 
@@ -90,7 +88,6 @@ export default function CreateCrop({isOpen, onClose, onCropSelect}: CropFormProp
             toast.current?.show({severity: "error", summary: "Error", detail: "Failed to create crop", life: 3000});
         } finally {
             console.log("finally")
-            setIsLoading(false);
         }
     };
 
@@ -181,9 +178,9 @@ export default function CreateCrop({isOpen, onClose, onCropSelect}: CropFormProp
                             <div className="space-y-2">
                             </div>
                         </div>
-                        <Button type="submit" disabled={isLoading}>
-                            {isLoading ? <span
-                                className="animate-spin border-2 border-white border-t-transparent rounded-full h-5 w-5 mr-2"></span> : "Create Crop"}
+                        <Button type="submit" disabled={loading}>
+                            {loading ? <span
+                                className="animate-spin border-2 border-white border-t-transparent rounded-full h-5 w-5 mr-2"></span> : "Save Crop"}
                         </Button>
                     </form>
                 </DialogContent>

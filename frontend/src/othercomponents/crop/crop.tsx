@@ -60,7 +60,7 @@ export default function CropComponent() {
         console.log(`Deleting client ${clientId}`)
     }
 
-    const handleCropSelect = (crop: Crop) => {
+    const handleCropSelect = (crop: Crop | undefined) => {
         console.log("here: ", JSON.stringify(crop))
         setSelectedCrop(crop)
     }
