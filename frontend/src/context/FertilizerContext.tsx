@@ -27,6 +27,7 @@ export const FertilizerProvider: React.FC<FertilizerProviderProps> = ({children}
             console.log(BASE_URL + "/v1/api/fertilizer")
             try {
                 const response = await apiClient.get<Fertilizer[]>(BASE_URL + "/v1/api/fertilizer");
+                console.log("response: ", response)
                 setFertilizers(response.data);
             } catch (error) {
                 console.error("Error fetching fertilizers:", error);

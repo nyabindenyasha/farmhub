@@ -3,7 +3,6 @@ import {useRouter} from "next/router";
 import {patients} from "@/lib/data";
 import DashboardLayout from "@/layouts/DashboardLayout";
 import {Button} from "@/components/ui/button";
-import PrimaryButton from "@/components/buttons/customButton";
 import {MoreHorizontal, Plus, Search} from "lucide-react";
 import {Tabs, TabsList, TabsTrigger} from "@/components/ui/tabs";
 import {Badge} from "@/components/ui/badge";
@@ -13,6 +12,7 @@ import {Checkbox} from "@/components/ui/checkbox";
 import {DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger} from "@/components/ui/dropdown-menu";
 import {useCropProgramContext} from "@/context/CropProgramContext";
 import CreateCropProgram from "@/othercomponents/cropprogram/create-crop-program";
+import CropProgramDetails from "@/farmercomponents/cropprogram/crop-program-details";
 
 // const cropProgramData: CropProgram[] = useCropProgramContext().getAllCropPrograms();
 
@@ -31,6 +31,8 @@ export default function CropProgramComponent() {
     const [selectedClients, setSelectedClients] = useState<string[]>([])
     const [searchTerm, setSearchTerm] = useState("")
     const router = useRouter()
+
+    const [selectedProgramId, setSelectedProgramId] = useState<number | null>(null)
 
     const filteredClients = patients.filter((patient) =>
         patient.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -61,13 +63,13 @@ export default function CropProgramComponent() {
     return (
         <DashboardLayout>
             <div className="flex w-screen p-5 space-y-6 min-h-screen flex-col">
-                <div className="flex items-center justify-between">
-                    <h2 className="text-3xl font-bold tracking-tight">CropPrograms</h2>
+                <div className="flex items-center justify-between h-1/6 bg-gradient-to-r from-green-600 to-green-800">
+                    <h2 className="text-3xl font-bold tracking-tight pl-2">CropPrograms</h2>
                     <div className="flex items-center space-x-2">
                         <Button variant="outline">Export</Button>
                         {/*<PrimaryButton secondary={true} text={"Add CropProgram"} onClick={openPolicyForm}*/}
                         {/*               icon={<Plus className="h-4 w-4"/>}/>*/}
-                        <CreateCropProgram isOpen={isPolicyFormOpen} onClose={closePolicyForm}/>
+                        <CreateCropProgram isFarmer={false} isOpen={isPolicyFormOpen} onClose={closePolicyForm}/>
                     </div>
                 </div>
                 <div className="flex items-center justify-between">
@@ -104,6 +106,7 @@ export default function CropProgramComponent() {
                         Filters
                     </Button>
                 </div>
+
                 <div className="rounded-md border">
                     <Table>
                         <TableHeader>
@@ -114,28 +117,39 @@ export default function CropProgramComponent() {
                                         onCheckedChange={handleSelectAll}
                                     />
                                 </TableHead>
+                                <TableHead>ID</TableHead>
                                 <TableHead>Crop Name</TableHead>
                                 <TableHead>Program Name</TableHead>
-                                <TableHead>Description</TableHead>
-                                <TableHead>Source</TableHead>
-                                <TableHead>Schedule Type</TableHead>
-
+                                <TableHead>Program Source</TableHead>
+                                <TableHead>Program Type</TableHead>
+                                <TableHead>Actions</TableHead>
                             </TableRow>
                         </TableHeader>
                         <TableBody>
-                            {cropPrograms.slice(0, 10).map((cropProgram) => (
-                                <TableRow key={cropProgram.id}>
+                            {cropPrograms.map((program) => (
+                                <TableRow key={program.id}>
                                     <TableCell>
                                         <Checkbox
-                                            checked={selectedClients.includes(String(cropProgram.id))}
-                                            onCheckedChange={() => handleSelectClient(String(cropProgram.id))}
+                                            checked={selectedClients.includes(String(program.id))}
+                                            onCheckedChange={() => handleSelectClient(String(program.id))}
                                         />
                                     </TableCell>
-                                    <TableCell>{cropProgram.crop.name}</TableCell>
-                                    <TableCell>{cropProgram.name}</TableCell>
-                                    <TableCell>{cropProgram.description}</TableCell>
-                                    <TableCell>{cropProgram.source}</TableCell>
-                                    <TableCell>{cropProgram.cropScheduleType}</TableCell>
+                                    <TableCell>{program.id}</TableCell>
+                                    <TableCell>{program.crop.name}</TableCell>
+                                    <TableCell>{program.name}</TableCell>
+                                    <TableCell>{program.source}</TableCell>
+                                    <TableCell>{program.cropScheduleType}</TableCell>
+
+                                    {/*<TableCell>*/}
+                                    {/*    <Button variant="outline" onClick={() => {*/}
+                                    {/*        console.log("onClick: ", program.id);*/}
+                                    {/*        setSelectedProgramId(program.id);*/}
+                                    {/*    }}>*/}
+                                    {/*        View Details*/}
+                                    {/*    </Button>*/}
+                                    {/*</TableCell>*/}
+
+
                                     <TableCell>
                                         <DropdownMenu>
                                             <DropdownMenuTrigger asChild>
@@ -146,18 +160,25 @@ export default function CropProgramComponent() {
                                             <DropdownMenuContent align="end">
                                                 <DropdownMenuItem>
                                                     <span
-                                                        onClick={() => router.push(`/dashboard/patient/${'adsfljkl'}`)}> View Details</span>
+                                                        onClick={() => {
+                                                            console.log("onClick: ", program.id);
+                                                            setSelectedProgramId(program.id);
+                                                        }}> View Details</span>
                                                 </DropdownMenuItem>
                                                 <DropdownMenuItem>Edit Record</DropdownMenuItem>
-                                                <DropdownMenuItem>Download Pdf</DropdownMenuItem>
+                                                <DropdownMenuItem>Download Program</DropdownMenuItem>
                                             </DropdownMenuContent>
                                         </DropdownMenu>
                                     </TableCell>
+
                                 </TableRow>
                             ))}
                         </TableBody>
                     </Table>
+                    {selectedProgramId &&
+                        <CropProgramDetails programId={selectedProgramId} onClose={() => setSelectedProgramId(null)}/>}
                 </div>
+
                 <div className="flex items-center justify-between">
                     <Button variant="outline" size="sm">
                         Previous

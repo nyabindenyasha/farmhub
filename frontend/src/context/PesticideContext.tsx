@@ -1,4 +1,4 @@
-import React, {createContext, useContext, useState, ReactNode, useRef} from "react";
+import React, {createContext, useContext, useState, ReactNode, useRef, useCallback} from "react";
 import apiClient from "../utils/apiClient";
 import {Pesticide} from "@/lib/types/pesticide";
 import {BASE_URL} from "@/lib/constants";
@@ -8,7 +8,7 @@ import {Crop} from "@/lib/types/crop";
 interface PesticideContextType {
     pesticides: Pesticide[];
     getAllPesticides: () => Promise<void>;
-    createPesticide: (pesticideData: Pesticide) => Promise<{ success: boolean; data?: Pesticide; error?: string}>;
+    createPesticide: (pesticideData: Pesticide) => Promise<{ success: boolean; data?: Pesticide; error?: string }>;
     loading: boolean;
 }
 
@@ -23,17 +23,23 @@ export const PesticideProvider: React.FC<PesticideProviderProps> = ({children}) 
     const [loading, setLoading] = useState(false);
     const toast = useRef<Toast | null>(null);
 
-    const getAllPesticides = async (): Promise<void> => {
-        console.log(BASE_URL + "/v1/api/pesticide")
-        try {
-            const response = await apiClient.get<Pesticide[]>(BASE_URL + "/v1/api/pesticide");
-            setPesticides(response.data);
-        } catch (error) {
-            console.error("Error fetching pesticides:", error);
-        }
-    };
+    const getAllPesticides = useCallback(async (): Promise<void> => {
+            console.log(BASE_URL + "/v1/api/pesticide")
+            try {
+                const response = await apiClient.get<Pesticide[]>(BASE_URL + "/v1/api/pesticide");
+                setPesticides(response.data);
+            } catch (error) {
+                console.error("Error fetching pesticides:", error);
+            }
+        }, []
+    );
 
-    const createPesticide = async (pesticideData: Pesticide): Promise<{ success: boolean; data?: Pesticide; error?: string}> => {
+
+    const createPesticide = async (pesticideData: Pesticide): Promise<{
+        success: boolean;
+        data?: Pesticide;
+        error?: string
+    }> => {
         setLoading(true);
         try {
             const response = await apiClient.post<Pesticide>(BASE_URL + "/v1/api/pesticide", pesticideData, {
@@ -48,7 +54,7 @@ export const PesticideProvider: React.FC<PesticideProviderProps> = ({children}) 
                 detail: "Pesticide created successfully",
                 life: 3000
             });
-            return { success: true, data: response.data };
+            return {success: true, data: response.data};
         } catch (error) {
             console.error("Error creating pesticide:", error);
             toast.current?.show({
@@ -57,7 +63,7 @@ export const PesticideProvider: React.FC<PesticideProviderProps> = ({children}) 
                 detail: "Failed to create pesticide",
                 life: 3000
             });
-            return { success: false, error: "Failed to create pesticide" };
+            return {success: false, error: "Failed to create pesticide"};
         } finally {
             setLoading(false);
         }

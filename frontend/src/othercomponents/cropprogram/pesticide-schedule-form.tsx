@@ -61,6 +61,7 @@ export default function PesticideScheduleForm({schedules, onChange}: PesticideSc
             if (i === index) {
                 return {...schedule, [field]: value}
             }
+            schedule.pesticideName = selectedPesticide?.name as string;
             console.log(schedule)
             return schedule
         })
@@ -119,7 +120,6 @@ export default function PesticideScheduleForm({schedules, onChange}: PesticideSc
                                     console.log(pesticide)
                                     setSelectedPesticide(pesticide)
                                     handleScheduleChange(index, "pesticideId", pesticide?.id)
-                                    handleScheduleChange(index, "pesticideName", pesticide?.name)
                                 }
                                 }>
                                     <SelectTrigger className="w-full">

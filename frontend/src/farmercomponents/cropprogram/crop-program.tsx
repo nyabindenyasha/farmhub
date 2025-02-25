@@ -8,13 +8,13 @@ import {useCropProgramContext} from "@/context/CropProgramContext";
 import DashboardLayout from "@/layouts/DashboardLayout";
 import PrimaryButton from "@/components/buttons/customButton";
 import {MoreHorizontal, Plus, Search} from "lucide-react";
-import CreateCrop from "@/othercomponents/crop/create-crop";
 import {Tabs, TabsList, TabsTrigger} from "@/components/ui/tabs";
 import {Badge} from "@/components/ui/badge";
 import {Input} from "@/components/ui/input";
 import {Checkbox} from "@/components/ui/checkbox";
 import {DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger} from "@/components/ui/dropdown-menu";
 import {patients} from "@/lib/data";
+import CreateCropProgram from "@/othercomponents/cropprogram/create-crop-program";
 
 export default function CropProgramComponent() {
 
@@ -58,13 +58,13 @@ export default function CropProgramComponent() {
     return (
         <DashboardLayout>
             <div className="flex w-screen p-5 space-y-6 min-h-screen flex-col">
-                <div className="flex items-center justify-between">
-                    <h2 className="text-3xl font-bold tracking-tight">Crop Programs</h2>
+                <div className="flex items-center justify-between h-1/6 bg-gradient-to-r from-green-600 to-green-800">
+                    <h2 className="text-3xl font-bold tracking-tight pl-2">Crop Programs</h2>
                     <div className="flex items-center space-x-2">
                         <Button variant="outline">Export</Button>
                         <PrimaryButton secondary={true} text={"Create Program"} onClick={openPolicyForm}
                                        icon={<Plus className="h-4 w-4"/>}/>
-                        <CreateCrop isOpen={isPolicyFormOpen} onClose={closePolicyForm}/>
+                        <CreateCropProgram isFarmer={true} isOpen={isPolicyFormOpen} onClose={closePolicyForm}/>
                     </div>
                 </div>
                 <div className="flex items-center justify-between">

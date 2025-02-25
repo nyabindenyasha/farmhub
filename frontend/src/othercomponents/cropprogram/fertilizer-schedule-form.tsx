@@ -59,11 +59,12 @@ export default function FertilizerScheduleForm({schedules, onChange}: Fertilizer
 
     const handleScheduleChange = (index: number, field: keyof FertilizerSchedule, value: any) => {
         console.log("index: ", index)
-        console.log("index: ", value)
+        console.log("value: ", value)
         const updatedSchedules = schedules.map((schedule, i) => {
             if (i === index) {
                 return {...schedule, [field]: value}
             }
+            schedule.fertilizerName = selectedFertilizer?.name as string;
             console.log(schedule)
             return schedule
         })
@@ -121,7 +122,6 @@ export default function FertilizerScheduleForm({schedules, onChange}: Fertilizer
                                     let fertilizer = fertilizers.find(item => item.name === value)
                                     setSelectedFertilizer(fertilizer)
                                     handleScheduleChange(index, "fertilizerId", fertilizer?.id)
-                                    handleScheduleChange(index, "fertilizerName", fertilizer?.name)
                                 }
                                 }>
                                     <SelectTrigger className="w-full">

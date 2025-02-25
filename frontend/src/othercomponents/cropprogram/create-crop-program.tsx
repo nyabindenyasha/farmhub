@@ -1,6 +1,6 @@
 'use client'
 
-import {useEffect, useState} from 'react'
+import {useEffect, useRef, useState} from 'react'
 import {Button} from '@/components/ui/button'
 import {Input} from '@/components/ui/input'
 import {Label} from '@/components/ui/label'
@@ -12,11 +12,13 @@ import FertilizerScheduleForm, {FertilizerSchedule} from "@/othercomponents/crop
 import PesticideScheduleForm, {PesticideSchedule} from "@/othercomponents/cropprogram/pesticide-schedule-form";
 import {CropProgramSummary} from "@/othercomponents/cropprogram/crop-program-summary";
 import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/components/ui/card";
-import {FormProps} from "@/lib/types";
+import {CropProgramFormProps, FormProps} from "@/lib/types";
 import {useCropContext} from "@/context/CropContext";
 import {Crop} from "@/lib/types/crop";
+import {useCropProgramContext} from "@/context/CropProgramContext";
+import {Toast} from "primereact/toast";
 
-interface CropProgram {
+export interface CropProgramRequest {
     cropId: number
     name: string
     description: string
@@ -27,7 +29,7 @@ interface CropProgram {
     pesticideScheduleRequests: PesticideSchedule[]
 }
 
-const initialCropProgram: CropProgram = {
+const initialCropProgram: CropProgramRequest = {
     cropId: 0,
     name: "",
     description: "",
@@ -38,16 +40,25 @@ const initialCropProgram: CropProgram = {
     pesticideScheduleRequests: [],
 }
 
-export default function CreateCropProgram({isOpen, onClose}: FormProps) {
+export default function CreateCropProgram({isFarmer, isOpen, onClose}: CropProgramFormProps) {
 
+    const {createCropProgram, loading} = useCropProgramContext()
     const {crops, getAllCrops} = useCropContext()
     const [selectedCrop, setSelectedCrop] = useState<Crop | undefined>(undefined);
     const [search, setSearch] = useState("");
     const [step, setStep] = useState(1)
-    const [cropProgram, setCropProgram] = useState<CropProgram>(initialCropProgram)
+    const [cropProgram, setCropProgram] = useState<CropProgramRequest>(initialCropProgram)
     const [isDialogOpen, setIsDialogOpen] = useState(false)
 
+    const [errors, setErrors] = useState<{ [key: string]: string }>({});
+    const toast = useRef<Toast | null>(null);
+
     useEffect(() => {
+        if(isFarmer){
+            console.log("isFarmer: ", isFarmer)
+            initialCropProgram.cropScheduleType = CropScheduleType.CUSTOM;
+            setCropProgram(initialCropProgram)
+        }
         getAllCrops()
     }, [getAllCrops])
 
@@ -68,11 +79,33 @@ export default function CreateCropProgram({isOpen, onClose}: FormProps) {
         setCropProgram((prev) => ({...prev, pesticideScheduleRequests: schedules}))
     }
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
-        // Here you would typically send the data to your API
+        cropProgram.cropId = selectedCrop?.id as number;
         console.log("Submitting crop program:", cropProgram)
-        setIsDialogOpen(false)
+
+        try {
+            const result = await createCropProgram(cropProgram);
+
+            console.log("### result: ", result);
+
+            if (result.success) {
+                setIsDialogOpen(false)
+                setCropProgram(initialCropProgram);
+                onClose(); // Close modal by default
+            }
+
+        } catch (error) {
+            console.error("Error creating crop program:", error);
+            toast.current?.show({
+                severity: "error",
+                summary: "Error",
+                detail: "Failed to create crop program",
+                life: 3000
+            });
+        } finally {
+            setStep(1)
+        }
     }
 
     const nextStep = () => {
@@ -157,24 +190,44 @@ export default function CreateCropProgram({isOpen, onClose}: FormProps) {
                             </div>
 
 
-                            <div>
-                                <Label htmlFor="cropScheduleType">Crop Schedule Type</Label>
-                                <Select
-                                    name="cropScheduleType"
-                                    value={cropProgram.cropScheduleType.toString()}
-                                    onValueChange={(value) => handleSelectChange("cropScheduleType", value)}
-                                >
-                                    <SelectTrigger>
-                                        <SelectValue placeholder="Select crop schedule type"/>
-                                    </SelectTrigger>
-                                    <SelectContent>
-                                        <SelectItem
-                                            value={CropScheduleType.SECONDARY.toString()}>{CropScheduleType.SECONDARY}</SelectItem>
-                                        <SelectItem
-                                            value={CropScheduleType.TERTIARY.toString()}>{CropScheduleType.TERTIARY}</SelectItem>
-                                    </SelectContent>
-                                </Select>
-                            </div>
+                            {isFarmer ? (
+                                    <div>
+                                        <Label htmlFor="cropScheduleType">Crop Schedule Type</Label>
+                                        <Select
+                                            name="cropScheduleType"
+                                            value={cropProgram.cropScheduleType.toString()}
+                                            onValueChange={(value) => handleSelectChange("cropScheduleType", value)}
+                                        >
+                                            <SelectTrigger>
+                                                <SelectValue placeholder="Select crop schedule type"/>
+                                            </SelectTrigger>
+                                            <SelectContent>
+                                                <SelectItem
+                                                    value={CropScheduleType.CUSTOM.toString()}>{CropScheduleType.CUSTOM}</SelectItem>
+                                            </SelectContent>
+                                        </Select>
+                                    </div>
+                                ) :
+                                <div>
+                                    <Label htmlFor="cropScheduleType">Crop Schedule Type</Label>
+                                    <Select
+                                        name="cropScheduleType"
+                                        value={cropProgram.cropScheduleType.toString()}
+                                        onValueChange={(value) => handleSelectChange("cropScheduleType", value)}
+                                    >
+                                        <SelectTrigger>
+                                            <SelectValue placeholder="Select crop schedule type"/>
+                                        </SelectTrigger>
+                                        <SelectContent>
+                                            <SelectItem
+                                                value={CropScheduleType.SECONDARY.toString()}>{CropScheduleType.SECONDARY}</SelectItem>
+                                            <SelectItem
+                                                value={CropScheduleType.TERTIARY.toString()}>{CropScheduleType.TERTIARY}</SelectItem>
+                                        </SelectContent>
+                                    </Select>
+                                </div>
+                            }
+
                         </form>
                     </div>
                 )

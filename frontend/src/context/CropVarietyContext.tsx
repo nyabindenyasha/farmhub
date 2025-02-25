@@ -1,14 +1,21 @@
-import React, {createContext, useContext, useState, ReactNode, useCallback} from "react";
+import React, {createContext, useContext, useState, ReactNode, useCallback, useRef} from "react";
 import apiClient from "../utils/apiClient";
 import {CropVariety} from "@/lib/types/crop-variety";
 import {BASE_URL} from "@/lib/constants";
 import {CropVarietyRequest} from "@/othercomponents/cropvariety/create-crop-variety";
+import {Crop} from "@/lib/types/crop";
+import {Toast} from "primereact/toast";
 
 // Define the context type
 interface CropVarietyContextType {
     cropVarieties: CropVariety[];
     getAllCropVarieties: () => Promise<void>;
-    createCropVariety: (cropVarietyData: CropVarietyRequest) => Promise<void>;
+    createCropVariety: (cropVarietyData: CropVarietyRequest) => Promise<{
+        success: boolean;
+        data?: CropVariety;
+        error?: string
+    }>;
+    loading: boolean
 }
 
 // Create the context with a default value
@@ -21,6 +28,8 @@ interface CropVarietyProviderProps {
 
 export const CropVarietyProvider: React.FC<CropVarietyProviderProps> = ({children}) => {
     const [cropVarieties, setCropVarieties] = useState<CropVariety[]>([]);
+    const [loading, setLoading] = useState(false);
+    const toast = useRef<Toast | null>(null);
 
     const getAllCropVarieties = useCallback(async (): Promise<void> => {
         console.log(BASE_URL + "/v1/api/crop-variety")
@@ -32,7 +41,11 @@ export const CropVarietyProvider: React.FC<CropVarietyProviderProps> = ({childre
         }
     }, []);
 
-    const createCropVariety = async (cropVarietyData: CropVarietyRequest): Promise<void> => {
+    const createCropVariety = async (cropVarietyData: CropVarietyRequest): Promise<{
+        success: boolean;
+        data?: CropVariety;
+        error?: string
+    }> => {
         try {
             const response = await apiClient.post<CropVariety>(BASE_URL + "/v1/api/crop-variety", cropVarietyData, {
                 headers: {
@@ -40,13 +53,30 @@ export const CropVarietyProvider: React.FC<CropVarietyProviderProps> = ({childre
                 },
             });
             setCropVarieties([...cropVarieties, response.data]);
+            toast.current?.show({
+                severity: "success",
+                summary: "Success",
+                detail: "Crop Variety created successfully",
+                life: 3000
+            });
+            return {success: true, data: response.data};
         } catch (error) {
-            console.error("Error creating cropVariety:", error);
+            console.error("Error creating Crop Variety:", error);
+            toast.current?.show({
+                severity: "error",
+                summary: "Error",
+                detail: "Failed to create Crop Variety",
+                life: 3000
+            });
+            return {success: false, error: "Failed to create Crop Variety"};
+        } finally {
+            setLoading(false);
         }
     };
 
     return (
-        <CropVarietyContext.Provider value={{cropVarieties, getAllCropVarieties, createCropVariety}}>
+        <CropVarietyContext.Provider value={{cropVarieties, getAllCropVarieties, createCropVariety, loading}}>
+            <Toast ref={toast}/>
             {children}
         </CropVarietyContext.Provider>
     );

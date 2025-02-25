@@ -1,25 +1,21 @@
 import type React from "react"
-import {useEffect, useState} from "react"
+import {useRef, useState} from "react"
 import {Button} from "@/components/ui/button"
 import {Input} from "@/components/ui/input"
 import {Label} from "@/components/ui/label"
 import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "@/components/ui/select"
-import {Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle} from "@/components/ui/card"
+import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/components/ui/card"
 import {Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle} from "@/components/ui/dialog"
-import {Alert, AlertDescription, AlertTitle} from "@/components/ui/alert"
-import {CheckCircle, Loader2, Maximize2, Minimize2, Plus, PlusCircle, Search, Trash2, X, XCircle} from "lucide-react"
-import {Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList} from "@/components/ui/command"
-import {Popover, PopoverContent, PopoverTrigger} from "@/components/ui/popover"
+import {Maximize2, Minimize2, PlusCircle, X} from "lucide-react"
 import {Period} from "@/lib/types/period";
 import {StagesOfGrowth} from "@/lib/enums/stages-of-growth";
 import {PeriodUnit} from "@/lib/enums/period-unit";
-import {useCropContext} from "@/context/CropContext";
 import {Crop} from "@/lib/types/crop";
 import {FormProps} from "@/lib/types";
 import {useCropStagesOfGrowthContext} from "@/context/CropStagesOfGrowthContext";
 import {DialogProps} from "@/lib/types/dialog-props";
 import {CropSelector} from "@/othercomponents/shared/crop-selector";
-import {Textarea} from "@/components/ui/textarea";
+import {Toast} from "primereact/toast";
 
 interface GrowthStage {
     stageStartDate: Period
@@ -33,15 +29,17 @@ export interface CropStagesOfGrowthRequest {
     cropStages: GrowthStage[]
 }
 
+const stageInitialState: GrowthStage = {
+    stageStartDate: {periodUnit: PeriodUnit.DAYS, periodValue: 1},
+    stageEndDate: {periodUnit: PeriodUnit.DAYS, periodValue: 1},
+    stageOfGrowth: StagesOfGrowth.TRANSPLANTING,
+    expanded: true
+}
+
 const initialCropStagesOfGrowth: CropStagesOfGrowthRequest = {
     cropId: 0,
     cropStages: [
-        {
-            stageStartDate: {periodUnit: PeriodUnit.DAYS, periodValue: 1},
-            stageEndDate: {periodUnit: PeriodUnit.DAYS, periodValue: 1},
-            stageOfGrowth: StagesOfGrowth.TRANSPLANTING,
-            expanded: true,
-        },
+        stageInitialState,
     ],
 }
 
@@ -50,9 +48,11 @@ export default function CreateCropStagesOfGrowth({isOpen, onClose}: FormProps) {
     const {createCropStagesOfGrowth} = useCropStagesOfGrowthContext();
     const [selectedCrop, setSelectedCrop] = useState<Crop | null>(null)
     const [cropStagesOfGrowth, setCropStagesOfGrowth] = useState<CropStagesOfGrowthRequest>(initialCropStagesOfGrowth)
+    const [cropStage, setCropStage] = useState<GrowthStage>(stageInitialState)
     const [isDialogOpen, setIsDialogOpen] = useState(false)
-    const [isLoading, setIsLoading] = useState(false)
-    const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle")
+
+    const [errors, setErrors] = useState<{ [key: string]: string }>({});
+    const toast = useRef<Toast | null>(null);
 
     const dialogProps: DialogProps = {
         width: 625,
@@ -62,6 +62,16 @@ export default function CreateCropStagesOfGrowth({isOpen, onClose}: FormProps) {
     const handleCropSelect = (crop: Crop) => {
         setSelectedCrop(crop)
         setCropStagesOfGrowth((prev) => ({...prev, cropId: crop.id}))
+    }
+
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        const {name, value} = e.target
+        setCropStage((prev) => ({
+            ...prev
+        }))
+        if (errors[e.target.name]) {
+            setErrors({...errors, [e.target.name]: ""});
+        }
     }
 
     const handleStageChange = (index: number, field: keyof GrowthStage, value: any) => {
@@ -95,14 +105,10 @@ export default function CreateCropStagesOfGrowth({isOpen, onClose}: FormProps) {
             ...prev,
             cropStages: [
                 ...prev.cropStages,
-                {
-                    stageStartDate: {periodUnit: PeriodUnit.DAYS, periodValue: 1},
-                    stageEndDate: {periodUnit: PeriodUnit.DAYS, periodValue: 1},
-                    stageOfGrowth: StagesOfGrowth.TRANSPLANTING,
-                    expanded: true,
-                },
+                stageInitialState,
             ],
         }))
+        setCropStage(stageInitialState);
     }
 
     const removeStage = (index: number) => {
@@ -121,32 +127,77 @@ export default function CreateCropStagesOfGrowth({isOpen, onClose}: FormProps) {
         }))
     }
 
+    const validateSubmit = () => {
+        if (cropStagesOfGrowth.cropStages.length === 0) {
+            // newErrors.activeIngredients = "At least one active ingredient is required.";
+            toast.current?.show({
+                severity: "warn",
+                summary: "Validation Error",
+                detail: "At least one stage is required",
+                life: 3000
+            });
+        }
+    };
+
+
+    const validateForm = () => {
+        let newErrors: { [key: string]: string } = {};
+        if (!cropStage.stageStartDate.periodUnit) newErrors.variety = "Stage Start Date Period Unit is required";
+        if (!cropStage.stageStartDate.periodValue) newErrors.variety = "Stage Start Date Period Value is required";
+        if (!cropStage.stageEndDate.periodUnit) newErrors.variety = "Stage End Date Period Unit is required";
+        if (!cropStage.stageEndDate.periodValue) newErrors.variety = "Stage End Date Period Value is required";
+        if (!cropStage.stageOfGrowth) newErrors.harvestDuration = "Stage is required";
+        setErrors(newErrors);
+        return Object.keys(newErrors).length === 0;
+    };
+
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
-        setIsLoading(true)
-        setIsDialogOpen(false)
-
-        setIsLoading(true)
         try {
-            await createCropStagesOfGrowth(cropStagesOfGrowth)
-            setSubmitStatus("success")
-            setIsDialogOpen(false)
-            setStep(1)
+            const result = await createCropStagesOfGrowth(cropStagesOfGrowth)
+
+            console.log("### result: ", result);
+
+            if (result.success) {
+                setIsDialogOpen(false)
+                setCropStagesOfGrowth(initialCropStagesOfGrowth);
+                onClose(); // Close modal by default
+            }
+
         } catch (error) {
-            console.error("Error creating crop variety:", error)
-            setSubmitStatus("error")
+            console.error("Error creating crop stages:", error);
+            toast.current?.show({
+                severity: "error",
+                summary: "Error",
+                detail: "Failed to create crop stages",
+                life: 3000
+            });
         } finally {
-            setIsLoading(false)
             setStep(1)
         }
     }
 
     const resetForm = () => {
         setCropStagesOfGrowth(initialCropStagesOfGrowth)
-        setSubmitStatus("idle")
+        setSelectedCrop(null)
+        openDialog()
     }
 
     const nextStep = () => {
+        if (step == 1 && !selectedCrop) {
+            return;
+        }
+        if (step == 2) {
+            if (!validateForm()) {
+                toast.current?.show({
+                    severity: "warn",
+                    summary: "Validation Error",
+                    detail: "Please fill all required fields",
+                    life: 3000
+                });
+                return;
+            }
+        }
         if (step < 4) {
             setStep((prev) => prev + 1)
         } else {
@@ -274,17 +325,6 @@ export default function CreateCropStagesOfGrowth({isOpen, onClose}: FormProps) {
                                         )}
                                     </CardContent>
 
-                                    {/*<CardFooter>*/}
-                                    {/*    <Button*/}
-                                    {/*        type="button"*/}
-                                    {/*        variant="destructive"*/}
-                                    {/*        onClick={() => removeStage(index)}*/}
-                                    {/*        disabled={cropStagesOfGrowth.cropStages.length === 1}*/}
-                                    {/*    >*/}
-                                    {/*        <Trash2 className="w-4 h-4 mr-2"/>*/}
-                                    {/*        Remove Stage*/}
-                                    {/*    </Button>*/}
-                                    {/*</CardFooter>*/}
                                 </Card>
                                 <Button
                                     type="button"
@@ -299,10 +339,6 @@ export default function CreateCropStagesOfGrowth({isOpen, onClose}: FormProps) {
                             </div>
                         ))}
 
-                        {/*<Button type="button" onClick={addStage} className="w-full">*/}
-                        {/*    <Plus className="w-4 h-4 mr-2"/>*/}
-                        {/*    Add Stage*/}
-                        {/*</Button>*/}
 
                         <Button
                             type="button"
@@ -315,12 +351,6 @@ export default function CreateCropStagesOfGrowth({isOpen, onClose}: FormProps) {
                             Add Stage
                         </Button>
 
-                        {/*<div className="flex justify-between">*/}
-                        {/*    <Button type="button" onClick={() => setIsDialogOpen(false)} variant="outline">*/}
-                        {/*        Cancel*/}
-                        {/*    </Button>*/}
-                        {/*    <Button type="submit">Review & Submit</Button>*/}
-                        {/*</div>*/}
                     </form>
                 )
             case 3:
@@ -361,43 +391,19 @@ export default function CreateCropStagesOfGrowth({isOpen, onClose}: FormProps) {
 
     return (
         <div className="max-w-4xl mx-auto p-4">
+            <Toast ref={toast}/>
             <Card>
                 <CardHeader>
                     <CardTitle>Create Crop Stages of Growth</CardTitle>
                     <CardDescription>Define the stages of growth for a crop</CardDescription>
                 </CardHeader>
                 <CardContent>
-                    {submitStatus === "idle" && (
-                        <div className="flex justify-between items-center">
-                            <div>Step {step} of 3</div>
-                            <Button
-                                onClick={openDialog}>{step === 3 ? "Review" : step === 1 ? "Start" : "Continue"}</Button>
-                        </div>
-                    )}
-                    {submitStatus === "success" && (
-                        <Alert>
-                            <CheckCircle className="h-4 w-4"/>
-                            <AlertTitle>Success</AlertTitle>
-                            <AlertDescription>Your crop stages of growth have been successfully
-                                submitted.</AlertDescription>
-                        </Alert>
-                    )}
-                    {submitStatus === "error" && (
-                        <Alert variant="destructive">
-                            <XCircle className="h-4 w-4"/>
-                            <AlertTitle>Error</AlertTitle>
-                            <AlertDescription>
-                                There was an error submitting your crop stages of growth. Please try again.
-                            </AlertDescription>
-                        </Alert>
-                    )}
-                </CardContent>
-                {submitStatus !== "idle" && (
-                    <CardFooter>
+                    <div className="flex justify-between items-center">
+                        <div>Step {step} of 3</div>
                         <Button
-                            onClick={resetForm}>{submitStatus === "success" ? "Create Another" : "Try Again"}</Button>
-                    </CardFooter>
-                )}
+                            onClick={openDialog}>{step === 3 ? "Review" : step === 1 ? "Start" : "Continue"}</Button>
+                    </div>
+                </CardContent>
             </Card>
 
             <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
@@ -421,7 +427,7 @@ export default function CreateCropStagesOfGrowth({isOpen, onClose}: FormProps) {
                             </Button>
                         )}
                         {step < 3 ? (
-                            <Button type="button" onClick={nextStep}>
+                            <Button type="button" disabled={step == 1 && !selectedCrop} onClick={nextStep}>
                                 Next
                             </Button>
                         ) : (

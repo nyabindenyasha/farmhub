@@ -33,6 +33,12 @@ export interface CropFormProps {
     onCropSelect: (crop: Crop | undefined) => void
 }
 
+export interface CropProgramFormProps {
+    isFarmer: boolean
+    isOpen: boolean
+    onClose: () => void
+}
+
 export interface AppointmentResponse {
     id: number;
     appointmentName: string;

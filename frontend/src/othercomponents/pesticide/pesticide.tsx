@@ -61,8 +61,8 @@ export default function PesticideComponent() {
     return (
         <DashboardLayout>
             <div className="flex w-screen p-5 space-y-6 min-h-screen flex-col">
-                <div className="flex items-center justify-between">
-                    <h2 className="text-3xl font-bold tracking-tight">Pesticides</h2>
+                <div className="flex items-center justify-between h-1/6 bg-gradient-to-r from-green-600 to-green-800">
+                    <h2 className="text-3xl font-bold tracking-tight pl-2">Pesticides</h2>
                     <div className="flex items-center space-x-2">
                         <Button variant="outline">Export</Button>
                         <PrimaryButton secondary={true} text={"Add Pesticide"} onClick={openPolicyForm}

@@ -1,7 +1,9 @@
-import React, {createContext, useContext, useState, ReactNode, useCallback} from "react";
+import React, {createContext, useContext, useState, ReactNode, useCallback, useRef} from "react";
 import apiClient from "../utils/apiClient";
 import {CropProgram} from "@/lib/types/crop-program";
 import {BASE_URL} from "@/lib/constants";
+import {Toast} from "primereact/toast";
+import {CropProgramRequest} from "@/othercomponents/cropprogram/create-crop-program";
 
 // Define the context type
 interface CropProgramContextType {
@@ -9,7 +11,12 @@ interface CropProgramContextType {
     getAllCropPrograms: () => Promise<void>;
     getCropProgramsByCrop: (cropId: number) => Promise<void>
     getCropProgramById: (id: number) => Promise<CropProgram | null>
-    createCropProgram: (cropProgramData: CropProgram) => Promise<void>;
+    createCropProgram: (cropProgramData: CropProgramRequest) => Promise<{
+        success: boolean;
+        data?: CropProgram;
+        error?: string
+    }>;
+    loading: boolean
 }
 
 // Create the context with a default value
@@ -22,6 +29,8 @@ interface CropProgramProviderProps {
 
 export const CropProgramProvider: React.FC<CropProgramProviderProps> = ({children}) => {
     const [cropPrograms, setCropPrograms] = useState<CropProgram[]>([]);
+    const [loading, setLoading] = useState(false);
+    const toast = useRef<Toast | null>(null);
 
     const getAllCropPrograms = useCallback(async (): Promise<void> => {
         try {
@@ -41,16 +50,36 @@ export const CropProgramProvider: React.FC<CropProgramProviderProps> = ({childre
         }
     }, [])
 
-    const createCropProgram = async (cropProgramData: CropProgram): Promise<void> => {
+    const createCropProgram = async (cropProgramData: CropProgramRequest): Promise<{
+        success: boolean;
+        data?: CropProgram;
+        error?: string
+    }> => {
         try {
-            const response = await apiClient.post<CropProgram>(BASE_URL + "/v1/api/crop-program", cropProgramData, {
+            const response = await apiClient.post<CropProgram>(BASE_URL + "/v1/api/crop-program/v2", cropProgramData, {
                 headers: {
                     'Content-Type': 'application/json',
                 },
             });
             setCropPrograms([...cropPrograms, response.data]);
+            toast.current?.show({
+                severity: "success",
+                summary: "Success",
+                detail: "Crop Program created successfully",
+                life: 3000
+            });
+            return {success: true, data: response.data};
         } catch (error) {
             console.error("Error creating Crop Program:", error);
+            toast.current?.show({
+                severity: "error",
+                summary: "Error",
+                detail: "Failed to create Crop Program",
+                life: 3000
+            });
+            return {success: false, error: "Failed to create Crop Program"};
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -65,7 +94,16 @@ export const CropProgramProvider: React.FC<CropProgramProviderProps> = ({childre
     }, []);
 
     return (
-        <CropProgramContext.Provider value={{cropPrograms, getAllCropPrograms, getCropProgramsByCrop, getCropProgramById, createCropProgram}}>
+        <CropProgramContext.Provider
+            value={{
+                cropPrograms,
+                getAllCropPrograms,
+                getCropProgramsByCrop,
+                getCropProgramById,
+                createCropProgram,
+                loading
+            }}>
+            <Toast ref={toast}/>
             {children}
         </CropProgramContext.Provider>
     );

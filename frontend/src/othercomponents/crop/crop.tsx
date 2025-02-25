@@ -14,6 +14,7 @@ import {DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger
 import {useCropContext} from "@/context/CropContext";
 import CreateCrop from "@/othercomponents/crop/create-crop";
 import {Crop} from "@/lib/types/crop";
+import CropGuideComponent from "@/othercomponents/cropguide/crop-guide-component";
 
 export default function CropComponent() {
 
@@ -27,7 +28,11 @@ export default function CropComponent() {
     const openPolicyForm = () => setIsCropFormOpen(true)
     const closeCropForm = () => setIsCropFormOpen(false)
 
-    const [selectedCrop, setSelectedCrop] = useState<Crop | undefined>(undefined);
+
+    const [createdCrop, setCreatedCrop] = useState<Crop | undefined>(undefined);
+
+    const [selectedCrop, setSelectedCrop] = useState<Crop | null>(null);
+
 
     const [selectedClients, setSelectedClients] = useState<string[]>([])
     const [searchTerm, setSearchTerm] = useState("")
@@ -62,14 +67,14 @@ export default function CropComponent() {
 
     const handleCropSelect = (crop: Crop | undefined) => {
         console.log("here: ", JSON.stringify(crop))
-        setSelectedCrop(crop)
+        setCreatedCrop(crop)
     }
 
     return (
         <DashboardLayout>
             <div className="flex w-screen p-5 space-y-6 min-h-screen flex-col">
-                <div className="flex items-center justify-between">
-                    <h2 className="text-3xl font-bold tracking-tight">Crops</h2>
+                <div className="flex items-center h-1/6 justify-between bg-gradient-to-r from-green-600 to-green-800">
+                    <h2 className="text-3xl font-bold tracking-tight pl-2">Crops</h2>
                     <div className="flex items-center space-x-2">
                         <Button variant="outline">Export</Button>
                         <PrimaryButton secondary={true} text={"Add Crop"} onClick={openPolicyForm}
@@ -152,8 +157,11 @@ export default function CropComponent() {
                                             </DropdownMenuTrigger>
                                             <DropdownMenuContent align="end">
                                                 <DropdownMenuItem>
-                                                    <span
-                                                        onClick={() => router.push(`/dashboard/patient/${'adsfljkl'}`)}> View Details</span>
+                                            <span
+                                                onClick={() => {
+                                                    console.log("onClick: ", crop.id);
+                                                    setSelectedCrop(crop);
+                                                }}> View Details</span>
                                                 </DropdownMenuItem>
                                                 <DropdownMenuItem>Edit Record</DropdownMenuItem>
                                             </DropdownMenuContent>
@@ -163,6 +171,8 @@ export default function CropComponent() {
                             ))}
                         </TableBody>
                     </Table>
+                    {selectedCrop &&
+                        <CropGuideComponent cropId={selectedCrop?.id} onClose={() => setSelectedCrop(null)}/>}
                 </div>
                 <div className="flex items-center justify-between">
                     <Button variant="outline" size="sm">
