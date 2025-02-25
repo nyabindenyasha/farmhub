@@ -1,24 +1,12 @@
 import React, {useState} from "react";
 import DashboardLayout from "@/layouts/DashboardLayout";
 
-import { Button } from "@/components/ui/button"
-import { Card } from "@/components/ui/card"
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import {
-    Table,
-    TableBody,
-    TableCell,
-    TableHead,
-    TableHeader,
-    TableRow,
-} from "@/components/ui/table"
-import { Badge } from "@/components/ui/badge"
-import {
-    Plus,
-    Download,
-    ChevronRight,
-    Search
-} from 'lucide-react'
+import {Button} from "@/components/ui/button"
+import {Card} from "@/components/ui/card"
+import {Tabs, TabsList, TabsTrigger} from "@/components/ui/tabs"
+import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow,} from "@/components/ui/table"
+import {Badge} from "@/components/ui/badge"
+import {ChevronRight, Download, Plus, Search} from 'lucide-react'
 import {Input} from "@/components/ui/input";
 import {useRouter} from "next/router";
 import {patients} from "@/lib/data";

@@ -14,7 +14,6 @@ import {useRouter} from "next/router";
 import {Badge} from "@/components/ui/badge";
 import {PolicyMember} from "@/lib/types";
 import PrimaryButton from "@/components/buttons/customButton";
-import AppointmentForm from "@/components/form/AppointmentForrm";
 import PolicyForm from "@/components/form/PolicyForm";
 
 

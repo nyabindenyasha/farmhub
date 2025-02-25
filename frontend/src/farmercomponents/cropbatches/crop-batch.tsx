@@ -6,7 +6,7 @@ import {Button} from "@/components/ui/button"
 import CropBatchDetails from "./crop-batch-details"
 import {useCropBatchContext} from "@/context/CropBatchContext";
 import DashboardLayout from "@/layouts/DashboardLayout";
-import {MoreHorizontal, Plus, Search} from "lucide-react";
+import {MoreHorizontal, Search} from "lucide-react";
 import {Tabs, TabsList, TabsTrigger} from "@/components/ui/tabs";
 import {Badge} from "@/components/ui/badge";
 import {Input} from "@/components/ui/input";

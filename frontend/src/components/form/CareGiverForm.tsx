@@ -2,12 +2,10 @@
 
 import {useState} from 'react'
 import {Button} from '@/components/ui/button'
-import {CardContent} from '@/components/ui/card'
 import {Input} from '@/components/ui/input'
 import {Label} from '@/components/ui/label'
-import {Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger,} from '@/components/ui/dialog'
+import {Dialog, DialogContent, DialogHeader, DialogTitle,} from '@/components/ui/dialog'
 import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue,} from '@/components/ui/select'
-import {AddButton} from './AddButton'
 import {FormProps} from "@/lib/types";
 
 export default function CarerForm({isOpen,onClose}: FormProps) {

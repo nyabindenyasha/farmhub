@@ -1,5 +1,5 @@
 import type React from "react"
-import {createContext, useContext, useState, useEffect} from "react"
+import {createContext, useEffect, useState} from "react"
 import {LoginResponse} from "@/lib/types/login-response";
 import {UserAccount} from "@/lib/types/user-account";
 import apiClient from "@/utils/apiClient";

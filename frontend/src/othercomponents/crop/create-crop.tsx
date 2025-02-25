@@ -4,21 +4,14 @@ import React, {useRef, useState} from 'react'
 import {Button} from '@/components/ui/button'
 import {Input} from '@/components/ui/input'
 import {Label} from '@/components/ui/label'
-import {
-    Dialog,
-    DialogContent,
-    DialogHeader,
-    DialogTitle,
-
-} from '@/components/ui/dialog'
-import {CropFormProps, FormProps} from "@/lib/types";
+import {Dialog, DialogContent, DialogHeader, DialogTitle,} from '@/components/ui/dialog'
+import {CropFormProps} from "@/lib/types";
 import {useCropContext} from "@/context/CropContext";
 import {Crop} from "@/lib/types/crop";
 import {Toast} from "primereact/toast";
-import {log} from "util";
-import {Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle} from "@/components/ui/card";
+import {Card, CardContent, CardFooter} from "@/components/ui/card";
 import {Alert, AlertDescription, AlertTitle} from "@/components/ui/alert";
-import {CheckCircle, XCircle} from "lucide-react";
+import {CheckCircle} from "lucide-react";
 
 export default function CreateCrop({isOpen, onClose, onCropSelect}: CropFormProps) {
 

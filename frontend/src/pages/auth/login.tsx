@@ -1,5 +1,5 @@
-import { useState } from "react"
-import { AnimatePresence } from "framer-motion"
+import {useState} from "react"
+import {AnimatePresence} from "framer-motion"
 import HeroSection from "@/pages/auth/hero-section";
 import {AuthForm} from "@/pages/auth/auth-form";
 

@@ -4,19 +4,11 @@ import React, {useRef, useState} from 'react'
 import {Button} from '@/components/ui/button'
 import {Input} from '@/components/ui/input'
 import {Label} from '@/components/ui/label'
-import {
-    Dialog,
-    DialogContent,
-    DialogHeader,
-    DialogTitle,
-
-} from '@/components/ui/dialog'
+import {Dialog, DialogContent, DialogHeader, DialogTitle,} from '@/components/ui/dialog'
 import {FormProps} from "@/lib/types";
-import axios from "axios";
 import {useFertilizerContext} from "@/context/FertilizerContext";
 import {Fertilizer} from "@/lib/types/fertilizer";
 import {Toast} from "primereact/toast";
-import {Crop} from "@/lib/types/crop";
 
 export default function CreateFertilizer({isOpen, onClose}: FormProps) {
 

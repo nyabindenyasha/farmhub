@@ -1,9 +1,8 @@
-import React, {createContext, useContext, useState, ReactNode, useRef, useCallback} from "react";
+import React, {createContext, ReactNode, useCallback, useContext, useRef, useState} from "react";
 import apiClient from "../utils/apiClient";
 import {Pesticide} from "@/lib/types/pesticide";
 import {BASE_URL} from "@/lib/constants";
 import {Toast} from "primereact/toast";
-import {Crop} from "@/lib/types/crop";
 
 interface PesticideContextType {
     pesticides: Pesticide[];

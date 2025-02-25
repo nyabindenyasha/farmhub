@@ -2,11 +2,10 @@ import React, {useState} from "react";
 import DashboardLayout from "@/layouts/DashboardLayout";
 
 
-import { Calendar, Plus, Search, Trash2} from 'lucide-react'
+import {Plus, Search} from 'lucide-react'
 import {Button} from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
+import {Badge} from "@/components/ui/badge"
 import {Input} from "@/components/ui/input"
-import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue,} from "@/components/ui/select"
 import {Accordion, AccordionContent, AccordionItem, AccordionTrigger} from "@/components/ui/accordion";
 import CustomStatus from "@/components/status/CustomStatus";
 import PrimaryButton from "@/components/buttons/customButton";
@@ -15,8 +14,6 @@ import {useRouter} from "next/router";
 import {patients} from "@/lib/data";
 import {AppointmentResponse} from "@/lib/types";
 import AppointmentForm from "@/components/form/AppointmentForrm";
-
-
 
 
 const appointmentResponses: AppointmentResponse[] = Array(2).fill({

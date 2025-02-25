@@ -1,7 +1,7 @@
-import { SiteHeader } from "@/components/siteheader/site-header"
-import { Button } from "@/components/ui/button"
-import { ProgressBar } from "@/components/progressbar/progress-bar"
-import { ArrowRight, Leaf, SproutIcon as Seedling, Sun, Cloud, DropletsIcon as Drop } from "lucide-react"
+import {SiteHeader} from "@/components/siteheader/site-header"
+import {Button} from "@/components/ui/button"
+import {ProgressBar} from "@/components/progressbar/progress-bar"
+import {ArrowRight, DropletsIcon as Drop, Leaf, SproutIcon as Seedling, Sun} from "lucide-react"
 import Image from "next/image"
 
 export default function LandingPage() {

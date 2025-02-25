@@ -1,5 +1,4 @@
 import {UserGroup} from "@/lib/types/user-group";
-import {Role} from "@/lib/enums/role";
 
 export interface UserAccount {
     id: number;

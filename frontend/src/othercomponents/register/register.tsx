@@ -1,10 +1,10 @@
-import { useState } from "react"
-import { useRouter } from "next/navigation"
-import { Input } from "@/components/ui/input"
-import { Button } from "@/components/ui/button"
-import { Label } from "@/components/ui/label"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Icons } from "@/components/icons/icons"
+import {useState} from "react"
+import {useRouter} from "next/navigation"
+import {Input} from "@/components/ui/input"
+import {Button} from "@/components/ui/button"
+import {Label} from "@/components/ui/label"
+import {Tabs, TabsContent, TabsList, TabsTrigger} from "@/components/ui/tabs"
+import {Icons} from "@/components/icons/icons"
 
 interface RegisterFormData {
     username: string;

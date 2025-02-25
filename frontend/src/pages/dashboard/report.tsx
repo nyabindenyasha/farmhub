@@ -1,9 +1,8 @@
 import DashboardLayout from "@/layouts/DashboardLayout";
 import React from "react";
-import { Card } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Button } from "@/components/ui/button"
-import { Filter, Download, RotateCcw, Plus, Settings, FileText, FilePieChart, FileSpreadsheet } from 'lucide-react'
+import {Input} from "@/components/ui/input"
+import {Button} from "@/components/ui/button"
+import {Download, Filter, Plus, RotateCcw, Settings} from 'lucide-react'
 import {OvertimeCard} from "@/components/cards/overtime-card";
 import {ReportDownloadOptions} from "@/components/report-download-options";
 import {PatientProgressGraph} from "@/components/cards/patient-progress";

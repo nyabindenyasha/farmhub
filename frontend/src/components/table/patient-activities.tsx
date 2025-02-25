@@ -1,13 +1,6 @@
-import {
-    Table,
-    TableBody,
-    TableCell,
-    TableHead,
-    TableHeader,
-    TableRow,
-} from "@/components/ui/table"
-import { Button } from "@/components/ui/button"
-import { Settings } from 'lucide-react'
+import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow,} from "@/components/ui/table"
+import {Button} from "@/components/ui/button"
+import {Settings} from 'lucide-react'
 import CustomStatus from "@/components/status/CustomStatus";
 
 export function PatientActivitiesTable() {

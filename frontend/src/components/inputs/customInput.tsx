@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useState } from 'react';
-import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/outline';
+import {useState} from 'react';
+import {EyeIcon, EyeSlashIcon} from '@heroicons/react/24/outline';
 
 type Props = {
     label?: string;

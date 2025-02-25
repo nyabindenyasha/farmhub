@@ -1,6 +1,5 @@
-import {Calendar, ChevronRight, Mail, Phone, User} from "lucide-react";
+import {Calendar, Mail, Phone, User} from "lucide-react";
 import {Card, CardContent, CardHeader, CardTitle} from "@/components/ui/card";
-import Image from "next/image"
 import React from "react";
 import {PolicyMember} from "@/lib/types";
 

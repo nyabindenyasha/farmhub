@@ -1,7 +1,6 @@
 import Image from "next/image"
-import { useRouter } from "next/navigation"
-import { Button } from "@/components/ui/button"
-import { RegisterForm } from "@/othercomponents/register/register"
+import {useRouter} from "next/navigation"
+import {RegisterForm} from "@/othercomponents/register/register"
 
 export default function RegisterPage() {
     const router = useRouter()

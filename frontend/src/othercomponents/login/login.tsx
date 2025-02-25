@@ -1,12 +1,12 @@
-import { useState } from "react"
+import {useState} from "react"
 import Link from "next/link"
-import { useRouter } from "next/navigation"
-import { Input } from "@/components/ui/input"
-import { Button } from "@/components/ui/button"
-import { Label } from "@/components/ui/label"
-import { Checkbox } from "@/components/ui/checkbox"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import type { LoginFormData, AuthState } from "@/lib/types/auth"
+import {useRouter} from "next/navigation"
+import {Input} from "@/components/ui/input"
+import {Button} from "@/components/ui/button"
+import {Label} from "@/components/ui/label"
+import {Checkbox} from "@/components/ui/checkbox"
+import {Tabs, TabsContent} from "@/components/ui/tabs"
+import type {AuthState, LoginFormData} from "@/lib/types/auth"
 import {Icons} from "@/components/icons/icons";
 import axios from "axios";
 import {useUser} from "@/hooks/useUser";

@@ -1,9 +1,9 @@
 import React from "react";
-import {dashboard_nav_items, sideBarDashboardNavItems} from "@/lib/data";
+import {sideBarDashboardNavItems} from "@/lib/data";
 import {useRouter} from "next/router";
 import {Button} from "@/components/ui/button";
 import {ScrollArea} from "@radix-ui/react-scroll-area";
-import {getRole, roleMap} from "@/lib/enums/role";
+import {getRole} from "@/lib/enums/role";
 import {useUser} from "@/hooks/useUser";
 
 function DashboardSideBar() {

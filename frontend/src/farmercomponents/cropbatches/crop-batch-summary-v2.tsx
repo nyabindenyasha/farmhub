@@ -5,10 +5,10 @@ import {PesticideModeOfAction} from "@/lib/enums/pesticide-mode-of-action";
 import {CropScheduleType} from "@/lib/enums/crop-schedule-type";
 import {PeriodUnit} from "@/lib/enums/period-unit";
 import {PesticideApplicationMethod} from "@/lib/enums/pesticide-application-method";
-import { useState } from "react"
-import { ChevronDown, ChevronUp } from "lucide-react";
-import { Button } from "@/components/ui/button"
-import { ScrollArea } from "@/components/ui/scroll-area"
+import {useState} from "react"
+import {ChevronDown, ChevronUp} from "lucide-react";
+import {Button} from "@/components/ui/button"
+import {ScrollArea} from "@/components/ui/scroll-area"
 
 export function CropBatchSummaryV2() {
 

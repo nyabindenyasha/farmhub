@@ -12,7 +12,7 @@ import FertilizerScheduleForm, {FertilizerSchedule} from "@/othercomponents/crop
 import PesticideScheduleForm, {PesticideSchedule} from "@/othercomponents/cropprogram/pesticide-schedule-form";
 import {CropProgramSummary} from "@/othercomponents/cropprogram/crop-program-summary";
 import {Card, CardContent, CardDescription, CardHeader, CardTitle} from "@/components/ui/card";
-import {CropProgramFormProps, FormProps} from "@/lib/types";
+import {CropProgramFormProps} from "@/lib/types";
 import {useCropContext} from "@/context/CropContext";
 import {Crop} from "@/lib/types/crop";
 import {useCropProgramContext} from "@/context/CropProgramContext";

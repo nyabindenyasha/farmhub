@@ -1,14 +1,10 @@
 import React, {useEffect, useState} from "react";
 import DashboardLayout from "@/layouts/DashboardLayout";
-import {FunkyChart} from "@/components/charts/FunkyCharts";
 import {Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle} from "@/components/ui/card";
-import {ClaimsPieChart} from "@/components/charts/ClaimsPieChart";
 import PrimaryButton from "@/components/buttons/customButton";
-import {CalendarDaysIcon} from "@heroicons/react/24/outline";
 import {Calendar, ChevronRight, DollarSign, Scissors, TrendingUp, Users} from "lucide-react";
 import MetricCard from "@/components/cards/metrics";
-import {BarChartMultiple} from "@/components/charts/BarChartMultiple";
-import {Cell, Line, LineChart, Pie, PieChart, ResponsiveContainer, XAxis, YAxis} from "recharts";
+import {Line, LineChart, Pie, PieChart, ResponsiveContainer, XAxis, YAxis} from "recharts";
 import {ChartConfig, ChartContainer, ChartTooltip, ChartTooltipContent} from "@/components/ui/chart";
 import {useUser} from "@/hooks/useUser";
 

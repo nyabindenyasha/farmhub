@@ -1,5 +1,5 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { ChevronDown } from 'lucide-react'
+import {Card, CardContent, CardHeader, CardTitle} from "@/components/ui/card"
+import {ChevronDown} from 'lucide-react'
 
 export function BMIIndicator() {
     return (

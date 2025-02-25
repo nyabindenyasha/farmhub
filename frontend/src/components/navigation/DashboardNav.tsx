@@ -1,8 +1,7 @@
 import React from "react";
-import {UserCircleIcon} from "@heroicons/react/24/outline";
 import UserDropDown from "@/components/userdropdown/UserDropDown";
 import {Search} from "lucide-react";
-import { Input } from "@/components/ui/input"
+import {Input} from "@/components/ui/input"
 import {useUser} from "@/hooks/useUser";
 
 function DashboardNav(){

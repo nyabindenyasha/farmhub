@@ -1,5 +1,5 @@
-import { Card, CardContent } from "@/components/ui/card"
-import { Heart, Skull, ThumbsUp, Clock } from 'lucide-react'
+import {Card, CardContent} from "@/components/ui/card"
+import {Clock, Heart, Skull, ThumbsUp} from 'lucide-react'
 
 interface MetricCardProps {
     title: string
