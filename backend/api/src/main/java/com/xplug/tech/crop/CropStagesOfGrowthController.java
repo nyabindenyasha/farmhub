@@ -39,8 +39,8 @@ public class CropStagesOfGrowthController {
 
     @PostMapping
     @Operation(summary = "Create CropStagesOfGrowth")
-    public List<CropStagesOfGrowth> create(@RequestBody CropStagesOfGrowthBulkRequest cropStagesOfGrowthRequest) {
-        return cropStagesOfGrowthService.create(cropStagesOfGrowthRequest);
+    public void create(@RequestBody CropStagesOfGrowthBulkRequest cropStagesOfGrowthRequest) {
+        cropStagesOfGrowthService.create(cropStagesOfGrowthRequest);
     }
 
     @PutMapping("/{id}")

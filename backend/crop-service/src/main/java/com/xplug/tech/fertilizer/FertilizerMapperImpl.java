@@ -15,6 +15,7 @@ public non-sealed class FertilizerMapperImpl implements FertilizerMapper {
                 .name(fertilizerRequest.getName())
                 .alias(fertilizerRequest.getAlias())
                 .composition(fertilizerRequest.getComposition())
+                .type(fertilizerRequest.getType())
                 .remarks(fertilizerRequest.getRemarks())
                 .build();
     }

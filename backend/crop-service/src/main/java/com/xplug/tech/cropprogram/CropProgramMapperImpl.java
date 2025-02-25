@@ -50,6 +50,20 @@ public non-sealed class CropProgramMapperImpl implements CropProgramMapper {
     }
 
     @Override
+    public CropProgram cropScheduleFromCropScheduleRequestV2(CropProgramRequestV2 cropProgramRequest) {
+        Objects.requireNonNull(cropProgramRequest, "CropScheduleRequest cannot be null!");
+        var crop = cropService.getById(cropProgramRequest.getCropId());
+        return CropProgram.builder()
+                .crop(crop)
+                .name(cropProgramRequest.getName())
+                .description(cropProgramRequest.getDescription())
+                .source(cropProgramRequest.getSource())
+                .remarks(cropProgramRequest.getRemarks())
+                .cropScheduleType(cropProgramRequest.getCropScheduleType())
+                .build();
+    }
+
+    @Override
     public CropProgram cropScheduleFromCropScheduleUpdateRequest(CropProgram cropProgram,
                                                                  CropProgramUpdateRequest cropScheduleUpdateRequest) {
         Objects.requireNonNull(cropProgram, "CropSchedule cannot be null!");

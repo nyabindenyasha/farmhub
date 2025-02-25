@@ -43,23 +43,29 @@ public non-sealed class CropStagesOfGrowthServiceImpl implements CropStagesOfGro
         return cropStagesOfGrowthList;
     }
 
-    public List<CropStagesOfGrowth> create(CropStagesOfGrowthBulkRequest request) {
+    public void create(CropStagesOfGrowthBulkRequest request) {
+
+        log.info("CropStagesOfGrowthBulkRequest: {}", request);
 
         List<CropStagesOfGrowth> cropStagesOfGrowthList = new ArrayList<>();
 
-        request.getCropStages().forEach(cropStage -> {
-            var stageStartDatePeriod = periodService.findOrCreatePeriod(cropStage.getStageStartDate());
-            var stageEndDatePeriod = periodService.findOrCreatePeriod(cropStage.getStageEndDate());
-            var optionalCropStagesOfGrowth = cropStagesOfGrowthRepository
-                    .findByCropIdAndStageStartDateIdAndStageEndDateId(request.getCropId(), stageStartDatePeriod.getId(), stageEndDatePeriod.getId());
-            if (optionalCropStagesOfGrowth.isPresent()) {
-                throw new ItemAlreadyExistsException("CropStagesOfGrowth with same period already exists");
-            }
-            var cropStagesOfGrowth = cropStagesOfGrowthMapper.cropStagesOfGrowthFromCropStagesOfGrowthRequest(cropStage, request.getCropId());
-            cropStagesOfGrowthList.add(cropStagesOfGrowth);
-        });
+//        request.getCropStages().forEach(cropStage -> {
+//            var stageStartDatePeriod = periodService.findOrCreatePeriod(cropStage.getStageStartDate());
+//            var stageEndDatePeriod = periodService.findOrCreatePeriod(cropStage.getStageEndDate());
+//            var optionalCropStagesOfGrowth = cropStagesOfGrowthRepository
+//                    .findByCropIdAndStageStartDateIdAndStageEndDateId(request.getCropId(), stageStartDatePeriod.getId(), stageEndDatePeriod.getId());
+//            if (optionalCropStagesOfGrowth.isPresent()) {
+//                throw new ItemAlreadyExistsException("CropStagesOfGrowth with same period already exists");
+//            }
+//            var cropStagesOfGrowth = cropStagesOfGrowthMapper.cropStagesOfGrowthFromCropStagesOfGrowthRequest(cropStage, request.getCropId());
+//            cropStagesOfGrowthList.add(cropStagesOfGrowth);
+//        });
+//
+//        return cropStagesOfGrowthRepository.saveAll(cropStagesOfGrowthList);
 
-        return cropStagesOfGrowthRepository.saveAll(cropStagesOfGrowthList);
+        request.getCropStages().forEach(cropStage -> {
+           initialize(cropStage, request.getCropId());
+        });
     }
 
     @Override

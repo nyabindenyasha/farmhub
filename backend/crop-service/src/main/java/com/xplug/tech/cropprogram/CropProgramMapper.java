@@ -13,6 +13,9 @@ public sealed interface CropProgramMapper permits CropProgramMapperImpl {
 
     CropProgram cropScheduleFromCropScheduleRequest(CropProgramRequestV2 cropRequest, Set<CropFertilizerSchedule> cropFertilizerSchedules, Set<CropPesticideSchedule> cropPesticideSchedules);
 
+    CropProgram cropScheduleFromCropScheduleRequestV2(CropProgramRequestV2 cropRequest);
+
+
     CropProgram cropScheduleFromCropScheduleUpdateRequest(CropProgram crop, CropProgramUpdateRequest cropUpdateRequest);
 
     CropProgramResponse cropScheduleResponseFromCropSchedule(CropProgram crop);

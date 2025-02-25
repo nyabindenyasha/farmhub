@@ -1,5 +1,6 @@
 package com.xplug.tech.crop;
 
+import com.xplug.tech.enums.FertilizerType;
 import lombok.*;
 
 import javax.persistence.*;
@@ -28,7 +29,8 @@ public class Fertilizer {
     @Column(length = 500)
     private String remarks;
 
-//    @OneToMany(mappedBy = "fertilizer", cascade = CascadeType.ALL, orphanRemoval = true)
-//    private List<FertilizerSchedule> schedules;
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private FertilizerType type;
 
 }

@@ -3,24 +3,28 @@
     "name": "Compound C",
     "alias": "C",
     "composition": "5:15:12",
+    "type": "INORGANIC",
     "remarks": "Basal"
   },
   {
     "name": "Ammonium Nitrate",
     "alias": "AN",
     "composition": "34.5%N",
+    "type": "INORGANIC",
     "remarks": "top dressing"
   },
   {
     "name": "Potassium Nitrate",
     "alias": "PN",
     "composition": "13:0:45",
+    "type": "INORGANIC",
     "remarks": "top dressing"
   },
   {
     "name": "Calcium Nitrate",
     "alias": "CN",
     "composition": "15,5% (N), 26,5% (CaO)",
+    "type": "INORGANIC",
     "remarks": "top dressing"
   }
 ]

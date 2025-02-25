@@ -1,6 +1,8 @@
 package com.xplug.tech.cropprogram;
 
 import com.xplug.tech.crop.*;
+import com.xplug.tech.cropfertilizerschedule.CropFertilizerScheduleService;
+import com.xplug.tech.croppesticideschedule.CropPesticideScheduleService;
 import com.xplug.tech.enums.CropScheduleType;
 import com.xplug.tech.exception.ItemAlreadyExistsException;
 import lombok.extern.slf4j.Slf4j;
@@ -18,11 +20,11 @@ public non-sealed class CropProgramServiceImpl implements CropProgramService {
 
     private final CropProgramMapper cropProgramMapper;
 
-    private final CropFertilizerScheduleDao cropFertilizerScheduleService;
+    private final CropFertilizerScheduleService cropFertilizerScheduleService;
 
-    private final CropPesticideScheduleDao cropPesticideScheduleService;
+    private final CropPesticideScheduleService cropPesticideScheduleService;
 
-    public CropProgramServiceImpl(CropProgramDao cropScheduleRepository, CropProgramMapper cropProgramMapper, CropFertilizerScheduleDao cropFertilizerScheduleService, CropPesticideScheduleDao cropPesticideScheduleService) {
+    public CropProgramServiceImpl(CropProgramDao cropScheduleRepository, CropProgramMapper cropProgramMapper, CropFertilizerScheduleService cropFertilizerScheduleService, CropPesticideScheduleService cropPesticideScheduleService) {
         this.cropScheduleRepository = cropScheduleRepository;
         this.cropProgramMapper = cropProgramMapper;
         this.cropFertilizerScheduleService = cropFertilizerScheduleService;
@@ -77,22 +79,33 @@ public non-sealed class CropProgramServiceImpl implements CropProgramService {
             throw new ItemAlreadyExistsException("CropSchedule for crop with Id: " + cropProgramRequest.getCropId() + " already exists");
         }
 
+        var cropProgram = cropProgramMapper
+                .cropScheduleFromCropScheduleRequestV2(cropProgramRequest);
+
+        var savedCropProgram = cropScheduleRepository.save(cropProgram);
+
+
         Set<CropFertilizerSchedule> cropFertilizerSchedules = new HashSet<>();
-//        cropProgramRequest.getFertilizerScheduleRequests().forEach(cropFertilizerScheduleRequest -> {
-//            var savedCropFertilizerSchedule = cropFertilizerScheduleService.create(cropFertilizerScheduleRequest);
-//            cropFertilizerSchedules.add(savedCropFertilizerSchedule);
-//        });
+        cropProgramRequest.getFertilizerScheduleRequests().forEach(cropFertilizerScheduleRequest -> {
+            cropFertilizerScheduleRequest.setCropProgram(cropProgram);
+            cropFertilizerScheduleRequest.setCropScheduleId(cropProgram.getId());
+            var savedCropFertilizerSchedule = cropFertilizerScheduleService.create(cropFertilizerScheduleRequest);
+            cropFertilizerSchedules.add(savedCropFertilizerSchedule);
+        });
 
         Set<CropPesticideSchedule> cropPesticideSchedules = new HashSet<>();
-//        cropProgramRequest.getPesticideScheduleRequests().forEach(cropPesticideScheduleRequest -> {
-//            var savedCropPesticideSchedule = cropPesticideScheduleService.create(cropPesticideScheduleRequest);
-//            cropPesticideSchedules.add(savedCropPesticideSchedule);
-//        });
+        cropProgramRequest.getPesticideScheduleRequests().forEach(cropPesticideScheduleRequest -> {
+            cropPesticideScheduleRequest.setCropProgram(cropProgram);
+            cropPesticideScheduleRequest.setCropScheduleId(cropProgram.getId());
+            var savedCropPesticideSchedule = cropPesticideScheduleService.create(cropPesticideScheduleRequest);
+            cropPesticideSchedules.add(savedCropPesticideSchedule);
+        });
 
-        var cropSchedule = cropProgramMapper
-                .cropScheduleFromCropScheduleRequest(cropProgramRequest, cropFertilizerSchedules, cropPesticideSchedules);
-        var savedCropSchedule = cropScheduleRepository.save(cropSchedule);
-        return savedCropSchedule;
+
+        savedCropProgram.setFertilizerScheduleList(cropFertilizerSchedules);
+        savedCropProgram.setPesticideScheduleList(cropPesticideSchedules);
+
+        return cropScheduleRepository.save(savedCropProgram);
     }
 
     @Override

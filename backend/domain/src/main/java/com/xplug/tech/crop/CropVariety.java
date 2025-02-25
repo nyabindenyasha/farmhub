@@ -1,5 +1,6 @@
 package com.xplug.tech.crop;
 
+import com.xplug.tech.enums.VarietyType;
 import lombok.*;
 
 import javax.persistence.*;
@@ -30,5 +31,8 @@ public class CropVariety {
     private Integer harvestDuration; //harvest window in days
 
     private String remarks;
+
+    @Enumerated(EnumType.STRING)
+    private VarietyType varietyType;
 
 }

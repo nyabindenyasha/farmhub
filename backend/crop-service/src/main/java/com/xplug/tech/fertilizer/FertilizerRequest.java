@@ -1,5 +1,6 @@
 package com.xplug.tech.fertilizer;
 
+import com.xplug.tech.enums.FertilizerType;
 import lombok.Getter;
 import lombok.ToString;
 
@@ -15,6 +16,8 @@ public class FertilizerRequest {
     private String alias;
 
     private String composition;
+
+    private FertilizerType type;
 
     private String remarks;
 

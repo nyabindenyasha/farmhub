@@ -1,5 +1,9 @@
 package com.xplug.tech.cropfertilizerschedule;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.xplug.tech.crop.CropProgram;
+import com.xplug.tech.crop.CropSchedule;
+import com.xplug.tech.crop.Fertilizer;
 import com.xplug.tech.enums.FertilizerApplicationMethod;
 import com.xplug.tech.period.PeriodRequest;
 import lombok.Getter;
@@ -28,5 +32,12 @@ public class CropFertilizerScheduleRequest {
     private FertilizerApplicationMethod applicationMethod; //enum
 
     private String remarks;
+
+    //todo
+    @JsonIgnore
+    private Fertilizer fertilizer;
+
+    @JsonIgnore
+    private CropProgram cropProgram;
 
 }
