@@ -1,7 +1,6 @@
 package com.xplug.tech.croppesticideschedule;
 
 import com.xplug.tech.crop.CropPesticideSchedule;
-import com.xplug.tech.cropprogram.CropProgramService;
 import com.xplug.tech.period.PeriodService;
 import com.xplug.tech.pesticide.PesticideService;
 import org.springframework.stereotype.Component;

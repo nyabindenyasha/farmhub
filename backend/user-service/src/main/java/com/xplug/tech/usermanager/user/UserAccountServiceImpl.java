@@ -2,7 +2,6 @@ package com.xplug.tech.usermanager.user;
 
 import com.xplug.tech.events.forgotpassword.ForgotPasswordEvent;
 import com.xplug.tech.events.passwordupdated.PasswordUpdatedEvent;
-import com.xplug.tech.events.usercreated.UserCreatedEvent;
 import com.xplug.tech.events.userverified.UserVerifiedEvent;
 import com.xplug.tech.exception.InvalidRequestException;
 import com.xplug.tech.exception.ItemNotFoundException;

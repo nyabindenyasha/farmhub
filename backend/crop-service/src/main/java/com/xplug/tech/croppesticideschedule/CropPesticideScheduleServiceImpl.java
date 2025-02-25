@@ -1,6 +1,9 @@
 package com.xplug.tech.croppesticideschedule;
 
-import com.xplug.tech.crop.*;
+import com.xplug.tech.crop.CropPesticideSchedule;
+import com.xplug.tech.crop.CropPesticideScheduleDao;
+import com.xplug.tech.crop.CropProgram;
+import com.xplug.tech.crop.Pesticide;
 import com.xplug.tech.enums.CropScheduleType;
 import com.xplug.tech.exception.ItemAlreadyExistsException;
 import com.xplug.tech.period.PeriodService;

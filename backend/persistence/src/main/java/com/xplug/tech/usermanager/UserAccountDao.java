@@ -1,7 +1,6 @@
 package com.xplug.tech.usermanager;
 
 import com.xplug.tech.jpa.BaseRepository;
-import com.xplug.tech.usermanager.UserAccount;
 import org.springframework.stereotype.Repository;
 
 import java.util.Collection;

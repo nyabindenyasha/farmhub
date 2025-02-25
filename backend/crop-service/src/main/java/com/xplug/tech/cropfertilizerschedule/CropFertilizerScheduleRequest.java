@@ -2,7 +2,6 @@ package com.xplug.tech.cropfertilizerschedule;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.xplug.tech.crop.CropProgram;
-import com.xplug.tech.crop.CropSchedule;
 import com.xplug.tech.crop.Fertilizer;
 import com.xplug.tech.enums.FertilizerApplicationMethod;
 import com.xplug.tech.period.PeriodRequest;

@@ -10,7 +10,6 @@ import com.xplug.tech.cropfertilizerschedule.CropFertilizerScheduleService;
 import com.xplug.tech.croppesticideschedule.CropPesticideScheduleService;
 import com.xplug.tech.cropstagesofgrowth.CropStagesOfGrowthService;
 import com.xplug.tech.enums.CropScheduleType;
-import com.xplug.tech.enums.PeriodUnit;
 import com.xplug.tech.enums.PesticideType;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

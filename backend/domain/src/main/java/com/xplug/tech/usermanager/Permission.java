@@ -1,6 +1,5 @@
 package com.xplug.tech.usermanager;
 
-import com.xplug.tech.jpa.BaseEntity;
 import lombok.*;
 
 import javax.persistence.*;

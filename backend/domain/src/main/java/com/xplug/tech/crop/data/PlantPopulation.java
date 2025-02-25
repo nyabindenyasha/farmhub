@@ -1,7 +1,9 @@
 package com.xplug.tech.crop.data;
 
 import com.xplug.tech.enums.RateUnit;
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;

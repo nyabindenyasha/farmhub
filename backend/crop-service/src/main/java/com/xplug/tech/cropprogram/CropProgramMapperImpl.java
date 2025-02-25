@@ -6,7 +6,6 @@ import com.xplug.tech.crop.CropProgram;
 import com.xplug.tech.crop.CropService;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 

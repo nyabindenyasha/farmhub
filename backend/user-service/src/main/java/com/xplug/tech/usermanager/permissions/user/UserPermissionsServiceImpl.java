@@ -1,12 +1,8 @@
 package com.xplug.tech.usermanager.permissions.user;
 
-import com.xplug.tech.usermanager.UserPermission;
-import com.xplug.tech.usermanager.permissions.permission.PermissionService;
+import com.xplug.tech.usermanager.*;
 import com.xplug.tech.usermanager.permissions.group.GroupPermissionService;
-import com.xplug.tech.usermanager.UserAccountDao;
-import com.xplug.tech.usermanager.GroupPermission;
-import com.xplug.tech.usermanager.Permission;
-import com.xplug.tech.usermanager.UserPermissionDao;
+import com.xplug.tech.usermanager.permissions.permission.PermissionService;
 import lombok.val;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

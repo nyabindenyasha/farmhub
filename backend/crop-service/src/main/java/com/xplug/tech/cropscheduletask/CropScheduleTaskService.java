@@ -1,7 +1,5 @@
 package com.xplug.tech.cropscheduletask;
 
-import com.xplug.tech.crop.CropFertilizerScheduleTask;
-import com.xplug.tech.crop.CropPesticideScheduleTask;
 import com.xplug.tech.crop.CropScheduleTask;
 
 import java.util.List;

@@ -1,12 +1,8 @@
 package com.xplug.tech.commons.security.services;
 
+import com.xplug.tech.usermanager.*;
 import com.xplug.tech.usermanager.permissions.group.GroupPermissionService;
-import com.xplug.tech.usermanager.UserPermission;
 import com.xplug.tech.usermanager.permissions.user.UserPermissionsService;
-import com.xplug.tech.usermanager.UserAccount;
-import com.xplug.tech.usermanager.UserAccountDao;
-import com.xplug.tech.usermanager.GroupPermission;
-import com.xplug.tech.usermanager.Permission;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;

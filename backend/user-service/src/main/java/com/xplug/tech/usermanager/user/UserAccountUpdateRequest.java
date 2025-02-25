@@ -1,8 +1,8 @@
 package com.xplug.tech.usermanager.user;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.xplug.tech.usermanager.UserGroup;
 import com.xplug.tech.usermanager.Permission;
+import com.xplug.tech.usermanager.UserGroup;
 import lombok.Data;
 
 import javax.validation.constraints.Email;

@@ -1,7 +1,6 @@
 package com.xplug.tech.usermanager;
 
 import com.xplug.tech.jpa.BaseEntity;
-import com.xplug.tech.usermanager.UserAccount;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

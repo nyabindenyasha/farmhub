@@ -1,8 +1,9 @@
 package com.xplug.tech.config;
 
-import java.util.TimeZone;
-import javax.annotation.PostConstruct;
 import org.springframework.stereotype.Component;
+
+import javax.annotation.PostConstruct;
+import java.util.TimeZone;
 
 @Component
 public class TimeZoneConfig {

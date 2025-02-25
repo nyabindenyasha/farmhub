@@ -1,8 +1,6 @@
 package com.xplug.tech.cropprogram;
 
-import com.xplug.tech.crop.CropFertilizerSchedule;
 import com.xplug.tech.cropfertilizerschedule.CropFertilizerScheduleRequest;
-import com.xplug.tech.cropfertilizerschedule.CropFertilizerScheduleResponse;
 import com.xplug.tech.croppesticideschedule.CropPesticideScheduleRequest;
 import com.xplug.tech.enums.CropScheduleType;
 import lombok.Getter;

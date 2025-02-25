@@ -1,6 +1,9 @@
 package com.xplug.tech.cropprogram;
 
-import com.xplug.tech.crop.*;
+import com.xplug.tech.crop.CropFertilizerSchedule;
+import com.xplug.tech.crop.CropPesticideSchedule;
+import com.xplug.tech.crop.CropProgram;
+import com.xplug.tech.crop.CropProgramDao;
 import com.xplug.tech.cropfertilizerschedule.CropFertilizerScheduleService;
 import com.xplug.tech.croppesticideschedule.CropPesticideScheduleService;
 import com.xplug.tech.enums.CropScheduleType;

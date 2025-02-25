@@ -1,12 +1,12 @@
 package com.xplug.tech.usermanager.permissions.group;
 
 import com.xplug.tech.exception.InvalidRequestException;
-import com.xplug.tech.usermanager.permissions.PermissionsEnum;
-import com.xplug.tech.usermanager.permissions.permission.PermissionService;
-import com.xplug.tech.usermanager.usergroup.UserGroupService;
 import com.xplug.tech.usermanager.GroupPermission;
 import com.xplug.tech.usermanager.GroupPermissionDao;
 import com.xplug.tech.usermanager.Permission;
+import com.xplug.tech.usermanager.permissions.PermissionsEnum;
+import com.xplug.tech.usermanager.permissions.permission.PermissionService;
+import com.xplug.tech.usermanager.usergroup.UserGroupService;
 import com.xplug.tech.utils.PageBuilder;
 import lombok.val;
 import org.springframework.data.domain.Page;

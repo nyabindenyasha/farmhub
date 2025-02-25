@@ -7,8 +7,6 @@ import com.lowagie.text.pdf.PdfPTable;
 import com.xplug.tech.utils.date.DateUtils;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 
 import java.awt.*;

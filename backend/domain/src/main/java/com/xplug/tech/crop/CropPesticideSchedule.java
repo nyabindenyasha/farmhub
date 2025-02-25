@@ -2,7 +2,6 @@ package com.xplug.tech.crop;
 
 import com.xplug.tech.enums.PesticideApplicationMethod;
 import lombok.*;
-import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
 

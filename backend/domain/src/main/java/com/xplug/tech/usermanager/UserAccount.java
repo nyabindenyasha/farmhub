@@ -1,7 +1,6 @@
 package com.xplug.tech.usermanager;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.xplug.tech.jpa.BaseEntity;
 import lombok.*;
 import org.hibernate.annotations.NaturalId;
 import org.springframework.security.core.GrantedAuthority;

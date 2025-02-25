@@ -1,6 +1,7 @@
 package com.xplug.tech.cropscheduletask;
 
-import com.xplug.tech.crop.*;
+import com.xplug.tech.crop.CropScheduleTask;
+import com.xplug.tech.crop.CropScheduleTaskDao;
 import com.xplug.tech.enums.TaskStatus;
 import com.xplug.tech.utils.date.DateUtils;
 import lombok.extern.slf4j.Slf4j;
