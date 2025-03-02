@@ -29,7 +29,7 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({children}
 
     const login = async (loginRequest: LoginFormData) => {
         try {
-            const response = await axios.post('http://localhost:8080/api/v1/auth/token/signin', loginRequest);
+            const response = await apiClient.post('/api/v1/auth/token/signin', loginRequest);
             console.log(response);
             setUser(response.data);
             localStorage.setItem("user", JSON.stringify(response.data));
