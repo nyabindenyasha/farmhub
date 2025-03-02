@@ -28,7 +28,7 @@ export default function RegisterPage() {
             {/* Right side - Image */}
             <div className="relative hidden lg:block lg:w-1/2">
                 <Image
-                    src="/farmhub/woman-in-vegetable.jpg"
+                    src="/images/woman-in-vegetable.jpg"
                     alt="Farm Hub Banner"
                     fill
                     className="object-cover"

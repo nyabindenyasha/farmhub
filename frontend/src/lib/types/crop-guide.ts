@@ -13,7 +13,7 @@ export interface CropGuide {
 export interface NurseryManagement {
     seedRate: SeedRate;
     nurseryPeriodicTimes: NurseryPeriodicTimes;
-    soilTemperatureForGermination: SoilTemperature;
+    soilTemperatureForGermination: SoilTemperatureForGermination;
     nurserySpacing: NurserySpacing;
     nurseryBedPreparation: NurseryBedPreparation;
 }
@@ -28,6 +28,12 @@ export interface NurseryPeriodicTimes {
     plantingTime: string
     emergenceTime: string
     transplantingTime: string
+}
+
+export interface SoilTemperatureForGermination {
+    minimumTemperature: SoilTemperature,
+    optimumTemperature: SoilTemperature,
+    maximumTemperature: SoilTemperature
 }
 
 export interface SoilTemperature {

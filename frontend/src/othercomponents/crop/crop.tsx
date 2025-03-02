@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useCallback, useEffect, useState} from "react";
 import {useRouter} from "next/router";
 import {patients} from "@/lib/data";
 import DashboardLayout from "@/layouts/DashboardLayout";
@@ -15,6 +15,8 @@ import {useCropContext} from "@/context/CropContext";
 import CreateCrop from "@/othercomponents/crop/create-crop";
 import {Crop} from "@/lib/types/crop";
 import CropGuideComponent from "@/othercomponents/cropguide/crop-guide-component";
+import {DataTable} from "primereact/datatable";
+import {Column} from "primereact/column";
 
 export default function CropComponent() {
 
@@ -32,6 +34,7 @@ export default function CropComponent() {
     const [createdCrop, setCreatedCrop] = useState<Crop | undefined>(undefined);
 
     const [selectedCrop, setSelectedCrop] = useState<Crop | null>(null);
+    const [selectedCrops, setSelectedCrops] = useState<Crop[]>([]);
 
 
     const [selectedClients, setSelectedClients] = useState<string[]>([])
@@ -69,6 +72,27 @@ export default function CropComponent() {
         console.log("here: ", JSON.stringify(crop))
         setCreatedCrop(crop)
     }
+
+    const actionBodyTemplate = (crop: Crop) => {
+        console.log("crop: ", crop);
+        return <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+                <Button variant="ghost" size="icon">
+                    <MoreHorizontal className="h-4 w-4"/>
+                </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+                <DropdownMenuItem>
+                    <span
+                        onClick={() => {
+                            console.log("onClick: ", crop.id);
+                            setSelectedCrop(crop);
+                        }}> View Details</span>
+                </DropdownMenuItem>
+                <DropdownMenuItem>Edit Record</DropdownMenuItem>
+            </DropdownMenuContent>
+        </DropdownMenu>;
+    };
 
     return (
         <DashboardLayout>
@@ -117,86 +141,102 @@ export default function CropComponent() {
                     </Button>
                 </div>
                 <div className="rounded-md border">
-                    <Table>
-                        <TableHeader>
-                            <TableRow>
-                                <TableHead className="w-[50px]">
-                                    <Checkbox
-                                        checked={selectedClients.length === filteredClients.length}
-                                        onCheckedChange={handleSelectAll}
-                                    />
-                                </TableHead>
-                                <TableHead>Name</TableHead>
-                                <TableHead>Family</TableHead>
-                                <TableHead>Genus</TableHead>
-                                <TableHead>Species</TableHead>
-                                <TableHead>Sub Species</TableHead>
+                    {/*<Table>*/}
+                    {/*    <TableHeader>*/}
+                    {/*        <TableRow>*/}
+                    {/*            <TableHead className="w-[50px]">*/}
+                    {/*                <Checkbox*/}
+                    {/*                    checked={selectedClients.length === filteredClients.length}*/}
+                    {/*                    onCheckedChange={handleSelectAll}*/}
+                    {/*                />*/}
+                    {/*            </TableHead>*/}
+                    {/*            <TableHead>Name</TableHead>*/}
+                    {/*            <TableHead>Family</TableHead>*/}
+                    {/*            <TableHead>Genus</TableHead>*/}
+                    {/*            <TableHead>Species</TableHead>*/}
+                    {/*            <TableHead>Sub Species</TableHead>*/}
 
-                            </TableRow>
-                        </TableHeader>
-                        <TableBody>
-                            {crops.slice(0, 10).map((crop) => (
-                                <TableRow key={crop.id}>
-                                    <TableCell>
-                                        <Checkbox
-                                            checked={selectedClients.includes(String(crop.id))}
-                                            onCheckedChange={() => handleSelectClient(String(crop.id))}
-                                        />
-                                    </TableCell>
-                                    <TableCell>{crop.name}</TableCell>
-                                    <TableCell>{crop.family}</TableCell>
-                                    <TableCell>{crop.genus}</TableCell>
-                                    <TableCell>{crop.species}</TableCell>
-                                    <TableCell>{crop.subSpecies}</TableCell>
-                                    <TableCell>
-                                        <DropdownMenu>
-                                            <DropdownMenuTrigger asChild>
-                                                <Button variant="ghost" size="icon">
-                                                    <MoreHorizontal className="h-4 w-4"/>
-                                                </Button>
-                                            </DropdownMenuTrigger>
-                                            <DropdownMenuContent align="end">
-                                                <DropdownMenuItem>
-                                            <span
-                                                onClick={() => {
-                                                    console.log("onClick: ", crop.id);
-                                                    setSelectedCrop(crop);
-                                                }}> View Details</span>
-                                                </DropdownMenuItem>
-                                                <DropdownMenuItem>Edit Record</DropdownMenuItem>
-                                            </DropdownMenuContent>
-                                        </DropdownMenu>
-                                    </TableCell>
-                                </TableRow>
-                            ))}
-                        </TableBody>
-                    </Table>
+                    {/*        </TableRow>*/}
+                    {/*    </TableHeader>*/}
+                    {/*    <TableBody>*/}
+                    {/*        {crops.slice(0, 10).map((crop) => (*/}
+                    {/*            <TableRow key={crop.id}>*/}
+                    {/*                <TableCell>*/}
+                    {/*                    <Checkbox*/}
+                    {/*                        checked={selectedClients.includes(String(crop.id))}*/}
+                    {/*                        onCheckedChange={() => handleSelectClient(String(crop.id))}*/}
+                    {/*                    />*/}
+                    {/*                </TableCell>*/}
+                    {/*                <TableCell>{crop.name}</TableCell>*/}
+                    {/*                <TableCell>{crop.family}</TableCell>*/}
+                    {/*                <TableCell>{crop.genus}</TableCell>*/}
+                    {/*                <TableCell>{crop.species}</TableCell>*/}
+                    {/*                <TableCell>{crop.subSpecies}</TableCell>*/}
+                    {/*                <TableCell>*/}
+                    {/*                    <DropdownMenu>*/}
+                    {/*                        <DropdownMenuTrigger asChild>*/}
+                    {/*                            <Button variant="ghost" size="icon">*/}
+                    {/*                                <MoreHorizontal className="h-4 w-4"/>*/}
+                    {/*                            </Button>*/}
+                    {/*                        </DropdownMenuTrigger>*/}
+                    {/*                        <DropdownMenuContent align="end">*/}
+                    {/*                            <DropdownMenuItem>*/}
+                    {/*                        <span*/}
+                    {/*                            onClick={() => {*/}
+                    {/*                                console.log("onClick: ", crop.id);*/}
+                    {/*                                setSelectedCrop(crop);*/}
+                    {/*                            }}> View Details</span>*/}
+                    {/*                            </DropdownMenuItem>*/}
+                    {/*                            <DropdownMenuItem>Edit Record</DropdownMenuItem>*/}
+                    {/*                        </DropdownMenuContent>*/}
+                    {/*                    </DropdownMenu>*/}
+                    {/*                </TableCell>*/}
+                    {/*            </TableRow>*/}
+                    {/*        ))}*/}
+                    {/*    </TableBody>*/}
+                    {/*</Table>*/}
+
+                    <DataTable className="prime-container" selectionMode='checkbox' selection={selectedCrops}
+                               onSelectionChange={(e) => setSelectedCrops(e.value)} dataKey="id" value={crops} paginator
+                               rows={10} rowsPerPageOptions={[5, 10, 25, 50]} size='small' tableStyle={{minWidth: '50rem'}}>
+                        <Column selectionMode="multiple" headerStyle={{width: '3rem'}}></Column>
+                        <Column field="name" header="Name"></Column>
+                        <Column field="family" header="Family"></Column>
+                        <Column field="genus" header="Genus"></Column>
+                        <Column field="species" header="Species"></Column>
+                        <Column field="subSpecies" header="Sub Species"></Column>
+                        <Column header="Actions" headerStyle={{ width: '5rem', textAlign: 'center' }} bodyStyle={{ textAlign: 'center', overflow: 'visible' }}
+                                body={(rowData) => actionBodyTemplate(rowData)}
+                        />
+                    </DataTable>
+
                     {selectedCrop &&
                         <CropGuideComponent cropId={selectedCrop?.id} onClose={() => setSelectedCrop(null)}/>}
                 </div>
-                <div className="flex items-center justify-between">
-                    <Button variant="outline" size="sm">
-                        Previous
-                    </Button>
-                    <div className="flex items-center space-x-2">
-                        <Button variant="outline" size="sm" className="h-8 w-8 p-0">
-                            1
-                        </Button>
-                        <Button variant="outline" size="sm" className="h-8 w-8 p-0">
-                            2
-                        </Button>
-                        <span>...</span>
-                        <Button variant="outline" size="sm" className="h-8 w-8 p-0">
-                            9
-                        </Button>
-                        <Button variant="outline" size="sm" className="h-8 w-8 p-0">
-                            10
-                        </Button>
-                    </div>
-                    <Button variant="outline" size="sm">
-                        Next
-                    </Button>
-                </div>
+
+                {/*<div className="flex items-center justify-between">*/}
+                {/*    <Button variant="outline" size="sm">*/}
+                {/*        Previous*/}
+                {/*    </Button>*/}
+                {/*    <div className="flex items-center space-x-2">*/}
+                {/*        <Button variant="outline" size="sm" className="h-8 w-8 p-0">*/}
+                {/*            1*/}
+                {/*        </Button>*/}
+                {/*        <Button variant="outline" size="sm" className="h-8 w-8 p-0">*/}
+                {/*            2*/}
+                {/*        </Button>*/}
+                {/*        <span>...</span>*/}
+                {/*        <Button variant="outline" size="sm" className="h-8 w-8 p-0">*/}
+                {/*            9*/}
+                {/*        </Button>*/}
+                {/*        <Button variant="outline" size="sm" className="h-8 w-8 p-0">*/}
+                {/*            10*/}
+                {/*        </Button>*/}
+                {/*    </div>*/}
+                {/*    <Button variant="outline" size="sm">*/}
+                {/*        Next*/}
+                {/*    </Button>*/}
+                {/*</div>*/}
 
             </div>
         </DashboardLayout>

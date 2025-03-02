@@ -10,6 +10,8 @@ import {useCropBatchContext} from "@/context/CropBatchContext";
 import {CropBatch} from "@/lib/types/crop-batch";
 import {ScheduleTask} from "@/lib/types/schedule-task";
 import {TaskStatus} from "@/lib/enums/task-status";
+import {toast} from "@/components/ui/use-toast";
+import {CropBatchTaskUpdateRequest} from "@/lib/types/crop-batch-task-update-request";
 
 interface CropBatchDetailsProps {
     batchId: number
@@ -18,9 +20,9 @@ interface CropBatchDetailsProps {
 
 export default function CropBatchDetails({batchId, onClose}: CropBatchDetailsProps) {
 
-    const {getCropBatchById} = useCropBatchContext();
+    const {getCropBatchById, updateCropBatchTask, loading} = useCropBatchContext();
 
-    const [batch, setBatch] = useState<CropBatch | null>(null);
+    const [batch, setBatch] = useState<CropBatch | undefined>(undefined);
 
     // Fetch batch data when component mounts or batchId changes
     // Fetch batch data only when batchId changes
@@ -63,6 +65,7 @@ export default function CropBatchDetails({batchId, onClose}: CropBatchDetailsPro
 
     // Initialize tasks state as empty array
     const [tasks, setTasks] = useState<ScheduleTask[]>([]);
+    const [refreshCounter, setRefreshCounter] = useState(0)
 
     // Update tasks when batch changes
     useEffect(() => {
@@ -79,10 +82,45 @@ export default function CropBatchDetails({batchId, onClose}: CropBatchDetailsPro
         return null;
     }
 
-    const handleTaskCompletion = (taskId: number, isCompleted: boolean) => {
+    const handleTaskUpdate = async (scheduleTask: ScheduleTask, isCompleted: boolean, remarks: string) => {
+        console.log("handleTaskUpdate", scheduleTask, isCompleted, remarks);
+        if (isCompleted && !remarks.trim()) {
+            toast({
+                title: "Error",
+                description: "Please provide remarks for completed tasks.",
+                variant: "destructive",
+            })
+            return
+        }
+
+        let cropBatchTaskUpdateRequest: CropBatchTaskUpdateRequest = {
+            batchId: batch.id,
+            cropScheduleTask: scheduleTask
+        }
+        try {
+
+            await updateCropBatchTask(cropBatchTaskUpdateRequest).then((response) => {
+                if (response.success){
+                    // setBatch(response.data)
+                    if (response.data) {
+                        // setTasks([...(response.data.fertilizerScheduleTasks || []), ...(response.data.pesticideScheduleTasks || [])])
+                        setRefreshCounter((prev) => prev + 1)
+                    }
+                }
+            }, (error) => {
+                console.error("Error updating crop batch task:", error)
+            })
+        } catch (error) {
+            console.error("Error creating crop variety:", error)
+        }
+
+    }
+
+    const handleTaskCompletion = (scheduleTask: ScheduleTask, isCompleted: boolean) => {
+        console.log("handleTaskCompletion", scheduleTask, isCompleted);
         setTasks((prevTasks) =>
             prevTasks.map((task) =>
-                task.id === taskId
+                task.id === scheduleTask.id
                     ? {
                         ...task,
                         isCompleted,
@@ -94,8 +132,12 @@ export default function CropBatchDetails({batchId, onClose}: CropBatchDetailsPro
         )
     }
 
-    const handleTaskRemarks = (taskId: number, remarks: string) => {
-        setTasks((prevTasks) => prevTasks.map((task) => (task.id === taskId ? {...task, taskRemarks: remarks} : task)))
+    const handleTaskRemarks = (scheduleTask: ScheduleTask, remarks: string) => {
+        console.log("handleTaskRemarks", scheduleTask, remarks);
+        setTasks((prevTasks) => prevTasks.map((task) => (task.id === scheduleTask.id ? {
+            ...task,
+            taskRemarks: remarks
+        } : task)))
     }
 
     const getStatusColor = (status: string) => {
@@ -134,6 +176,7 @@ export default function CropBatchDetails({batchId, onClose}: CropBatchDetailsPro
                                 <TableHead>Status</TableHead>
                                 <TableHead>Completed</TableHead>
                                 <TableHead>Remarks</TableHead>
+                                <TableHead>Actions</TableHead>
                             </TableRow>
                         </TableHeader>
                         <TableBody>
@@ -150,15 +193,21 @@ export default function CropBatchDetails({batchId, onClose}: CropBatchDetailsPro
                                     <TableCell>
                                         <Checkbox
                                             checked={task.isCompleted}
-                                            onCheckedChange={(checked) => handleTaskCompletion(task.id, checked as boolean)}
+                                            onCheckedChange={(checked) => handleTaskCompletion(task, checked as boolean)}
                                         />
                                     </TableCell>
                                     <TableCell>
                                         <Input
                                             value={task.taskRemarks || ""}
-                                            onChange={(e) => handleTaskRemarks(task.id, e.target.value)}
+                                            onChange={(e) => handleTaskRemarks(task, e.target.value)}
                                             placeholder="Add remarks"
                                         />
+                                    </TableCell>
+                                    <TableCell>
+                                        <Button className="text-sm"
+                                                onClick={() => handleTaskUpdate(task, task.isCompleted, task.taskRemarks || "")}>
+                                            Submit
+                                        </Button>
                                     </TableCell>
                                 </TableRow>
                             ))}

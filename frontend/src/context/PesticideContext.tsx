@@ -23,7 +23,7 @@ export const PesticideProvider: React.FC<PesticideProviderProps> = ({children}) 
     const toast = useRef<Toast | null>(null);
 
     const getAllPesticides = useCallback(async (): Promise<void> => {
-            console.log(BASE_URL + "/v1/api/pesticide")
+            console.log(BASE_URL + "/v1/api/chemical")
             try {
                 const response = await apiClient.get<Pesticide[]>(BASE_URL + "/v1/api/pesticide");
                 setPesticides(response.data);
@@ -55,14 +55,14 @@ export const PesticideProvider: React.FC<PesticideProviderProps> = ({children}) 
             });
             return {success: true, data: response.data};
         } catch (error) {
-            console.error("Error creating pesticide:", error);
+            console.error("Error creating chemical:", error);
             toast.current?.show({
                 severity: "error",
                 summary: "Error",
-                detail: "Failed to create pesticide",
+                detail: "Failed to create chemical",
                 life: 3000
             });
-            return {success: false, error: "Failed to create pesticide"};
+            return {success: false, error: "Failed to create chemical"};
         } finally {
             setLoading(false);
         }

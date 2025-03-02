@@ -1,12 +1,14 @@
 import type React from "react"
-import {createContext, useEffect, useState} from "react"
+import {createContext, useContext, useEffect, useState} from "react"
 import {LoginResponse} from "@/lib/types/login-response";
 import {UserAccount} from "@/lib/types/user-account";
 import apiClient from "@/utils/apiClient";
+import {LoginFormData} from "@/lib/types/auth";
+import axios from "axios";
 
 interface UserContextType {
     user: LoginResponse | null
-    login: (loginData: LoginResponse) => void
+    login: (loginRequest: LoginFormData) => void
     logout: () => void
     getAllUsers: () => Promise<UserAccount[]>
     getUserById: (id: number) => Promise<UserAccount | null>
@@ -25,10 +27,16 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({children}
         }
     }, [])
 
-    const login = (loginData: LoginResponse) => {
-
-        setUser(loginData)
-        localStorage.setItem("user", JSON.stringify(loginData))
+    const login = async (loginRequest: LoginFormData) => {
+        try {
+            const response = await axios.post('http://localhost:8080/api/v1/auth/token/signin', loginRequest);
+            console.log(response);
+            setUser(response.data);
+            localStorage.setItem("user", JSON.stringify(response.data));
+        } catch (error) {
+            console.log("Error logging in:", error);
+            throw new Error("Invalid username or password");
+        }
     }
 
     const logout = () => {
@@ -62,10 +70,10 @@ export const UserProvider: React.FC<{ children: React.ReactNode }> = ({children}
         value={{user, login, logout, getAllUsers, getUserById}}>{children}</UserContext.Provider>
 }
 
-// export const useUser = () => {
-//     const context = useContext(UserContext)
-//     if (context === undefined) {
-//         throw new Error("useUser must be used within a UserProvider")
-//     }
-//     return context
-// }
+export const useUser = () => {
+    const context = useContext(UserContext)
+    if (context === undefined) {
+        throw new Error("useUser must be used within a UserProvider")
+    }
+    return context
+}

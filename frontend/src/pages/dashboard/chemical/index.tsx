@@ -1,5 +1,5 @@
 import React from "react";
-import PesticideComponent from "@/othercomponents/pesticide/pesticide";
+import PesticideComponent from "@/othercomponents/chemical/chemical";
 import {PesticideProvider} from "@/context/PesticideContext";
 
 function Pesticide() {

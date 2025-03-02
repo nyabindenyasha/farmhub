@@ -14,7 +14,7 @@ import {PesticideModeOfAction} from "@/lib/enums/pesticide-mode-of-action";
 import {usePesticideContext} from "@/context/PesticideContext";
 import {Toast} from "primereact/toast";
 
-export default function CreatePesticide({isOpen, onClose}: FormProps) {
+export default function CreateChemical({isOpen, onClose}: FormProps) {
 
     const {createPesticide, loading} = usePesticideContext();
 

@@ -5,6 +5,8 @@ import {Button} from "@/components/ui/button";
 import {ScrollArea} from "@radix-ui/react-scroll-area";
 import {getRole} from "@/lib/enums/role";
 import {useUser} from "@/hooks/useUser";
+import Link from "next/link";
+import {LogOut, Settings, Sprout} from "lucide-react";
 
 function DashboardSideBar() {
 
@@ -16,7 +18,7 @@ function DashboardSideBar() {
             <div className="p-4 border-b border-gray-200">
                 <div className="flex items-center gap-2">
                     <div className="w-20 h-8 rounded-lg bg-[#14532d] flex items-center justify-center">
-                        <span className="text-white font-bold text-sm">FarmHub</span>
+                        <Sprout className="h-12 w-12 text-white" /> <span className="text-white font-bold text-sm">FarmHub</span>
                     </div>
                     <span className="font-semibold text-xl text-[bg-brand-main]"></span>
                 </div>
@@ -35,7 +37,6 @@ function DashboardSideBar() {
                     {/*        <item.Icon height={20} width={20}/>*/}
                     {/*        <span className="text-sm font-medium">{item.name}</span>*/}
                     {/*    </Button>*/}
-
                     {/*))}*/}
 
                     <div className="p-3 space-y-1">
@@ -60,9 +61,19 @@ function DashboardSideBar() {
 
                 </div>
             </ScrollArea>
-            <div className={"flex flex-col space-y-6 p-8 text-sm font-medium text-[#14532d]"}>
-                <p>Settings</p>
-                <p>Logout</p>
+
+            <div className="absolute bottom-0 w-64 p-4 border-gray-200">
+                <Link
+                    href="/settings"
+                    className="flex items-center gap-3 px-4 py-3 text-sm text-gray-700 hover:bg-gray-100 rounded-lg"
+                >
+                    <Settings className="w-5 h-5" />
+                    Settings
+                </Link>
+                <button className="w-full flex items-center gap-3 px-4 py-3 text-sm text-gray-700 hover:bg-gray-100 rounded-lg">
+                    <LogOut className="w-5 h-5" />
+                    Logout
+                </button>
             </div>
         </div>
 

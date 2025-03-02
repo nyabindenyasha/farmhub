@@ -171,12 +171,13 @@ export default function CropStagesOfGrowthComponent() {
                 {/*    </Table>*/}
                 {/*</div>*/}
 
-                <div className="card">
+                <div className="rounded-md border card">
                     <DataTable value={cropStagesOfGrowths} stripedRows rowGroupMode="subheader" groupRowsBy="crop.name"
                                sortMode="single" sortField="crop.name" sortOrder={1}
                                expandableRowGroups expandedRows={expandedRows}
                                onRowToggle={(e: DataTableRowToggleEvent) => setExpandedRows(e.data)}
                                rowGroupHeaderTemplate={headerTemplate} rowGroupFooterTemplate={footerTemplate}
+                               size='small'
                                tableStyle={{minWidth: '50rem'}}>
                         <Column field="id" header="Id" style={{width: '20%'}}></Column>
                         <Column field="stageStartDate" header="Stage Period" body={startDateBodyTemplate}

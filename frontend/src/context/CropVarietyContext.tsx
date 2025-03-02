@@ -45,6 +45,7 @@ export const CropVarietyProvider: React.FC<CropVarietyProviderProps> = ({childre
         data?: CropVariety;
         error?: string
     }> => {
+        console.log(JSON.stringify(cropVarietyData))
         try {
             const response = await apiClient.post<CropVariety>(BASE_URL + "/v1/api/crop-variety", cropVarietyData, {
                 headers: {

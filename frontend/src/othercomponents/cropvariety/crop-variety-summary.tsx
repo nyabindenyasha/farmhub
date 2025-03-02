@@ -30,6 +30,9 @@ export function CropVarietySummary({crop, cropVariety}: CropVarietySummaryProps)
                         <dt className="text-sm font-medium text-gray-500">Maturity End Day:</dt>
                         <dd className="mt-1 text-sm text-gray-900">{cropVariety.maturityEndDay} Days</dd>
 
+                        <dt className="text-sm font-medium text-gray-500">Variety Type:</dt>
+                        <dd className="mt-1 text-sm text-gray-900">{cropVariety.varietyType}</dd>
+
                         <dt className="text-sm font-medium text-gray-500">Harvest Duration:</dt>
                         <dd className="mt-1 text-sm text-gray-900">{cropVariety.harvestDuration} Days</dd>
 

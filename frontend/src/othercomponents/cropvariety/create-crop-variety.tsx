@@ -15,6 +15,10 @@ import {FormProps} from "@/lib/types";
 import {CropVarietySummary} from "@/othercomponents/cropvariety/crop-variety-summary";
 import {DialogProps} from "@/lib/types/dialog-props";
 import {Toast} from "primereact/toast";
+import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "@/components/ui/select";
+import {VarietyType} from "@/lib/enums/variety-type";
+import {PesticideType} from "@/lib/enums/pesticide-type";
+import {Pesticide} from "@/lib/types/pesticide";
 
 export interface CropVarietyRequest {
     cropId: number
@@ -23,6 +27,7 @@ export interface CropVarietyRequest {
     maturityEndDay: number
     harvestDuration: number
     remarks: string
+    varietyType: VarietyType
 }
 
 const cropVarietyInitialState: CropVarietyRequest = {
@@ -32,6 +37,7 @@ const cropVarietyInitialState: CropVarietyRequest = {
     maturityEndDay: 0,
     harvestDuration: 0,
     remarks: "",
+    varietyType: VarietyType.EARLY_MATURITY
 }
 
 export default function CreateCropVariety({isOpen, onClose}: FormProps) {
@@ -45,6 +51,8 @@ export default function CreateCropVariety({isOpen, onClose}: FormProps) {
     const toast = useRef<Toast | null>(null);
     const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle")
     const [isDialogOpen, setIsDialogOpen] = useState(false)
+
+    let varietyTypes = Object.keys(VarietyType);
 
     const dialogProps: DialogProps = {
         width: 625,
@@ -67,6 +75,13 @@ export default function CreateCropVariety({isOpen, onClose}: FormProps) {
         }
     }
 
+    const handleSelectChange = (field: keyof CropVarietyRequest) => (value: string) => {
+        setCropVariety((prev) => ({
+            ...prev,
+            [field]: value,
+        }));
+    };
+
     // Validate inputs
     const validateForm = () => {
         let newErrors: { [key: string]: string } = {};
@@ -74,6 +89,7 @@ export default function CreateCropVariety({isOpen, onClose}: FormProps) {
         if (!cropVariety.maturityStartDay) newErrors.maturityStartDay = "Maturity Start Day is required";
         if (!cropVariety.maturityEndDay) newErrors.maturityEndDay = "Maturity End Day is required";
         if (!cropVariety.harvestDuration) newErrors.harvestDuration = "Harvest Duration Interval is required";
+        if (!cropVariety.varietyType) newErrors.harvestDuration = "Variety Type is required";
 
 
         if (cropVariety.maturityStartDay > 0 && cropVariety.maturityStartDay > cropVariety.maturityEndDay) {
@@ -204,6 +220,27 @@ export default function CreateCropVariety({isOpen, onClose}: FormProps) {
                             />
                             {errors.maturityEndDay && <p className="text-red-500 text-sm">{errors.maturityEndDay}</p>}
                         </div>
+
+                        <div>
+                            <Label htmlFor="varietyType">Variety Type</Label>
+                            <Select name="varietyType"
+                                    value={cropVariety.varietyType}
+                                    onValueChange={handleSelectChange("varietyType")}>
+                                <SelectTrigger id="varietyType">
+                                    <SelectValue placeholder="Select Variety Type"/>
+                                </SelectTrigger>
+                                <SelectContent>
+                                    {varietyTypes.map((varietyType) => (
+                                        <SelectItem value={varietyType}>
+                                            {varietyType}
+                                        </SelectItem>
+                                    ))}
+                                </SelectContent>
+                            </Select>
+                            {errors.pesticideType && <p className="text-red-500 text-sm">{errors.pesticideType}</p>}
+                        </div>
+
+
                         <div>
                             <Label htmlFor="harvestDuration">Harvest Duration (days)</Label>
                             <Input
@@ -235,16 +272,20 @@ export default function CreateCropVariety({isOpen, onClose}: FormProps) {
             <div className="max-w-4xl mx-auto p-4">
                 <Toast ref={toast}/>
                 <Card>
-                    <CardHeader>
-                        <CardTitle>Create Crop Variety</CardTitle>
-                        <CardDescription>Add a new variety for an existing crop</CardDescription>
-                    </CardHeader>
+                    {submitStatus !== "success" && (
+                        <CardHeader>
+                            <CardTitle>Create Crop Variety</CardTitle>
+                            <CardDescription>Add a new variety for an existing crop</CardDescription>
+                        </CardHeader>
+                    )}
                     <CardContent>
-                        <div className="flex justify-between items-center">
-                            <div>Step {step} of 3</div>
-                            <Button
-                                onClick={openDialog}>{step === 3 ? "Review" : step === 1 ? "Start" : "Continue"}</Button>
-                        </div>
+                        {submitStatus !== "success" && (
+                            <div className="flex justify-between items-center">
+                                <div>Step {step} of 3</div>
+                                <Button
+                                    onClick={openDialog}>{step === 3 ? "Review" : step === 1 ? "Start" : "Continue"}</Button>
+                            </div>
+                        )}
                         {submitStatus === "success" && (
                             <Alert className="mt-4">
                                 <CheckCircle className="h-4 w-4"/>

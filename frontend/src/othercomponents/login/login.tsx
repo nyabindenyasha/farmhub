@@ -8,44 +8,36 @@ import {Checkbox} from "@/components/ui/checkbox"
 import {Tabs, TabsContent} from "@/components/ui/tabs"
 import type {AuthState, LoginFormData} from "@/lib/types/auth"
 import {Icons} from "@/components/icons/icons";
-import axios from "axios";
-import {useUser} from "@/hooks/useUser";
+import {Eye, EyeOff, Loader2} from "lucide-react";
+import {useUser} from "@/context/UserContext";
 
 export function LoginForm() {
     const { login } = useUser()
     const router = useRouter()
+    const [showPassword, setShowPassword] = useState(false)
     const [state, setState] = useState<AuthState>({
         isLoading: false,
         error: null,
     })
 
     async function onSubmit(event: React.FormEvent<HTMLFormElement>) {
-        event.preventDefault()
-        setState({ isLoading: true, error: null })
+        event.preventDefault();
+        setState({ isLoading: true, error: null });
 
-        const formData = new FormData(event.currentTarget)
-        const data: LoginFormData = {
+        const formData = new FormData(event.currentTarget);
+        const data = {
             username: formData.get("username") as string,
             password: formData.get("password") as string,
-        }
+        };
 
         try {
-            // Add your authentication logic here
-            await new Promise((resolve) => setTimeout(resolve, 2000))
-
-            const response = await axios.post('http://localhost:8080/api/v1/auth/token/signin', data);
-            // Handle successful login (e.g., store token in local storage)
-            console.log(response);
-            console.log(response.data);
-            // localStorage.setItem("user", response.data)
-            login(response.data);
-
-            router.push("/dashboard")
+            await login(data);
+            router.push("/dashboard");
         } catch (error) {
             setState({
                 isLoading: false,
                 error: "Invalid username or password",
-            })
+            });
         }
     }
 
@@ -53,8 +45,8 @@ export function LoginForm() {
     return (
         <div className="space-y-6">
             <div className="space-y-2 text-center">
-                <h1 className="text-3xl font-bold tracking-tight">Welcome</h1>
-                <p className="text-muted-foreground">To Farm Hub</p>
+                <h1 className="text-3xl font-bold tracking-tight">Welcome Back</h1>
+                <p className="text-muted-foreground">Sign in to your Farm Hub Account</p>
             </div>
 
             <Tabs defaultValue="login" className="space-y-6">
@@ -69,6 +61,7 @@ export function LoginForm() {
                     )}
 
                     <form onSubmit={onSubmit} className="space-y-4">
+
                         <div className="space-y-2">
                             <Label htmlFor="username">Username</Label>
                             <Input
@@ -78,23 +71,41 @@ export function LoginForm() {
                                 required
                                 type="text"
                                 disabled={state.isLoading}
-                                className="bg-background"
-                            />
-                        </div>
-                        <div className="space-y-2">
-                            <Label htmlFor="password">Password</Label>
-                            <Input
-                                id="password"
-                                name="password"
-                                placeholder="Enter your password"
-                                required
-                                type="password"
-                                disabled={state.isLoading}
-                                className="bg-background"
+                                className="bg-background relative"
                             />
                         </div>
 
-                        <div className="flex items-center justify-between">
+
+                        <div className="space-y-2">
+                            <Label htmlFor="password">Password</Label>
+                            <div className="relative">
+                                <Input
+                                    id="password"
+                                    name="password"
+                                    placeholder="Enter your password"
+                                    required
+                                    type={showPassword ? "text" : "password"}
+                                    disabled={state.isLoading}
+                                    className="bg-background pr-10"
+                                />
+                                <Button
+                                    type="button"
+                                    variant="ghost"
+                                    size="sm"
+                                    className="absolute right-0 top-0 h-full px-3 py-2 hover:bg-transparent"
+                                    onClick={() => setShowPassword(!showPassword)}
+                                >
+                                    {showPassword ? (
+                                        <EyeOff className="h-4 w-4 text-muted-foreground/70" />
+                                    ) : (
+                                        <Eye className="h-4 w-4 text-muted-foreground/70" />
+                                    )}
+                                    <span className="sr-only">{showPassword ? "Hide password" : "Show password"}</span>
+                                </Button>
+                            </div>
+                        </div>
+
+                        <div className="relative flex items-center justify-between">
                             <div className="flex items-center space-x-2">
                                 <Checkbox id="remember" name="remember" />
                                 <label
@@ -112,16 +123,17 @@ export function LoginForm() {
                             </Link>
                         </div>
 
-                        <Button className="w-full bg-green-600 hover:bg-green-700" type="submit" disabled={state.isLoading}>
+                        <Button className="relative w-full bg-green-600 hover:bg-green-700" type="submit" disabled={state.isLoading}>
                             {state.isLoading && <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />}
-                            {state.isLoading ? "Signing in..." : "Login"}
+                            {state.isLoading ? "Signing in..." : "Sign In"}
                         </Button>
+
                     </form>
                 </TabsContent>
 
             </Tabs>
 
-            <Button variant="outline" className="w-full" type="button">
+            <Button variant="outline" className="relative w-full" type="button">
                 <svg className="mr-2 h-4 w-4" viewBox="0 0 24 24">
                     <path
                         d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"

@@ -56,7 +56,7 @@ export const CropProgramProvider: React.FC<CropProgramProviderProps> = ({childre
         error?: string
     }> => {
         try {
-            const response = await apiClient.post<CropProgram>(BASE_URL + "/v1/api/crop-program/v2", cropProgramData, {
+            const response = await apiClient.post<CropProgram>(BASE_URL + "/v1/api/crop-program", cropProgramData, {
                 headers: {
                     'Content-Type': 'application/json',
                 },

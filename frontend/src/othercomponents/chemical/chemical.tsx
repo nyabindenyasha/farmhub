@@ -11,28 +11,29 @@ import {Input} from "@/components/ui/input";
 import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow} from "@/components/ui/table";
 import {Checkbox} from "@/components/ui/checkbox";
 import {DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger} from "@/components/ui/dropdown-menu";
-import {useFertilizerContext} from "@/context/FertilizerContext";
-import CreateFertilizer from "@/othercomponents/fertilizer/create-fertilizer";
+import {usePesticideContext} from "@/context/PesticideContext";
+import CreateChemical from "@/othercomponents/chemical/create-chemical";
+import {DataTable, DataTableRowToggleEvent} from "primereact/datatable";
 import {Column} from "primereact/column";
-import {DataTable} from "primereact/datatable";
-import {Fertilizer} from "@/lib/types/fertilizer";
 import {CropProgram} from "@/lib/types/crop-program";
+import {Pesticide} from "@/lib/types/pesticide";
+import {CropVariety} from "@/lib/types/crop-variety";
 
-// const fertilizerData: Fertilizer[] = useFertilizerContext().getAllFertilizers();
+// const pesticideData: Pesticide[] = usePesticideContext().getAllPesticides();
 
-export default function FertilizerComponent() {
+export default function PesticideComponent() {
 
-    const {fertilizers, getAllFertilizers} = useFertilizerContext();
+    const {pesticides, getAllPesticides} = usePesticideContext();
 
     useEffect(() => {
-        getAllFertilizers();
-    }, [getAllFertilizers]);
+        getAllPesticides();
+    }, [getAllPesticides]);
 
     const [isPolicyFormOpen, setIsPolicyFormOpen] = useState(false)
     const openPolicyForm = () => setIsPolicyFormOpen(true)
     const closePolicyForm = () => setIsPolicyFormOpen(false)
 
-    const [selectedFertilizers, setSelectedFertilizers] = useState<Fertilizer[]>([])
+    const [selectedChemicals, setSelectedChemicals] = useState<Pesticide[]>([])
     const [searchTerm, setSearchTerm] = useState("")
     const router = useRouter()
 
@@ -46,6 +47,22 @@ export default function FertilizerComponent() {
         // Handle delete logic here
         console.log(`Deleting client ${clientId}`)
     }
+
+    const activeIngredientsTemplate = (rowData: Pesticide) => {
+        return (
+            <div className="flex align-items-center gap-2">
+                <span>{rowData.activeIngredients.join(", ")}</span>
+            </div>
+        );
+    };
+
+    const safetyIntervalBodyTemplate = (rowData: Pesticide) => {
+        return (
+            <div className="flex align-items-center gap-2">
+                <span>{rowData.safetyInterval} Days</span>
+            </div>
+        );
+    };
 
     const actionBodyTemplate = (cropProgram: CropProgram) => {
         console.log("cropProgram: ", cropProgram);
@@ -66,12 +83,12 @@ export default function FertilizerComponent() {
         <DashboardLayout>
             <div className="flex w-screen p-5 space-y-6 min-h-screen flex-col">
                 <div className="flex items-center justify-between h-1/6 bg-gradient-to-r from-green-600 to-green-800">
-                    <h2 className="text-3xl font-bold tracking-tight pl-2">Fertilizers</h2>
+                    <h2 className="text-3xl font-bold tracking-tight pl-2">Chemicals</h2>
                     <div className="flex items-center space-x-2">
                         <Button variant="outline">Export</Button>
-                        <PrimaryButton secondary={true} text={"Add Fertilizer"} onClick={openPolicyForm}
+                        <PrimaryButton secondary={true} text={"Add Pesticide"} onClick={openPolicyForm}
                                        icon={<Plus className="h-4 w-4"/>}/>
-                        <CreateFertilizer isOpen={isPolicyFormOpen} onClose={closePolicyForm}/>
+                        <CreateChemical isOpen={isPolicyFormOpen} onClose={closePolicyForm}/>
                     </div>
                 </div>
                 <div className="flex items-center justify-between">
@@ -119,25 +136,30 @@ export default function FertilizerComponent() {
                     {/*                />*/}
                     {/*            </TableHead>*/}
                     {/*            <TableHead>Name</TableHead>*/}
-                    {/*            <TableHead>Alias</TableHead>*/}
-                    {/*            <TableHead>Composition</TableHead>*/}
-                    {/*            <TableHead>Remarks</TableHead>*/}
-                    {/*            <TableHead>Actions</TableHead>*/}
+                    {/*            /!*<TableHead>Alias</TableHead>*!/*/}
+                    {/*            <TableHead>Chemical Type</TableHead>*/}
+                    {/*            <TableHead>Active Ingredients</TableHead>*/}
+                    {/*            <TableHead>Application Rate</TableHead>*/}
+                    {/*            <TableHead>Withdrawal Period</TableHead>*/}
+
                     {/*        </TableRow>*/}
                     {/*    </TableHeader>*/}
                     {/*    <TableBody>*/}
-                    {/*        {fertilizers.slice(0, 10).map((fertilizer) => (*/}
-                    {/*            <TableRow key={fertilizer.id}>*/}
+                    {/*        {pesticides.slice(0, 10).map((chemical) => (*/}
+                    {/*            <TableRow key={chemical.id}>*/}
                     {/*                <TableCell>*/}
                     {/*                    <Checkbox*/}
-                    {/*                        checked={selectedClients.includes(String(fertilizer.id))}*/}
-                    {/*                        onCheckedChange={() => handleSelectClient(String(fertilizer.id))}*/}
+                    {/*                        checked={selectedClients.includes(String(chemical.id))}*/}
+                    {/*                        onCheckedChange={() => handleSelectClient(String(chemical.id))}*/}
                     {/*                    />*/}
                     {/*                </TableCell>*/}
-                    {/*                <TableCell>{fertilizer.name}</TableCell>*/}
-                    {/*                <TableCell>{fertilizer.alias}</TableCell>*/}
-                    {/*                <TableCell>{fertilizer.composition}</TableCell>*/}
-                    {/*                <TableCell>{fertilizer.remarks}</TableCell>*/}
+                    {/*                <TableCell>{chemical.name}</TableCell>*/}
+                    {/*                /!*<TableCell>{chemical.alias}</TableCell>*!/*/}
+                    {/*                <TableCell>{chemical.pesticideType}</TableCell>*/}
+                    {/*                <TableCell>{chemical.activeIngredients.join(", ")}</TableCell>*/}
+                    {/*                <TableCell>{chemical.applicationRate}</TableCell>*/}
+                    {/*                <TableCell>{chemical.safetyInterval} Days</TableCell>*/}
+
                     {/*                <TableCell>*/}
                     {/*                    <DropdownMenu>*/}
                     {/*                        <DropdownMenuTrigger asChild>*/}
@@ -160,20 +182,25 @@ export default function FertilizerComponent() {
                     {/*    </TableBody>*/}
                     {/*</Table>*/}
 
-                    <DataTable className="prime-container" selectionMode='checkbox' selection={selectedFertilizers}
-                               onSelectionChange={(e) => setSelectedFertilizers(e.value)} dataKey="id"
-                               value={fertilizers} paginator
+
+                    <DataTable className="prime-container" selectionMode='checkbox' selection={selectedChemicals}
+                               onSelectionChange={(e) => setSelectedChemicals(e.value)} dataKey="id"
+                               value={pesticides} paginator
                                rows={10} rowsPerPageOptions={[5, 10, 25, 50]} size='small'
                                tableStyle={{minWidth: '50rem'}}>
                         <Column selectionMode="multiple" headerStyle={{width: '3rem'}}></Column>
                         <Column field="name" header="Name"></Column>
-                        <Column field="alias" header="Alias"></Column>
-                        <Column field="composition" header="Composition"></Column>
-                        <Column field="remarks" header="Remarks"></Column>
+                        <Column field="pesticideType" header="Chemical Type"></Column>
+
+                        <Column field="activeIngredients" header="Active Ingredients" body={activeIngredientsTemplate}></Column>
+
+                        <Column field="applicationRate" header="Application Rate"></Column>
+
+                        <Column field="safetyInterval" header="Withdrawal Period" body={safetyIntervalBodyTemplate}></Column>
+
                         <Column header="Actions" headerStyle={{width: '5rem', textAlign: 'center'}}
                                 bodyStyle={{textAlign: 'center', overflow: 'visible'}}
-                                body={(rowData) => actionBodyTemplate(rowData)}
-                        />
+                                body={(rowData) => actionBodyTemplate(rowData)}/>
                     </DataTable>
 
                 </div>

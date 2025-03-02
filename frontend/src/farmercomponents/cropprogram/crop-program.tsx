@@ -62,8 +62,6 @@ export default function CropProgramComponent() {
                     <h2 className="text-3xl font-bold tracking-tight pl-2">Crop Programs</h2>
                     <div className="flex items-center space-x-2">
                         <Button variant="outline">Export</Button>
-                        <PrimaryButton secondary={true} text={"Create Program"} onClick={openPolicyForm}
-                                       icon={<Plus className="h-4 w-4"/>}/>
                         <CreateCropProgram isFarmer={true} isOpen={isPolicyFormOpen} onClose={closePolicyForm}/>
                     </div>
                 </div>

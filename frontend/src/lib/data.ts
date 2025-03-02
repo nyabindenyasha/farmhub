@@ -1,43 +1,24 @@
-import {
-    CalendarDateRangeIcon,
-    ChartBarIcon,
-    ClipboardDocumentListIcon,
-    HomeIcon,
-    UserGroupIcon
-} from "@heroicons/react/24/outline";
-import {TimerIcon} from "@radix-ui/react-icons";
 import {Patient as PatientType} from '@/lib/types'
 import {NavItem} from "@/lib/types/nav-item";
 import {Role} from "@/lib/enums/role";
-import {ShieldCheck} from "lucide-react";
+import {
+    Sprout,
+    FlaskRoundIcon as Flask,
+    Bug,
+    Calendar,
+    ListTodo,
+    Layers,
+    BarChart3,
+    HomeIcon,
+    Settings,
+    FileStack
+} from "lucide-react";
 
 export const nav_items = [
-
     {name: 'Home', location: '/', id: '1'},
     {name: 'About', location: '/about', id: '2'},
     {name: 'Contact', location: '/contact', id: '3'},
 ];
-
-export const dashboard_nav_items = {
-    sideBar: [
-        {name: 'Dashboard', location: '/dashboard', id: '1', Icon: HomeIcon, active: true},
-        {name: 'Crops', location: '/dashboard/crop', id: '2', Icon: ClipboardDocumentListIcon},
-        {name: 'Fertilizer', location: '/dashboard/fertilizer', id: '3', Icon: CalendarDateRangeIcon},
-        {name: 'Pesticides', location: '/dashboard/pesticide', id: '4', Icon: ClipboardDocumentListIcon},
-        {name: 'Crop Program', location: '/dashboard/cropprogram', id: '5', Icon: TimerIcon},
-        {name: 'Crop Stages', location: '/dashboard/cropstages', id: '6', Icon: TimerIcon},
-        {name: 'Crop Variety', location: '/dashboard/cropvariety', id: '7', Icon: TimerIcon},
-        {name: 'Reports', location: '/dashboard/report', id: '6', Icon: ChartBarIcon},
-        // {name:'PatientDashboard',location:'/dashboard/patientDashboard',id:'3',Icon: ClipboardDocumentListIcon},
-
-
-    ],
-    navBar: [
-        {name: 'Home', location: '/dashboard', id: '1', Icon: UserGroupIcon},
-        {name: 'Profile', location: 'dashboard/profile', id: '2', Icon: UserGroupIcon}
-    ]
-
-}
 
 export const sideBarDashboardNavItems: NavItem[] = [
     {
@@ -53,74 +34,73 @@ export const sideBarDashboardNavItems: NavItem[] = [
         name: "Crops",
         location: "/dashboard/crop",
         id: "2",
-        icon: ClipboardDocumentListIcon,
+        icon: Sprout,
         roles: [Role.ADMIN],
     },
     {
         name: "Fertilizer",
         location: "/dashboard/fertilizer",
         id: "3",
-        icon: CalendarDateRangeIcon,
+        icon: Flask,
         roles: [Role.ADMIN]
     },
     {
-        name: "Pesticides",
-        location: "/dashboard/pesticide",
+        name: "Chemicals",
+        location: "/dashboard/chemical",
         id: "4",
-        icon: ClipboardDocumentListIcon,
+        icon: Bug,
         roles: [Role.ADMIN],
     },
     {
         name: "Crop Program",
         location: "/dashboard/cropprogram",
         id: "5",
-        icon: TimerIcon,
+        icon: Calendar,
         roles: [Role.ADMIN]
     },
     {
         name: "Crop Stages",
         location: "/dashboard/cropstages",
         id: "6",
-        icon: TimerIcon,
+        icon: ListTodo,
         roles: [Role.ADMIN]
     },
     {
         name: "Crop Variety",
         location: "/dashboard/cropvariety",
         id: "7",
-        icon: TimerIcon,
+        icon: Layers,
         roles: [Role.ADMIN]
     },
     {
         name: "Reports",
         location: "/dashboard/report",
         id: "8",
-        icon: ChartBarIcon,
+        icon: BarChart3,
         roles: [Role.ADMIN]
     },
-
 
 
     {
         name: "Crop Programs",
         location: "/farmerdashboard/cropprogram",
         id: "9",
-        icon: ShieldCheck,
+        icon: Calendar,
         roles: [Role.FARMER]
     },
     {
         name: "Crop Batches",
         location: "/farmerdashboard/cropbatch",
         id: "10",
-        icon: TimerIcon,
+        icon: FileStack,
         roles: [Role.FARMER]
     },
 ];
 
 
 export const navBarDashboardNavItems: NavItem[] = [
-    {name: "Home", location: "/dashboard", id: "1", icon: UserGroupIcon, roles: [Role.ADMIN, Role.FARMER]},
-    {name: "Profile", location: "dashboard/profile", id: "2", icon: UserGroupIcon, roles: [Role.ADMIN, Role.FARMER]},
+    {name: "Home", location: "/dashboard", id: "1", icon: Settings, roles: [Role.ADMIN, Role.FARMER]},
+    {name: "Profile", location: "dashboard/profile", id: "2", icon: Settings, roles: [Role.ADMIN, Role.FARMER]},
 ];
 
 

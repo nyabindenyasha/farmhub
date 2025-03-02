@@ -34,6 +34,7 @@ export const CropProvider: React.FC<CropProviderProps> = ({children}) => {
 
     const createCrop = async (cropData: Crop): Promise<{ success: boolean; data?: Crop; error?: string }> => {
         setLoading(true);
+        console.log("### Creating crop:", JSON.stringify(cropData));
         try {
             const response = await apiClient.post<Crop>("/v1/api/crop", cropData, {
                 headers: {

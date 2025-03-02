@@ -188,12 +188,13 @@ export default function CropVarietyComponent() {
                 {/*    </Table>*/}
                 {/*</div>*/}
 
-                <div className="card">
+                <div className="rounded-md border card">
                     <DataTable value={cropVarieties} stripedRows rowGroupMode="subheader" groupRowsBy="crop.name"
                                sortMode="single" sortField="crop.name" sortOrder={1}
                                expandableRowGroups expandedRows={expandedRows}
                                onRowToggle={(e: DataTableRowToggleEvent) => setExpandedRows(e.data)}
                                rowGroupHeaderTemplate={headerTemplate} rowGroupFooterTemplate={footerTemplate}
+                               size='small'
                                tableStyle={{minWidth: '50rem'}}>
                         <Column field="variety" header="Variety" style={{width: '20%'}}></Column>
 
@@ -202,6 +203,7 @@ export default function CropVarietyComponent() {
 
                         <Column field="maturityStartDay" header="Maturity Start" style={{width: '20%'}}></Column>
                         <Column field="maturityEndDay" header="Maturity End" style={{width: '20%'}}></Column>
+                        <Column field="varietyType" header="Variety Type" style={{width: '20%'}}></Column>
                         <Column field="harvestDuration" header="Harvest Duration" style={{width: '20%'}}></Column>
                         <Column field="remarks" header="Comments" style={{width: '20%'}}></Column>
                     </DataTable>

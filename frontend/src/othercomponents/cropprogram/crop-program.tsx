@@ -13,6 +13,10 @@ import {DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger
 import {useCropProgramContext} from "@/context/CropProgramContext";
 import CreateCropProgram from "@/othercomponents/cropprogram/create-crop-program";
 import CropProgramDetails from "@/farmercomponents/cropprogram/crop-program-details";
+import {Column} from "primereact/column";
+import {DataTable} from "primereact/datatable";
+import {Crop} from "@/lib/types/crop";
+import {CropProgram} from "@/lib/types/crop-program";
 
 // const cropProgramData: CropProgram[] = useCropProgramContext().getAllCropPrograms();
 
@@ -28,11 +32,11 @@ export default function CropProgramComponent() {
     const openPolicyForm = () => setIsPolicyFormOpen(true)
     const closePolicyForm = () => setIsPolicyFormOpen(false)
 
-    const [selectedClients, setSelectedClients] = useState<string[]>([])
+    const [selectedPrograms, setSelectedPrograms] = useState<CropProgram[]>([])
     const [searchTerm, setSearchTerm] = useState("")
     const router = useRouter()
 
-    const [selectedProgramId, setSelectedProgramId] = useState<number | null>(null)
+    const [selectedProgram, setSelectedProgram] = useState<CropProgram | null>(null)
 
     const filteredClients = patients.filter((patient) =>
         patient.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -40,26 +44,33 @@ export default function CropProgramComponent() {
         patient.source.toLowerCase().includes(searchTerm.toLowerCase())
     )
 
-    const handleSelectAll = () => {
-        if (selectedClients.length === filteredClients.length) {
-            setSelectedClients([])
-        } else {
-            setSelectedClients(filteredClients.map((client) => client.id))
-        }
-    }
-
-    const handleSelectClient = (clientId: string) => {
-        if (selectedClients.includes(clientId)) {
-            setSelectedClients(selectedClients.filter((id) => id !== clientId))
-        } else {
-            setSelectedClients([...selectedClients, clientId])
-        }
-    }
-
     const handleDelete = (clientId: string) => {
         // Handle delete logic here
         console.log(`Deleting client ${clientId}`)
     }
+
+    const actionBodyTemplate = (cropProgram: CropProgram) => {
+        console.log("cropProgram: ", cropProgram);
+        return <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+                <Button variant="ghost" size="icon">
+                    <MoreHorizontal className="h-4 w-4"/>
+                </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+                <DropdownMenuItem>
+                    <span
+                        onClick={() => {
+                            console.log("onClick: ", cropProgram.id);
+                            setSelectedProgram(cropProgram);
+                        }}> View Details</span>
+                </DropdownMenuItem>
+                <DropdownMenuItem>Edit Record</DropdownMenuItem>
+                <DropdownMenuItem>Download Program</DropdownMenuItem>
+            </DropdownMenuContent>
+        </DropdownMenu>;
+    };
+
     return (
         <DashboardLayout>
             <div className="flex w-screen p-5 space-y-6 min-h-screen flex-col">
@@ -108,100 +119,105 @@ export default function CropProgramComponent() {
                 </div>
 
                 <div className="rounded-md border">
-                    <Table>
-                        <TableHeader>
-                            <TableRow>
-                                <TableHead className="w-[50px]">
-                                    <Checkbox
-                                        checked={selectedClients.length === filteredClients.length}
-                                        onCheckedChange={handleSelectAll}
-                                    />
-                                </TableHead>
-                                <TableHead>ID</TableHead>
-                                <TableHead>Crop Name</TableHead>
-                                <TableHead>Program Name</TableHead>
-                                <TableHead>Program Source</TableHead>
-                                <TableHead>Program Type</TableHead>
-                                <TableHead>Actions</TableHead>
-                            </TableRow>
-                        </TableHeader>
-                        <TableBody>
-                            {cropPrograms.map((program) => (
-                                <TableRow key={program.id}>
-                                    <TableCell>
-                                        <Checkbox
-                                            checked={selectedClients.includes(String(program.id))}
-                                            onCheckedChange={() => handleSelectClient(String(program.id))}
-                                        />
-                                    </TableCell>
-                                    <TableCell>{program.id}</TableCell>
-                                    <TableCell>{program.crop.name}</TableCell>
-                                    <TableCell>{program.name}</TableCell>
-                                    <TableCell>{program.source}</TableCell>
-                                    <TableCell>{program.cropScheduleType}</TableCell>
+                    {/*<Table>*/}
+                    {/*    <TableHeader>*/}
+                    {/*        <TableRow>*/}
+                    {/*            <TableHead className="w-[50px]">*/}
+                    {/*                <Checkbox*/}
+                    {/*                    checked={selectedClients.length === filteredClients.length}*/}
+                    {/*                    onCheckedChange={handleSelectAll}*/}
+                    {/*                />*/}
+                    {/*            </TableHead>*/}
+                    {/*            <TableHead>ID</TableHead>*/}
+                    {/*            <TableHead>Crop Name</TableHead>*/}
+                    {/*            <TableHead>Program Name</TableHead>*/}
+                    {/*            <TableHead>Program Source</TableHead>*/}
+                    {/*            <TableHead>Program Type</TableHead>*/}
+                    {/*            <TableHead>Actions</TableHead>*/}
+                    {/*        </TableRow>*/}
+                    {/*    </TableHeader>*/}
+                    {/*    <TableBody>*/}
+                    {/*        {cropPrograms.map((program) => (*/}
+                    {/*            <TableRow key={program.id}>*/}
+                    {/*                <TableCell>*/}
+                    {/*                    <Checkbox*/}
+                    {/*                        checked={selectedClients.includes(String(program.id))}*/}
+                    {/*                        onCheckedChange={() => handleSelectClient(String(program.id))}*/}
+                    {/*                    />*/}
+                    {/*                </TableCell>*/}
+                    {/*                <TableCell>{program.id}</TableCell>*/}
+                    {/*                <TableCell>{program.crop.name}</TableCell>*/}
+                    {/*                <TableCell>{program.name}</TableCell>*/}
+                    {/*                <TableCell>{program.source}</TableCell>*/}
+                    {/*                <TableCell>{program.cropScheduleType}</TableCell>*/}
+                    {/*                <TableCell>*/}
+                    {/*                    <DropdownMenu>*/}
+                    {/*                        <DropdownMenuTrigger asChild>*/}
+                    {/*                            <Button variant="ghost" size="icon">*/}
+                    {/*                                <MoreHorizontal className="h-4 w-4"/>*/}
+                    {/*                            </Button>*/}
+                    {/*                        </DropdownMenuTrigger>*/}
+                    {/*                        <DropdownMenuContent align="end">*/}
+                    {/*                            <DropdownMenuItem>*/}
+                    {/*                                <span*/}
+                    {/*                                    onClick={() => {*/}
+                    {/*                                        console.log("onClick: ", program.id);*/}
+                    {/*                                        setSelectedProgramId(program.id);*/}
+                    {/*                                    }}> View Details</span>*/}
+                    {/*                            </DropdownMenuItem>*/}
+                    {/*                            <DropdownMenuItem>Edit Record</DropdownMenuItem>*/}
+                    {/*                            <DropdownMenuItem>Download Program</DropdownMenuItem>*/}
+                    {/*                        </DropdownMenuContent>*/}
+                    {/*                    </DropdownMenu>*/}
+                    {/*                </TableCell>*/}
 
-                                    {/*<TableCell>*/}
-                                    {/*    <Button variant="outline" onClick={() => {*/}
-                                    {/*        console.log("onClick: ", program.id);*/}
-                                    {/*        setSelectedProgramId(program.id);*/}
-                                    {/*    }}>*/}
-                                    {/*        View Details*/}
-                                    {/*    </Button>*/}
-                                    {/*</TableCell>*/}
+                    {/*            </TableRow>*/}
+                    {/*        ))}*/}
+                    {/*    </TableBody>*/}
+                    {/*</Table>*/}
 
 
-                                    <TableCell>
-                                        <DropdownMenu>
-                                            <DropdownMenuTrigger asChild>
-                                                <Button variant="ghost" size="icon">
-                                                    <MoreHorizontal className="h-4 w-4"/>
-                                                </Button>
-                                            </DropdownMenuTrigger>
-                                            <DropdownMenuContent align="end">
-                                                <DropdownMenuItem>
-                                                    <span
-                                                        onClick={() => {
-                                                            console.log("onClick: ", program.id);
-                                                            setSelectedProgramId(program.id);
-                                                        }}> View Details</span>
-                                                </DropdownMenuItem>
-                                                <DropdownMenuItem>Edit Record</DropdownMenuItem>
-                                                <DropdownMenuItem>Download Program</DropdownMenuItem>
-                                            </DropdownMenuContent>
-                                        </DropdownMenu>
-                                    </TableCell>
+                    <DataTable className="prime-container" selectionMode='checkbox' selection={selectedPrograms}
+                               onSelectionChange={(e) => setSelectedPrograms(e.value)} dataKey="id" value={cropPrograms} paginator
+                               rows={10} rowsPerPageOptions={[5, 10, 25, 50]} size='small' tableStyle={{minWidth: '50rem'}}>
+                        <Column selectionMode="multiple" headerStyle={{width: '3rem'}}></Column>
+                        <Column field="crop.name" header="Crop Name"></Column>
+                        <Column field="name" header="Program Name"></Column>
+                        <Column field="source" header="Program Source"></Column>
+                        <Column field="cropScheduleType" header="Program Type"></Column>
+                        <Column header="Actions" headerStyle={{ width: '5rem', textAlign: 'center' }} bodyStyle={{ textAlign: 'center', overflow: 'visible' }}
+                                body={(rowData) => actionBodyTemplate(rowData)}
+                        />
+                    </DataTable>
 
-                                </TableRow>
-                            ))}
-                        </TableBody>
-                    </Table>
-                    {selectedProgramId &&
-                        <CropProgramDetails programId={selectedProgramId} onClose={() => setSelectedProgramId(null)}/>}
+
+                    {selectedProgram &&
+                        <CropProgramDetails programId={selectedProgram.id} onClose={() => setSelectedProgram(null)}/>}
                 </div>
 
-                <div className="flex items-center justify-between">
-                    <Button variant="outline" size="sm">
-                        Previous
-                    </Button>
-                    <div className="flex items-center space-x-2">
-                        <Button variant="outline" size="sm" className="h-8 w-8 p-0">
-                            1
-                        </Button>
-                        <Button variant="outline" size="sm" className="h-8 w-8 p-0">
-                            2
-                        </Button>
-                        <span>...</span>
-                        <Button variant="outline" size="sm" className="h-8 w-8 p-0">
-                            9
-                        </Button>
-                        <Button variant="outline" size="sm" className="h-8 w-8 p-0">
-                            10
-                        </Button>
-                    </div>
-                    <Button variant="outline" size="sm">
-                        Next
-                    </Button>
-                </div>
+                {/*<div className="flex items-center justify-between">*/}
+                {/*    <Button variant="outline" size="sm">*/}
+                {/*        Previous*/}
+                {/*    </Button>*/}
+                {/*    <div className="flex items-center space-x-2">*/}
+                {/*        <Button variant="outline" size="sm" className="h-8 w-8 p-0">*/}
+                {/*            1*/}
+                {/*        </Button>*/}
+                {/*        <Button variant="outline" size="sm" className="h-8 w-8 p-0">*/}
+                {/*            2*/}
+                {/*        </Button>*/}
+                {/*        <span>...</span>*/}
+                {/*        <Button variant="outline" size="sm" className="h-8 w-8 p-0">*/}
+                {/*            9*/}
+                {/*        </Button>*/}
+                {/*        <Button variant="outline" size="sm" className="h-8 w-8 p-0">*/}
+                {/*            10*/}
+                {/*        </Button>*/}
+                {/*    </div>*/}
+                {/*    <Button variant="outline" size="sm">*/}
+                {/*        Next*/}
+                {/*    </Button>*/}
+                {/*</div>*/}
 
             </div>
         </DashboardLayout>

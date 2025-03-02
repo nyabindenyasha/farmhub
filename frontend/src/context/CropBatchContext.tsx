@@ -1,16 +1,28 @@
-import React, {createContext, ReactNode, useCallback, useContext, useState} from "react";
+import React, {createContext, ReactNode, useCallback, useContext, useRef, useState} from "react";
 import apiClient from "../utils/apiClient";
 import {CropBatch} from "@/lib/types/crop-batch";
 import {CropBatchRequest} from "@/farmercomponents/cropbatches/create-crop-batch";
+import {Toast} from "primereact/toast";
+import {Crop} from "@/lib/types/crop";
+import {CropBatchTaskUpdateRequest} from "@/lib/types/crop-batch-task-update-request";
 
 
 // Define the context type
 interface CropBatchContextType {
     cropBatches: CropBatch[];
     getAllCropBatches: () => Promise<void>;
-    // cropBatch: CropBatch;
     getCropBatchById: (id: number) => Promise<CropBatch | null>
-    createCropBatch: (cropBatchData: CropBatchRequest) => Promise<void>;
+    createCropBatch: (cropBatchData: CropBatchRequest) => Promise<{
+        success: boolean;
+        data?: CropBatch;
+        error?: string
+    }>;
+    updateCropBatchTask: (cropBatchTaskUpdateRequest: CropBatchTaskUpdateRequest) => Promise<{
+        success: boolean;
+        data?: CropBatch;
+        error?: string
+    }>;
+    loading: boolean
 }
 
 // Create the context with a default value
@@ -22,7 +34,10 @@ interface CropBatchProviderProps {
 }
 
 export const CropBatchProvider: React.FC<CropBatchProviderProps> = ({children}) => {
+
     const [cropBatches, setCropBatches] = useState<CropBatch[]>([]);
+    const [loading, setLoading] = useState(false);
+    const toast = useRef<Toast | null>(null);
 
     const getAllCropBatches = useCallback(async (): Promise<void> => {
         try {
@@ -43,7 +58,12 @@ export const CropBatchProvider: React.FC<CropBatchProviderProps> = ({children}) 
         }
     }, []);
 
-    const createCropBatch = useCallback(async (cropBatchData: CropBatchRequest): Promise<void> => {
+    const createCropBatch = useCallback(async (cropBatchData: CropBatchRequest): Promise<{
+        success: boolean;
+        data?: CropBatch;
+        error?: string
+    }> => {
+        setLoading(true);
         try {
             const response = await apiClient.post<CropBatch>("/v1/api/crop/batch", cropBatchData, {
                 headers: {
@@ -51,13 +71,65 @@ export const CropBatchProvider: React.FC<CropBatchProviderProps> = ({children}) 
                 },
             });
             setCropBatches(prevBatches => [...prevBatches, response.data]);
+            toast.current?.show({
+                severity: "success",
+                summary: "Success",
+                detail: "Crop Batch created successfully",
+                life: 3000
+            });
+            return {success: true, data: response.data};
         } catch (error) {
-            console.error("Error creating cropBatch:", error);
+            console.error("Error creating crop:", error);
+            toast.current?.show({
+                severity: "error",
+                summary: "Error",
+                detail: "Failed to create crop batch",
+                life: 3000
+            });
+            return {success: false, error: "Failed to create crop"};
+        } finally {
+            setLoading(false);
         }
+
+    }, []);
+
+    const updateCropBatchTask = useCallback(async (cropBatchTaskUpdateRequest: CropBatchTaskUpdateRequest): Promise<{
+        success: boolean;
+        data?: CropBatch;
+        error?: string
+    }> => {
+        setLoading(true);
+        try {
+            const response = await apiClient.put<CropBatch>("/v1/api/crop/batch/update-task", cropBatchTaskUpdateRequest, {
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+    //        setCropBatches(cropBatches.map((cropBatch) => (cropBatch.id === response.data.id ? response.data : cropBatch)))
+            toast.current?.show({
+                severity: "success",
+                summary: "Success",
+                detail: "Crop Batch Updated successfully",
+                life: 3000
+            });
+            return {success: true, data: response.data};
+        } catch (error) {
+            console.error("Error creating crop:", error);
+            toast.current?.show({
+                severity: "error",
+                summary: "Error",
+                detail: "Failed to update crop batch",
+                life: 3000
+            });
+            return {success: false, error: "Failed to create crop"};
+        } finally {
+            setLoading(false);
+        }
+
     }, []);
 
     return (
-        <CropBatchContext.Provider value={{cropBatches, getAllCropBatches, getCropBatchById, createCropBatch}}>
+        <CropBatchContext.Provider value={{cropBatches, getAllCropBatches, getCropBatchById, createCropBatch, updateCropBatchTask, loading}}>
             {children}
         </CropBatchContext.Provider>
     );

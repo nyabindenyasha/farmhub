@@ -4,7 +4,7 @@ import {patients} from "@/lib/data";
 import DashboardLayout from "@/layouts/DashboardLayout";
 import {Button} from "@/components/ui/button";
 import PrimaryButton from "@/components/buttons/customButton";
-import {Plus, Search} from "lucide-react";
+import {MoreHorizontal, Plus, Search} from "lucide-react";
 import {Tabs, TabsList, TabsTrigger} from "@/components/ui/tabs";
 import {Badge} from "@/components/ui/badge";
 import {Input} from "@/components/ui/input";
@@ -13,6 +13,7 @@ import CreateCrop from "@/othercomponents/crop/create-crop";
 import {Crop} from "@/lib/types/crop";
 import {DataTable} from "primereact/datatable";
 import {Column} from "primereact/column";
+import {DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger} from "@/components/ui/dropdown-menu";
 
 export default function CropDataTableComponent() {
 
@@ -27,6 +28,9 @@ export default function CropDataTableComponent() {
     const closeCropForm = () => setIsCropFormOpen(false)
 
     const [selectedCrop, setSelectedCrop] = useState<Crop | undefined>(undefined);
+
+    const [selectedCrops, setSelectedCrops] = useState<Crop[]>([]);
+
 
     const [selectedClients, setSelectedClients] = useState<string[]>([])
     const [searchTerm, setSearchTerm] = useState("")
@@ -63,6 +67,27 @@ export default function CropDataTableComponent() {
         console.log("here: ", JSON.stringify(crop))
         setSelectedCrop(crop)
     }
+
+    const actionBodyTemplate = (crop: Crop) => {
+        console.log("crop: ", crop);
+        return <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+                <Button variant="ghost" size="icon">
+                    <MoreHorizontal className="h-4 w-4"/>
+                </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+                <DropdownMenuItem>
+                    <span
+                        onClick={() => {
+                            console.log("onClick: ", crop.id);
+                            setSelectedCrop(crop);
+                        }}> View Details</span>
+                </DropdownMenuItem>
+                <DropdownMenuItem>Edit Record</DropdownMenuItem>
+            </DropdownMenuContent>
+        </DropdownMenu>;
+    };
 
     return (
         <DashboardLayout>
@@ -110,14 +135,20 @@ export default function CropDataTableComponent() {
                         Filters
                     </Button>
                 </div>
-                <div className="card">
+                <div className="rounded-md border card">
 
-                    <DataTable className="prime-container" value={crops} paginator rows={10} rowsPerPageOptions={[5, 10, 25, 50]} tableStyle={{minWidth: '50rem'}}>
+                    <DataTable className="prime-container" selectionMode='checkbox' selection={selectedCrops}
+                               onSelectionChange={(e) => setSelectedCrops(e.value)} dataKey="id" value={crops} paginator
+                               rows={10} rowsPerPageOptions={[5, 10, 25, 50]} tableStyle={{minWidth: '50rem'}}>
+                        <Column selectionMode="multiple" headerStyle={{width: '3rem'}}></Column>
                         <Column field="name" header="Name"></Column>
                         <Column field="family" header="Family"></Column>
                         <Column field="genus" header="Genus"></Column>
                         <Column field="species" header="Species"></Column>
                         <Column field="subSpecies" header="Sub Species"></Column>
+                        <Column header="Actions" headerStyle={{ width: '5rem', textAlign: 'center' }} bodyStyle={{ textAlign: 'center', overflow: 'visible' }}
+                            body={(rowData) => actionBodyTemplate(rowData)}
+                        />
                     </DataTable>
 
                 </div>
