@@ -23,7 +23,7 @@
 #CMD ["nginx", "-g", "daemon off;"]
 
 # Step 1: Build Next.js App
-FROM node:18-alpine AS builder
+FROM node:18.19.1-alpine AS builder
 WORKDIR /app
 COPY . .
 RUN npm install && npm run build
