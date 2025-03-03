@@ -2,6 +2,7 @@ package com.xplug.tech.cropvariety;
 
 import com.xplug.tech.crop.CropResponse;
 import com.xplug.tech.crop.CropVariety;
+import com.xplug.tech.enums.VarietyType;
 import lombok.Builder;
 import lombok.Setter;
 import lombok.ToString;
@@ -19,7 +20,7 @@ public class CropVarietyResponse {
     private String maturity; //days
     private Integer harvestDuration;
     private String remarks;
-
+    private VarietyType varietyType;
 
     public static CropVarietyResponse of(CropVariety cropVariety) {
         Objects.requireNonNull(cropVariety, "CropVariety cannot be null!");
@@ -29,6 +30,7 @@ public class CropVarietyResponse {
                 .variety(cropVariety.getVariety())
                 .maturity(cropVariety.getMaturityStartDay() + "-" + cropVariety.getMaturityEndDay() + " Days")
                 .harvestDuration(cropVariety.getHarvestDuration())
+                .varietyType(cropVariety.getVarietyType())
                 .remarks(cropVariety.getRemarks())
                 .build();
     }

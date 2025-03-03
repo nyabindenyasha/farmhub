@@ -2,8 +2,10 @@ package com.xplug.tech.cropdata;
 
 import com.xplug.tech.crop.CropRequest;
 import com.xplug.tech.cropfertilizerschedule.CropFertilizerScheduleRequest;
+import com.xplug.tech.cropguide.CropGuideRequest;
 import com.xplug.tech.croppesticideschedule.CropPesticideScheduleRequest;
 import com.xplug.tech.cropstagesofgrowth.CropStagesOfGrowthRequest;
+import com.xplug.tech.cropvariety.CropVarietyRequest;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -21,7 +23,11 @@ public class CropData {
 
     private List<CropDataPesticideScheduleRequest> pesticideSchedule;
 
-    private List<CropDataCropStagesOfGrowthRequest> stagesOfGrowth;
+    private List<CropStagesOfGrowthRequest> stagesOfGrowth;
+
+    private List<CropVarietyRequest> varieties;
+
+    private CropGuideRequest cropData;
 
 }
 
@@ -30,7 +36,6 @@ public class CropData {
 @ToString
 class CropDataFertilizerScheduleRequest extends CropFertilizerScheduleRequest {
 
-    private String cropName;
     private String fertilizerName;
 
 }
@@ -40,17 +45,7 @@ class CropDataFertilizerScheduleRequest extends CropFertilizerScheduleRequest {
 @ToString
 class CropDataPesticideScheduleRequest extends CropPesticideScheduleRequest {
 
-    private String cropName;
     private String pesticideName;
-
-}
-
-@Getter
-@Setter
-@ToString
-class CropDataCropStagesOfGrowthRequest extends CropStagesOfGrowthRequest {
-
-    private String cropName;
 
 }
 

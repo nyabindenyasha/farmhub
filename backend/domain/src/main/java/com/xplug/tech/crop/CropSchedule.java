@@ -21,7 +21,7 @@ public class CropSchedule {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "crop_program_id", nullable = false)
+    @JoinColumn(name = "crop_program_id") // Prevent ownership
     private CropProgram cropProgram;
 
     @ManyToOne

@@ -37,10 +37,6 @@ public class PesticideDataLoader {
         }
     }
 
-    public List<PesticideRequest> getPesticides() {
-        return pesticides;
-    }
-
     public PesticideRequest getByName(String name) {
         return pesticides.stream()
                 .filter(pesticide -> pesticide.getName().equalsIgnoreCase(name))

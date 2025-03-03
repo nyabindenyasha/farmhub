@@ -1,0 +1,647 @@
+[
+  {
+    "crop": {
+      "name": "Broccoli-Cauliflower",
+      "family": "Cruciferaceae",
+      "genus": "Brassica",
+      "species": "Oleracea",
+      "subSpecies": "Botrytis"
+    },
+    "fertilizerSchedule": [
+      {
+        "fertilizerName": "Compound C",
+        "stageOfGrowth": {
+          "periodUnit": "DAYS",
+          "periodValue": 1
+        },
+        "applicationInterval": {
+          "periodUnit": "HOURS",
+          "periodValue": 0
+        },
+        "applicationMethod": "SPOT_PLACEMENT",
+        "rate": 30,
+        "remarks": "Basal"
+      },
+      {
+        "fertilizerName": "Ammonium Nitrate",
+        "stageOfGrowth": {
+          "periodUnit": "WEEKS",
+          "periodValue": 2
+        },
+        "applicationInterval": {
+          "periodUnit": "HOURS",
+          "periodValue": 0
+        },
+        "applicationMethod": "SPOT_PLACEMENT",
+        "rate": 5,
+        "remarks": "Top dressing"
+      },
+      {
+        "fertilizerName": "Potassium Nitrate",
+        "stageOfGrowth": {
+          "periodUnit": "WEEKS",
+          "periodValue": 4
+        },
+        "applicationInterval": {
+          "periodUnit": "WEEKS",
+          "periodValue": 2
+        },
+        "applicationMethod": "SPOT_PLACEMENT",
+        "rate": 5,
+        "remarks": "Split application"
+      },
+      {
+        "fertilizerName": "Potassium Nitrate",
+        "stageOfGrowth": {
+          "periodUnit": "WEEKS",
+          "periodValue": 6
+        },
+        "applicationInterval": {
+          "periodUnit": "HOURS",
+          "periodValue": 0
+        },
+        "applicationMethod": "SPOT_PLACEMENT",
+        "rate": 5,
+        "remarks": "Split application"
+      }
+    ],
+    "pesticideSchedule": [
+      {
+        "pesticideName": "Lambda",
+        "stageOfGrowth": {
+          "periodUnit": "DAYS",
+          "periodValue": 1
+        },
+        "applicationInterval": {
+          "periodUnit": "HOURS",
+          "periodValue": 0
+        },
+        "applicationMethod": "SPRAYING",
+        "remarks": "string"
+      },
+      {
+        "pesticideName": "Metolachlor",
+        "stageOfGrowth": {
+          "periodUnit": "DAYS",
+          "periodValue": 1
+        },
+        "applicationInterval": {
+          "periodUnit": "HOURS",
+          "periodValue": 0
+        },
+        "applicationMethod": "SPRAYING",
+        "remarks": "Herbicide"
+      },
+      {
+        "pesticideName": "Dimethoate",
+        "stageOfGrowth": {
+          "periodUnit": "WEEKS",
+          "periodValue": 1
+        },
+        "applicationInterval": {
+          "periodUnit": "HOURS",
+          "periodValue": 0
+        },
+        "applicationMethod": "SPRAYING",
+        "remarks": "string"
+      },
+      {
+        "pesticideName": "Muroti",
+        "stageOfGrowth": {
+          "periodUnit": "WEEKS",
+          "periodValue": 2
+        },
+        "applicationInterval": {
+          "periodUnit": "HOURS",
+          "periodValue": 0
+        },
+        "applicationMethod": "SPRAYING",
+        "remarks": "string"
+      },
+      {
+        "pesticideName": "Chlorothalonil",
+        "stageOfGrowth": {
+          "periodUnit": "WEEKS",
+          "periodValue": 2
+        },
+        "applicationInterval": {
+          "periodUnit": "HOURS",
+          "periodValue": 0
+        },
+        "applicationMethod": "SPRAYING",
+        "remarks": "string"
+      },
+      {
+        "pesticideName": "Muroti",
+        "stageOfGrowth": {
+          "periodUnit": "WEEKS",
+          "periodValue": 2
+        },
+        "applicationInterval": {
+          "periodUnit": "HOURS",
+          "periodValue": 0
+        },
+        "applicationMethod": "SPRAYING",
+        "remarks": "string"
+      },
+      {
+        "pesticideName": "Chlorothalonil",
+        "stageOfGrowth": {
+          "periodUnit": "WEEKS",
+          "periodValue": 2
+        },
+        "applicationInterval": {
+          "periodUnit": "HOURS",
+          "periodValue": 0
+        },
+        "applicationMethod": "SPRAYING",
+        "remarks": "string"
+      },
+      {
+        "pesticideName": "Belt",
+        "stageOfGrowth": {
+          "periodUnit": "WEEKS",
+          "periodValue": 3
+        },
+        "applicationInterval": {
+          "periodUnit": "HOURS",
+          "periodValue": 0
+        },
+        "applicationMethod": "SPRAYING",
+        "remarks": "string"
+      },
+      {
+        "pesticideName": "Antracol",
+        "stageOfGrowth": {
+          "periodUnit": "WEEKS",
+          "periodValue": 3
+        },
+        "applicationInterval": {
+          "periodUnit": "HOURS",
+          "periodValue": 0
+        },
+        "applicationMethod": "SPRAYING",
+        "remarks": "string"
+      },
+      {
+        "pesticideName": "Carbaryl",
+        "stageOfGrowth": {
+          "periodUnit": "WEEKS",
+          "periodValue": 4
+        },
+        "applicationInterval": {
+          "periodUnit": "HOURS",
+          "periodValue": 0
+        },
+        "applicationMethod": "SPRAYING",
+        "remarks": "string"
+      },
+      {
+        "pesticideName": "Acomil",
+        "stageOfGrowth": {
+          "periodUnit": "WEEKS",
+          "periodValue": 4
+        },
+        "applicationInterval": {
+          "periodUnit": "HOURS",
+          "periodValue": 0
+        },
+        "applicationMethod": "SPRAYING",
+        "remarks": "string"
+      },
+      {
+        "pesticideName": "Oxyfluorfen",
+        "stageOfGrowth": {
+          "periodUnit": "WEEKS",
+          "periodValue": 4
+        },
+        "applicationInterval": {
+          "periodUnit": "HOURS",
+          "periodValue": 0
+        },
+        "applicationMethod": "SPRAYING",
+        "remarks": "string"
+      },
+      {
+        "pesticideName": "Dimethoate",
+        "stageOfGrowth": {
+          "periodUnit": "WEEKS",
+          "periodValue": 5
+        },
+        "applicationInterval": {
+          "periodUnit": "HOURS",
+          "periodValue": 0
+        },
+        "applicationMethod": "SPRAYING",
+        "remarks": "string"
+      },
+      {
+        "pesticideName": "Tebuconazole",
+        "stageOfGrowth": {
+          "periodUnit": "WEEKS",
+          "periodValue": 5
+        },
+        "applicationInterval": {
+          "periodUnit": "HOURS",
+          "periodValue": 0
+        },
+        "applicationMethod": "SPRAYING",
+        "remarks": "string"
+      },
+      {
+        "pesticideName": "Fluazifop",
+        "stageOfGrowth": {
+          "periodUnit": "WEEKS",
+          "periodValue": 5
+        },
+        "applicationInterval": {
+          "periodUnit": "HOURS",
+          "periodValue": 0
+        },
+        "applicationMethod": "SPRAYING",
+        "remarks": "string"
+      },
+      {
+        "pesticideName": "Muroti",
+        "stageOfGrowth": {
+          "periodUnit": "WEEKS",
+          "periodValue": 6
+        },
+        "applicationInterval": {
+          "periodUnit": "HOURS",
+          "periodValue": 0
+        },
+        "applicationMethod": "SPRAYING",
+        "remarks": "string"
+      },
+      {
+        "pesticideName": "Belt",
+        "stageOfGrowth": {
+          "periodUnit": "WEEKS",
+          "periodValue": 7
+        },
+        "applicationInterval": {
+          "periodUnit": "HOURS",
+          "periodValue": 0
+        },
+        "applicationMethod": "SPRAYING",
+        "remarks": "string"
+      },
+      {
+        "pesticideName": "Chlorothalonil",
+        "stageOfGrowth": {
+          "periodUnit": "WEEKS",
+          "periodValue": 7
+        },
+        "applicationInterval": {
+          "periodUnit": "HOURS",
+          "periodValue": 0
+        },
+        "applicationMethod": "SPRAYING",
+        "remarks": "string"
+      },
+      {
+        "pesticideName": "Carbaryl",
+        "stageOfGrowth": {
+          "periodUnit": "WEEKS",
+          "periodValue": 8
+        },
+        "applicationInterval": {
+          "periodUnit": "HOURS",
+          "periodValue": 0
+        },
+        "applicationMethod": "SPRAYING",
+        "remarks": "string"
+      },
+      {
+        "pesticideName": "Dimethoate",
+        "stageOfGrowth": {
+          "periodUnit": "WEEKS",
+          "periodValue": 9
+        },
+        "applicationInterval": {
+          "periodUnit": "HOURS",
+          "periodValue": 0
+        },
+        "applicationMethod": "SPRAYING",
+        "remarks": "string"
+      },
+      {
+        "pesticideName": "Antracol",
+        "stageOfGrowth": {
+          "periodUnit": "WEEKS",
+          "periodValue": 9
+        },
+        "applicationInterval": {
+          "periodUnit": "HOURS",
+          "periodValue": 0
+        },
+        "applicationMethod": "SPRAYING",
+        "remarks": "string"
+      },
+      {
+        "pesticideName": "Muroti",
+        "stageOfGrowth": {
+          "periodUnit": "WEEKS",
+          "periodValue": 10
+        },
+        "applicationInterval": {
+          "periodUnit": "HOURS",
+          "periodValue": 0
+        },
+        "applicationMethod": "SPRAYING",
+        "remarks": "string"
+      },
+      {
+        "pesticideName": "Belt",
+        "stageOfGrowth": {
+          "periodUnit": "WEEKS",
+          "periodValue": 11
+        },
+        "applicationInterval": {
+          "periodUnit": "HOURS",
+          "periodValue": 0
+        },
+        "applicationMethod": "SPRAYING",
+        "remarks": "string"
+      },
+      {
+        "pesticideName": "Carbaryl",
+        "stageOfGrowth": {
+          "periodUnit": "WEEKS",
+          "periodValue": 12
+        },
+        "applicationInterval": {
+          "periodUnit": "HOURS",
+          "periodValue": 0
+        },
+        "applicationMethod": "SPRAYING",
+        "remarks": "string"
+      }
+    ],
+    "stagesOfGrowth": [
+      {
+        "stageStartDate": {
+          "periodUnit": "DAYS",
+          "periodValue": 1
+        },
+        "stageEndDate": {
+          "periodUnit": "DAYS",
+          "periodValue": 1
+        },
+        "stageOfGrowth": "TRANSPLANTING"
+      },
+      {
+        "stageStartDate": {
+          "periodUnit": "WEEKS",
+          "periodValue": 1
+        },
+        "stageEndDate": {
+          "periodUnit": "WEEKS",
+          "periodValue": 5
+        },
+        "stageOfGrowth": "VEGETATIVE_GROWTH"
+      },
+      {
+        "stageStartDate": {
+          "periodUnit": "WEEKS",
+          "periodValue": 6
+        },
+        "stageEndDate": {
+          "periodUnit": "WEEKS",
+          "periodValue": 9
+        },
+        "stageOfGrowth": "HEAD_FORMATION"
+      },
+      {
+        "stageStartDate": {
+          "periodUnit": "WEEKS",
+          "periodValue": 10
+        },
+        "stageEndDate": {
+          "periodUnit": "WEEKS",
+          "periodValue": 12
+        },
+        "stageOfGrowth": "MATURITY"
+      }
+    ],
+    "varieties": [
+      {
+        "variety": "Zara",
+        "maturityStartDay": 65,
+        "maturityEndDay": 80,
+        "harvestDuration": 10,
+        "remarks": "Broccoli",
+        "varietyType": "EARLY_MATURITY"
+      },
+      {
+        "variety": "Montop",
+        "maturityStartDay": 65,
+        "maturityEndDay": 80,
+        "harvestDuration": 10,
+        "remarks": "Broccoli",
+        "varietyType": "EARLY_MATURITY"
+      },
+      {
+        "variety": "Star 2204",
+        "maturityStartDay": 65,
+        "maturityEndDay": 80,
+        "harvestDuration": 10,
+        "remarks": "Broccoli",
+        "varietyType": "EARLY_MATURITY"
+      },
+      {
+        "variety": "Cigno",
+        "maturityStartDay": 65,
+        "maturityEndDay": 80,
+        "harvestDuration": 10,
+        "remarks": "Broccoli",
+        "varietyType": "EARLY_MATURITY"
+      },
+      {
+        "variety": "Formoso",
+        "maturityStartDay": 65,
+        "maturityEndDay": 80,
+        "harvestDuration": 10,
+        "remarks": "Broccoli",
+        "varietyType": "EARLY_MATURITY"
+      },
+      {
+        "variety": "Dainty",
+        "maturityStartDay": 65,
+        "maturityEndDay": 80,
+        "harvestDuration": 10,
+        "remarks": "Broccoli",
+        "varietyType": "EARLY_MATURITY"
+      },
+      {
+        "variety": "Capella",
+        "maturityStartDay": 65,
+        "maturityEndDay": 80,
+        "harvestDuration": 10,
+        "remarks": "Broccoli",
+        "varietyType": "EARLY_MATURITY"
+      },
+      {
+        "variety": "Corato",
+        "maturityStartDay": 65,
+        "maturityEndDay": 80,
+        "harvestDuration": 10,
+        "remarks": "Cauliflower",
+        "varietyType": "EARLY_MATURITY"
+      },
+      {
+        "variety": "Wallaby",
+        "maturityStartDay": 65,
+        "maturityEndDay": 80,
+        "harvestDuration": 10,
+        "remarks": "Cauliflower",
+        "varietyType": "EARLY_MATURITY"
+      },
+      {
+        "variety": "Spacestar",
+        "maturityStartDay": 65,
+        "maturityEndDay": 80,
+        "harvestDuration": 10,
+        "remarks": "Cauliflower",
+        "varietyType": "EARLY_MATURITY"
+      },
+      {
+        "variety": "Pearl",
+        "maturityStartDay": 65,
+        "maturityEndDay": 80,
+        "harvestDuration": 10,
+        "remarks": "Cauliflower",
+        "varietyType": "EARLY_MATURITY"
+      },
+      {
+        "variety": "Bonny",
+        "maturityStartDay": 65,
+        "maturityEndDay": 80,
+        "harvestDuration": 10,
+        "remarks": "Cauliflower",
+        "varietyType": "EARLY_MATURITY"
+      },
+      {
+        "variety": "Crossway",
+        "maturityStartDay": 65,
+        "maturityEndDay": 80,
+        "harvestDuration": 10,
+        "remarks": "Cauliflower",
+        "varietyType": "EARLY_MATURITY"
+      },
+      {
+        "variety": "Star 4405",
+        "maturityStartDay": 65,
+        "maturityEndDay": 80,
+        "harvestDuration": 10,
+        "remarks": "Cauliflower",
+        "varietyType": "EARLY_MATURITY"
+      },
+      {
+        "variety": "Star 4418",
+        "maturityStartDay": 65,
+        "maturityEndDay": 80,
+        "harvestDuration": 10,
+        "remarks": "Cauliflower",
+        "varietyType": "EARLY_MATURITY"
+      }
+    ],
+    "cropData": {
+      "cropId": 0,
+      "cropName": "Broccoli-Cauliflower",
+      "nurseryManagement": {
+        "seedRate": {
+          "unit": "PER_GRAM",
+          "minRate": 200,
+          "maxRate": 350
+        },
+        "nurseryPeriodicTimes": {
+          "plantingTime": "All year round",
+          "emergenceTime": "5-7 days",
+          "transplantingTime": "35 days from planting, 28 days from emergence"
+        },
+        "soilTemperatureForGermination": {
+          "minimumTemperature": {
+            "temperatureValue": 4,
+            "description": "Degrees Celcius, todo add unit field"
+          },
+          "optimumTemperature": {
+            "temperatureValue": 18,
+            "description": "Degrees Celcius, todo add unit field"
+          },
+          "maximumTemperature": {
+            "temperatureValue": 35,
+            "description": "Degrees Celcius, todo add unit field"
+          }
+        },
+        "nurserySpacing": {
+          "sowingDepth": {
+            "minimumSpacing": 1,
+            "maximumSpacing": 1,
+            "unit": "CENTIMETER",
+            "description": "Maintain depth for good emergence"
+          },
+          "inRowSpacing": {
+            "minimumSpacing": 0.5,
+            "maximumSpacing": 1,
+            "unit": "CENTIMETER",
+            "description": "Avoid overcrowding your seedlings as this may lead to weak seedlings"
+          },
+          "interRowSpacing": {
+            "minimumSpacing": 5,
+            "maximumSpacing": 7,
+            "unit": "CENTIMETER",
+            "description": "Avoid overcrowding your seedlings as this may lead to weak seedlings"
+          }
+        },
+        "nurseryBedPreparation": {
+          "fertilizerApplications": [
+            {
+              "fertilizerId": 1,
+              "unit": "GRAM",
+              "quantity": 45,
+              "perUnit": "PER_SQUARE_METER"
+            },
+            {
+              "fertilizerId": 2,
+              "unit": "GRAM",
+              "quantity": 35,
+              "perUnit": "PER_SQUARE_METER"
+            }
+          ],
+          "metadataList": [
+            {
+              "key": "test",
+              "value": "string"
+            }
+          ]
+        }
+      },
+      "fieldManagement": {
+        "soilRequirements": "Clay loams rich in organic matter",
+        "ph": "6.0-7.0",
+        "temperature": "15-30°C",
+        "waterRequirement": "HEAVY",
+        "easeOfCare": "DIFFICULT",
+        "inRowSpacing": {
+          "minimumSpacing": 30,
+          "maximumSpacing": 60,
+          "unit": "CENTIMETER",
+          "description": "string"
+        },
+        "interRowSpacing": {
+          "minimumSpacing": 60,
+          "maximumSpacing": 90,
+          "unit": "CENTIMETER",
+          "description": "string"
+        },
+        "plantPopulation": {
+          "unit": "PER_HECTARE",
+          "minRate": 20000,
+          "maxRate": 60000
+        }
+      }
+    }
+  }
+]

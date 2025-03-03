@@ -26,5 +26,33 @@
     "composition": "15,5% (N), 26,5% (CaO)",
     "type": "INORGANIC",
     "remarks": "top dressing"
+  },
+  {
+    "name": "Cow Manure",
+    "alias": "Cow Manure",
+    "composition": "NPK",
+    "type": "ORGANIC",
+    "remarks": "Relatively low in NPK, but excellent for soil conditioning."
+  },
+  {
+    "name": "Chicken Manure",
+    "alias": "Chicken Manure",
+    "composition": "PK",
+    "type": "ORGANIC",
+    "remarks": "High in nitrogen and phosphorus, requiring careful application to avoid burns."
+  },
+  {
+    "name": "Compost",
+    "alias": "Compost",
+    "composition": "Organic Matter",
+    "type": "ORGANIC",
+    "remarks": "Improves soil structure, aeration, and water retentio"
+  },
+  {
+    "name": "Well Rotten Manure",
+    "alias": "Well Rotten Manure",
+    "composition": "NPK",
+    "type": "ORGANIC",
+    "remarks": "Improves soil health by enhancing its structure and microbial activity"
   }
 ]

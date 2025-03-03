@@ -74,6 +74,130 @@
     ],
     "targetDiseases": []
   },
+  {
+    "name": "Aceta + Ema",
+    "alias": "Aceta + Ema",
+    "activeIngredients": [
+      "Aceta, Ema"
+    ],
+    "applicationRate": "16ml",
+    "safetyInterval": 7,
+    "pesticideType": "PESTICIDE",
+    "modeOfAction": "PREVENTATIVE",
+    "targetPests": [
+      "General pests"
+    ],
+    "targetDiseases": []
+  },
+  {
+    "name": "Hoover",
+    "alias": "Hoover",
+    "activeIngredients": [
+      "Hoover"
+    ],
+    "applicationRate": "50g",
+    "safetyInterval": 7,
+    "pesticideType": "PESTICIDE",
+    "modeOfAction": "PREVENTATIVE",
+    "targetPests": [
+      "General pests"
+    ],
+    "targetDiseases": []
+  },
+  {
+    "name": "Lufenuron",
+    "alias": "Lufenuron",
+    "activeIngredients": [
+      "Lufenuron"
+    ],
+    "applicationRate": "50g",
+    "safetyInterval": 7,
+    "pesticideType": "PESTICIDE",
+    "modeOfAction": "PREVENTATIVE",
+    "targetPests": [
+      "General pests"
+    ],
+    "targetDiseases": []
+  },
+
+  {
+    "name": "Forceful",
+    "alias": "Forceful",
+    "activeIngredients": [
+      "Forceful"
+    ],
+    "applicationRate": "50g",
+    "safetyInterval": 7,
+    "pesticideType": "PESTICIDE",
+    "modeOfAction": "PREVENTATIVE",
+    "targetPests": [
+      "General pests"
+    ],
+    "targetDiseases": []
+  },
+  {
+    "name": "Range",
+    "alias": "Range",
+    "activeIngredients": [
+      "Range"
+    ],
+    "applicationRate": "50g",
+    "safetyInterval": 7,
+    "pesticideType": "PESTICIDE",
+    "modeOfAction": "PREVENTATIVE",
+    "targetPests": [
+      "General pests"
+    ],
+    "targetDiseases": []
+  },
+  {
+    "name": "Panther",
+    "alias": "Panther",
+    "activeIngredients": [
+      "Panther"
+    ],
+    "applicationRate": "50g",
+    "safetyInterval": 7,
+    "pesticideType": "PESTICIDE",
+    "modeOfAction": "PREVENTATIVE",
+    "targetPests": [
+      "General pests"
+    ],
+    "targetDiseases": []
+  },
+  {
+    "name": "Traps",
+    "alias": "Traps",
+    "activeIngredients": [
+      "Traps"
+    ],
+    "applicationRate": "50g",
+    "safetyInterval": 7,
+    "pesticideType": "PESTICIDE",
+    "modeOfAction": "PREVENTATIVE",
+    "targetPests": [
+      "General pests"
+    ],
+    "targetDiseases": []
+  },
+  {
+    "name": "Aegis",
+    "alias": "Aegis",
+    "activeIngredients": [
+      "Aegis"
+    ],
+    "applicationRate": "50g",
+    "safetyInterval": 7,
+    "pesticideType": "PESTICIDE",
+    "modeOfAction": "PREVENTATIVE",
+    "targetPests": [
+      "General pests"
+    ],
+    "targetDiseases": []
+  },
+
+
+
 
   {
     "name": "Chlorothalonil",
@@ -136,6 +260,17 @@
     "name": "Fluazifop",
     "alias": "Fluazifop",
     "activeIngredients": ["Fluazifop"],
+    "applicationRate": "80ml",
+    "safetyInterval": 7,
+    "pesticideType": "HERBICIDE",
+    "modeOfAction": "PREVENTATIVE",
+    "targetPests": ["Grassy weeds"],
+    "targetDiseases": []
+  },
+  {
+    "name": "Oxyfluorfen",
+    "alias": "Oxyfluorfen",
+    "activeIngredients": ["Oxyfluorfen"],
     "applicationRate": "80ml",
     "safetyInterval": 7,
     "pesticideType": "HERBICIDE",
@@ -228,6 +363,23 @@
     "targetDiseases": []
   },
 
+  {
+    "name": "Acephate",
+    "alias": "Acephate",
+    "activeIngredients": [
+      "Acephate"
+    ],
+    "applicationRate": "25g",
+    "safetyInterval": 7,
+    "pesticideType": "PESTICIDE",
+    "modeOfAction": "PREVENTATIVE",
+    "targetPests": [
+      "General pests"
+    ],
+    "targetDiseases": []
+  },
+
+
 
   {
     "name": "Copper",
@@ -288,6 +440,28 @@
     "modeOfAction": "PREVENTATIVE",
     "targetPests": [],
     "targetDiseases": ["Fungal infections"]
-  }
+  },
 
+  {
+    "name": "Bravo",
+    "alias": "Bravo",
+    "activeIngredients": ["Bravo"],
+    "applicationRate": "32ml",
+    "safetyInterval": 14,
+    "pesticideType": "FUNGICIDE",
+    "modeOfAction": "PREVENTATIVE",
+    "targetPests": [],
+    "targetDiseases": ["Fungal infections"]
+  },
+  {
+    "name": "Orius",
+    "alias": "Orius",
+    "activeIngredients": ["Orius"],
+    "applicationRate": "16ml",
+    "safetyInterval": 7,
+    "pesticideType": "FUNGICIDE",
+    "modeOfAction": "PREVENTATIVE",
+    "targetPests": [],
+    "targetDiseases": ["Fungal infections"]
+  }
 ]

@@ -6,6 +6,6 @@ import java.util.Optional;
 
 public interface PesticideDao extends JpaRepository<Pesticide, Long> {
 
-    Optional<Pesticide> findByNameOrAliasIgnoreCase(String name, String alias);
+    Optional<Pesticide> findByNameContainsIgnoreCaseOrAliasContainsIgnoreCase(String name, String alias);
 
 }

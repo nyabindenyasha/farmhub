@@ -40,11 +40,6 @@ public non-sealed class CropPesticideScheduleServiceImpl implements CropPesticid
     }
 
     @Override
-    public Set<CropPesticideSchedule> getByCropScheduleId(Long cropScheduleId) {
-        return cropPesticideScheduleRepository.findByCropProgramId(cropScheduleId);
-    }
-
-    @Override
     public List<CropPesticideSchedule> getByCropAndScheduleType(Long cropId, CropScheduleType cropScheduleType) {
         return cropPesticideScheduleRepository.findByCropProgramCropIdAndCropProgramCropScheduleType(cropId, cropScheduleType);
     }

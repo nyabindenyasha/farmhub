@@ -1,11 +1,15 @@
+server:
+  port: 8088
 spring:
+  jackson:
+    time-zone: Africa/Harare
   application:
-   name: crop-management-app
+    name: crop-management-app
   datasource:
     driver-class-name: org.postgresql.Driver
-    password: postgres
-    url: jdbc:postgresql://localhost:5432/crop_management8
-    username: postgres
+    password: xxx
+    url: jdbc:postgresql://xxx
+    username: xxx
   jpa:
     database: POSTGRESQL
     hibernate:
@@ -13,5 +17,36 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
+        jdbc:
+          time_zone: Africa/Harare
   main:
     allow-bean-definition-overriding: true
+  mail:
+    host: smtp.gmail.com
+    password: egeozlkhwdkdtzzf
+    properties:
+      mail:
+        smtp:
+          auth: true
+          socketFactory:
+            class: javax.net.ssl.SSLSocketFactory
+            fallback: false
+            port: 465
+    username: noreplysmartproc@gmail.com
+system:
+  baseURL: https://procurement-system-backend.herokuapp.com
+  name: FarmHub
+  redirectURL: "http://localhost:8080/v1/verify-user"
+logging:
+  file:
+    name: farm-hub.log
+org:
+  jobrunr:
+    background-job-server:
+      enabled: true
+    dashboard:
+      enabled: true
+      port: 8000
+
+crop:
+  path: backend/app/src/main/resources/crops

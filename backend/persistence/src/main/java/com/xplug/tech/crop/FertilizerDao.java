@@ -6,6 +6,6 @@ import java.util.Optional;
 
 public interface FertilizerDao extends JpaRepository<Fertilizer, Long> {
 
-    Optional<Fertilizer> findByNameOrAliasIgnoreCase(String name, String alias);
+    Optional<Fertilizer> findByNameIgnoreCaseOrAliasIgnoreCase(String name, String alias);
 
 }

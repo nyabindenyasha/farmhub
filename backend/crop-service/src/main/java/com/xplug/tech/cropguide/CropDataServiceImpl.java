@@ -34,6 +34,7 @@ public non-sealed class CropDataServiceImpl implements CropDataService {
         log.info("### CropGuideRequest: {}", cropGuideRequest);
 
         var optionalCropData = cropDataRepository.findByClassificationId(cropGuideRequest.getCropId());
+
         if (optionalCropData.isPresent()) {
             throw new ItemAlreadyExistsException("Crop Guide for crop with id: " + cropGuideRequest.getCropId() + " already exists");
         }
@@ -68,8 +69,10 @@ public non-sealed class CropDataServiceImpl implements CropDataService {
 
         log.info("### CropFieldManagement: {}", fieldManagement);
 
+        var crop = cropService.findById(cropGuideRequest.getCropId()).orElse(cropService.getByName(cropGuideRequest.getCropName()));
+
         CropData cropData = CropData.builder()
-                .classification(cropService.getById(cropGuideRequest.getCropId()))
+                .classification(crop)
                 .nurseryManagement(nurseryManagement)
                 .fieldManagement(fieldManagement)
                 .build();

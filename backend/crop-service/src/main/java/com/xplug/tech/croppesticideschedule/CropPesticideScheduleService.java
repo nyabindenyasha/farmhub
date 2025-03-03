@@ -14,8 +14,6 @@ public sealed interface CropPesticideScheduleService permits CropPesticideSchedu
 
     CropPesticideSchedule getById(Long id);
 
-    Set<CropPesticideSchedule> getByCropScheduleId(Long cropScheduleId);
-
     List<CropPesticideSchedule> getByCropAndScheduleType(Long cropId, CropScheduleType cropScheduleType);
 
     CropPesticideSchedule getByCropAndScheduleTypeAndStageOfGrowth(Long cropId, CropScheduleType cropScheduleType, Long stageOfGrowthId);

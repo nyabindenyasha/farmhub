@@ -62,7 +62,7 @@ public class CropBatchCreatedEventListener implements ApplicationListener<CropBa
         emails.add(farmer.getEmail());
         emailRequest.setEmailRecipients(emails);
         //todo
-        notificationService.create(userCreatedNotificationsContext, emailRequest);
+//        notificationService.create(userCreatedNotificationsContext, emailRequest);
     }
 
 }

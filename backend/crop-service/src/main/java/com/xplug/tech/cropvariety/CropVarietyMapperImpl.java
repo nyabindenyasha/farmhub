@@ -26,6 +26,7 @@ public non-sealed class CropVarietyMapperImpl implements CropVarietyMapper {
                 .maturityEndDay(cropVarietyRequest.getMaturityEndDay())
                 .harvestDuration(cropVarietyRequest.getHarvestDuration())
                 .remarks(cropVarietyRequest.getRemarks())
+                .varietyType(cropVarietyRequest.getVarietyType())
                 .build();
     }
 

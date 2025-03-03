@@ -33,13 +33,13 @@ public non-sealed class PesticideServiceImpl implements PesticideService {
 
     @Override
     public Pesticide getByName(String name) {
-        return pesticideRepository.findByNameOrAliasIgnoreCase(name, name)
+        return pesticideRepository.findByNameContainsIgnoreCaseOrAliasContainsIgnoreCase(name, name)
                 .orElseThrow(() -> new RuntimeException("Pesticide not found with Name: " + name));
     }
 
     @Override
     public Pesticide create(PesticideRequest pesticideRequest) {
-        var optionalCrop = pesticideRepository.findByNameOrAliasIgnoreCase(pesticideRequest.getName(), pesticideRequest.getAlias());
+        var optionalCrop = pesticideRepository.findByNameContainsIgnoreCaseOrAliasContainsIgnoreCase(pesticideRequest.getName(), pesticideRequest.getAlias());
         if (optionalCrop.isPresent()) {
             throw new ItemAlreadyExistsException("Pesticide with name: " + pesticideRequest.getName() + " already exists");
         }
@@ -53,7 +53,7 @@ public non-sealed class PesticideServiceImpl implements PesticideService {
 
     @Override
     public Pesticide initialize(PesticideRequest pesticideRequest) {
-        var optionalPesticide = pesticideRepository.findByNameOrAliasIgnoreCase(pesticideRequest.getName(), pesticideRequest.getAlias());
+        var optionalPesticide = pesticideRepository.findByNameContainsIgnoreCaseOrAliasContainsIgnoreCase(pesticideRequest.getName(), pesticideRequest.getAlias());
         if (optionalPesticide.isPresent()) {
             log.info("### Pesticide Found {}", pesticideRequest.getName());
             return optionalPesticide.get();

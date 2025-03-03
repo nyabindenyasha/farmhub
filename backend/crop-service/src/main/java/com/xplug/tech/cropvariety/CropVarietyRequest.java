@@ -1,11 +1,14 @@
 package com.xplug.tech.cropvariety;
 
+import com.xplug.tech.enums.VarietyType;
 import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 
 import javax.validation.constraints.NotNull;
 
 @Getter
+@Setter
 @ToString
 public class CropVarietyRequest {
 
@@ -22,5 +25,7 @@ public class CropVarietyRequest {
     private Integer harvestDuration;
 
     private String remarks;
+
+    private VarietyType varietyType;
 
 }

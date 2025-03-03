@@ -1,9 +1,6 @@
 package com.xplug.tech.crop;
 
-import com.xplug.tech.cropbatch.CropBatchRequest;
-import com.xplug.tech.cropbatch.CropBatchResponse;
-import com.xplug.tech.cropbatch.CropBatchService;
-import com.xplug.tech.cropbatch.CropBatchUpdateRequest;
+import com.xplug.tech.cropbatch.*;
 import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.web.bind.annotation.*;
 
@@ -49,6 +46,12 @@ public class CropBatchController {
     @Operation(summary = "Update Crop Batch")
     public CropBatch update(@RequestBody CropBatchUpdateRequest cropBatchUpdateRequest) {
         return cropBatchService.update(cropBatchUpdateRequest);
+    }
+
+    @PutMapping("/update-task")
+    @Operation(summary = "Update Crop Batch Task")
+    CropBatch updateTask(@RequestBody CropBatchTaskUpdateRequest cropBatchTaskUpdateRequest) {
+        return cropBatchService.updateTask(cropBatchTaskUpdateRequest);
     }
 
     @DeleteMapping("/{id}")

@@ -16,6 +16,8 @@ public sealed interface CropBatchService permits CropBatchServiceImpl {
 
     CropBatch update(CropBatchUpdateRequest cropBatchUpdateRequest);
 
+    CropBatch updateTask(CropBatchTaskUpdateRequest cropBatchTaskUpdateRequest);
+
     void delete(Long id);
 
 }

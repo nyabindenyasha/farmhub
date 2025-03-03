@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @Builder
-@ToString(exclude = {"cropBatch"})
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
 public class CropFertilizerScheduleTask extends CropScheduleTask {

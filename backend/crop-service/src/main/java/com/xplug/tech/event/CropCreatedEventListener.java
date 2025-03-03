@@ -31,7 +31,7 @@ public class CropCreatedEventListener implements ApplicationListener<CropCreated
 
         //todo get values from a preloaded file
 
-        var cropSchedule = CropProgram.builder()
+        var cropProgram = CropProgram.builder()
                 .crop(cropCreatedEvent.getCrop())
                 .name(cropCreatedEvent.getCrop().getName().concat("_default"))
                 .description(cropCreatedEvent.getCrop().getName().concat("_default"))
@@ -40,7 +40,7 @@ public class CropCreatedEventListener implements ApplicationListener<CropCreated
                 .cropScheduleType(CropScheduleType.PRIMARY)
                 .build();
 
-        var savedCropSchedule = cropProgramService.save(cropSchedule);
+        var savedCropSchedule = cropProgramService.save(cropProgram);
 
         log.info("### Saved Crop Schedule, {}", savedCropSchedule);
 
@@ -49,7 +49,7 @@ public class CropCreatedEventListener implements ApplicationListener<CropCreated
         for (int i = 0; i < 12; i++) {
 
 //            var cropFertilizerSchedule = CropFertilizerSchedule.builder()
-//                    .cropSchedule(savedCropSchedule)
+//                    .cropProgram(savedCropSchedule)
 //                    .fertilizer(fertilizer)
 //                    .stageOfGrowth(periodService.findOrCreatePeriod(cropFertilizerScheduleRequest.getStageOfGrowth()))
 //                    .applicationInterval(periodService.findOrCreatePeriod(cropFertilizerScheduleRequest.getApplicationInterval()))
@@ -58,7 +58,7 @@ public class CropCreatedEventListener implements ApplicationListener<CropCreated
 //                    .build();
 //
 //            var cropPesticideSchedule = CropPesticideSchedule.builder()
-//                    .cropSchedule(savedCropSchedule)
+//                    .cropProgram(savedCropSchedule)
 //                    .pesticide(fertilizer)
 //                    .stageOfGrowth(periodService.findOrCreatePeriod(cropPesticideScheduleRequest.getStageOfGrowth()))
 //                    .applicationInterval(periodService.findOrCreatePeriod(cropPesticideScheduleRequest.getApplicationInterval()))

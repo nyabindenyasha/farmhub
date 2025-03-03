@@ -39,10 +39,14 @@ public class CropProgram {
     @Enumerated(EnumType.STRING)
     private CropScheduleType cropScheduleType;
 
-    @OneToMany(mappedBy = "cropProgram", cascade = CascadeType.ALL, orphanRemoval = true)
+    // OWN the relationship by adding @JoinColumn on OneToMany
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @JoinColumn(name = "crop_program_id") // Ensures foreign key in CropPesticideSchedule table
     private Set<CropPesticideSchedule> pesticideScheduleList;
 
-    @OneToMany(mappedBy = "cropProgram", cascade = CascadeType.ALL, orphanRemoval = true)
+    // OWN the relationship by adding @JoinColumn on OneToMany
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @JoinColumn(name = "crop_program_id") // Ensures foreign key in CropPesticideSchedule table
     private Set<CropFertilizerSchedule> fertilizerScheduleList;
 
     public Set<CropPesticideSchedule> getPesticideScheduleList() {

@@ -1,6 +1,9 @@
 package com.xplug.tech.crop;
 
-import com.xplug.tech.cropprogram.*;
+import com.xplug.tech.cropprogram.CropProgramRequest;
+import com.xplug.tech.cropprogram.CropProgramResponse;
+import com.xplug.tech.cropprogram.CropProgramService;
+import com.xplug.tech.cropprogram.CropProgramUpdateRequest;
 import com.xplug.tech.cropprograms.CropProgramPDFGenerator;
 import com.xplug.tech.cropprograms.CropProgramPDFGeneratorTest;
 import io.swagger.v3.oas.annotations.Operation;
@@ -49,12 +52,6 @@ public class CropProgramController {
     @PostMapping
     @Operation(summary = "Create CropSchedule")
     public CropProgram create(@RequestBody CropProgramRequest cropProgramRequest) {
-        return cropProgramService.create(cropProgramRequest);
-    }
-
-    @PostMapping("/v2")
-    @Operation(summary = "Create V2 CropSchedule")
-    public CropProgram create(@RequestBody CropProgramRequestV2 cropProgramRequest) {
         return cropProgramService.create(cropProgramRequest);
     }
 

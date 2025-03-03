@@ -9,4 +9,6 @@ public interface CropDataDao extends JpaRepository<CropData, Long> {
 
     Optional<CropData> findByClassificationId(Long cropId);
 
+    Optional<CropData> findByClassificationName(String name);
+
 }

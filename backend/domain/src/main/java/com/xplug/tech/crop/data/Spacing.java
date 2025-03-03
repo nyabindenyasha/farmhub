@@ -15,9 +15,9 @@ import javax.persistence.Enumerated;
 @Embeddable
 public class Spacing {
 
-    private Integer minimumSpacing;
+    private Double minimumSpacing;
 
-    private Integer maximumSpacing;
+    private Double maximumSpacing;
 
     @Enumerated(EnumType.STRING)
     private MeasurementUnit unit;

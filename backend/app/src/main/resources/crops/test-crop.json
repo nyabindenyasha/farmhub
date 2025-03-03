@@ -1,0 +1,393 @@
+[
+  {
+    "crop": {
+      "name": "Test Crop",
+      "family": "Cruciferacease",
+      "genus": "Brassica",
+      "species": "Oleracea",
+      "subSpecies": "Capitate"
+    },
+    "fertilizerSchedule": [
+      {
+        "fertilizerName": "Compound C",
+        "stageOfGrowth": {
+          "periodUnit": "MINUTES",
+          "periodValue": 10
+        },
+        "applicationInterval": {
+          "periodUnit": "HOURS",
+          "periodValue": 0
+        },
+        "applicationMethod": "SPOT_PLACEMENT",
+        "rate": 30,
+        "remarks": "Basal"
+      },
+      {
+        "fertilizerName": "AN",
+        "stageOfGrowth": {
+          "periodUnit": "HOURS",
+          "periodValue": 2
+        },
+        "applicationInterval": {
+          "periodUnit": "HOURS",
+          "periodValue": 0
+        },
+        "applicationMethod": "SPOT_PLACEMENT",
+        "rate": 5,
+        "remarks": "Top dressing"
+      },
+      {
+        "fertilizerName": "AN",
+        "stageOfGrowth": {
+          "periodUnit": "HOURS",
+          "periodValue": 3
+        },
+        "applicationInterval": {
+          "periodUnit": "HOURS",
+          "periodValue": 0
+        },
+        "applicationMethod": "SPOT_PLACEMENT",
+        "rate": 5,
+        "remarks": "Top dressing"
+      },
+      {
+        "fertilizerName": "AN",
+        "stageOfGrowth": {
+          "periodUnit": "HOURS",
+          "periodValue": 5
+        },
+        "applicationInterval": {
+          "periodUnit": "HOURS",
+          "periodValue": 0
+        },
+        "applicationMethod": "SPOT_PLACEMENT",
+        "rate": 5,
+        "remarks": "Top dressing"
+      }
+    ],
+    "pesticideSchedule": [
+      {
+        "pesticideName": "Lambda",
+        "stageOfGrowth": {
+          "periodUnit": "MINUTES",
+          "periodValue": 10
+        },
+        "applicationInterval": {
+          "periodUnit": "HOURS",
+          "periodValue": 0
+        },
+        "applicationMethod": "SPRAYING",
+        "remarks": "string"
+      },
+      {
+        "pesticideName": "Metolachlor",
+        "stageOfGrowth": {
+          "periodUnit": "MINUTES",
+          "periodValue": 10
+        },
+        "applicationInterval": {
+          "periodUnit": "HOURS",
+          "periodValue": 0
+        },
+        "applicationMethod": "SPRAYING",
+        "remarks": "string"
+      },
+      {
+        "pesticideName": "Dichlorvos",
+        "stageOfGrowth": {
+          "periodUnit": "HOURS",
+          "periodValue": 1
+        },
+        "applicationInterval": {
+          "periodUnit": "HOURS",
+          "periodValue": 0
+        },
+        "applicationMethod": "SPRAYING",
+        "remarks": "string"
+      },
+      {
+        "pesticideName": "Muroti",
+        "stageOfGrowth": {
+          "periodUnit": "HOURS",
+          "periodValue": 2
+        },
+        "applicationInterval": {
+          "periodUnit": "HOURS",
+          "periodValue": 0
+        },
+        "applicationMethod": "SPRAYING",
+        "remarks": "string"
+      },
+      {
+        "pesticideName": "Chlorothalonil",
+        "stageOfGrowth": {
+          "periodUnit": "HOURS",
+          "periodValue": 2
+        },
+        "applicationInterval": {
+          "periodUnit": "HOURS",
+          "periodValue": 0
+        },
+        "applicationMethod": "SPRAYING",
+        "remarks": "string"
+      },
+      {
+        "pesticideName": "Belt",
+        "stageOfGrowth": {
+          "periodUnit": "HOURS",
+          "periodValue": 3
+        },
+        "applicationInterval": {
+          "periodUnit": "HOURS",
+          "periodValue": 0
+        },
+        "applicationMethod": "SPRAYING",
+        "remarks": "string"
+      },
+      {
+        "pesticideName": "Antracol",
+        "stageOfGrowth": {
+          "periodUnit": "HOURS",
+          "periodValue": 3
+        },
+        "applicationInterval": {
+          "periodUnit": "HOURS",
+          "periodValue": 0
+        },
+        "applicationMethod": "SPRAYING",
+        "remarks": "string"
+      },
+      {
+        "pesticideName": "Carbaryl",
+        "stageOfGrowth": {
+          "periodUnit": "HOURS",
+          "periodValue": 4
+        },
+        "applicationInterval": {
+          "periodUnit": "HOURS",
+          "periodValue": 0
+        },
+        "applicationMethod": "SPRAYING",
+        "remarks": "string"
+      },
+      {
+        "pesticideName": "Acomil",
+        "stageOfGrowth": {
+          "periodUnit": "HOURS",
+          "periodValue": 4
+        },
+        "applicationInterval": {
+          "periodUnit": "HOURS",
+          "periodValue": 0
+        },
+        "applicationMethod": "SPRAYING",
+        "remarks": "string"
+      },
+      {
+        "pesticideName": "Fluazifop",
+        "stageOfGrowth": {
+          "periodUnit": "HOURS",
+          "periodValue": 4
+        },
+        "applicationInterval": {
+          "periodUnit": "HOURS",
+          "periodValue": 0
+        },
+        "applicationMethod": "SPRAYING",
+        "remarks": "string"
+      },
+      {
+        "pesticideName": "Dichlorvos",
+        "stageOfGrowth": {
+          "periodUnit": "HOURS",
+          "periodValue": 5
+        },
+        "applicationInterval": {
+          "periodUnit": "HOURS",
+          "periodValue": 0
+        },
+        "applicationMethod": "SPRAYING",
+        "remarks": "string"
+      },
+      {
+        "pesticideName": "Tebuconazole",
+        "stageOfGrowth": {
+          "periodUnit": "HOURS",
+          "periodValue": 5
+        },
+        "applicationInterval": {
+          "periodUnit": "HOURS",
+          "periodValue": 0
+        },
+        "applicationMethod": "SPRAYING",
+        "remarks": "string"
+      },
+      {
+        "pesticideName": "Muroti",
+        "stageOfGrowth": {
+          "periodUnit": "HOURS",
+          "periodValue": 6
+        },
+        "applicationInterval": {
+          "periodUnit": "HOURS",
+          "periodValue": 0
+        },
+        "applicationMethod": "SPRAYING",
+        "remarks": "string"
+      },
+      {
+        "pesticideName": "Belt",
+        "stageOfGrowth": {
+          "periodUnit": "HOURS",
+          "periodValue": 7
+        },
+        "applicationInterval": {
+          "periodUnit": "HOURS",
+          "periodValue": 0
+        },
+        "applicationMethod": "SPRAYING",
+        "remarks": "string"
+      },
+      {
+        "pesticideName": "Chlorothalonil",
+        "stageOfGrowth": {
+          "periodUnit": "HOURS",
+          "periodValue": 7
+        },
+        "applicationInterval": {
+          "periodUnit": "HOURS",
+          "periodValue": 0
+        },
+        "applicationMethod": "SPRAYING",
+        "remarks": "string"
+      },
+      {
+        "pesticideName": "Carbaryl",
+        "stageOfGrowth": {
+          "periodUnit": "HOURS",
+          "periodValue": 8
+        },
+        "applicationInterval": {
+          "periodUnit": "HOURS",
+          "periodValue": 0
+        },
+        "applicationMethod": "SPRAYING",
+        "remarks": "string"
+      },
+      {
+        "pesticideName": "Dichlorvos",
+        "stageOfGrowth": {
+          "periodUnit": "HOURS",
+          "periodValue": 9
+        },
+        "applicationInterval": {
+          "periodUnit": "HOURS",
+          "periodValue": 0
+        },
+        "applicationMethod": "SPRAYING",
+        "remarks": "string"
+      },
+      {
+        "pesticideName": "Antracol",
+        "stageOfGrowth": {
+          "periodUnit": "HOURS",
+          "periodValue": 9
+        },
+        "applicationInterval": {
+          "periodUnit": "HOURS",
+          "periodValue": 0
+        },
+        "applicationMethod": "SPRAYING",
+        "remarks": "string"
+      },
+      {
+        "pesticideName": "Muroti",
+        "stageOfGrowth": {
+          "periodUnit": "HOURS",
+          "periodValue": 10
+        },
+        "applicationInterval": {
+          "periodUnit": "HOURS",
+          "periodValue": 0
+        },
+        "applicationMethod": "SPRAYING",
+        "remarks": "string"
+      },
+      {
+        "pesticideName": "Belt",
+        "stageOfGrowth": {
+          "periodUnit": "HOURS",
+          "periodValue": 11
+        },
+        "applicationInterval": {
+          "periodUnit": "HOURS",
+          "periodValue": 0
+        },
+        "applicationMethod": "SPRAYING",
+        "remarks": "string"
+      },
+      {
+        "pesticideName": "Carbaryl",
+        "stageOfGrowth": {
+          "periodUnit": "HOURS",
+          "periodValue": 12
+        },
+        "applicationInterval": {
+          "periodUnit": "HOURS",
+          "periodValue": 0
+        },
+        "applicationMethod": "SPRAYING",
+        "remarks": "string"
+      }
+    ],
+    "stagesOfGrowth": [
+      {
+        "stageStartDate": {
+          "periodUnit": "MINUTES",
+          "periodValue": 10
+        },
+        "stageEndDate": {
+          "periodUnit": "MINUTES",
+          "periodValue": 10
+        },
+        "stageOfGrowth": "TRANSPLANTING"
+      },
+      {
+        "stageStartDate": {
+          "periodUnit": "HOURS",
+          "periodValue": 1
+        },
+        "stageEndDate": {
+          "periodUnit": "HOURS",
+          "periodValue": 5
+        },
+        "stageOfGrowth": "VEGETATIVE_GROWTH"
+      },
+      {
+        "stageStartDate": {
+          "periodUnit": "HOURS",
+          "periodValue": 6
+        },
+        "stageEndDate": {
+          "periodUnit": "HOURS",
+          "periodValue": 11
+        },
+        "stageOfGrowth": "HEAD_FORMATION"
+      },
+      {
+        "stageStartDate": {
+          "periodUnit": "HOURS",
+          "periodValue": 12
+        },
+        "stageEndDate": {
+          "periodUnit": "HOURS",
+          "periodValue": 12
+        },
+        "stageOfGrowth": "MATURITY"
+      }
+    ],
+    "varieties": [
+    ],
+    "cropData": {}
+  }
+]

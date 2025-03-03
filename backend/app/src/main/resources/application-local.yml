@@ -6,7 +6,7 @@ spring:
   datasource:
     driver-class-name: org.postgresql.Driver
     password: postgres
-    url: jdbc:postgresql://localhost:5432/crop_management12
+    url: jdbc:postgresql://localhost:5432/crop_management5
     username: postgres
   jpa:
     database: POSTGRESQL
@@ -45,3 +45,6 @@ org:
     dashboard:
       enabled: true
       port: 8000
+
+crop:
+  path: backend/app/src/main/resources/crops

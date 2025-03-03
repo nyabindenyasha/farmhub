@@ -9,7 +9,7 @@
     },
     "fertilizerSchedule": [
       {
-        "cropName": "Cabbage",
+     
         "fertilizerName": "Compound C",
         "stageOfGrowth": {
           "periodUnit": "DAYS",
@@ -24,7 +24,7 @@
         "remarks": "Basal"
       },
       {
-        "cropName": "Cabbage",
+     
         "fertilizerName": "AN",
         "stageOfGrowth": {
           "periodUnit": "WEEKS",
@@ -39,7 +39,7 @@
         "remarks": "Top dressing"
       },
       {
-        "cropName": "Cabbage",
+     
         "fertilizerName": "AN",
         "stageOfGrowth": {
           "periodUnit": "WEEKS",
@@ -54,7 +54,7 @@
         "remarks": "Top dressing"
       },
       {
-        "cropName": "Cabbage",
+     
         "fertilizerName": "AN",
         "stageOfGrowth": {
           "periodUnit": "WEEKS",
@@ -71,7 +71,7 @@
     ],
     "pesticideSchedule": [
       {
-        "cropName": "Cabbage",
+     
         "pesticideName": "Lambda",
         "stageOfGrowth": {
           "periodUnit": "DAYS",
@@ -85,7 +85,7 @@
         "remarks": "string"
       },
       {
-        "cropName": "Cabbage",
+     
         "pesticideName": "Metolachlor",
         "stageOfGrowth": {
           "periodUnit": "DAYS",
@@ -99,7 +99,7 @@
         "remarks": "string"
       },
       {
-        "cropName": "Cabbage",
+     
         "pesticideName": "Dichlorvos",
         "stageOfGrowth": {
           "periodUnit": "WEEKS",
@@ -113,7 +113,7 @@
         "remarks": "string"
       },
       {
-        "cropName": "Cabbage",
+     
         "pesticideName": "Muroti",
         "stageOfGrowth": {
           "periodUnit": "WEEKS",
@@ -127,7 +127,7 @@
         "remarks": "string"
       },
       {
-        "cropName": "Cabbage",
+     
         "pesticideName": "Chlorothalonil",
         "stageOfGrowth": {
           "periodUnit": "WEEKS",
@@ -141,7 +141,7 @@
         "remarks": "string"
       },
       {
-        "cropName": "Cabbage",
+     
         "pesticideName": "Belt",
         "stageOfGrowth": {
           "periodUnit": "WEEKS",
@@ -155,7 +155,7 @@
         "remarks": "string"
       },
       {
-        "cropName": "Cabbage",
+     
         "pesticideName": "Antracol",
         "stageOfGrowth": {
           "periodUnit": "WEEKS",
@@ -169,7 +169,7 @@
         "remarks": "string"
       },
       {
-        "cropName": "Cabbage",
+     
         "pesticideName": "Carbaryl",
         "stageOfGrowth": {
           "periodUnit": "WEEKS",
@@ -183,7 +183,7 @@
         "remarks": "string"
       },
       {
-        "cropName": "Cabbage",
+     
         "pesticideName": "Acomil",
         "stageOfGrowth": {
           "periodUnit": "WEEKS",
@@ -197,7 +197,7 @@
         "remarks": "string"
       },
       {
-        "cropName": "Cabbage",
+     
         "pesticideName": "Fluazifop",
         "stageOfGrowth": {
           "periodUnit": "WEEKS",
@@ -211,7 +211,7 @@
         "remarks": "string"
       },
       {
-        "cropName": "Cabbage",
+     
         "pesticideName": "Dichlorvos",
         "stageOfGrowth": {
           "periodUnit": "WEEKS",
@@ -225,7 +225,7 @@
         "remarks": "string"
       },
       {
-        "cropName": "Cabbage",
+     
         "pesticideName": "Tebuconazole",
         "stageOfGrowth": {
           "periodUnit": "WEEKS",
@@ -239,7 +239,7 @@
         "remarks": "string"
       },
       {
-        "cropName": "Cabbage",
+     
         "pesticideName": "Muroti",
         "stageOfGrowth": {
           "periodUnit": "WEEKS",
@@ -253,7 +253,7 @@
         "remarks": "string"
       },
       {
-        "cropName": "Cabbage",
+     
         "pesticideName": "Belt",
         "stageOfGrowth": {
           "periodUnit": "WEEKS",
@@ -267,7 +267,7 @@
         "remarks": "string"
       },
       {
-        "cropName": "Cabbage",
+     
         "pesticideName": "Chlorothalonil",
         "stageOfGrowth": {
           "periodUnit": "WEEKS",
@@ -281,7 +281,7 @@
         "remarks": "string"
       },
       {
-        "cropName": "Cabbage",
+     
         "pesticideName": "Carbaryl",
         "stageOfGrowth": {
           "periodUnit": "WEEKS",
@@ -295,7 +295,7 @@
         "remarks": "string"
       },
       {
-        "cropName": "Cabbage",
+     
         "pesticideName": "Dichlorvos",
         "stageOfGrowth": {
           "periodUnit": "WEEKS",
@@ -309,7 +309,7 @@
         "remarks": "string"
       },
       {
-        "cropName": "Cabbage",
+     
         "pesticideName": "Antracol",
         "stageOfGrowth": {
           "periodUnit": "WEEKS",
@@ -323,7 +323,7 @@
         "remarks": "string"
       },
       {
-        "cropName": "Cabbage",
+     
         "pesticideName": "Muroti",
         "stageOfGrowth": {
           "periodUnit": "WEEKS",
@@ -337,7 +337,7 @@
         "remarks": "string"
       },
       {
-        "cropName": "Cabbage",
+     
         "pesticideName": "Belt",
         "stageOfGrowth": {
           "periodUnit": "WEEKS",
@@ -351,7 +351,7 @@
         "remarks": "string"
       },
       {
-        "cropName": "Cabbage",
+     
         "pesticideName": "Carbaryl",
         "stageOfGrowth": {
           "periodUnit": "WEEKS",
@@ -367,7 +367,7 @@
     ],
     "stagesOfGrowth": [
       {
-        "cropName": "Cabbage",
+     
         "stageStartDate": {
           "periodUnit": "DAYS",
           "periodValue": 1
@@ -379,7 +379,7 @@
         "stageOfGrowth": "TRANSPLANTING"
       },
       {
-        "cropName": "Cabbage",
+     
         "stageStartDate": {
           "periodUnit": "WEEKS",
           "periodValue": 1
@@ -391,7 +391,7 @@
         "stageOfGrowth": "VEGETATIVE_GROWTH"
       },
       {
-        "cropName": "Cabbage",
+     
         "stageStartDate": {
           "periodUnit": "WEEKS",
           "periodValue": 6
@@ -403,7 +403,7 @@
         "stageOfGrowth": "HEAD_FORMATION"
       },
       {
-        "cropName": "Cabbage",
+     
         "stageStartDate": {
           "periodUnit": "WEEKS",
           "periodValue": 12
@@ -413,6 +413,116 @@
           "periodValue": 12
         },
         "stageOfGrowth": "MATURITY"
+      }
+    ],
+    "varieties": [
+      {
+     
+        "variety": "Fabiola",
+        "maturityStartDay": 65,
+        "maturityEndDay": 80,
+        "harvestDuration": 10,
+        "remarks": "",
+        "varietyType": "EARLY_MATURITY"
+      },
+      {
+     
+        "variety": "Kilimo",
+        "maturityStartDay": 65,
+        "maturityEndDay": 80,
+        "harvestDuration": 10,
+        "remarks": "",
+        "varietyType": "EARLY_MATURITY"
+      },
+      {
+     
+        "variety": "Athena Plus",
+        "maturityStartDay": 65,
+        "maturityEndDay": 80,
+        "harvestDuration": 10,
+        "remarks": "",
+        "varietyType": "EARLY_MATURITY"
+      },
+      {
+     
+        "variety": "3301",
+        "maturityStartDay": 85,
+        "maturityEndDay": 110,
+        "harvestDuration": 10,
+        "remarks": "",
+        "varietyType": "MEDIUM_MATURITY"
+      },
+      {
+     
+        "variety": "3311",
+        "maturityStartDay": 85,
+        "maturityEndDay": 110,
+        "harvestDuration": 10,
+        "remarks": "",
+        "varietyType": "MEDIUM_MATURITY"
+      },
+      {
+     
+        "variety": "Indica",
+        "maturityStartDay": 85,
+        "maturityEndDay": 110,
+        "harvestDuration": 10,
+        "remarks": "",
+        "varietyType": "MEDIUM_MATURITY"
+      },
+      {
+     
+        "variety": "Gemma",
+        "maturityStartDay": 85,
+        "maturityEndDay": 110,
+        "harvestDuration": 10,
+        "remarks": "",
+        "varietyType": "MEDIUM_MATURITY"
+      },
+      {
+     
+        "variety": "Corton",
+        "maturityStartDay": 85,
+        "maturityEndDay": 110,
+        "harvestDuration": 10,
+        "remarks": "",
+        "varietyType": "MEDIUM_MATURITY"
+      },
+      {
+     
+        "variety": "Marcanta",
+        "maturityStartDay": 85,
+        "maturityEndDay": 110,
+        "harvestDuration": 10,
+        "remarks": "",
+        "varietyType": "MEDIUM_MATURITY"
+      },
+      {
+     
+        "variety": "Delight",
+        "maturityStartDay": 85,
+        "maturityEndDay": 110,
+        "harvestDuration": 10,
+        "remarks": "",
+        "varietyType": "MEDIUM_MATURITY"
+      },
+      {
+     
+        "variety": "Drumhead",
+        "maturityStartDay": 110,
+        "maturityEndDay": 150,
+        "harvestDuration": 10,
+        "remarks": "",
+        "varietyType": "LATE_MATURITY"
+      },
+      {
+     
+        "variety": "3316",
+        "maturityStartDay": 110,
+        "maturityEndDay": 150,
+        "harvestDuration": 10,
+        "remarks": "",
+        "varietyType": "LATE_MATURITY"
       }
     ]
   },
@@ -428,7 +538,7 @@
     },
     "fertilizerSchedule": [
       {
-        "cropName": "Cebbege_test",
+ 
         "fertilizerName": "Compound C",
         "stageOfGrowth": {
           "periodUnit": "MINUTES",
@@ -443,7 +553,7 @@
         "remarks": "Basal"
       },
       {
-        "cropName": "Cebbege_test",
+ 
         "fertilizerName": "AN",
         "stageOfGrowth": {
           "periodUnit": "HOURS",
@@ -458,7 +568,7 @@
         "remarks": "Top dressing"
       },
       {
-        "cropName": "Cebbege_test",
+ 
         "fertilizerName": "AN",
         "stageOfGrowth": {
           "periodUnit": "HOURS",
@@ -473,7 +583,7 @@
         "remarks": "Top dressing"
       },
       {
-        "cropName": "Cebbege_test",
+ 
         "fertilizerName": "AN",
         "stageOfGrowth": {
           "periodUnit": "HOURS",
@@ -490,7 +600,7 @@
     ],
     "pesticideSchedule": [
       {
-        "cropName": "Cebbege_test",
+ 
         "pesticideName": "Lambda",
         "stageOfGrowth": {
           "periodUnit": "MINUTES",
@@ -504,7 +614,7 @@
         "remarks": "string"
       },
       {
-        "cropName": "Cebbege_test",
+ 
         "pesticideName": "Metolachlor",
         "stageOfGrowth": {
           "periodUnit": "MINUTES",
@@ -518,7 +628,7 @@
         "remarks": "string"
       },
       {
-        "cropName": "Cebbege_test",
+ 
         "pesticideName": "Dichlorvos",
         "stageOfGrowth": {
           "periodUnit": "HOURS",
@@ -532,7 +642,7 @@
         "remarks": "string"
       },
       {
-        "cropName": "Cebbege_test",
+ 
         "pesticideName": "Muroti",
         "stageOfGrowth": {
           "periodUnit": "HOURS",
@@ -546,7 +656,7 @@
         "remarks": "string"
       },
       {
-        "cropName": "Cebbege_test",
+ 
         "pesticideName": "Chlorothalonil",
         "stageOfGrowth": {
           "periodUnit": "HOURS",
@@ -560,7 +670,7 @@
         "remarks": "string"
       },
       {
-        "cropName": "Cebbege_test",
+ 
         "pesticideName": "Belt",
         "stageOfGrowth": {
           "periodUnit": "HOURS",
@@ -574,7 +684,7 @@
         "remarks": "string"
       },
       {
-        "cropName": "Cebbege_test",
+ 
         "pesticideName": "Antracol",
         "stageOfGrowth": {
           "periodUnit": "HOURS",
@@ -588,7 +698,7 @@
         "remarks": "string"
       },
       {
-        "cropName": "Cebbege_test",
+ 
         "pesticideName": "Carbaryl",
         "stageOfGrowth": {
           "periodUnit": "HOURS",
@@ -602,7 +712,7 @@
         "remarks": "string"
       },
       {
-        "cropName": "Cebbege_test",
+ 
         "pesticideName": "Acomil",
         "stageOfGrowth": {
           "periodUnit": "HOURS",
@@ -616,7 +726,7 @@
         "remarks": "string"
       },
       {
-        "cropName": "Cebbege_test",
+ 
         "pesticideName": "Fluazifop",
         "stageOfGrowth": {
           "periodUnit": "HOURS",
@@ -630,7 +740,7 @@
         "remarks": "string"
       },
       {
-        "cropName": "Cebbege_test",
+ 
         "pesticideName": "Dichlorvos",
         "stageOfGrowth": {
           "periodUnit": "HOURS",
@@ -644,7 +754,7 @@
         "remarks": "string"
       },
       {
-        "cropName": "Cebbege_test",
+ 
         "pesticideName": "Tebuconazole",
         "stageOfGrowth": {
           "periodUnit": "HOURS",
@@ -658,7 +768,7 @@
         "remarks": "string"
       },
       {
-        "cropName": "Cebbege_test",
+ 
         "pesticideName": "Muroti",
         "stageOfGrowth": {
           "periodUnit": "HOURS",
@@ -672,7 +782,7 @@
         "remarks": "string"
       },
       {
-        "cropName": "Cebbege_test",
+ 
         "pesticideName": "Belt",
         "stageOfGrowth": {
           "periodUnit": "HOURS",
@@ -686,7 +796,7 @@
         "remarks": "string"
       },
       {
-        "cropName": "Cebbege_test",
+ 
         "pesticideName": "Chlorothalonil",
         "stageOfGrowth": {
           "periodUnit": "HOURS",
@@ -700,7 +810,7 @@
         "remarks": "string"
       },
       {
-        "cropName": "Cebbege_test",
+ 
         "pesticideName": "Carbaryl",
         "stageOfGrowth": {
           "periodUnit": "HOURS",
@@ -714,7 +824,7 @@
         "remarks": "string"
       },
       {
-        "cropName": "Cebbege_test",
+ 
         "pesticideName": "Dichlorvos",
         "stageOfGrowth": {
           "periodUnit": "HOURS",
@@ -728,7 +838,7 @@
         "remarks": "string"
       },
       {
-        "cropName": "Cebbege_test",
+ 
         "pesticideName": "Antracol",
         "stageOfGrowth": {
           "periodUnit": "HOURS",
@@ -742,7 +852,7 @@
         "remarks": "string"
       },
       {
-        "cropName": "Cebbege_test",
+ 
         "pesticideName": "Muroti",
         "stageOfGrowth": {
           "periodUnit": "HOURS",
@@ -756,7 +866,7 @@
         "remarks": "string"
       },
       {
-        "cropName": "Cebbege_test",
+ 
         "pesticideName": "Belt",
         "stageOfGrowth": {
           "periodUnit": "HOURS",
@@ -770,7 +880,7 @@
         "remarks": "string"
       },
       {
-        "cropName": "Cebbege_test",
+ 
         "pesticideName": "Carbaryl",
         "stageOfGrowth": {
           "periodUnit": "HOURS",
@@ -786,7 +896,7 @@
     ],
     "stagesOfGrowth": [
       {
-        "cropName": "Cebbege_test",
+ 
         "stageStartDate": {
           "periodUnit": "MINUTES",
           "periodValue": 10
@@ -798,7 +908,7 @@
         "stageOfGrowth": "TRANSPLANTING"
       },
       {
-        "cropName": "Cebbege_test",
+ 
         "stageStartDate": {
           "periodUnit": "HOURS",
           "periodValue": 1
@@ -810,7 +920,7 @@
         "stageOfGrowth": "VEGETATIVE_GROWTH"
       },
       {
-        "cropName": "Cebbege_test",
+ 
         "stageStartDate": {
           "periodUnit": "HOURS",
           "periodValue": 6
@@ -822,7 +932,7 @@
         "stageOfGrowth": "HEAD_FORMATION"
       },
       {
-        "cropName": "Cebbege_test",
+ 
         "stageStartDate": {
           "periodUnit": "HOURS",
           "periodValue": 12
@@ -833,7 +943,8 @@
         },
         "stageOfGrowth": "MATURITY"
       }
-    ]
+    ],
+    "varieties": []
   },
 
 
@@ -847,7 +958,7 @@
     },
     "fertilizerSchedule": [
       {
-        "cropName": "Cucumber",
+       
         "fertilizerName": "Compound C",
         "stageOfGrowth": {
           "periodUnit": "DAYS",
@@ -862,7 +973,7 @@
         "remarks": "Basal"
       },
       {
-        "cropName": "Cucumber",
+       
         "fertilizerName": "AN",
         "stageOfGrowth": {
           "periodUnit": "WEEKS",
@@ -877,7 +988,7 @@
         "remarks": "Top dressing"
       },
       {
-        "cropName": "Cucumber",
+       
         "fertilizerName": "PN",
         "stageOfGrowth": {
           "periodUnit": "WEEKS",
@@ -892,7 +1003,7 @@
         "remarks": "Top dressing"
       },
       {
-        "cropName": "Cucumber",
+       
         "fertilizerName": "PN",
         "stageOfGrowth": {
           "periodUnit": "WEEKS",
@@ -907,7 +1018,7 @@
         "remarks": "PN 160g/16ml knapsack"
       },
       {
-        "cropName": "Cucumber",
+       
         "fertilizerName": "CN",
         "stageOfGrowth": {
           "periodUnit": "WEEKS",
@@ -922,7 +1033,7 @@
         "remarks": "Top dressing"
       },
       {
-        "cropName": "Cucumber",
+       
         "fertilizerName": "CN",
         "stageOfGrowth": {
           "periodUnit": "WEEKS",
@@ -939,7 +1050,7 @@
     ],
     "pesticideSchedule": [
       {
-        "cropName": "Cucumber",
+       
         "pesticideName": "Lambda",
         "stageOfGrowth": {
           "periodUnit": "DAYS",
@@ -953,7 +1064,7 @@
         "remarks": "string"
       },
       {
-        "cropName": "Cucumber",
+       
         "pesticideName": "Copper",
         "stageOfGrowth": {
           "periodUnit": "DAYS",
@@ -967,7 +1078,7 @@
         "remarks": "string"
       },
       {
-        "cropName": "Cucumber",
+       
         "pesticideName": "Metolachlor",
         "stageOfGrowth": {
           "periodUnit": "DAYS",
@@ -982,7 +1093,7 @@
       },
 
       {
-        "cropName": "Cucumber",
+       
         "pesticideName": "Dimethoate",
         "stageOfGrowth": {
           "periodUnit": "WEEKS",
@@ -996,7 +1107,7 @@
         "remarks": "string"
       },
       {
-        "cropName": "Cucumber",
+       
         "pesticideName": "Chlorothalonil",
         "stageOfGrowth": {
           "periodUnit": "WEEKS",
@@ -1013,7 +1124,7 @@
 
 
       {
-        "cropName": "Cucumber",
+       
         "pesticideName": "Thunder",
         "stageOfGrowth": {
           "periodUnit": "WEEKS",
@@ -1027,7 +1138,7 @@
         "remarks": "string"
       },
       {
-        "cropName": "Cucumber",
+       
         "pesticideName": "Metalaxyl + Mancozeb",
         "stageOfGrowth": {
           "periodUnit": "WEEKS",
@@ -1043,7 +1154,7 @@
 
 
       {
-        "cropName": "Cucumber",
+       
         "pesticideName": "Abamectin",
         "stageOfGrowth": {
           "periodUnit": "WEEKS",
@@ -1059,7 +1170,7 @@
 
 
       {
-        "cropName": "Cucumber",
+       
         "pesticideName": "Malathion",
         "stageOfGrowth": {
           "periodUnit": "WEEKS",
@@ -1073,7 +1184,7 @@
         "remarks": "string"
       },
       {
-        "cropName": "Cucumber",
+       
         "pesticideName": "Bion",
         "stageOfGrowth": {
           "periodUnit": "WEEKS",
@@ -1087,7 +1198,7 @@
         "remarks": "string"
       },
       {
-        "cropName": "Cucumber",
+       
         "pesticideName": "Fluazifop",
         "stageOfGrowth": {
           "periodUnit": "WEEKS",
@@ -1103,7 +1214,7 @@
 
 
       {
-        "cropName": "Cucumber",
+       
         "pesticideName": "Dimethoate",
         "stageOfGrowth": {
           "periodUnit": "WEEKS",
@@ -1117,7 +1228,7 @@
         "remarks": "string"
       },
       {
-        "cropName": "Cucumber",
+       
         "pesticideName": "Copper",
         "stageOfGrowth": {
           "periodUnit": "WEEKS",
@@ -1133,7 +1244,7 @@
 
 
       {
-        "cropName": "Cucumber",
+       
         "pesticideName": "Nemesis",
         "stageOfGrowth": {
           "periodUnit": "WEEKS",
@@ -1147,7 +1258,7 @@
         "remarks": "string"
       },
       {
-        "cropName": "Cucumber",
+       
         "pesticideName": "Chlorothalonil",
         "stageOfGrowth": {
           "periodUnit": "WEEKS",
@@ -1164,7 +1275,7 @@
 
 
       {
-        "cropName": "Cucumber",
+       
         "pesticideName": "Thunder",
         "stageOfGrowth": {
           "periodUnit": "WEEKS",
@@ -1178,7 +1289,7 @@
         "remarks": "string"
       },
       {
-        "cropName": "Cucumber",
+       
         "pesticideName": "Metalaxyl + Mancozeb",
         "stageOfGrowth": {
           "periodUnit": "WEEKS",
@@ -1194,7 +1305,7 @@
 
 
       {
-        "cropName": "Cucumber",
+       
         "pesticideName": "Abamectin",
         "stageOfGrowth": {
           "periodUnit": "WEEKS",
@@ -1208,7 +1319,7 @@
         "remarks": "string"
       },
       {
-        "cropName": "Cucumber",
+       
         "pesticideName": "Tebuconazole",
         "stageOfGrowth": {
           "periodUnit": "WEEKS",
@@ -1224,7 +1335,7 @@
 
 
       {
-        "cropName": "Cucumber",
+       
         "pesticideName": "Malathion",
         "stageOfGrowth": {
           "periodUnit": "WEEKS",
@@ -1238,7 +1349,7 @@
         "remarks": "string"
       },
       {
-        "cropName": "Cucumber",
+       
         "pesticideName": "Copper",
         "stageOfGrowth": {
           "periodUnit": "WEEKS",
@@ -1254,7 +1365,7 @@
 
 
       {
-        "cropName": "Cucumber",
+       
         "pesticideName": "Nemesis",
         "stageOfGrowth": {
           "periodUnit": "WEEKS",
@@ -1268,7 +1379,7 @@
         "remarks": "string"
       },
       {
-        "cropName": "Cucumber",
+       
         "pesticideName": "Chlorothalonil",
         "stageOfGrowth": {
           "periodUnit": "WEEKS",
@@ -1285,7 +1396,7 @@
     ],
     "stagesOfGrowth": [
       {
-        "cropName": "Cucumber",
+       
         "stageStartDate": {
           "periodUnit": "DAYS",
           "periodValue": 1
@@ -1297,7 +1408,7 @@
         "stageOfGrowth": "TRANSPLANTING"
       },
       {
-        "cropName": "Cucumber",
+       
         "stageStartDate": {
           "periodUnit": "WEEKS",
           "periodValue": 1
@@ -1309,7 +1420,7 @@
         "stageOfGrowth": "VEGETATIVE_GROWTH"
       },
       {
-        "cropName": "Cucumber",
+       
         "stageStartDate": {
           "periodUnit": "WEEKS",
           "periodValue": 6
@@ -1321,7 +1432,7 @@
         "stageOfGrowth": "FLOWERING"
       },
       {
-        "cropName": "Cucumber",
+       
         "stageStartDate": {
           "periodUnit": "WEEKS",
           "periodValue": 8
@@ -1333,7 +1444,7 @@
         "stageOfGrowth": "FRUIT_FORMATION"
       },
       {
-        "cropName": "Cucumber",
+       
         "stageStartDate": {
           "periodUnit": "WEEKS",
           "periodValue": 9
@@ -1344,7 +1455,8 @@
         },
         "stageOfGrowth": "MATURITY"
       }
-    ]
+    ],
+    "varieties": []
   }
 
 

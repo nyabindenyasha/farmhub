@@ -1,0 +1,562 @@
+[
+  {
+    "crop": {
+      "name": "Watermelon",
+      "family": "Curcubitaceae",
+      "genus": "Citrullus",
+      "species": "lanatus",
+      "subSpecies": ""
+    },
+    "fertilizerSchedule": [
+      {
+        "fertilizerName": "Well rotten Manure",
+        "stageOfGrowth": {
+          "periodUnit": "DAYS",
+          "periodValue": 0
+        },
+        "applicationInterval": {
+          "periodUnit": "HOURS",
+          "periodValue": 0
+        },
+        "applicationMethod": "INCORPORATION",
+        "rate": 1500,
+        "remarks": "Basal application of well rotten manure (1.5kg per plant)"
+      },
+      {
+        "fertilizerName": "Compost",
+        "stageOfGrowth": {
+          "periodUnit": "DAYS",
+          "periodValue": 0
+        },
+        "applicationInterval": {
+          "periodUnit": "HOURS",
+          "periodValue": 0
+        },
+        "applicationMethod": "INCORPORATION",
+        "rate": 40,
+        "remarks": "Basal application at planting"
+      },
+      {
+        "fertilizerName": "Compound C",
+        "stageOfGrowth": {
+          "periodUnit": "DAYS",
+          "periodValue": 0
+        },
+        "applicationInterval": {
+          "periodUnit": "HOURS",
+          "periodValue": 0
+        },
+        "applicationMethod": "SPOT_PLACEMENT",
+        "rate": 120,
+        "remarks": "Applied with a heaped shovel of manure in a prepared basin before planting"
+      },
+      {
+        "fertilizerName": "Ammonium Nitrate",
+        "stageOfGrowth": {
+          "periodUnit": "WEEKS",
+          "periodValue": 2
+        },
+        "applicationInterval": {
+          "periodUnit": "HOURS",
+          "periodValue": 0
+        },
+        "applicationMethod": "TOP_DRESSING",
+        "rate": 5,
+        "remarks": "Top dressing applied at week 2 after emergence"
+      },
+      {
+        "fertilizerName": "Potassium nitrate",
+        "stageOfGrowth": {
+          "periodUnit": "WEEKS",
+          "periodValue": 4
+        },
+        "applicationInterval": {
+          "periodUnit": "HOURS",
+          "periodValue": 0
+        },
+        "applicationMethod": "TOP_DRESSING",
+        "rate": 5,
+        "remarks": "Split application part 1 at week 4"
+      },
+      {
+        "fertilizerName": "Potassium nitrate",
+        "stageOfGrowth": {
+          "periodUnit": "WEEKS",
+          "periodValue": 6
+        },
+        "applicationInterval": {
+          "periodUnit": "HOURS",
+          "periodValue": 0
+        },
+        "applicationMethod": "TOP_DRESSING",
+        "rate": 5,
+        "remarks": "Split application part 2 at week 6"
+      }
+    ],
+    "pesticideSchedule": [
+      {
+        "pesticideName": "Lambda",
+        "stageOfGrowth": {
+          "periodUnit": "WEEKS",
+          "periodValue": 0
+        },
+        "applicationInterval": {
+          "periodUnit": "HOURS",
+          "periodValue": 0
+        },
+        "applicationMethod": "SPRAYING",
+        "remarks": ""
+      },
+      {
+        "pesticideName": "Copper",
+        "stageOfGrowth": {
+          "periodUnit": "WEEKS",
+          "periodValue": 0
+        },
+        "applicationInterval": {
+          "periodUnit": "HOURS",
+          "periodValue": 0
+        },
+        "applicationMethod": "SPRAYING",
+        "remarks": ""
+      },
+      {
+        "pesticideName": "Hoover",
+        "stageOfGrowth": {
+          "periodUnit": "WEEKS",
+          "periodValue": 1
+        },
+        "applicationInterval": {
+          "periodUnit": "HOURS",
+          "periodValue": 0
+        },
+        "applicationMethod": "SPRAYING",
+        "remarks": ""
+      },
+      {
+        "pesticideName": "Mancozeb",
+        "stageOfGrowth": {
+          "periodUnit": "WEEKS",
+          "periodValue": 1
+        },
+        "applicationInterval": {
+          "periodUnit": "HOURS",
+          "periodValue": 0
+        },
+        "applicationMethod": "SPRAYING",
+        "remarks": ""
+      },
+      {
+        "pesticideName": "Acephate",
+        "stageOfGrowth": {
+          "periodUnit": "WEEKS",
+          "periodValue": 2
+        },
+        "applicationInterval": {
+          "periodUnit": "HOURS",
+          "periodValue": 0
+        },
+        "applicationMethod": "SPRAYING",
+        "remarks": ""
+      },
+      {
+        "pesticideName": "Lufenuron",
+        "stageOfGrowth": {
+          "periodUnit": "WEEKS",
+          "periodValue": 3
+        },
+        "applicationInterval": {
+          "periodUnit": "HOURS",
+          "periodValue": 0
+        },
+        "applicationMethod": "SPRAYING",
+        "remarks": ""
+      },
+      {
+        "pesticideName": "Acomil",
+        "stageOfGrowth": {
+          "periodUnit": "WEEKS",
+          "periodValue": 3
+        },
+        "applicationInterval": {
+          "periodUnit": "HOURS",
+          "periodValue": 0
+        },
+        "applicationMethod": "SPRAYING",
+        "remarks": ""
+      },
+      {
+        "pesticideName": "Malathion",
+        "stageOfGrowth": {
+          "periodUnit": "WEEKS",
+          "periodValue": 4
+        },
+        "applicationInterval": {
+          "periodUnit": "HOURS",
+          "periodValue": 0
+        },
+        "applicationMethod": "SPRAYING",
+        "remarks": ""
+      },
+      {
+        "pesticideName": "Forceful",
+        "stageOfGrowth": {
+          "periodUnit": "WEEKS",
+          "periodValue": 5
+        },
+        "applicationInterval": {
+          "periodUnit": "HOURS",
+          "periodValue": 0
+        },
+        "applicationMethod": "SPRAYING",
+        "remarks": ""
+      },
+      {
+        "pesticideName": "Range",
+        "stageOfGrowth": {
+          "periodUnit": "WEEKS",
+          "periodValue": 5
+        },
+        "applicationInterval": {
+          "periodUnit": "HOURS",
+          "periodValue": 0
+        },
+        "applicationMethod": "SPRAYING",
+        "remarks": ""
+      },
+      {
+        "pesticideName": "Panther",
+        "stageOfGrowth": {
+          "periodUnit": "WEEKS",
+          "periodValue": 5
+        },
+        "applicationInterval": {
+          "periodUnit": "HOURS",
+          "periodValue": 0
+        },
+        "applicationMethod": "SPRAYING",
+        "remarks": ""
+      },
+      {
+        "pesticideName": "Hoover",
+        "stageOfGrowth": {
+          "periodUnit": "WEEKS",
+          "periodValue": 6
+        },
+        "applicationInterval": {
+          "periodUnit": "HOURS",
+          "periodValue": 0
+        },
+        "applicationMethod": "SPRAYING",
+        "remarks": ""
+      },
+      {
+        "pesticideName": "Copper",
+        "stageOfGrowth": {
+          "periodUnit": "WEEKS",
+          "periodValue": 6
+        },
+        "applicationInterval": {
+          "periodUnit": "HOURS",
+          "periodValue": 0
+        },
+        "applicationMethod": "SPRAYING",
+        "remarks": ""
+      },
+      {
+        "pesticideName": "Acephate",
+        "stageOfGrowth": {
+          "periodUnit": "WEEKS",
+          "periodValue": 7
+        },
+        "applicationInterval": {
+          "periodUnit": "HOURS",
+          "periodValue": 0
+        },
+        "applicationMethod": "SPRAYING",
+        "remarks": ""
+      },
+      {
+        "pesticideName": "Mancozeb",
+        "stageOfGrowth": {
+          "periodUnit": "WEEKS",
+          "periodValue": 7
+        },
+        "applicationInterval": {
+          "periodUnit": "HOURS",
+          "periodValue": 0
+        },
+        "applicationMethod": "SPRAYING",
+        "remarks": ""
+      },
+      {
+        "pesticideName": "Traps",
+        "stageOfGrowth": {
+          "periodUnit": "WEEKS",
+          "periodValue": 7
+        },
+        "applicationInterval": {
+          "periodUnit": "HOURS",
+          "periodValue": 0
+        },
+        "applicationMethod": "SPRAYING",
+        "remarks": "Fruit fly traps"
+      },
+      {
+        "pesticideName": "Malathion",
+        "stageOfGrowth": {
+          "periodUnit": "WEEKS",
+          "periodValue": 9
+        },
+        "applicationInterval": {
+          "periodUnit": "HOURS",
+          "periodValue": 0
+        },
+        "applicationMethod": "SPRAYING",
+        "remarks": ""
+      },
+      {
+        "pesticideName": "Acomil",
+        "stageOfGrowth": {
+          "periodUnit": "WEEKS",
+          "periodValue": 9
+        },
+        "applicationInterval": {
+          "periodUnit": "HOURS",
+          "periodValue": 0
+        },
+        "applicationMethod": "SPRAYING",
+        "remarks": ""
+      },
+      {
+        "pesticideName": "Forceful",
+        "stageOfGrowth": {
+          "periodUnit": "WEEKS",
+          "periodValue": 10
+        },
+        "applicationInterval": {
+          "periodUnit": "HOURS",
+          "periodValue": 0
+        },
+        "applicationMethod": "SPRAYING",
+        "remarks": ""
+      },
+      {
+        "pesticideName": "Aegis",
+        "stageOfGrowth": {
+          "periodUnit": "WEEKS",
+          "periodValue": 10
+        },
+        "applicationInterval": {
+          "periodUnit": "HOURS",
+          "periodValue": 0
+        },
+        "applicationMethod": "SPRAYING",
+        "remarks": ""
+      },
+      {
+        "pesticideName": "Hoover",
+        "stageOfGrowth": {
+          "periodUnit": "WEEKS",
+          "periodValue": 11
+        },
+        "applicationInterval": {
+          "periodUnit": "HOURS",
+          "periodValue": 0
+        },
+        "applicationMethod": "SPRAYING",
+        "remarks": ""
+      },
+      {
+        "pesticideName": "Range",
+        "stageOfGrowth": {
+          "periodUnit": "WEEKS",
+          "periodValue": 11
+        },
+        "applicationInterval": {
+          "periodUnit": "HOURS",
+          "periodValue": 0
+        },
+        "applicationMethod": "SPRAYING",
+        "remarks": ""
+      }
+    ],
+    "stagesOfGrowth": [
+      {
+        "stageOfGrowth": "TRANSPLANTING",
+        "stageStartDate": {
+          "periodUnit": "DAYS",
+          "periodValue": 1
+        },
+        "stageEndDate": {
+          "periodUnit": "DAYS",
+          "periodValue": 0
+        }
+      },
+      {
+        "stageOfGrowth": "VEGETATIVE_GROWTH",
+        "stageStartDate": {
+          "periodUnit": "WEEKS",
+          "periodValue": 1
+        },
+        "stageEndDate": {
+          "periodUnit": "WEEKS",
+          "periodValue": 3
+        }
+      },
+      {
+        "stageOfGrowth": "FLOWERING",
+        "stageStartDate": {
+          "periodUnit": "WEEKS",
+          "periodValue": 4
+        },
+        "stageEndDate": {
+          "periodUnit": "WEEKS",
+          "periodValue": 7
+        }
+      },
+      {
+        "stageOfGrowth": "FRUIT_FORMATION",
+        "stageStartDate": {
+          "periodUnit": "WEEKS",
+          "periodValue": 8
+        },
+        "stageEndDate": {
+          "periodUnit": "WEEKS",
+          "periodValue": 11
+        }
+      },
+      {
+        "stageOfGrowth": "MATURITY",
+        "stageStartDate": {
+          "periodUnit": "WEEKS",
+          "periodValue": 12
+        },
+        "stageEndDate": {
+          "periodUnit": "WEEKS",
+          "periodValue": 14
+        }
+      }
+    ],
+    "varieties": [
+      {
+        "variety": "Crimson sweet",
+        "maturityStartDay": 0,
+        "maturityEndDay": 0,
+        "harvestDuration": 0,
+        "remarks": "",
+        "varietyType": "MEDIUM_MATURITY"
+      },
+      {
+        "variety": "Tiger F1",
+        "maturityStartDay": 0,
+        "maturityEndDay": 0,
+        "harvestDuration": 0,
+        "remarks": "",
+        "varietyType": "MEDIUM_MATURITY"
+      },
+      {
+        "variety": "Kito F1",
+        "maturityStartDay": 0,
+        "maturityEndDay": 0,
+        "harvestDuration": 0,
+        "remarks": "",
+        "varietyType": "MEDIUM_MATURITY"
+      },
+      {
+        "variety": "Fahari F1",
+        "maturityStartDay": 0,
+        "maturityEndDay": 0,
+        "harvestDuration": 0,
+        "remarks": "",
+        "varietyType": "MEDIUM_MATURITY"
+      },
+      {
+        "variety": "Baraka F1",
+        "maturityStartDay": 0,
+        "maturityEndDay": 0,
+        "harvestDuration": 0,
+        "remarks": "",
+        "varietyType": "MEDIUM_MATURITY"
+      }
+    ],
+    "cropData": {
+      "cropId": 0,
+      "cropName": "Watermelon",
+      "nurseryManagement": {
+        "seedRate": {
+          "unit": "PER_GRAM",
+          "minRate": 10,
+          "maxRate": 10
+        },
+        "nurseryPeriodicTimes": {
+          "plantingTime": "All year round in frost free areas",
+          "emergenceTime": "5-7 days",
+          "transplantingTime": "35 days from planting"
+        },
+        "soilTemperatureForGermination": {
+          "minimumTemperature": {
+            "temperatureValue": 20,
+            "description": "°C"
+          },
+          "optimumTemperature": {
+            "temperatureValue": 23.5,
+            "description": "°C"
+          },
+          "maximumTemperature": {
+            "temperatureValue": 27,
+            "description": "°C"
+          }
+        },
+        "nurserySpacing": {
+          "sowingDepth": {
+            "minimumSpacing": 0,
+            "maximumSpacing": 0,
+            "unit": "CENTIMETER",
+            "description": "test"
+          },
+          "inRowSpacing": {
+            "minimumSpacing": 6,
+            "maximumSpacing": 7,
+            "unit": "CENTIMETER",
+            "description": "In-row spacing"
+          },
+          "interRowSpacing": {
+            "minimumSpacing": 12,
+            "maximumSpacing": 15,
+            "unit": "CENTIMETER",
+            "description": "Inter-row spacing"
+          }
+        },
+        "nurseryBedPreparation": {
+          "fertilizerApplications": [],
+          "metadataList": []
+        }
+      },
+      "fieldManagement": {
+        "soilRequirements": "Organically rich loam soils with good drainage",
+        "temperature": "20-27°C",
+        "waterRequirement": "MEDIUM",
+        "easeOfCare": "MODERATE",
+        "inRowSpacing": {
+          "minimumSpacing": 60,
+          "maximumSpacing": 75,
+          "unit": "CENTIMETER",
+          "description": "Inrow spacing"
+        },
+        "interRowSpacing": {
+          "minimumSpacing": 120,
+          "maximumSpacing": 150,
+          "unit": "CENTIMETER",
+          "description": "Interrow spacing"
+        },
+        "plantPopulation": {
+          "unit": "PER_HECTARE",
+          "minRate": 9000,
+          "maxRate": 14000
+        },
+        "ph": "5.5-6.5"
+      }
+    }
+  }
+]

@@ -33,12 +33,12 @@ public non-sealed class FertilizerServiceImpl implements FertilizerService {
 
     @Override
     public Fertilizer getByName(String name) {
-        return fertilizerRepository.findByNameOrAliasIgnoreCase(name, name)
+        return fertilizerRepository.findByNameIgnoreCaseOrAliasIgnoreCase(name, name)
                 .orElseThrow(() -> new RuntimeException("Fertilizer not found with Name: " + name));
     }
 
     public Fertilizer create(FertilizerRequest fertilizerRequest) {
-        var optionalFertilizer = fertilizerRepository.findByNameOrAliasIgnoreCase(fertilizerRequest.getName(), fertilizerRequest.getAlias());
+        var optionalFertilizer = fertilizerRepository.findByNameIgnoreCaseOrAliasIgnoreCase(fertilizerRequest.getName(), fertilizerRequest.getAlias());
         if (optionalFertilizer.isPresent()) {
             throw new ItemAlreadyExistsException("Fertilizer with name: " + fertilizerRequest.getName() + " already exists");
         }
@@ -53,7 +53,7 @@ public non-sealed class FertilizerServiceImpl implements FertilizerService {
 
     @Override
     public Fertilizer initialize(FertilizerRequest fertilizerRequest) {
-        var optionalFertilizer = fertilizerRepository.findByNameOrAliasIgnoreCase(fertilizerRequest.getName(), fertilizerRequest.getAlias());
+        var optionalFertilizer = fertilizerRepository.findByNameIgnoreCaseOrAliasIgnoreCase(fertilizerRequest.getName(), fertilizerRequest.getAlias());
         if (optionalFertilizer.isPresent()) {
             log.info("### Fertilizer Found {}", fertilizerRequest.getName());
             return optionalFertilizer.get();

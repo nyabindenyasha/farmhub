@@ -8,6 +8,7 @@ import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @Service
@@ -33,6 +34,11 @@ public non-sealed class CropServiceImpl implements CropService {
     public Crop getById(Long id) {
         return cropRepository.findById(id)
                 .orElseThrow(() -> new ItemNotFoundException("Crop not found with Id: " + id));
+    }
+
+    @Override
+    public Optional<Crop> findById(Long id) {
+        return cropRepository.findById(id);
     }
 
     @Override

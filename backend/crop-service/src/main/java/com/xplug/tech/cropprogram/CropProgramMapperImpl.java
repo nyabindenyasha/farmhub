@@ -4,8 +4,14 @@ import com.xplug.tech.crop.CropFertilizerSchedule;
 import com.xplug.tech.crop.CropPesticideSchedule;
 import com.xplug.tech.crop.CropProgram;
 import com.xplug.tech.crop.CropService;
+import com.xplug.tech.cropfertilizerschedule.CropFertilizerScheduleMapper;
+import com.xplug.tech.cropfertilizerschedule.CropFertilizerScheduleRequest;
+import com.xplug.tech.croppesticideschedule.CropPesticideScheduleMapper;
+import com.xplug.tech.croppesticideschedule.CropPesticideScheduleRequest;
 import org.springframework.stereotype.Component;
 
+import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -14,28 +20,25 @@ public non-sealed class CropProgramMapperImpl implements CropProgramMapper {
 
     private final CropService cropService;
 
-    public CropProgramMapperImpl(CropService cropService) {
+    private final CropFertilizerScheduleMapper cropFertilizerScheduleMapper;
+
+    private final CropPesticideScheduleMapper cropPesticideScheduleMapper;
+
+    public CropProgramMapperImpl(CropService cropService, CropFertilizerScheduleMapper cropFertilizerScheduleMapper, CropPesticideScheduleMapper cropPesticideScheduleMapper) {
         this.cropService = cropService;
+        this.cropFertilizerScheduleMapper = cropFertilizerScheduleMapper;
+        this.cropPesticideScheduleMapper = cropPesticideScheduleMapper;
     }
 
     @Override
     public CropProgram cropScheduleFromCropScheduleRequest(CropProgramRequest cropProgramRequest) {
         Objects.requireNonNull(cropProgramRequest, "CropScheduleRequest cannot be null!");
         var crop = cropService.getById(cropProgramRequest.getCropId());
-        return CropProgram.builder()
-                .crop(crop)
-                .name(cropProgramRequest.getName())
-                .description(cropProgramRequest.getDescription())
-                .source(cropProgramRequest.getSource())
-                .remarks(cropProgramRequest.getRemarks())
-                .cropScheduleType(cropProgramRequest.getCropScheduleType())
-                .build();
-    }
 
-    @Override
-    public CropProgram cropScheduleFromCropScheduleRequest(CropProgramRequestV2 cropProgramRequest, Set<CropFertilizerSchedule> cropFertilizerSchedules, Set<CropPesticideSchedule> cropPesticideSchedules) {
-        Objects.requireNonNull(cropProgramRequest, "CropScheduleRequest cannot be null!");
-        var crop = cropService.getById(cropProgramRequest.getCropId());
+        Set<CropFertilizerSchedule> cropFertilizerSchedules = getCropFertilizerSchedules(cropProgramRequest.getFertilizerScheduleRequests());
+
+        Set<CropPesticideSchedule> cropPesticideSchedules = getCropPesticideSchedules(cropProgramRequest.getPesticideScheduleRequests());
+
         return CropProgram.builder()
                 .crop(crop)
                 .name(cropProgramRequest.getName())
@@ -49,17 +52,23 @@ public non-sealed class CropProgramMapperImpl implements CropProgramMapper {
     }
 
     @Override
-    public CropProgram cropScheduleFromCropScheduleRequestV2(CropProgramRequestV2 cropProgramRequest) {
-        Objects.requireNonNull(cropProgramRequest, "CropScheduleRequest cannot be null!");
-        var crop = cropService.getById(cropProgramRequest.getCropId());
-        return CropProgram.builder()
-                .crop(crop)
-                .name(cropProgramRequest.getName())
-                .description(cropProgramRequest.getDescription())
-                .source(cropProgramRequest.getSource())
-                .remarks(cropProgramRequest.getRemarks())
-                .cropScheduleType(cropProgramRequest.getCropScheduleType())
-                .build();
+    public Set<CropPesticideSchedule> getCropPesticideSchedules(List<CropPesticideScheduleRequest> cropPesticideScheduleRequests) {
+        Set<CropPesticideSchedule> cropPesticideSchedules = new HashSet<>();
+        cropPesticideScheduleRequests.forEach(cropPesticideScheduleRequest -> {
+            CropPesticideSchedule cropPesticideSchedule = cropPesticideScheduleMapper.cropPesticideScheduleFromCropPesticideScheduleRequest(cropPesticideScheduleRequest);
+            cropPesticideSchedules.add(cropPesticideSchedule);
+        });
+        return cropPesticideSchedules;
+    }
+
+    @Override
+    public Set<CropFertilizerSchedule> getCropFertilizerSchedules(List<CropFertilizerScheduleRequest> cropFertilizerScheduleRequests) {
+        Set<CropFertilizerSchedule> cropFertilizerSchedules = new HashSet<>();
+        cropFertilizerScheduleRequests.forEach(cropFertilizerScheduleRequest -> {
+            CropFertilizerSchedule cropFertilizerSchedule = cropFertilizerScheduleMapper.cropFertilizerScheduleFromCropFertilizerScheduleRequest(cropFertilizerScheduleRequest);
+            cropFertilizerSchedules.add(cropFertilizerSchedule);
+        });
+        return cropFertilizerSchedules;
     }
 
     @Override

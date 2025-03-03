@@ -5,8 +5,12 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+
+import static java.util.Objects.isNull;
 
 @Entity
 @Getter
@@ -26,7 +30,7 @@ public class CropBatch {
     private UserAccount userAccount; //farmer
 
     @ManyToOne
-    @JoinColumn(name = "crop_schedule_id", nullable = false)
+    @JoinColumn(name = "crop_program_id", nullable = false)
     private CropProgram cropProgram; //crop program to be used
 
     //todo for testing
@@ -38,43 +42,45 @@ public class CropBatch {
 
     private String remarks;
 
-//  todo breaking the bidirectional mapping
+    // OWN the relationship by adding @JoinColumn on OneToMany
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "crop_batch_id") // Ensures foreign key in CropPesticideSchedule table
+    private Set<CropPesticideScheduleTask> pesticideScheduleTasks;
 
-//    @OneToMany(mappedBy = "cropBatch", cascade = CascadeType.ALL, orphanRemoval = true)
-//    private Set<CropPesticideScheduleTask> pesticideScheduleTasks = new HashSet<>();
-//
-//    @OneToMany(mappedBy = "cropBatch", cascade = CascadeType.ALL, orphanRemoval = true)
-//    private Set<CropFertilizerScheduleTask> fertilizerScheduleTasks = new HashSet<>();
-//
-//    public void addPesticideScheduleTask(CropPesticideScheduleTask task) {
-//        task.setCropBatch(this);
-//        this.pesticideScheduleTasks.add(task);
-//    }
-//
-//    public void addFertilizerScheduleTask(CropFertilizerScheduleTask task) {
-//        task.setCropBatch(this);
-//        this.fertilizerScheduleTasks.add(task);
-//    }
-//
-//    public Set<CropPesticideScheduleTask> getPesticideScheduleTasks() {
-//        if (isNull(pesticideScheduleTasks)) {
-//            pesticideScheduleTasks = new HashSet<>();
-//        }
-//        return pesticideScheduleTasks;
-//    }
-//
-//    public Set<CropFertilizerScheduleTask> getFertilizerScheduleTasks() {
-//        if (isNull(fertilizerScheduleTasks)) {
-//            fertilizerScheduleTasks = new HashSet<>();
-//        }
-//        return fertilizerScheduleTasks;
-//    }
+    // OWN the relationship by adding @JoinColumn on OneToMany
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "crop_batch_id") // Ensures foreign key in CropPesticideSchedule table
+    private Set<CropFertilizerScheduleTask> fertilizerScheduleTasks;
 
-    @Transient
-    private Set<CropFertilizerScheduleTask> fertilizerScheduleTasks = new HashSet<>();
+    public void addPesticideScheduleTask(CropPesticideScheduleTask task) {
+        task.setCropBatch(this);
+        this.pesticideScheduleTasks.add(task);
+    }
 
+    public void addFertilizerScheduleTask(CropFertilizerScheduleTask task) {
+        task.setCropBatch(this);
+        this.fertilizerScheduleTasks.add(task);
+    }
 
-    @Transient
-    private Set<CropPesticideScheduleTask> pesticideScheduleTasks = new HashSet<>();
+    public Set<CropPesticideScheduleTask> getPesticideScheduleTasks() {
+        if (isNull(pesticideScheduleTasks)) {
+            pesticideScheduleTasks = new HashSet<>();
+        }
+        return pesticideScheduleTasks;
+    }
+
+    public Set<CropFertilizerScheduleTask> getFertilizerScheduleTasks() {
+        if (isNull(fertilizerScheduleTasks)) {
+            fertilizerScheduleTasks = new HashSet<>();
+        }
+        return fertilizerScheduleTasks;
+    }
+
+    public List<CropScheduleTask> getCropScheduleTasks() {
+        List<CropScheduleTask> cropScheduleTaskList = new ArrayList<>();
+        cropScheduleTaskList.addAll(getFertilizerScheduleTasks());
+        cropScheduleTaskList.addAll(getPesticideScheduleTasks());
+        return cropScheduleTaskList;
+    }
 
 }

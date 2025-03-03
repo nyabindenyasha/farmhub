@@ -1,0 +1,552 @@
+[
+  {
+    "crop": {
+      "name": "Butternut",
+      "family": "Curcubitaceae",
+      "genus": "Curcubita",
+      "species": "Pepo"
+    },
+    "fertilizerSchedule": [
+      {
+        "fertilizerName": "Well rotten manure",
+        "stageOfGrowth": {
+          "periodUnit": "DAYS",
+          "periodValue": 1
+        },
+        "applicationInterval": {
+          "periodUnit": "HOURS",
+          "periodValue": 0
+        },
+        "applicationMethod": "SPOT_PLACEMENT",
+        "rate": 1500,
+        "remarks": "Basal"
+      },
+      {
+        "fertilizerName": "Compound C",
+        "stageOfGrowth": {
+          "periodUnit": "DAYS",
+          "periodValue": 1
+        },
+        "applicationInterval": {
+          "periodUnit": "HOURS",
+          "periodValue": 0
+        },
+        "applicationMethod": "SPOT_PLACEMENT",
+        "rate": 60,
+        "remarks": "Basal"
+      },
+      {
+        "fertilizerName": "Ammonium Nitrate",
+        "stageOfGrowth": {
+          "periodUnit": "WEEKS",
+          "periodValue": 2
+        },
+        "applicationInterval": {
+          "periodUnit": "HOURS",
+          "periodValue": 0
+        },
+        "applicationMethod": "SPOT_PLACEMENT",
+        "rate": 8,
+        "remarks": "Top dressing"
+      },
+      {
+        "fertilizerName": "Potassium Nitrate",
+        "stageOfGrowth": {
+          "periodUnit": "WEEKS",
+          "periodValue": 4
+        },
+        "applicationInterval": {
+          "periodUnit": "WEEKS",
+          "periodValue": 2
+        },
+        "applicationMethod": "SPOT_PLACEMENT",
+        "rate": 15,
+        "remarks": "Split application"
+      },
+      {
+        "fertilizerName": "Potassium Nitrate",
+        "stageOfGrowth": {
+          "periodUnit": "WEEKS",
+          "periodValue": 6
+        },
+        "applicationInterval": {
+          "periodUnit": "HOURS",
+          "periodValue": 0
+        },
+        "applicationMethod": "SPOT_PLACEMENT",
+        "rate": 15,
+        "remarks": "Split application"
+      },
+      {
+        "fertilizerName": "Calcium Nitrate",
+        "stageOfGrowth": {
+          "periodUnit": "WEEKS",
+          "periodValue": 8
+        },
+        "applicationInterval": {
+          "periodUnit": "HOURS",
+          "periodValue": 0
+        },
+        "applicationMethod": "SPOT_PLACEMENT",
+        "rate": 15,
+        "remarks": "Split application"
+      }
+    ],
+    "pesticideSchedule": [
+      {
+        "pesticideName": "Lambda",
+        "stageOfGrowth": {
+          "periodUnit": "DAYS",
+          "periodValue": 1
+        },
+        "applicationInterval": {
+          "periodUnit": "HOURS",
+          "periodValue": 0
+        },
+        "applicationMethod": "SPRAYING",
+        "remarks": "string"
+      },
+      {
+        "pesticideName": "Metolachlor",
+        "stageOfGrowth": {
+          "periodUnit": "DAYS",
+          "periodValue": 1
+        },
+        "applicationInterval": {
+          "periodUnit": "HOURS",
+          "periodValue": 0
+        },
+        "applicationMethod": "SPRAYING",
+        "remarks": "Herbicide"
+      },
+      {
+        "pesticideName": "Copper",
+        "stageOfGrowth": {
+          "periodUnit": "DAYS",
+          "periodValue": 1
+        },
+        "applicationInterval": {
+          "periodUnit": "HOURS",
+          "periodValue": 0
+        },
+        "applicationMethod": "SPRAYING",
+        "remarks": "Herbicide"
+      },
+      {
+        "pesticideName": "Dichlorvos",
+        "stageOfGrowth": {
+          "periodUnit": "WEEKS",
+          "periodValue": 1
+        },
+        "applicationInterval": {
+          "periodUnit": "HOURS",
+          "periodValue": 0
+        },
+        "applicationMethod": "SPRAYING",
+        "remarks": "string"
+      },
+      {
+        "pesticideName": "Bravo",
+        "stageOfGrowth": {
+          "periodUnit": "WEEKS",
+          "periodValue": 1
+        },
+        "applicationInterval": {
+          "periodUnit": "HOURS",
+          "periodValue": 0
+        },
+        "applicationMethod": "SPRAYING",
+        "remarks": "string"
+      },
+      {
+        "pesticideName": "Abamectin",
+        "stageOfGrowth": {
+          "periodUnit": "WEEKS",
+          "periodValue": 2
+        },
+        "applicationInterval": {
+          "periodUnit": "HOURS",
+          "periodValue": 0
+        },
+        "applicationMethod": "SPRAYING",
+        "remarks": "string"
+      },
+      {
+        "pesticideName": "Antracol",
+        "stageOfGrowth": {
+          "periodUnit": "WEEKS",
+          "periodValue": 2
+        },
+        "applicationInterval": {
+          "periodUnit": "HOURS",
+          "periodValue": 0
+        },
+        "applicationMethod": "SPRAYING",
+        "remarks": "string"
+      },
+      {
+        "pesticideName": "Malathion",
+        "stageOfGrowth": {
+          "periodUnit": "WEEKS",
+          "periodValue": 3
+        },
+        "applicationInterval": {
+          "periodUnit": "HOURS",
+          "periodValue": 0
+        },
+        "applicationMethod": "SPRAYING",
+        "remarks": "string"
+      },
+      {
+        "pesticideName": "Acomil",
+        "stageOfGrowth": {
+          "periodUnit": "WEEKS",
+          "periodValue": 3
+        },
+        "applicationInterval": {
+          "periodUnit": "HOURS",
+          "periodValue": 0
+        },
+        "applicationMethod": "SPRAYING",
+        "remarks": "string"
+      },
+      {
+        "pesticideName": "Aceta + Ema",
+        "stageOfGrowth": {
+          "periodUnit": "WEEKS",
+          "periodValue": 4
+        },
+        "applicationInterval": {
+          "periodUnit": "HOURS",
+          "periodValue": 0
+        },
+        "applicationMethod": "SPRAYING",
+        "remarks": "string"
+      },
+      {
+        "pesticideName": "Orius",
+        "stageOfGrowth": {
+          "periodUnit": "WEEKS",
+          "periodValue": 4
+        },
+        "applicationInterval": {
+          "periodUnit": "HOURS",
+          "periodValue": 0
+        },
+        "applicationMethod": "SPRAYING",
+        "remarks": "string"
+      },
+      {
+        "pesticideName": "Belt",
+        "stageOfGrowth": {
+          "periodUnit": "WEEKS",
+          "periodValue": 5
+        },
+        "applicationInterval": {
+          "periodUnit": "HOURS",
+          "periodValue": 0
+        },
+        "applicationMethod": "SPRAYING",
+        "remarks": "Herbicide"
+      },
+      {
+        "pesticideName": "Copper",
+        "stageOfGrowth": {
+          "periodUnit": "WEEKS",
+          "periodValue": 5
+        },
+        "applicationInterval": {
+          "periodUnit": "HOURS",
+          "periodValue": 0
+        },
+        "applicationMethod": "SPRAYING",
+        "remarks": "Herbicide"
+      },
+      {
+        "pesticideName": "Dichlorvos",
+        "stageOfGrowth": {
+          "periodUnit": "WEEKS",
+          "periodValue": 6
+        },
+        "applicationInterval": {
+          "periodUnit": "HOURS",
+          "periodValue": 0
+        },
+        "applicationMethod": "SPRAYING",
+        "remarks": "string"
+      },
+      {
+        "pesticideName": "Bravo",
+        "stageOfGrowth": {
+          "periodUnit": "WEEKS",
+          "periodValue": 6
+        },
+        "applicationInterval": {
+          "periodUnit": "HOURS",
+          "periodValue": 0
+        },
+        "applicationMethod": "SPRAYING",
+        "remarks": "string"
+      },
+      {
+        "pesticideName": "Abamectin",
+        "stageOfGrowth": {
+          "periodUnit": "WEEKS",
+          "periodValue": 7
+        },
+        "applicationInterval": {
+          "periodUnit": "HOURS",
+          "periodValue": 0
+        },
+        "applicationMethod": "SPRAYING",
+        "remarks": "string"
+      },
+      {
+        "pesticideName": "Antracol",
+        "stageOfGrowth": {
+          "periodUnit": "WEEKS",
+          "periodValue": 7
+        },
+        "applicationInterval": {
+          "periodUnit": "HOURS",
+          "periodValue": 0
+        },
+        "applicationMethod": "SPRAYING",
+        "remarks": "string"
+      },
+      {
+        "pesticideName": "Malathion",
+        "stageOfGrowth": {
+          "periodUnit": "WEEKS",
+          "periodValue": 8
+        },
+        "applicationInterval": {
+          "periodUnit": "HOURS",
+          "periodValue": 0
+        },
+        "applicationMethod": "SPRAYING",
+        "remarks": "string"
+      },
+      {
+        "pesticideName": "Acomil",
+        "stageOfGrowth": {
+          "periodUnit": "WEEKS",
+          "periodValue": 8
+        },
+        "applicationInterval": {
+          "periodUnit": "HOURS",
+          "periodValue": 0
+        },
+        "applicationMethod": "SPRAYING",
+        "remarks": "string"
+      },
+      {
+        "pesticideName": "Aceta + Ema",
+        "stageOfGrowth": {
+          "periodUnit": "WEEKS",
+          "periodValue": 9
+        },
+        "applicationInterval": {
+          "periodUnit": "HOURS",
+          "periodValue": 0
+        },
+        "applicationMethod": "SPRAYING",
+        "remarks": "string"
+      },
+      {
+        "pesticideName": "Orius",
+        "stageOfGrowth": {
+          "periodUnit": "WEEKS",
+          "periodValue": 9
+        },
+        "applicationInterval": {
+          "periodUnit": "HOURS",
+          "periodValue": 0
+        },
+        "applicationMethod": "SPRAYING",
+        "remarks": "string"
+      },
+      {
+        "pesticideName": "Belt",
+        "stageOfGrowth": {
+          "periodUnit": "WEEKS",
+          "periodValue": 10
+        },
+        "applicationInterval": {
+          "periodUnit": "HOURS",
+          "periodValue": 0
+        },
+        "applicationMethod": "SPRAYING",
+        "remarks": "Herbicide"
+      },
+      {
+        "pesticideName": "Copper",
+        "stageOfGrowth": {
+          "periodUnit": "WEEKS",
+          "periodValue": 10
+        },
+        "applicationInterval": {
+          "periodUnit": "HOURS",
+          "periodValue": 0
+        },
+        "applicationMethod": "SPRAYING",
+        "remarks": "Herbicide"
+      }
+    ],
+    "stagesOfGrowth": [
+      {
+        "stageStartDate": {
+          "periodUnit": "DAYS",
+          "periodValue": 1
+        },
+        "stageEndDate": {
+          "periodUnit": "DAYS",
+          "periodValue": 1
+        },
+        "stageOfGrowth": "TRANSPLANTING"
+      },
+      {
+        "stageStartDate": {
+          "periodUnit": "WEEKS",
+          "periodValue": 1
+        },
+        "stageEndDate": {
+          "periodUnit": "WEEKS",
+          "periodValue": 5
+        },
+        "stageOfGrowth": "VEGETATIVE_GROWTH"
+      },
+      {
+        "stageStartDate": {
+          "periodUnit": "WEEKS",
+          "periodValue": 6
+        },
+        "stageEndDate": {
+          "periodUnit": "WEEKS",
+          "periodValue": 6
+        },
+        "stageOfGrowth": "FLOWERING"
+      },
+      {
+        "stageStartDate": {
+          "periodUnit": "WEEKS",
+          "periodValue": 7
+        },
+        "stageEndDate": {
+          "periodUnit": "WEEKS",
+          "periodValue": 11
+        },
+        "stageOfGrowth": "FRUIT_FORMATION"
+      },
+      {
+        "stageStartDate": {
+          "periodUnit": "WEEKS",
+          "periodValue": 12
+        },
+        "stageEndDate": {
+          "periodUnit": "WEEKS",
+          "periodValue": 16
+        },
+        "stageOfGrowth": "MATURITY"
+      }
+    ],
+    "varieties": [
+    ],
+    "cropData": {
+      "cropId": 0,
+      "cropName": "Butternut",
+      "nurseryManagement": {
+        "seedRate": {
+          "unit": "PER_GRAM",
+          "minRate": 200,
+          "maxRate": 350
+        },
+        "nurseryPeriodicTimes": {
+          "plantingTime": "All year round",
+          "emergenceTime": "5-7 days",
+          "transplantingTime": "35 days from planting"
+        },
+        "soilTemperatureForGermination": {
+          "minimumTemperature": {
+            "temperatureValue": 4,
+            "description": "Degrees Celcius, todo add unit field"
+          },
+          "optimumTemperature": {
+            "temperatureValue": 18,
+            "description": "Degrees Celcius, todo add unit field"
+          },
+          "maximumTemperature": {
+            "temperatureValue": 35,
+            "description": "Degrees Celcius, todo add unit field"
+          }
+        },
+        "nurserySpacing": {
+          "sowingDepth": {
+            "minimumSpacing": 1,
+            "maximumSpacing": 1,
+            "unit": "CENTIMETER",
+            "description": "test"
+          },
+          "inRowSpacing": {
+            "minimumSpacing": 0.5,
+            "maximumSpacing": 1,
+            "unit": "CENTIMETER",
+            "description": "test"
+          },
+          "interRowSpacing": {
+            "minimumSpacing": 5,
+            "maximumSpacing": 7,
+            "unit": "CENTIMETER",
+            "description": "test"
+          }
+        },
+        "nurseryBedPreparation": {
+          "fertilizerApplications": [
+            {
+              "fertilizerId": 1,
+              "unit": "GRAM",
+              "quantity": 45,
+              "perUnit": "PER_SQUARE_METER"
+            },
+            {
+              "fertilizerId": 2,
+              "unit": "GRAM",
+              "quantity": 10,
+              "perUnit": "PER_SQUARE_METER"
+            }
+          ],
+          "metadataList": [
+            {
+              "key": "test",
+              "value": "string"
+            }
+          ]
+        }
+      },
+      "fieldManagement": {
+        "soilRequirements": "Clay loams rich in organic matter",
+        "temperature": "18-30°C",
+        "waterRequirement": "HEAVY",
+        "easeOfCare": "DIFFICULT",
+        "inRowSpacing": {
+          "minimumSpacing": 30,
+          "maximumSpacing": 60,
+          "unit": "CENTIMETER",
+          "description": "string"
+        },
+        "interRowSpacing": {
+          "minimumSpacing": 60,
+          "maximumSpacing": 90,
+          "unit": "CENTIMETER",
+          "description": "string"
+        },
+        "plantPopulation": {
+          "unit": "PER_HECTARE",
+          "minRate": 20000,
+          "maxRate": 60000
+        },
+        "ph": "5.5-6.5"
+      }
+    }
+  }
+]

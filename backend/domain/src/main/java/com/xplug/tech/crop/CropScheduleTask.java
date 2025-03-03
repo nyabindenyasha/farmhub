@@ -2,10 +2,7 @@ package com.xplug.tech.crop;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.xplug.tech.enums.TaskStatus;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -17,6 +14,7 @@ import java.time.ZonedDateTime;
 @Entity
 @Getter
 @Setter
+@ToString(exclude = {"cropBatch"})
 @NoArgsConstructor
 @AllArgsConstructor
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -39,7 +37,7 @@ public class CropScheduleTask {
 
     @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "crop_batch_id", nullable = false)
+    @JoinColumn(name = "crop_program_id") // Prevent ownership
     private CropBatch cropBatch;
 
     @PrePersist
